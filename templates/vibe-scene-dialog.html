@@ -1,0 +1,44 @@
+<form class="vibe-scene-form">
+  <div class="form-group">
+    <label for="sceneName">Scene Name</label>
+    <input type="text" name="sceneName" id="sceneName" value="Generated Dungeon" placeholder="Enter scene name" />
+  </div>
+
+  <div class="form-group">
+    <label for="size">Dungeon Size</label>
+    <select name="size" id="size">
+      {{#each sizeOptions}}
+        <option value="{{value}}" {{#if (eq value "MEDIUM")}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="symmetry">Symmetry</label>
+    <select name="symmetry" id="symmetry">
+      {{#each symmetryOptions}}
+        <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="waterDepth">Water Depth</label>
+    <select name="waterDepth" id="waterDepth">
+      {{#each waterOptions}}
+        <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="seed">Seed (optional)</label>
+    <input type="number" name="seed" id="seed" placeholder="Random if empty" />
+    <p class="notes">Leave empty for a random seed. Use a specific number to reproduce the same dungeon.</p>
+  </div>
+
+  <div class="form-group">
+    <label for="gridSize">Grid Size (pixels)</label>
+    <input type="number" name="gridSize" id="gridSize" value="{{defaultGridSize}}" min="50" max="200" />
+  </div>
+</form>

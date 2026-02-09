@@ -1,0 +1,95 @@
+/* Vibe Scene Button in Scene Directory */
+.vibe-scene-button {
+  margin-left: 8px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vibe-scene-button:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.vibe-scene-button:active {
+  transform: translateY(0);
+}
+
+.vibe-scene-button i {
+  font-size: 12px;
+}
+
+/* Button container styling */
+.vibe-scene-button-container {
+  padding: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Dialog styling */
+.vibe-scene-dialog .dialog-content {
+  padding: 0;
+}
+
+.vibe-scene-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+.vibe-scene-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vibe-scene-form label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+
+.vibe-scene-form input,
+.vibe-scene-form select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.vibe-scene-form input:focus,
+.vibe-scene-form select:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.vibe-scene-form .notes {
+  font-size: 11px;
+  color: #666;
+  margin: 4px 0 0 0;
+  font-style: italic;
+}
+
+/* Generate button styling in dialog */
+.vibe-scene-dialog .dialog-buttons button[data-button="generate"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.vibe-scene-dialog .dialog-buttons button[data-button="generate"]:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
