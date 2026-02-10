@@ -25,8 +25,11 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 3. Configure your dungeon:
    - **Scene Name**: Name for the new scene
    - **Dungeon Size**: TINY (4-6 rooms) to XLARGE (35-50 rooms)
+   - **Dungeon Shape**: Rectangle, Round, Cross, Keep, or Cavernous
    - **Symmetry**: None (asymmetric) or Bilateral (mirror)
-   - **Water Depth**: Dry to Flooded (coming soon)
+   - **Room Density**: 0.1 (Sparse) to 1.0 (Dense)
+   - **Corridor Style**: L-Path (Standard), Straight (Jagged), or Wandering
+   - **Connectivity**: Standard, Minimal (Tree), Full (Cyclic), or Chain
    - **Seed**: Optional number for reproducible dungeons
    - **Grid Size**: Pixels per grid square
 4. Click **Generate** to create the dungeon
@@ -38,6 +41,15 @@ Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 - **Default Grid Size**: Default grid size in pixels (default: 100)
 - **Map Render Resolution**: Pixels per cell when rendering (default: 20)
 - **Image Storage Path**: Folder for saving dungeon images (default: `vibe-scenes/dungeons`)
+
+### Advanced Configuration (Generator Options)
+
+The underlying generator options are now fully exposed in the dialog:
+
+- **Dead End Removal**: Controls pruning of dead-end corridors (`none`, `some`, `all`).
+- **Peripheral Egress**: If true, digs exits from the dungeon edge to the map boundary.
+- **Stairs**: Configure number of Up/Down stairs (`{ up: 1, down: 2 }`).
+- **Door Density**: Probability (0.0 - 1.0) of placing a door at a valid location.
 
 ## Technical Details
 

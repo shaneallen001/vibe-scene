@@ -8,24 +8,43 @@ import { SceneImporter } from "../services/scene-importer.js";
 
 // Configuration options for dungeon generation
 const SIZE_OPTIONS = [
-    { value: "TINY", label: "Tiny (4-6 rooms)" },
-    { value: "SMALL", label: "Small (6-10 rooms)" },
-    { value: "MEDIUM", label: "Medium (10-20 rooms)" },
-    { value: "LARGE", label: "Large (20-35 rooms)" },
-    { value: "XLARGE", label: "Extra Large (35-50 rooms)" }
+    { value: "tiny", label: "Tiny (4-6 rooms)" },
+    { value: "small", label: "Small (6-10 rooms)" },
+    { value: "medium", label: "Medium (10-20 rooms)" },
+    { value: "large", label: "Large (20-35 rooms)" },
+    { value: "xlarge", label: "Extra Large (35-50 rooms)" }
+];
+
+const SHAPE_OPTIONS = [
+    { value: "rectangle", label: "Rectangle" },
+    { value: "round", label: "Round" },
+    { value: "cross", label: "Cross" },
+    { value: "keep", label: "Keep" },
+    { value: "cavernous", label: "Cavernous" }
 ];
 
 const SYMMETRY_OPTIONS = [
-    { value: "NONE", label: "None (Asymmetric)" },
-    { value: "BILATERAL", label: "Bilateral (Mirror)" }
+    { value: "none", label: "None (Asymmetric)" },
+    { value: "bilateral", label: "Bilateral (Mirror)" }
 ];
 
-const WATER_OPTIONS = [
-    { value: "DRY", label: "Dry (No water)" },
-    { value: "PUDDLES", label: "Puddles (~45% coverage)" },
-    { value: "POOLS", label: "Pools (~65% coverage)" },
-    { value: "LAKES", label: "Lakes (~82% coverage)" },
-    { value: "FLOODED", label: "Flooded (~90% coverage)" }
+const CORRIDOR_OPTIONS = [
+    { value: "l_path", label: "L-Path (Standard)" },
+    { value: "straight", label: "Straight (Jagged)" },
+    { value: "errant", label: "Wandering" }
+];
+
+const CONNECTIVITY_OPTIONS = [
+    { value: "mst_loops", label: "Standard (Cyclic)" },
+    { value: "mst", label: "Minimal (Tree)" },
+    { value: "full", label: "Full (Chaos)" },
+    { value: "nearest", label: "Chain" }
+];
+
+const DEAD_END_OPTIONS = [
+    { value: "none", label: "None (Remove all)" },
+    { value: "some", label: "Some (Keep ~50%)" },
+    { value: "all", label: "All (Keep all)" }
 ];
 
 export class VibeSceneDialog {
@@ -36,9 +55,17 @@ export class VibeSceneDialog {
         // Generate context for template
         const context = {
             sizeOptions: SIZE_OPTIONS,
+            shapeOptions: SHAPE_OPTIONS,
             symmetryOptions: SYMMETRY_OPTIONS,
-            waterOptions: WATER_OPTIONS,
-            defaultGridSize
+            corridorOptions: CORRIDOR_OPTIONS,
+            connectivityOptions: CONNECTIVITY_OPTIONS,
+            deadEndOptions: DEAD_END_OPTIONS,
+            defaultGridSize,
+            // Defaults for new options
+            density: 0.4,
+            peripheralEgress: false,
+            doorDensity: 0.5,
+            stairs: { up: 1, down: 2 }
         };
 
         const content = await renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
@@ -53,8 +80,21 @@ export class VibeSceneDialog {
                     callback: async (html) => {
                         const sceneName = html.find('[name="sceneName"]').val() || "Generated Dungeon";
                         const size = html.find('[name="size"]').val();
+                        const maskType = html.find('[name="maskType"]').val(); // Renamed from shape in UI for clarity
                         const symmetry = html.find('[name="symmetry"]').val();
-                        const waterDepth = html.find('[name="waterDepth"]').val();
+
+                        // New Options
+                        const density = parseFloat(html.find('[name="density"]').val());
+                        const corridorStyle = html.find('[name="corridorStyle"]').val();
+                        const connectivity = html.find('[name="connectivity"]').val();
+
+                        // Advanced
+                        const deadEndRemoval = html.find('[name="deadEndRemoval"]').val();
+                        const peripheralEgress = html.find('[name="peripheralEgress"]').is(':checked');
+                        const doorDensity = parseFloat(html.find('[name="doorDensity"]').val());
+                        const stairsUp = parseInt(html.find('[name="stairsUp"]').val()) || 0;
+                        const stairsDown = parseInt(html.find('[name="stairsDown"]').val()) || 0;
+
                         const seedInput = html.find('[name="seed"]').val();
                         const gridSize = parseInt(html.find('[name="gridSize"]').val()) || 100;
 
@@ -64,10 +104,17 @@ export class VibeSceneDialog {
                         await this.generateDungeon({
                             sceneName,
                             size,
+                            maskType,
                             symmetry,
-                            waterDepth,
+                            corridorStyle,
+                            connectivity,
+                            density,
                             seed,
-                            gridSize
+                            gridSize,
+                            deadEndRemoval,
+                            peripheralEgress,
+                            doorDensity,
+                            stairs: { up: stairsUp, down: stairsDown }
                         });
                     }
                 },
@@ -92,8 +139,8 @@ export class VibeSceneDialog {
     }
 
     static async generateDungeon(options) {
-        const { sceneName, size, symmetry, waterDepth, seed, gridSize } = options;
-        console.log("Vibe Scenes | generateDungeon called with:", { sceneName, size, symmetry, waterDepth, seed, gridSize });
+        const { sceneName, size, maskType, symmetry, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity, stairs } = options;
+        console.log("Vibe Scenes | generateDungeon called with:", { sceneName, size, maskType, seed });
 
         // Show loading notification
         const notification = ui.notifications.info("Generating dungeon...", { permanent: true });
@@ -110,10 +157,17 @@ export class VibeSceneDialog {
             // Generate the dungeon image
             const imageData = await dungeonService.generate({
                 size,
+                maskType,
                 symmetry,
-                waterDepth,
+                corridorStyle,
+                connectivity,
+                density,
                 seed,
-                gridSize: renderCellSize
+                gridSize: renderCellSize,
+                deadEndRemoval,
+                peripheralEgress,
+                doorDensity,
+                stairs
             });
             console.log("Vibe Scenes | Image data received, size:", imageData?.size || 0, "bytes");
 

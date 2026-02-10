@@ -8,7 +8,16 @@
     <label for="size">Dungeon Size</label>
     <select name="size" id="size">
       {{#each sizeOptions}}
-        <option value="{{value}}" {{#if (eq value "MEDIUM")}}selected{{/if}}>{{label}}</option>
+      <option value="{{value}}" {{#if (eq value "MEDIUM" )}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="maskType">Dungeon Shape</label>
+    <select name="maskType" id="maskType">
+      {{#each shapeOptions}}
+      <option value="{{value}}">{{label}}</option>
       {{/each}}
     </select>
   </div>
@@ -17,18 +26,65 @@
     <label for="symmetry">Symmetry</label>
     <select name="symmetry" id="symmetry">
       {{#each symmetryOptions}}
-        <option value="{{value}}">{{label}}</option>
+      <option value="{{value}}">{{label}}</option>
       {{/each}}
     </select>
   </div>
 
   <div class="form-group">
-    <label for="waterDepth">Water Depth</label>
-    <select name="waterDepth" id="waterDepth">
-      {{#each waterOptions}}
-        <option value="{{value}}">{{label}}</option>
+    <label for="density">Room Density: <span id="densityVal">{{density}}</span></label>
+    <input type="range" name="density" id="density" min="0.1" max="1.0" step="0.1" value="{{density}}"
+      oninput="document.getElementById('densityVal').innerText = this.value" />
+  </div>
+
+  <div class="form-group">
+    <label for="corridorStyle">Corridor Style</label>
+    <select name="corridorStyle" id="corridorStyle">
+      {{#each corridorOptions}}
+      <option value="{{value}}">{{label}}</option>
       {{/each}}
     </select>
+  </div>
+
+  <div class="form-group">
+    <label for="connectivity">Connectivity</label>
+    <select name="connectivity" id="connectivity">
+      {{#each connectivityOptions}}
+      <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <hr>
+  <h3>Advanced Options</h3>
+
+  <div class="form-group">
+    <label for="deadEndRemoval">Dead Ends</label>
+    <select name="deadEndRemoval" id="deadEndRemoval">
+      {{#each deadEndOptions}}
+      <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group check">
+    <label for="peripheralEgress">Peripheral Egress</label>
+    <input type="checkbox" name="peripheralEgress" id="peripheralEgress" {{#if peripheralEgress}}checked{{/if}} />
+    <p class="notes">Create exits at the edge of the map?</p>
+  </div>
+
+  <div class="form-group">
+    <label for="doorDensity">Door Density: <span id="doorDensityVal">{{doorDensity}}</span></label>
+    <input type="range" name="doorDensity" id="doorDensity" min="0" max="1" step="0.1" value="{{doorDensity}}"
+      oninput="document.getElementById('doorDensityVal').innerText = this.value" />
+  </div>
+
+  <div class="form-group">
+    <label>Stairs (Up / Down)</label>
+    <div class="flex-row" style="display: flex; gap: 10px;">
+      <input type="number" name="stairsUp" value="{{stairs.up}}" min="0" placeholder="Up" style="flex: 1;">
+      <input type="number" name="stairsDown" value="{{stairs.down}}" min="0" placeholder="Down" style="flex: 1;">
+    </div>
   </div>
 
   <div class="form-group">
