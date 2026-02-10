@@ -2,27 +2,35 @@
  * Dungeongen - Main Entry Point
  * 
  * Procedural dungeon generation for Foundry VTT.
- * JavaScript port of the dungeongen Python library.
+ * Grid-based generation system.
  */
 
 import { DungeonGenerator } from './layout/generator.js';
-import { GenerationParams, DungeonSize, SymmetryType, WaterDepth } from './layout/params.js';
 import { DungeonRenderer } from './map/renderer.js';
 
-// Re-export for external use
+// Re-export for external use - Note: Models have changed!
 export { DungeonGenerator } from './layout/generator.js';
 export { DungeonRenderer } from './map/renderer.js';
-export { GenerationParams, DungeonSize, SymmetryType, WaterDepth } from './layout/params.js';
-export { Room, Passage, Door, Dungeon, RoomShape, DoorType } from './layout/models.js';
+export { CellType, DungeonGrid, Room, Door } from './layout/models.js';
+
+/**
+ * Size presets for dungeon generation
+ */
+const SIZE_PRESETS = {
+    tiny: { width: 40, height: 40, numRooms: 5, minSize: 5, maxSize: 10 },
+    small: { width: 60, height: 60, numRooms: 10, minSize: 6, maxSize: 12 },
+    medium: { width: 90, height: 90, numRooms: 20, minSize: 8, maxSize: 15 },
+    large: { width: 120, height: 120, numRooms: 35, minSize: 10, maxSize: 20 },
+    xlarge: { width: 160, height: 160, numRooms: 50, minSize: 12, maxSize: 25 },
+    huge: { width: 200, height: 200, numRooms: 75, minSize: 15, maxSize: 30 }
+};
 
 /**
  * Generate a dungeon and render it to a PNG blob
  * 
  * @param {Object} options - Generation options
  * @param {string} options.size - Size preset: TINY, SMALL, MEDIUM, LARGE, XLARGE
- * @param {string} options.symmetry - Symmetry type: NONE, BILATERAL
- * @param {string} options.waterDepth - Water depth: DRY, PUDDLES, POOLS, LAKES, FLOODED
- * @param {number} options.seed - Random seed for reproducibility
+ * @param {number} options.seed - Random seed (not fully implemented in new gen yet)
  * @param {number} options.gridSize - Pixels per grid cell (for rendering)
  * @returns {Promise<Blob>} - PNG image blob
  */
@@ -31,36 +39,30 @@ export async function generateDungeon(options = {}) {
 
     const startTime = performance.now();
 
-    // Parse options
-    const params = GenerationParams.fromOptions({
-        size: options.size || 'medium',
-        symmetry: options.symmetry || 'none',
-        waterDepth: options.waterDepth || 'dry',
-        seed: options.seed
+    // 1. Resolve configuration from options
+    const sizeName = (options.size || 'medium').toLowerCase();
+    const config = SIZE_PRESETS[sizeName] || SIZE_PRESETS.medium;
+
+    // 2. Generate
+    const generator = new DungeonGenerator(config.width, config.height, {
+        numRooms: config.numRooms,
+        minRoomSize: config.minSize,
+        maxRoomSize: config.maxSize
     });
-    console.log("Dungeongen | Parsed params:", params);
 
-    // Generate layout
-    const generator = new DungeonGenerator(params);
-    console.log("Dungeongen | Generator created, generating dungeon...");
-    const dungeon = generator.generate(options.seed);
+    console.log(`Dungeongen | Generating ${sizeName} dungeon (${config.width}x${config.height})...`);
+    const grid = generator.generate();
 
-    console.log(`Dungeongen | Generated ${dungeon.rooms.length} rooms, ${dungeon.passages.length} passages`);
-    console.log("Dungeongen | Dungeon bounds:", dungeon.bounds);
-    if (dungeon.rooms.length > 0) {
-        console.log("Dungeongen | First room:", dungeon.rooms[0]);
-    }
+    console.log(`Dungeongen | Generated ${grid.rooms.length} rooms and ${grid.doors.length} doors`);
 
-    // Render to image
-    const renderer = new DungeonRenderer(dungeon, {
+    // 3. Render
+    const renderer = new DungeonRenderer(grid, {
         cellSize: options.gridSize || 20,
-        drawGrid: true,
-        drawNumbers: true
+        drawNumbers: false
     });
-    console.log("Dungeongen | Renderer created, rendering to blob...");
 
+    console.log("Dungeongen | Rendering to blob...");
     const blob = await renderer.renderToBlob();
-    console.log("Dungeongen | Blob created, size:", blob.size, "bytes");
 
     const endTime = performance.now();
     console.log(`Dungeongen | Generation complete in ${(endTime - startTime).toFixed(0)}ms`);
@@ -70,45 +72,29 @@ export async function generateDungeon(options = {}) {
 
 /**
  * Generate dungeon and return both layout data and image
- * 
- * @param {Object} options - Generation options
- * @returns {Promise<{dungeon: Dungeon, blob: Blob}>}
+ * Note: 'dungeon' return value is now a DungeonGrid, not the old Dungeon model
  */
 export async function generateDungeonWithData(options = {}) {
-    const params = GenerationParams.fromOptions({
-        size: options.size || 'medium',
-        symmetry: options.symmetry || 'none',
-        waterDepth: options.waterDepth || 'dry',
-        seed: options.seed
+    // 1. Resolve configuration from options
+    const sizeName = (options.size || 'medium').toLowerCase();
+    const config = SIZE_PRESETS[sizeName] || SIZE_PRESETS.medium;
+
+    // 2. Generate
+    const generator = new DungeonGenerator(config.width, config.height, {
+        numRooms: config.numRooms,
+        minRoomSize: config.minSize,
+        maxRoomSize: config.maxSize
     });
 
-    const generator = new DungeonGenerator(params);
-    const dungeon = generator.generate(options.seed);
+    const grid = generator.generate();
 
-    const renderer = new DungeonRenderer(dungeon, {
+    // 3. Render
+    const renderer = new DungeonRenderer(grid, {
         cellSize: options.gridSize || 20,
-        drawGrid: true,
         drawNumbers: true
     });
 
     const blob = await renderer.renderToBlob();
 
-    return { dungeon, blob };
-}
-
-/**
- * Render an existing dungeon layout to image
- * 
- * @param {Dungeon} dungeon - Dungeon layout to render
- * @param {Object} options - Rendering options
- * @returns {Promise<Blob>} - PNG image blob
- */
-export async function renderDungeon(dungeon, options = {}) {
-    const renderer = new DungeonRenderer(dungeon, {
-        cellSize: options.gridSize || 20,
-        drawGrid: options.drawGrid ?? true,
-        drawNumbers: options.drawNumbers ?? true
-    });
-
-    return await renderer.renderToBlob();
+    return { dungeon: grid, blob };
 }

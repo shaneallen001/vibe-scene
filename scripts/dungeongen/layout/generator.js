@@ -1,398 +1,89 @@
 /**
- * Dungeon Layout Generator
+ * Grid-Based Dungeon Generator
  * 
- * Main procedural dungeon generator.
- * Ported from dungeongen Python generator.
+ * Generates dungeons by painting cells onto a grid.
  */
 
-import { Room, Passage, Door, Exit, Dungeon, RoomShape, DoorType, ExitType } from './models.js';
-import { GenerationParams, SymmetryType } from './params.js';
+import { DungeonGrid, CellType, Room, Door } from './models.js';
 
-/**
- * Seeded random number generator (LCG)
- */
-class SeededRandom {
-    constructor(seed = Date.now()) {
-        this.seed = seed >>> 0;
-    }
-
-    /**
-     * Get next random number (0-1)
-     */
-    random() {
-        this.seed = (this.seed * 1103515245 + 12345) >>> 0;
-        return (this.seed & 0x7fffffff) / 0x7fffffff;
-    }
-
-    /**
-     * Random integer in range [min, max] inclusive
-     */
-    randInt(min, max) {
-        return Math.floor(this.random() * (max - min + 1)) + min;
-    }
-
-    /**
-     * Random float in range [min, max]
-     */
-    randFloat(min, max) {
-        return min + this.random() * (max - min);
-    }
-
-    /**
-     * Random element from array
-     */
-    choice(arr) {
-        return arr[Math.floor(this.random() * arr.length)];
-    }
-
-    /**
-     * Shuffle array in place
-     */
-    shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(this.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-    }
-}
-
-/**
- * Occupancy grid for collision detection
- */
-class OccupancyGrid {
-    constructor(size = 200) {
-        this.size = size;
-        this.offset = Math.floor(size / 2);
-        this.grid = new Int8Array(size * size);
-    }
-
-    clear() {
-        this.grid.fill(0);
-    }
-
-    /**
-     * Get cell value
-     */
-    get(x, y) {
-        const gx = x + this.offset;
-        const gy = y + this.offset;
-        if (gx < 0 || gx >= this.size || gy < 0 || gy >= this.size) {
-            return -1; // Out of bounds treated as occupied
-        }
-        return this.grid[gy * this.size + gx];
-    }
-
-    /**
-     * Set cell value
-     */
-    set(x, y, value = 1) {
-        const gx = x + this.offset;
-        const gy = y + this.offset;
-        if (gx >= 0 && gx < this.size && gy >= 0 && gy < this.size) {
-            this.grid[gy * this.size + gx] = value;
-        }
-    }
-
-    /**
-     * Mark a rectangular region
-     */
-    markRect(x, y, width, height, value = 1) {
-        for (let dy = 0; dy < height; dy++) {
-            for (let dx = 0; dx < width; dx++) {
-                this.set(x + dx, y + dy, value);
-            }
-        }
-    }
-
-    /**
-     * Check if a rectangular region is empty
-     */
-    isRectEmpty(x, y, width, height, margin = 1) {
-        for (let dy = -margin; dy < height + margin; dy++) {
-            for (let dx = -margin; dx < width + margin; dx++) {
-                if (this.get(x + dx, y + dy) !== 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-}
-
-/**
- * Main dungeon generator
- */
 export class DungeonGenerator {
-    constructor(params = null) {
-        this.params = params || new GenerationParams();
-        this.rng = new SeededRandom();
-        this.occupancy = new OccupancyGrid();
-        this._connectedPairs = new Map();
-        this._mirrorPairs = new Map();
+    constructor(width, height, options = {}) {
+        this.width = width;
+        this.height = height;
+        this.options = options;
+        // Initialize grid
+        this.grid = new DungeonGrid(width, height);
     }
 
-    /**
-     * Generate a complete dungeon
-     */
-    generate(seed = null) {
-        // Setup RNG
-        if (seed !== null) {
-            this.rng = new SeededRandom(seed);
-        } else if (this.params.seed !== null) {
-            this.rng = new SeededRandom(this.params.seed);
-        } else {
-            this.rng = new SeededRandom(Date.now());
-        }
+    generate() {
+        // Phase 1: Place Rooms with explicit buffer
+        this._placeRooms();
 
-        const dungeon = new Dungeon(seed || Date.now());
-        this.occupancy.clear();
-        this._connectedPairs.clear();
-        this._mirrorPairs.clear();
+        // Phase 2: Connect Rooms (MST) & Route Passages using A*
+        this._connectRooms();
 
-        // Phase 1: Place rooms
-        this._placeRooms(dungeon);
+        // Phase 3: Place Doors (explicitly at room entries)
+        this._placeDoors();
 
-        // Phase 2: Connect rooms with passages
-        this._connectRooms(dungeon);
-
-        // Phase 3: Add extra connections (Jaquaying)
-        this._addExtraConnections(dungeon);
-
-        // Phase 4: Generate doors
-        this._generateDoors(dungeon);
-
-        // Phase 5: Generate exits
-        this._generateExits(dungeon);
-
-        // Phase 6: Number rooms
-        this._numberRooms(dungeon);
-
-        // Store symmetry info
-        dungeon.mirrorPairs = Object.fromEntries(this._mirrorPairs);
-        dungeon.propsSeed = this.rng.randInt(0, 0x7fffffff);
-
-        return dungeon;
+        return this.grid;
     }
 
-    /**
-     * Place rooms based on symmetry type
-     */
-    _placeRooms(dungeon) {
-        if (this.params.symmetry === SymmetryType.BILATERAL) {
-            this._placeRoomsBilateral(dungeon);
-        } else {
-            this._placeRoomsAsymmetric(dungeon);
-        }
-    }
+    _placeRooms() {
+        const numRooms = this.options.numRooms || 10;
+        const minSize = this.options.minRoomSize || 6;
+        const maxSize = this.options.maxRoomSize || 12; // Reduced max size slightly to allow more space
 
-    /**
-     * Place rooms asymmetrically
-     */
-    _placeRoomsAsymmetric(dungeon) {
-        const [minCount, maxCount] = this.params.getRoomCountRange();
-        const targetCount = this.rng.randInt(minCount, maxCount);
-        const templates = this.params.getRoomTemplates();
-
-        // Place first room at center
-        const firstTemplate = this.rng.choice(templates);
-        const firstRoom = new Room({
-            x: -Math.floor(firstTemplate[0] / 2),
-            y: -Math.floor(firstTemplate[1] / 2),
-            width: firstTemplate[0],
-            height: firstTemplate[1]
-        });
-        dungeon.addRoom(firstRoom);
-        this._markRoom(firstRoom);
-
-        // Place remaining rooms
+        // Try to place rooms
         let attempts = 0;
-        const maxAttempts = targetCount * 50;
+        const maxAttempts = numRooms * 20;
 
-        while (dungeon.rooms.length < targetCount && attempts < maxAttempts) {
+        while (this.grid.rooms.length < numRooms && attempts < maxAttempts) {
             attempts++;
 
-            // Pick a random existing room to branch from
-            const anchor = this.rng.choice(dungeon.rooms);
+            const w = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
+            const h = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
 
-            // Pick random direction
-            const direction = this.rng.choice(['north', 'south', 'east', 'west']);
+            // Ensure we don't go out of bounds (padding of 2 for walls + buffer)
+            const x = Math.floor(Math.random() * (this.width - w - 4)) + 2;
+            const y = Math.floor(Math.random() * (this.height - h - 4)) + 2;
 
-            // Create new room
-            const template = this.rng.choice(templates);
-            const newRoom = new Room({
-                width: template[0],
-                height: template[1]
-            });
-
-            // Try to place adjacent
-            if (this._placeRoomAdjacent(anchor, direction, newRoom, dungeon)) {
-                // Success - room was placed and marked
+            // Check if region is empty including a 1-cell buffer around it
+            // This ensures at least 1 cell of wall between rooms
+            if (this.grid.isRegionEmpty(x - 1, y - 1, w + 2, h + 2)) {
+                this.grid.carveRect(x, y, w, h, CellType.FLOOR);
+                const room = new Room(x, y, w, h);
+                this.grid.rooms.push(room);
             }
         }
     }
 
-    /**
-     * Place rooms with bilateral symmetry
-     */
-    _placeRoomsBilateral(dungeon) {
-        const [minCount, maxCount] = this.params.getRoomCountRange();
-        const targetCount = this.rng.randInt(minCount, maxCount);
-        const templates = this.params.getRoomTemplates();
+    _connectRooms() {
+        const rooms = this.grid.rooms;
+        if (rooms.length < 2) return;
 
-        dungeon.spineDirection = 'south';
-
-        // Create central spine going south
-        const spineLength = Math.min(5, Math.ceil(targetCount / 6));
-        let lastSpineRoom = null;
-
-        for (let i = 0; i < spineLength; i++) {
-            const template = this.rng.choice(templates);
-            const room = new Room({
-                width: template[0],
-                height: template[1],
-                x: -Math.floor(template[0] / 2),
-                y: lastSpineRoom ? lastSpineRoom.y + lastSpineRoom.height + 2 : -5
-            });
-
-            if (this._canPlaceRoom(room)) {
-                dungeon.addRoom(room);
-                this._markRoom(room);
-                lastSpineRoom = room;
-            }
-        }
-
-        // Add branches on both sides
-        let attempts = 0;
-        const maxAttempts = targetCount * 50;
-
-        while (dungeon.rooms.length < targetCount && attempts < maxAttempts) {
-            attempts++;
-
-            // Pick a random spine room
-            const anchor = this.rng.choice(dungeon.rooms);
-
-            // Branch east/west (mirrored)
-            const template = this.rng.choice(templates);
-
-            // East branch
-            const eastRoom = new Room({
-                width: template[0],
-                height: template[1]
-            });
-
-            if (this._placeRoomAdjacent(anchor, 'east', eastRoom, dungeon)) {
-                // Create mirrored west room
-                const westRoom = new Room({
-                    width: template[0],
-                    height: template[1],
-                    x: -eastRoom.x - template[0],
-                    y: eastRoom.y
-                });
-
-                if (this._canPlaceRoom(westRoom)) {
-                    dungeon.addRoom(westRoom);
-                    this._markRoom(westRoom);
-                    this._mirrorPairs.set(eastRoom.id, westRoom.id);
-                    this._mirrorPairs.set(westRoom.id, eastRoom.id);
-                }
-            }
-        }
-    }
-
-    /**
-     * Check if room can be placed (no collisions)
-     */
-    _canPlaceRoom(room, margin = 1) {
-        return this.occupancy.isRectEmpty(
-            room.x, room.y,
-            room.width, room.height,
-            margin
-        );
-    }
-
-    /**
-     * Mark room cells as occupied
-     */
-    _markRoom(room) {
-        this.occupancy.markRect(room.x, room.y, room.width, room.height, 1);
-    }
-
-    /**
-     * Place room adjacent to anchor in given direction
-     */
-    _placeRoomAdjacent(anchor, direction, newRoom, dungeon) {
-        const spacing = this.rng.randInt(...this.params.getSpacingRange());
-        const ac = anchor.centerGrid;
-
-        // Position based on direction
-        switch (direction) {
-            case 'north':
-                newRoom.x = ac.x - Math.floor(newRoom.width / 2);
-                newRoom.y = anchor.y - spacing - newRoom.height;
-                break;
-            case 'south':
-                newRoom.x = ac.x - Math.floor(newRoom.width / 2);
-                newRoom.y = anchor.y + anchor.height + spacing;
-                break;
-            case 'east':
-                newRoom.x = anchor.x + anchor.width + spacing;
-                newRoom.y = ac.y - Math.floor(newRoom.height / 2);
-                break;
-            case 'west':
-                newRoom.x = anchor.x - spacing - newRoom.width;
-                newRoom.y = ac.y - Math.floor(newRoom.height / 2);
-                break;
-        }
-
-        if (this._canPlaceRoom(newRoom)) {
-            dungeon.addRoom(newRoom);
-            this._markRoom(newRoom);
-
-            // Create connecting passage
-            this._createPassage(anchor, newRoom, dungeon);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Connect rooms using minimum spanning tree
-     */
-    _connectRooms(dungeon) {
-        if (dungeon.rooms.length < 2) return;
-
-        // Build edge list with distances
         const edges = [];
-        for (let i = 0; i < dungeon.rooms.length; i++) {
-            for (let j = i + 1; j < dungeon.rooms.length; j++) {
-                const r1 = dungeon.rooms[i];
-                const r2 = dungeon.rooms[j];
-                const c1 = r1.centerWorld;
-                const c2 = r2.centerWorld;
-                const dist = Math.hypot(c2.x - c1.x, c2.y - c1.y);
-                edges.push({ i, j, dist, r1, r2 });
+        for (let i = 0; i < rooms.length; i++) {
+            for (let j = i + 1; j < rooms.length; j++) {
+                const r1 = rooms[i];
+                const r2 = rooms[j];
+                const c1 = r1.center;
+                const c2 = r2.center;
+                const dist = Math.abs(c1.x - c2.x) + Math.abs(c1.y - c2.y);
+                edges.push({ u: i, v: j, w: dist });
             }
         }
+        edges.sort((a, b) => a.w - b.w);
 
-        // Sort by distance
-        edges.sort((a, b) => a.dist - b.dist);
-
-        // Kruskal's MST
-        const parent = dungeon.rooms.map((_, i) => i);
-
-        function find(x) {
-            if (parent[x] !== x) parent[x] = find(parent[x]);
-            return parent[x];
+        const parent = Array.from({ length: rooms.length }, (_, i) => i);
+        function find(i) {
+            if (parent[i] === i) return i;
+            return parent[i] = find(parent[i]);
         }
-
-        function union(x, y) {
-            const px = find(x);
-            const py = find(y);
-            if (px !== py) {
-                parent[px] = py;
+        function union(i, j) {
+            const rootI = find(i);
+            const rootJ = find(j);
+            if (rootI !== rootJ) {
+                parent[rootI] = rootJ;
                 return true;
             }
             return false;
@@ -400,198 +91,281 @@ export class DungeonGenerator {
 
         // Add MST edges
         for (const edge of edges) {
-            if (union(edge.i, edge.j)) {
-                const pairKey = this._pairKey(edge.r1.id, edge.r2.id);
-                if (!this._connectedPairs.has(pairKey)) {
-                    this._createPassage(edge.r1, edge.r2, dungeon);
+            if (union(edge.u, edge.v)) {
+                this._routePassageAStar(rooms[edge.u], rooms[edge.v]);
+            }
+        }
+
+        // Add a few loop edges
+        let loopsAdded = 0;
+        for (const edge of edges) {
+            if (loopsAdded >= 2) break;
+            if (find(edge.u) === find(edge.v)) {
+                if (Math.random() < 0.1) {
+                    this._routePassageAStar(rooms[edge.u], rooms[edge.v]);
+                    loopsAdded++;
                 }
             }
         }
     }
 
-    /**
-     * Add extra connections for more interesting layouts
-     */
-    _addExtraConnections(dungeon) {
-        const extraChance = 0.15; // 15% chance per potential connection
+    _routePassageAStar(r1, r2) {
+        const start = r1.center;
+        const end = r2.center;
 
-        for (let i = 0; i < dungeon.rooms.length; i++) {
-            for (let j = i + 1; j < dungeon.rooms.length; j++) {
-                const r1 = dungeon.rooms[i];
-                const r2 = dungeon.rooms[j];
+        // A* Pathfinding
+        const frontier = new TinyQueue([{ x: start.x, y: start.y, priority: 0 }], (a, b) => a.priority - b.priority);
+        const cameFrom = new Map();
+        const costSoFar = new Map();
+        const startKey = `${start.x},${start.y}`;
 
-                const pairKey = this._pairKey(r1.id, r2.id);
-                if (this._connectedPairs.has(pairKey)) continue;
+        cameFrom.set(startKey, null);
+        costSoFar.set(startKey, 0);
 
-                // Only connect nearby rooms
-                const c1 = r1.centerWorld;
-                const c2 = r2.centerWorld;
-                const dist = Math.hypot(c2.x - c1.x, c2.y - c1.y);
+        let current = null;
+        let found = false;
 
-                if (dist < 15 && this.rng.random() < extraChance) {
-                    this._createPassage(r1, r2, dungeon);
+        while (frontier.length > 0) {
+            current = frontier.pop();
+
+            // Reached destination room interior?
+            // Actually, we want to reach center, but hitting any point in target room is fine?
+            // Let's stick to center for now to ensure we punch through.
+            if (current.x === end.x && current.y === end.y) {
+                found = true;
+                break;
+            }
+
+            const neighbors = [
+                { x: current.x + 1, y: current.y },
+                { x: current.x - 1, y: current.y },
+                { x: current.x, y: current.y + 1 },
+                { x: current.x, y: current.y - 1 }
+            ];
+
+            for (const next of neighbors) {
+                if (next.x <= 0 || next.x >= this.width - 1 || next.y <= 0 || next.y >= this.height - 1) continue;
+
+                const newCost = (costSoFar.get(`${current.x},${current.y}`) || 0) + this._getMovementCost(next.x, next.y, r1, r2);
+                const nextKey = `${next.x},${next.y}`;
+
+                if (!costSoFar.has(nextKey) || newCost < costSoFar.get(nextKey)) {
+                    costSoFar.set(nextKey, newCost);
+                    const priority = newCost + Math.abs(end.x - next.x) + Math.abs(end.y - next.y); // Heuristic
+                    frontier.push({ x: next.x, y: next.y, priority });
+                    cameFrom.set(nextKey, current);
+                }
+            }
+        }
+
+        if (found) {
+            // Retrace path
+            let curr = current;
+            while (curr) {
+                this.grid.set(curr.x, curr.y, CellType.FLOOR);
+                const key = `${curr.x},${curr.y}`;
+                const prev = cameFrom.get(key);
+                if (!prev) break;
+                curr = prev;
+            }
+        } else {
+            // Fallback to L-shape if A* fails (rare)
+            this._routePassage(r1, r2);
+        }
+    }
+
+    _getMovementCost(x, y, r1, r2) {
+        // Base cost
+        let cost = 1;
+
+        const cell = this.grid.get(x, y);
+
+        // Prefer existing floors
+        if (cell === CellType.FLOOR) {
+            cost = 1;
+        } else {
+            cost = 5; // Digging new tunnel is slightly more expensive
+        }
+
+        // HEAVY penalty for being adjacent to a room that isn't the start or end room
+        // This creates the "buffer" effect for hallways
+        if (this._isAdjacentToOtherRoom(x, y, r1, r2)) {
+            cost += 50;
+        }
+
+        return cost;
+    }
+
+    _isAdjacentToOtherRoom(x, y, r1, r2) {
+        for (const room of this.grid.rooms) {
+            if (room === r1 || room === r2) continue; // It's okay to be near start/end rooms
+            // Check expansion (room borders + 1)
+            if (x >= room.x - 1 && x <= room.x + room.width &&
+                y >= room.y - 1 && y <= room.y + room.height) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Fallback L-shaped routing
+    _routePassage(r1, r2) {
+        const c1 = r1.center;
+        const c2 = r2.center;
+        if (Math.random() < 0.5) {
+            this._carveH(c1.x, c2.x, c1.y);
+            this._carveV(c1.y, c2.y, c2.x);
+        } else {
+            this._carveV(c1.y, c2.y, c1.x);
+            this._carveH(c1.x, c2.x, c2.y);
+        }
+    }
+    _carveH(x1, x2, y) {
+        const start = Math.min(x1, x2);
+        const end = Math.max(x1, x2);
+        for (let x = start; x <= end; x++) this.grid.set(x, y, CellType.FLOOR);
+    }
+
+    _carveV(y1, y2, x) {
+        const start = Math.min(y1, y2);
+        const end = Math.max(y1, y2);
+        for (let y = start; y <= end; y++) this.grid.set(x, y, CellType.FLOOR);
+    }
+
+
+    _placeDoors() {
+        // Identify potential door locations:
+        // A floor cell that has exactly two FLOOR neighbors (opposite sides)
+        // AND one of those neighbors is in a room and the other is NOT (hallway)
+        // OR both are in different rooms (direct adjacent rooms, though _placeRooms avoids this usually)
+
+        this.grid.doors = []; // Reset doors
+
+        // Iterate over all rooms to find their entry points
+        // Doing it this way ensures we look at boundaries
+
+        // BETTER STRATEGY: 
+        // Iterate every cell. If it is a FLOOR cell, check if it qualifies as a door.
+        // A Door Candidate is:
+        // 1. A FLOOR cell
+        // 2. Is effectively a "connector" (narrow point)
+        // 3. Connects a room to something else (hallway or another room)
+
+        for (let y = 1; y < this.height - 1; y++) {
+            for (let x = 1; x < this.width - 1; x++) {
+                if (this.grid.get(x, y) !== CellType.FLOOR) continue;
+
+                // Check neighbors
+                const n = this.grid.get(x, y - 1) === CellType.FLOOR;
+                const s = this.grid.get(x, y + 1) === CellType.FLOOR;
+                const e = this.grid.get(x + 1, y) === CellType.FLOOR;
+                const w = this.grid.get(x - 1, y) === CellType.FLOOR;
+
+                let isVerticalDoor = w && e && !n && !s; // Corridor runs Left-Right
+                let isHorizontalDoor = n && s && !w && !e; // Corridor runs Top-Bottom
+
+                if (!isVerticalDoor && !isHorizontalDoor) continue;
+
+                // Now check room connectivity
+                // For a vertical door (running left-right), check if left is room and right is hallway, or vice versa
+                // Actually, simplest check: Am I inside a room definition?
+                const myRoom = this._getRoomAt(x, y);
+                if (myRoom) continue; // Don't place doors INSIDE rooms
+
+                // So I am a hallway cell.
+                // Do I connect to a room?
+                let connectsToRoom = false;
+
+                if (isVerticalDoor) {
+                    if (this._getRoomAt(x - 1, y) || this._getRoomAt(x + 1, y)) connectsToRoom = true;
+                } else {
+                    if (this._getRoomAt(x, y - 1) || this._getRoomAt(x, y + 1)) connectsToRoom = true;
+                }
+
+                if (connectsToRoom) {
+                    // Determine direction for the door object (visuals)
+                    // If corridor is Left-Right (Vertical Door), we want the door to block the path?
+                    // Wait, 'direction' in models.js was 'vertical' (right edge) or 'horizontal' (bottom edge).
+                    // But now we are the cell itself.
+                    // Let's redefine direction:
+                    // 'vertical' = door stands vertically (blocking left-right movement) -> |
+                    // 'horizontal' = door stands horizontally (blocking up-down movement) -> -
+
+                    // If I am a connector moving Left-Right (neighbors West/East), I need a Vertical door (|) to block it.
+                    const dir = isVerticalDoor ? 'vertical' : 'horizontal';
+
+                    // Avoid double doors (if neighbor is also a door)
+                    const hasDoorNeighbor = this.grid.doors.some(d => Math.abs(d.x - x) + Math.abs(d.y - y) <= 1);
+                    if (!hasDoorNeighbor) {
+                        this.grid.doors.push(new Door(x, y, dir));
+                    }
                 }
             }
         }
     }
 
-    /**
-     * Create a passage between two rooms
-     */
-    _createPassage(room1, room2, dungeon) {
-        const c1 = room1.centerGrid;
-        const c2 = room2.centerGrid;
-
-        // Calculate waypoints for L-shaped passage
-        const waypoints = [];
-
-        // Start at room1 edge
-        const start = this._getRoomEdgePoint(room1, c2);
-        waypoints.push(start);
-
-        // Decide if horizontal or vertical first
-        const dx = c2.x - c1.x;
-        const dy = c2.y - c1.y;
-
-        if (Math.abs(dx) > Math.abs(dy)) {
-            // Horizontal first
-            waypoints.push({ x: c2.x, y: start.y });
-        } else {
-            // Vertical first
-            waypoints.push({ x: start.x, y: c2.y });
-        }
-
-        // End at room2 edge
-        const end = this._getRoomEdgePoint(room2, c1);
-        waypoints.push(end);
-
-        const passage = new Passage({
-            startRoom: room1.id,
-            endRoom: room2.id,
-            waypoints
-        });
-
-        dungeon.addPassage(passage);
-        room1.connections.push(room2.id);
-        room2.connections.push(room1.id);
-
-        const pairKey = this._pairKey(room1.id, room2.id);
-        this._connectedPairs.set(pairKey, true);
-
-        return passage;
-    }
-
-    /**
-     * Get point on room edge closest to target
-     */
-    _getRoomEdgePoint(room, target) {
-        const c = room.centerGrid;
-        const dx = target.x - c.x;
-        const dy = target.y - c.y;
-
-        if (Math.abs(dx) > Math.abs(dy)) {
-            // Exit from east or west
-            return {
-                x: dx > 0 ? room.x + room.width : room.x - 1,
-                y: c.y
-            };
-        } else {
-            // Exit from north or south
-            return {
-                x: c.x,
-                y: dy > 0 ? room.y + room.height : room.y - 1
-            };
-        }
-    }
-
-    /**
-     * Generate doors at room entrances
-     */
-    _generateDoors(dungeon) {
-        for (const passage of dungeon.passages) {
-            const wp = passage.waypoints;
-            if (wp.length < 2) continue;
-
-            // Door at start
-            const startRoom = dungeon.getRoom(passage.startRoom);
-            if (startRoom) {
-                const dir = this._getDirection(startRoom.centerGrid, wp[0]);
-                const door = new Door({
-                    x: wp[0].x,
-                    y: wp[0].y,
-                    direction: dir,
-                    doorType: this.rng.random() < 0.6 ? DoorType.CLOSED : DoorType.OPEN,
-                    roomId: startRoom.id,
-                    passageId: passage.id
-                });
-                dungeon.addDoor(door);
-            }
-        }
-    }
-
-    /**
-     * Generate dungeon exits
-     */
-    _generateExits(dungeon) {
-        if (dungeon.rooms.length === 0) return;
-
-        // Main entrance on first room
-        const entranceRoom = dungeon.rooms[0];
-        const exit = new Exit({
-            x: entranceRoom.x + Math.floor(entranceRoom.width / 2),
-            y: entranceRoom.y - 1,
-            direction: 'north',
-            exitType: ExitType.ENTRANCE,
-            roomId: entranceRoom.id,
-            isMain: true
-        });
-        dungeon.exits.push(exit);
-    }
-
-    /**
-     * Number rooms by distance from entrance
-     */
-    _numberRooms(dungeon) {
-        if (dungeon.rooms.length === 0) return;
-
-        // BFS from entrance
-        const queue = [dungeon.rooms[0]];
-        const visited = new Set([dungeon.rooms[0].id]);
-        let number = 1;
-
-        while (queue.length > 0) {
-            const room = queue.shift();
-            room.number = number++;
-
-            // Find connected rooms
-            for (const connId of room.connections) {
-                if (!visited.has(connId)) {
-                    visited.add(connId);
-                    const connRoom = dungeon.getRoom(connId);
-                    if (connRoom) queue.push(connRoom);
-                }
-            }
-        }
-    }
-
-    /**
-     * Get direction from point a to point b
-     */
-    _getDirection(from, to) {
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-
-        if (Math.abs(dx) > Math.abs(dy)) {
-            return dx > 0 ? 'east' : 'west';
-        } else {
-            return dy > 0 ? 'south' : 'north';
-        }
-    }
-
-    /**
-     * Create consistent pair key for two room IDs
-     */
-    _pairKey(id1, id2) {
-        return id1 < id2 ? `${id1}-${id2}` : `${id2}-${id1}`;
+    _getRoomAt(x, y) {
+        return this.grid.rooms.find(r =>
+            x >= r.x && x < r.x + r.width &&
+            y >= r.y && y < r.y + r.height
+        );
     }
 }
+
+// Simple Priority Queue for A*
+class TinyQueue {
+    constructor(data = [], compare = (a, b) => a - b) {
+        this.data = data;
+        this.compare = compare;
+        this.length = data.length;
+        if (this.length > 0) {
+            for (let i = (this.length >> 1) - 1; i >= 0; i--) this._down(i);
+        }
+    }
+    push(item) {
+        this.data.push(item);
+        this.length++;
+        this._up(this.length - 1);
+    }
+    pop() {
+        if (this.length === 0) return undefined;
+        const top = this.data[0];
+        const bottom = this.data.pop();
+        this.length--;
+        if (this.length > 0) {
+            this.data[0] = bottom;
+            this._down(0);
+        }
+        return top;
+    }
+    peek() { return this.data[0]; }
+    _up(pos) {
+        const { data, compare } = this;
+        const item = data[pos];
+        while (pos > 0) {
+            const parent = (pos - 1) >> 1;
+            const current = data[parent];
+            if (compare(item, current) >= 0) break;
+            data[pos] = current;
+            pos = parent;
+        }
+        data[pos] = item;
+    }
+    _down(pos) {
+        const { data, compare } = this;
+        const halfLength = this.length >> 1;
+        const item = data[pos];
+        while (pos < halfLength) {
+            let bestChild = (pos << 1) + 1;
+            const right = bestChild + 1;
+            if (right < this.length && compare(data[right], data[bestChild]) < 0) {
+                bestChild = right;
+            }
+            if (compare(data[bestChild], item) >= 0) break;
+            data[pos] = data[bestChild];
+            pos = bestChild;
+        }
+        data[pos] = item;
+    }
+}
+

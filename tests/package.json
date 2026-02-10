@@ -1,0 +1,14 @@
+{
+    "name": "vibe-scenes-tests",
+    "version": "1.0.0",
+    "description": "Standalone tests for vibe-scenes dungeon generator",
+    "main": "test_generator.js",
+    "type": "module",
+    "scripts": {
+        "test": "node test_generator.js"
+    },
+    "dependencies": {
+        "canvas": "^2.11.2",
+        "jsdom": "^22.1.0"
+    }
+}

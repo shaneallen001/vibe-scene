@@ -55,3 +55,25 @@ This module includes a complete JavaScript port of the [dungeongen](https://gith
 ## Credits
 
 - [dungeongen](https://github.com/benjcooley/dungeongen) by benjcooley - Original procedural dungeon generation algorithm
+
+## Development
+
+### Standalone Tester
+
+You can run the dungeon generator without opening Foundry VTT using the included standalone test script. This is useful for rapid testing of the generation algorithm.
+
+1. Navigate to the `tests` directory:
+   ```bash
+   cd tests
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the generator:
+   ```bash
+   node test_generator.js
+   ```
+
+The script will generate a medium-sized dungeon and save the image to `vibe-scenes/Generated Dungeons/`.
+
