@@ -14,9 +14,11 @@ export class DungeonGrid {
         this.width = width;
         this.height = height;
         this.data = new Int8Array(width * height).fill(CellType.EMPTY);
+        this.mask = new Int8Array(width * height).fill(0); // 0 = Void, 1 = Valid
         this.rooms = [];
         this.passages = [];
         this.doors = [];
+        this.stairs = [];
     }
 
     get(x, y) {
@@ -27,6 +29,33 @@ export class DungeonGrid {
     set(x, y, value) {
         if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
         this.data[y * this.width + x] = value;
+    }
+
+    getMask(x, y) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return 0;
+        return this.mask[y * this.width + x];
+    }
+
+    setMask(x, y, value) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
+        this.mask[y * this.width + x] = value;
+    }
+
+    /**
+     * Check if a region is valid according to the mask.
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} w 
+     * @param {number} h 
+     * @returns {boolean} True if the entire region is within the valid mask
+     */
+    isRegionValid(x, y, w, h) {
+        for (let dy = 0; dy < h; dy++) {
+            for (let dx = 0; dx < w; dx++) {
+                if (this.getMask(x + dx, y + dy) === 0) return false;
+            }
+        }
+        return true;
     }
 
     carveRect(x, y, w, h, value = CellType.FLOOR) {
@@ -87,6 +116,15 @@ export class Door {
         this.x = x;
         this.y = y;
         this.direction = direction; // 'vertical' (blocks Left-Right) or 'horizontal' (blocks Top-Bottom)
+        this.id = crypto.randomUUID();
+    }
+}
+
+export class Stair {
+    constructor(x, y, type = 'down') {
+        this.x = x;
+        this.y = y;
+        this.type = type; // 'up' or 'down'
         this.id = crypto.randomUUID();
     }
 }

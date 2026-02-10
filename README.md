@@ -43,9 +43,11 @@ Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 
 This module includes a complete JavaScript port of the [dungeongen](https://github.com/benjcooley/dungeongen) library:
 
-- **Layout Generation**: Procedural room placement with configurable sizes and symmetry
-- **Passage Routing**: Intelligent corridor generation with minimum spanning tree connectivity
-- **Door & Exit Placement**: Automatic door and entrance generation
+- **Layout Generation**: New phase-based procedural generation framework inspired by Donjon
+- **Spatial Constraints**: Support for various map shapes (Rectangle, Round, Cross, Cavernous)
+- **Advanced Room Placement**: Intelligent room sizing and placement algorithms
+- **Passage Routing**: sophisticated corridor generation with multiple connectivity strategies
+- **Door & Exit Placement**: Context-aware door and entrance generation
 - **Canvas Rendering**: Pure JavaScript rendering (no external dependencies)
 
 ## Requirements
