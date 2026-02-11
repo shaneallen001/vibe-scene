@@ -9,12 +9,13 @@ export class SceneImporter {
      * @param {Object} options - Scene creation options
      * @param {string} options.name - Scene name
      * @param {Blob} options.imageData - PNG image blob
+     * @param {Array} options.walls - Array of wall data objects
      * @param {number} options.gridSize - Grid size in pixels
      * @param {number} options.seed - Seed used for generation (for metadata)
      * @returns {Promise<Scene>} - Created scene document
      */
     async createScene(options) {
-        const { name, imageData, gridSize, seed } = options;
+        const { name, imageData, walls, gridSize, seed } = options;
 
         console.log("Vibe Scenes | Creating scene:", name);
 
@@ -85,6 +86,12 @@ export class SceneImporter {
 
         if (!scene) {
             throw new Error("Failed to create scene document");
+        }
+
+        // Create Walls if provided
+        if (walls && walls.length > 0) {
+            console.log(`Vibe Scenes | Creating ${walls.length} walls...`);
+            await scene.createEmbeddedDocuments("Wall", walls);
         }
 
         console.log("Vibe Scenes | Scene created successfully:", scene.id);

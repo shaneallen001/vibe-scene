@@ -7,6 +7,7 @@
 
 import { DungeonGenerator } from './layout/generator.js';
 import { DungeonRenderer } from './map/renderer.js';
+import { WallBuilder } from './map/wall-builder.js';
 
 // Re-export for external use - Note: Models have changed!
 export { DungeonGenerator } from './layout/generator.js';
@@ -32,7 +33,7 @@ const SIZE_PRESETS = {
  * @param {string} options.size - Size preset: TINY, SMALL, MEDIUM, LARGE, XLARGE
  * @param {number} options.seed - Random seed (not fully implemented in new gen yet)
  * @param {number} options.gridSize - Pixels per grid cell (for rendering)
- * @returns {Promise<Blob>} - PNG image blob
+ * @returns {Promise<Object>} - { blob, walls }
  */
 export async function generateDungeon(options = {}) {
     console.log("Dungeongen | Starting generation with options:", options);
@@ -74,10 +75,15 @@ export async function generateDungeon(options = {}) {
     console.log("Dungeongen | Rendering to blob...");
     const blob = await renderer.renderToBlob();
 
+    // 4. Extract Walls
+    const pad = options.gridSize * 2 || 40; // match renderer padding logic
+    const walls = WallBuilder.build(grid, options.gridSize || 20, pad);
+    console.log(`Dungeongen | Extracted ${walls.length} wall segments`);
+
     const endTime = performance.now();
     console.log(`Dungeongen | Generation complete in ${(endTime - startTime).toFixed(0)}ms`);
 
-    return blob;
+    return { blob, walls };
 }
 
 /**
@@ -116,5 +122,9 @@ export async function generateDungeonWithData(options = {}) {
 
     const blob = await renderer.renderToBlob();
 
-    return { dungeon: grid, blob };
+    // 4. Extract Walls
+    const pad = options.gridSize * 2 || 40;
+    const walls = WallBuilder.build(grid, options.gridSize || 20, pad);
+
+    return { dungeon: grid, blob, walls };
 }

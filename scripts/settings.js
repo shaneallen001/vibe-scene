@@ -10,7 +10,7 @@ export function registerModuleSettings() {
     scope: "world",
     config: true,
     type: Number,
-    default: 100
+    default: 20
   });
 
   game.settings.register("vibe-scenes", "imageStorage", {

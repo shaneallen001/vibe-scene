@@ -59,7 +59,10 @@ export class DungeonRenderer {
         // 3. Draw Doors
         this._drawDoors(ctx);
 
-        // 4. Draw Room Numbers (Debug)
+        // 4. Draw Stairs (New)
+        this._drawStairs(ctx);
+
+        // 5. Draw Room Numbers (Debug)
         if (this.options.drawNumbers) {
             this._drawRoomNumbers(ctx);
         }
@@ -176,6 +179,60 @@ export class DungeonRenderer {
             }
 
             ctx.fillRect(x, y, w, h);
+        }
+    }
+
+    /**
+     * Draw stairs with visual distinction between UP and DOWN
+     */
+    _drawStairs(ctx) {
+        const cellSize = this.options.cellSize;
+
+        // Settings for stairs
+        const upColor = '#cccccc'; // Light gray for UP
+        const downColor = '#666666'; // Dark gray for DOWN
+        const stepColor = '#000000';
+        const textColor = '#ffffff';
+
+        for (const stair of this.grid.stairs) {
+            const x = stair.x * cellSize;
+            const y = stair.y * cellSize;
+
+            // 1. Background Fill
+            ctx.fillStyle = stair.type === 'up' ? upColor : downColor;
+            ctx.fillRect(x, y, cellSize, cellSize);
+
+            // 2. Draw "Steps" (Horizontal lines)
+            ctx.strokeStyle = stepColor;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+
+            // Draw 3-4 lines to simulate steps
+            const steps = 4;
+            const stepGap = cellSize / steps;
+
+            for (let i = 1; i < steps; i++) {
+                const ly = y + i * stepGap;
+                ctx.moveTo(x, ly);
+                ctx.lineTo(x + cellSize, ly);
+            }
+            ctx.stroke();
+
+            // 3. Draw Label (UP/DN)
+            ctx.fillStyle = textColor;
+            ctx.font = `bold ${Math.floor(cellSize / 2.5)}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            // Add text shadow for readability
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+
+            const label = stair.type === 'up' ? "UP" : "DN";
+            const cx = x + cellSize / 2;
+            const cy = y + cellSize / 2;
+
+            ctx.strokeText(label, cx, cy);
+            ctx.fillText(label, cx, cy);
         }
     }
 

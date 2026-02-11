@@ -50,7 +50,7 @@ const DEAD_END_OPTIONS = [
 export class VibeSceneDialog {
     static async show() {
         // Get default grid size from settings
-        const defaultGridSize = game.settings.get("vibe-scenes", "defaultGridSize") || 100;
+        const defaultGridSize = game.settings.get("vibe-scenes", "defaultGridSize") || 20;
 
         // Generate context for template
         const context = {
@@ -96,7 +96,7 @@ export class VibeSceneDialog {
                         const stairsDown = parseInt(html.find('[name="stairsDown"]').val()) || 0;
 
                         const seedInput = html.find('[name="seed"]').val();
-                        const gridSize = parseInt(html.find('[name="gridSize"]').val()) || 100;
+                        const gridSize = parseInt(html.find('[name="gridSize"]').val()) || 20;
 
                         // Parse seed - use random if empty
                         const seed = seedInput ? parseInt(seedInput) : Math.floor(Math.random() * 999999);
@@ -155,7 +155,7 @@ export class VibeSceneDialog {
             console.log("Vibe Scenes | DungeongenService created, starting generation...");
 
             // Generate the dungeon image
-            const imageData = await dungeonService.generate({
+            const { blob: imageData, walls } = await dungeonService.generate({
                 size,
                 maskType,
                 symmetry,
@@ -179,6 +179,7 @@ export class VibeSceneDialog {
             const scene = await sceneImporter.createScene({
                 name: sceneName,
                 imageData,
+                walls,
                 gridSize,
                 seed
             });

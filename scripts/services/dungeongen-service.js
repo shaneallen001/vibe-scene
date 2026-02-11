@@ -27,14 +27,14 @@ export class DungeongenService {
      * @param {boolean} options.peripheralEgress - Create exits at edges
      * @param {number} options.doorDensity - 0.0 to 1.0
      * @param {Object} options.stairs - { up: number, down: number }
-     * @returns {Promise<Blob>} - PNG image blob
+     * @returns {Promise<Object>} - { blob, walls }
      */
     async generate(options) {
         console.log("Vibe Scenes | Generating dungeon locally with options:", options);
 
         try {
             // Use integrated local generation
-            const blob = await generateDungeon({
+            const result = await generateDungeon({
                 size: options.size,
                 maskType: options.maskType,
                 corridorStyle: options.corridorStyle,
@@ -51,7 +51,7 @@ export class DungeongenService {
             });
 
             console.log("Vibe Scenes | Dungeon generated successfully");
-            return blob;
+            return result;
 
         } catch (error) {
             console.error("Vibe Scenes | Local generation failed:", error);

@@ -8,6 +8,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 - **Built-in Dungeon Generator**: Procedural dungeon generation runs entirely within Foundry (no external dependencies!)
 - **Dungeon Configuration**: Configure dungeon size, symmetry, water features, and random seed
 - **Scene Import**: Automatically creates a new Foundry scene with the generated dungeon map
+- **Auto-Walls & Doors**: Automatically constructs vision-blocking walls and interactive doors
 - **Grid Settings**: Configurable grid size for the generated scenes
 
 ## Installation
@@ -38,7 +39,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 
 Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 
-- **Default Grid Size**: Default grid size in pixels (default: 100)
+- **Default Grid Size**: Default grid size in pixels (default: 20)
 - **Map Render Resolution**: Pixels per cell when rendering (default: 20)
 - **Image Storage Path**: Folder for saving dungeon images (default: `vibe-scenes/dungeons`)
 
@@ -53,14 +54,14 @@ The underlying generator options are now fully exposed in the dialog:
 
 ## Technical Details
 
-This module includes a complete JavaScript port of the [dungeongen](https://github.com/benjcooley/dungeongen) library:
+This module includes a complete JavaScript port of the [dungeongen](https://github.com/benjcooley/dungeongen) library, enhanced with Foundry-specific optimizations:
 
-- **Layout Generation**: New phase-based procedural generation framework inspired by Donjon
-- **Spatial Constraints**: Support for various map shapes (Rectangle, Round, Cross, Cavernous)
-- **Advanced Room Placement**: Intelligent room sizing and placement algorithms
-- **Passage Routing**: sophisticated corridor generation with multiple connectivity strategies
-- **Door & Exit Placement**: Context-aware door and entrance generation
-- **Canvas Rendering**: Pure JavaScript rendering (no external dependencies)
+- **Layout Generation**: Phase-based procedural generation framework (inspired by Donjon).
+- **Advanced Room Placement**: Supports iterative **Relaxation** (physics-based separation) to resolve overlaps and **Symmetric** placement strategies.
+- **Passage Routing**: Uses **Minimum Spanning Trees (MST)** for room connectivity and **A* Pathfinding** for carving. "Errant" styles employ weighted noise to create organic, winding paths.
+- **Performance Optimization**: The `WallBuilder` performs **Collinear Merging**, collapsing hundreds of tile-sized sections into single long vector lines to maintain high performance in Foundry VTT.
+- **Canvas Rendering**: Pure JavaScript rendering using the HTML5 Canvas API, employing a multi-layered approach (Floor → Edges/Walls → Doors).
+- **Foundry Vision**: Context-aware door placement and automated wall generation ensure the dungeon is ready for immediate play.
 
 ## Requirements
 
