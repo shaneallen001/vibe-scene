@@ -10,6 +10,7 @@ const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
 global.window = dom.window;
 global.document = dom.window.document;
 global.HTMLCanvasElement = dom.window.HTMLCanvasElement;
+global.Image = dom.window.Image;
 global.crypto = crypto; // Polyfill crypto for randomUUID if needed, or just the object
 if (!global.crypto.randomUUID) {
     global.crypto.randomUUID = () => crypto.randomUUID();
@@ -70,7 +71,7 @@ const options = {
     symmetry: 'none',
     water: 'none',
     seed: Math.floor(Math.random() * 100000), // Random seed
-    gridSize: 20
+    gridSize: 100
 };
 
 console.log(`Generating dungeon: ${sceneName}`);
@@ -114,7 +115,7 @@ async function run() {
     console.log(`Size: ${options.size}, Grid: ${options.gridSize}`);
 
     try {
-        const blob = await generateDungeon(options);
+        const { blob } = await generateDungeon(options);
 
         if (!blob) {
             throw new Error("Failed to generate blob");

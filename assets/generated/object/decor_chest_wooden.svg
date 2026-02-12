@@ -1,0 +1,21 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <g>
+    <!-- Shadow -->
+    <ellipse cx="256" cy="266" rx="60" ry="20" fill="rgba(0, 0, 0, 0.2)" />
+    <!-- Chest Body -->
+    <rect x="106" y="150" width="300" height="120" fill="#A0522D" stroke="#703214" stroke-width="8" />
+    <!-- Lid -->
+    <path d="M106,150 C126,110 386,110 406,150" fill="#B8860B" stroke="#8B572A" stroke-width="8" />
+    <!-- Iron Bands -->
+    <rect x="106" y="170" width="300" height="20" fill="none" stroke="#555555" stroke-width="6" />
+    <rect x="106" y="230" width="300" height="20" fill="none" stroke="#555555" stroke-width="6" />
+    <!-- Latch Base -->
+    <rect x="246" y="130" width="20" height="30" fill="#555555" stroke="#333333" stroke-width="4" />
+    <!-- Latch Hook -->
+    <path d="M256,130 L256,100 A10,10 0 0,1 266,100 L266,130" fill="none" stroke="#555555" stroke-width="4" />
+  </g>
+</svg>

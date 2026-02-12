@@ -9,6 +9,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 - **Dungeon Configuration**: Configure dungeon size, symmetry, water features, and random seed
 - **Scene Import**: Automatically creates a new Foundry scene with the generated dungeon map
 - **Auto-Walls & Doors**: Automatically constructs vision-blocking walls and interactive doors
+- **AI Asset Generator**: Built-in integration with Google Gemini to generate custom SVG map assets
 - **Grid Settings**: Configurable grid size for the generated scenes
 
 ## Installation
@@ -39,8 +40,8 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 
 Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 
-- **Default Grid Size**: Default grid size in pixels (default: 20)
-- **Map Render Resolution**: Pixels per cell when rendering (default: 20)
+- **Default Grid Size**: Default grid size in pixels (default: 100)
+- **Map Render Resolution**: Pixels per cell when rendering (default: 100)
 - **Image Storage Path**: Folder for saving dungeon images (default: `vibe-scenes/dungeons`)
 
 ### Advanced Configuration (Generator Options)
@@ -91,4 +92,51 @@ You can run the dungeon generator without opening Foundry VTT using the included
    ```
 
 The script will generate a medium-sized dungeon and save the image to `vibe-scenes/Generated Dungeons/`.
+
+### AI Asset Generator (Vibe Studio)
+
+The module includes a standalone AI service for generating SVG assets (tiles, furniture, etc.) using Google Gemini. The architecture is split into three parts for modularity:
+
+1.  **`GeminiService`**: A generic API client for Google Gemini (handles auth, retries, etc.).
+2.  **`AiAssetService`**: A specialized service for generating game assets (handles prompts, SVG cleaning).
+3.  **`prompts.js`**: A centralized file for system prompts and instructions.
+
+#### Setup for Development/Testing
+
+1.  Get a free API Key from [Google AI Studio](https://aistudio.google.com/).
+2.  Create a local config file (ignored by git): `tests/config.json`
+    ```json
+    {
+      "apiKey": "YOUR_API_KEY_HERE"
+    }
+    ```
+3.  Run the test generator:
+    ```bash
+    node tests/test_ai_generator.js "A cracked stone floor tile with moss"
+    ```
+    The resulting SVG will be saved to `vibe-scenes/svgs/`.
+
+#### In-game Usage
+
+Once configured in Foundry (Module Settings -> Vibe Scenes -> Gemini API Key), the `AiAssetService` can be used to generate assets dynamically. Currently exposed via the API, with a UI coming soon.
+
+## AI Asset Standards
+
+To ensure generated assets work well in a VTT environment, we enforce specific "Archetypes" via system prompts:
+
+### 1. Textures (The Base Layer)
+*   **Role**: The "carpet" or "ground" that fills the entire room or corridor.
+*   **Enforcement**: Generated as **Full Bleed** (fills the whole 512x512 square) and **Seamless** (can be repeated infinitely).
+*   **Rendering**: The Map Renderer uses these as a `CanvasPattern`. It repeats the texture horizontally and vertically to fill the polygon, ensuring no empty space exists on the floor.
+*   **Examples**: Stone paving, grass, dirt, water, wood planks.
+
+### 2. Objects (The Decor Layer)
+*   **Role**: Items placed *on top* of the base layer.
+*   **Enforcement**: Generated with a **Transparent Background** and **Padding**. The prompt explicitly requests a "Top-down 2D" perspective to match the map.
+*   **Rendering**: Drawn as individual images at specific X,Y coordinates on top of the floor pattern.
+*   **Examples**: Beds, chests, tables, rocks, trees.
+
+### 3. Structures
+*   **Role**: Large features that might act as both walls and floor (e.g., a tent or hut).
+*   **Enforcement**: Similar to objects but larger scale.
 

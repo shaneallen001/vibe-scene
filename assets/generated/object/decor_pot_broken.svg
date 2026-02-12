@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<style>
+rect { shape-rendering: geometricPrecision; }
+path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+</style>
+  <g>
+    <!-- Contact Shadow -->
+    <ellipse cx="256" cy="266" rx="24" ry="8" fill="rgba(0, 0, 0, 0.2)" />
+  </g>
+  <g>
+    <!-- Pot Shards -->
+    <path d="M230,240 C220,230 210,210 215,200 C220,190 235,190 245,200" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M280,235 C290,225 300,205 295,195 C290,185 275,185 265,195" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M200,270 C190,280 170,290 160,285 C150,280 160,265 170,255" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M310,265 C320,275 340,285 350,280 C360,275 350,260 340,250" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M240,285 C230,295 210,315 200,325 C190,335 210,325 220,315" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M270,280 C280,290 300,310 310,320 C320,330 300,320 290,310" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M250,310 C240,320 230,340 235,350 C240,360 255,350 265,340" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+    <path d="M260,220 C250,210 230,190 220,180 C210,170 230,180 240,190" fill="#B8860B" stroke="#8B4513" stroke-width="8"/>
+  </g>
+</svg>

@@ -1,0 +1,311 @@
+{
+  "floor_stone_paving_clean": {
+    "id": "floor_stone_paving_clean",
+    "path": "assets/generated/texture/floor_stone_paving_clean.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "stone",
+      "floor",
+      "clean"
+    ],
+    "generatedAt": 1770869029612,
+    "width": 1,
+    "height": 1
+  },
+  "floor_stone_paving_cracked": {
+    "id": "floor_stone_paving_cracked",
+    "path": "assets/generated/texture/floor_stone_paving_cracked.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "stone",
+      "floor",
+      "ruin"
+    ],
+    "generatedAt": 1770869034570,
+    "width": 1,
+    "height": 1
+  },
+  "floor_dirt_packed": {
+    "id": "floor_dirt_packed",
+    "path": "assets/generated/texture/floor_dirt_packed.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "dirt",
+      "floor",
+      "nature"
+    ],
+    "generatedAt": 1770869040151,
+    "width": 1,
+    "height": 1
+  },
+  "floor_wood_planks": {
+    "id": "floor_wood_planks",
+    "path": "assets/generated/texture/floor_wood_planks.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "wood",
+      "floor"
+    ],
+    "generatedAt": 1770869047739,
+    "width": 1,
+    "height": 1
+  },
+  "water_blue_ripples": {
+    "id": "water_blue_ripples",
+    "path": "assets/generated/texture/water_blue_ripples.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "water",
+      "liquid"
+    ],
+    "generatedAt": 1770869052723,
+    "width": 1,
+    "height": 1
+  },
+  "furniture_bed_wood": {
+    "id": "furniture_bed_wood",
+    "path": "assets/generated/object/furniture_bed_wood.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "furniture",
+      "bed"
+    ],
+    "generatedAt": 1770869058017,
+    "width": 2,
+    "height": 2
+  },
+  "furniture_table_round": {
+    "id": "furniture_table_round",
+    "path": "assets/generated/object/furniture_table_round.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "furniture",
+      "table"
+    ],
+    "generatedAt": 1770869066579,
+    "width": 2,
+    "height": 2
+  },
+  "furniture_bookshelf_full": {
+    "id": "furniture_bookshelf_full",
+    "path": "assets/generated/object/furniture_bookshelf_full.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "furniture",
+      "storage"
+    ],
+    "generatedAt": 1770869075431,
+    "width": 2,
+    "height": 1
+  },
+  "decor_chest_wooden": {
+    "id": "decor_chest_wooden",
+    "path": "assets/generated/object/decor_chest_wooden.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "container",
+      "treasure"
+    ],
+    "generatedAt": 1770869081434,
+    "width": 1,
+    "height": 1
+  },
+  "decor_rug_oval_red": {
+    "id": "decor_rug_oval_red",
+    "path": "assets/generated/object/decor_rug_oval_red.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "rug"
+    ],
+    "generatedAt": 1770869085399,
+    "width": 2,
+    "height": 2
+  },
+  "structure_tent_round": {
+    "id": "structure_tent_round",
+    "path": "assets/generated/structure/structure_tent_round.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "STRUCTURE",
+    "tags": [
+      "structure",
+      "tent",
+      "camp"
+    ],
+    "generatedAt": 1770869089908,
+    "width": 4,
+    "height": 4
+  },
+  "floor_stone_block_large": {
+    "id": "floor_stone_block_large",
+    "path": "assets/generated/texture/floor_stone_block_large.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "TEXTURE",
+    "tags": [
+      "stone",
+      "floor",
+      "dungeon"
+    ],
+    "generatedAt": 1770870351538,
+    "width": 1,
+    "height": 1
+  },
+  "wall_stone_bricks_grey": {
+    "id": "wall_stone_bricks_grey",
+    "path": "assets/generated/wall/wall_stone_bricks_grey.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "WALL",
+    "tags": [
+      "wall",
+      "stone",
+      "brick"
+    ],
+    "generatedAt": 1770870355734,
+    "width": 1,
+    "height": 1
+  },
+  "wall_cave_rock_dark": {
+    "id": "wall_cave_rock_dark",
+    "path": "assets/generated/wall/wall_cave_rock_dark.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "WALL",
+    "tags": [
+      "wall",
+      "rock",
+      "cave"
+    ],
+    "generatedAt": 1770870363551,
+    "width": 1,
+    "height": 1
+  },
+  "wall_plaster_cracked": {
+    "id": "wall_plaster_cracked",
+    "path": "assets/generated/wall/wall_plaster_cracked.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "WALL",
+    "tags": [
+      "wall",
+      "plaster",
+      "ruin"
+    ],
+    "generatedAt": 1770870370166,
+    "width": 1,
+    "height": 1
+  },
+  "object_puddle_water": {
+    "id": "object_puddle_water",
+    "path": "assets/generated/object/object_puddle_water.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "water",
+      "puddle"
+    ],
+    "generatedAt": 1770870375182,
+    "width": 1,
+    "height": 1
+  },
+  "object_puddle_slime": {
+    "id": "object_puddle_slime",
+    "path": "assets/generated/object/object_puddle_slime.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "slime",
+      "puddle"
+    ],
+    "generatedAt": 1770870381253,
+    "width": 1,
+    "height": 1
+  },
+  "furniture_chair_decayed": {
+    "id": "furniture_chair_decayed",
+    "path": "assets/generated/object/furniture_chair_decayed.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "furniture",
+      "chair",
+      "ruin"
+    ],
+    "generatedAt": 1770870388042,
+    "width": 1,
+    "height": 1
+  },
+  "furniture_table_decayed": {
+    "id": "furniture_table_decayed",
+    "path": "assets/generated/object/furniture_table_decayed.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "furniture",
+      "table",
+      "ruin"
+    ],
+    "generatedAt": 1770870403345,
+    "width": 2,
+    "height": 1
+  },
+  "decor_pot_ceramic": {
+    "id": "decor_pot_ceramic",
+    "path": "assets/generated/object/decor_pot_ceramic.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "container",
+      "pot"
+    ],
+    "generatedAt": 1770870407441,
+    "width": 1,
+    "height": 1
+  },
+  "decor_pot_broken": {
+    "id": "decor_pot_broken",
+    "path": "assets/generated/object/decor_pot_broken.svg",
+    "fileType": "svg",
+    "source": "ai-gen",
+    "type": "OBJECT",
+    "tags": [
+      "decor",
+      "ruin",
+      "pot"
+    ],
+    "generatedAt": 1770870414921,
+    "width": 1,
+    "height": 1
+  }
+}

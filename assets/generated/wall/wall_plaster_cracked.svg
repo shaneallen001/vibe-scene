@@ -1,0 +1,24 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="plasterBrick" width="256" height="256" patternUnits="userSpaceOnUse">
+      <rect width="256" height="256" fill="#f0f0f0"/>
+      <path d="M0,32 H256 M0,96 H256 M0,160 H256 M0,224 H256" stroke="#d0d0d0" stroke-width="6"/>
+      <rect x="0" y="64" width="128" height="64" fill="#b0b0b0"/>
+      <rect x="128" y="64" width="128" height="64" fill="#b0b0b0"/>
+      <rect x="0" y="192" width="128" height="64" fill="#b0b0b0"/>
+      <rect x="128" y="192" width="128" height="64" fill="#b0b0b0"/>
+      
+      <path d="M32,0 V256 M96,0 V256 M160,0 V256 M224,0 V256" stroke="#909090" stroke-width="6"/>
+
+      <path d="M16,16 L48,48 M80,16 L112,48 M144,16 L176,48 M208,16 L240,48" stroke="#a0a0a0" stroke-width="4"/>
+       <path d="M16,80 L48,112 M80,80 L112,112 M144,80 L176,112 M208,80 L240,112" stroke="#a0a0a0" stroke-width="4"/>
+       <path d="M16,144 L48,176 M80,144 L112,176 M144,144 L176,176 M208,144 L240,176" stroke="#a0a0a0" stroke-width="4"/>
+        <path d="M16,208 L48,240 M80,208 L112,240 M144,208 L176,240 M208,208 L240,240" stroke="#a0a0a0" stroke-width="4"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#plasterBrick)"/>
+</svg>

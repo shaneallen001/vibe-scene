@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="dirt" width="64" height="64" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="#8B4513"/>
+      <path d="M0,0 C16,8 32,0 48,8 C64,0 64,16 48,24 C32,16 16,24 0,16 Z" fill="#A0522D" opacity="0.3"/>
+      <path d="M0,32 C16,40 32,32 48,40 C64,32 64,48 48,56 C32,48 16,56 0,48 Z" fill="#A0522D" opacity="0.3"/>
+      <path d="M8,8 C12,4 16,8 20,4 C24,8 20,12 16,16 C12,12 8,8 Z" fill="#654321" opacity="0.2"/>
+      <path d="M40,40 C44,36 48,40 52,36 C56,40 52,44 48,48 C44,44 40,40 Z" fill="#654321" opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#dirt)"/>
+</svg>

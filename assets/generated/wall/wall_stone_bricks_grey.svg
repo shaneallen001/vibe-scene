@@ -1,0 +1,17 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="stoneBrick" width="128" height="64" patternUnits="userSpaceOnUse">
+      <rect width="128" height="64" fill="#777"/>
+      <rect x="0" y="0" width="128" height="56" fill="#555"/>
+      <rect x="8" y="8" width="112" height="40" fill="#999"/>
+      <rect x="0" y="64" width="128" height="56" fill="#555"/>
+      <rect x="64" y="64" width="128" height="56" fill="#555"/>
+      <rect x="72" y="72" width="112" height="40" fill="#999"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#stoneBrick)"/>
+</svg>

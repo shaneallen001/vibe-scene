@@ -1,0 +1,31 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="rock_pattern" width="128" height="128" patternUnits="userSpaceOnUse">
+      <path d="M0 16 C 16 0, 32 16, 48 0, 64 16, 80 0, 96 16, 112 0, 128 16" stroke="#444" stroke-width="6" fill="none"/>
+      <path d="M0 80 C 16 64, 32 80, 48 64, 64 80, 80 64, 96 80, 112 64, 128 80" stroke="#444" stroke-width="6" fill="none"/>
+      <path d="M0 32 C 16 48, 32 32, 48 48, 64 32, 80 48, 96 32, 112 48, 128 32" stroke="#222" stroke-width="4" fill="none"/>
+      <path d="M0 96 C 16 112, 32 96, 48 112, 64 96, 80 112, 96 96, 112 112, 128 96" stroke="#222" stroke-width="4" fill="none"/>
+
+      <path d="M16 0 L 16 128" stroke="#333" stroke-width="8"/>
+      <path d="M48 0 L 48 128" stroke="#555" stroke-width="8"/>
+      <path d="M80 0 L 80 128" stroke="#333" stroke-width="8"/>
+      <path d="M112 0 L 112 128" stroke="#555" stroke-width="8"/>
+
+      <path d="M0 16 C 0 32, 16 48, 16 64" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M32 16 C 32 32, 48 48, 48 64" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M64 16 C 64 32, 80 48, 80 64" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M96 16 C 96 32, 112 48, 112 64" stroke="#111" stroke-width="4" fill="none"/>
+
+      <path d="M16 64 C 16 80, 0 96, 0 112" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M48 64 C 48 80, 32 96, 32 112" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M80 64 C 80 80, 64 96, 64 112" stroke="#111" stroke-width="4" fill="none"/>
+      <path d="M112 64 C 112 80, 96 96, 96 112" stroke="#111" stroke-width="4" fill="none"/>
+
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#rock_pattern)"/>
+</svg>

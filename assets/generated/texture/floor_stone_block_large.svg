@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="stone" width="256" height="256" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="256" height="256" fill="#808080"/>
+      <path d="M0 0 L256 0 L256 256 L0 256 Z" fill="none" stroke="#606060" stroke-width="4"/>
+      <rect x="10" y="10" width="118" height="118" fill="#707070" stroke="#505050" stroke-width="4"/>
+      <rect x="128" y="10" width="118" height="118" fill="#707070" stroke="#505050" stroke-width="4"/>
+      <rect x="10" y="128" width="118" height="118" fill="#707070" stroke="#505050" stroke-width="4"/>
+      <rect x="128" y="128" width="118" height="118" fill="#707070" stroke="#505050" stroke-width="4"/>
+	  <path d="M128 0 L128 256" stroke="#505050" stroke-width="4"/>
+	  <path d="M0 128 L256 128" stroke="#505050" stroke-width="4"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#stone)"/>
+</svg>

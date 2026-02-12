@@ -55,6 +55,16 @@
     </select>
   </div>
 
+  <div class="form-group">
+    <label for="floorTexture">Floor Texture</label>
+    <select name="floorTexture" id="floorTexture">
+      <option value="">Default (Solid Color)</option>
+      {{#each floorTextures}}
+      <option value="{{value}}">{{label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
   <hr>
   <h3>Advanced Options</h3>
 

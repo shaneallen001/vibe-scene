@@ -52,6 +52,22 @@ export class VibeSceneDialog {
         // Get default grid size from settings
         const defaultGridSize = game.settings.get("vibe-scenes", "defaultGridSize") || 20;
 
+        // Fetch available floor textures (SVGs)
+        let floorTextures = [];
+        try {
+            // List files in the module's svgs directory
+            const result = await FilePicker.browse("data", "modules/vibe-scenes/svgs", { extensions: [".svg"] });
+            floorTextures = result.files.map(file => {
+                const filename = file.split("/").pop();
+                return {
+                    value: file,
+                    label: filename
+                };
+            });
+        } catch (error) {
+            console.error("Vibe Scenes | Failed to load floor textures:", error);
+        }
+
         // Generate context for template
         const context = {
             sizeOptions: SIZE_OPTIONS,
@@ -60,10 +76,12 @@ export class VibeSceneDialog {
             corridorOptions: CORRIDOR_OPTIONS,
             connectivityOptions: CONNECTIVITY_OPTIONS,
             deadEndOptions: DEAD_END_OPTIONS,
+            floorTextures,
             defaultGridSize,
             // Defaults for new options
             density: 0.4,
             peripheralEgress: false,
+            doorDensity: 0.5,
             doorDensity: 0.5,
             stairs: { up: 1, down: 2 }
         };
@@ -82,6 +100,7 @@ export class VibeSceneDialog {
                         const size = html.find('[name="size"]').val();
                         const maskType = html.find('[name="maskType"]').val(); // Renamed from shape in UI for clarity
                         const symmetry = html.find('[name="symmetry"]').val();
+                        const floorTexture = html.find('[name="floorTexture"]').val();
 
                         // New Options
                         const density = parseFloat(html.find('[name="density"]').val());
@@ -106,6 +125,7 @@ export class VibeSceneDialog {
                             size,
                             maskType,
                             symmetry,
+                            floorTexture,
                             corridorStyle,
                             connectivity,
                             density,
@@ -113,6 +133,7 @@ export class VibeSceneDialog {
                             gridSize,
                             deadEndRemoval,
                             peripheralEgress,
+                            doorDensity,
                             doorDensity,
                             stairs: { up: stairsUp, down: stairsDown }
                         });
@@ -146,15 +167,12 @@ export class VibeSceneDialog {
         const notification = ui.notifications.info("Generating dungeon...", { permanent: true });
 
         try {
-            // Get render resolution from settings
-            const renderCellSize = game.settings.get("vibe-scenes", "renderCellSize") || 20;
-            console.log("Vibe Scenes | Render cell size:", renderCellSize);
-
             // Create the dungeon service (local generation, no URL needed)
             const dungeonService = new DungeongenService();
             console.log("Vibe Scenes | DungeongenService created, starting generation...");
 
             // Generate the dungeon image
+            // We use the requested gridSize for rendering to ensure 1:1 mapping with the scene grid
             const { blob: imageData, walls } = await dungeonService.generate({
                 size,
                 maskType,
@@ -163,11 +181,14 @@ export class VibeSceneDialog {
                 connectivity,
                 density,
                 seed,
-                gridSize: renderCellSize,
+                gridSize, // Use the prompt's grid size
                 deadEndRemoval,
                 peripheralEgress,
                 doorDensity,
-                stairs
+                peripheralEgress,
+                doorDensity,
+                stairs,
+                floorTexture: options.floorTexture
             });
             console.log("Vibe Scenes | Image data received, size:", imageData?.size || 0, "bytes");
 

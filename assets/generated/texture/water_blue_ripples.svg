@@ -1,0 +1,14 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<style>
+rect { shape-rendering: geometricPrecision; }
+path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+</style>
+  <defs>
+    <pattern id="water" width="64" height="64" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="#5dade2"/>
+      <path d="M0,16 C16,8 32,8 48,16 C64,24 64,40 48,48 C32,56 16,56 0,48 C0,40 0,24 0,16 Z" fill="none" stroke="#aed6f1" stroke-width="2"/>
+      <path d="M16,0 C24,16 24,32 16,48 C8,64 24,64 40,48 C56,32 56,16 48,0 C40,0 24,0 16,0 Z" fill="none" stroke="#aed6f1" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#water)"/>
+</svg>

@@ -10,7 +10,7 @@ export function registerModuleSettings() {
     scope: "world",
     config: true,
     type: Number,
-    default: 20
+    default: 100
   });
 
   game.settings.register("vibe-scenes", "imageStorage", {
@@ -28,11 +28,28 @@ export function registerModuleSettings() {
     scope: "world",
     config: true,
     type: Number,
-    default: 20,
+    default: 100,
     range: {
       min: 10,
-      max: 50,
-      step: 5
+      max: 300,
+      step: 10
     }
+  });
+  game.settings.register("vibe-scenes", "geminiApiKey", {
+    name: "Gemini API Key",
+    hint: "API Key for Google Gemini (Get one from Google AI Studio)",
+    scope: "world",
+    config: true,
+    type: String,
+    default: ""
+  });
+
+  game.settings.register("vibe-scenes", "geminiModel", {
+    name: "Gemini Model",
+    hint: "The specific model version to use for generation",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "gemini-2.5-flash"
   });
 }

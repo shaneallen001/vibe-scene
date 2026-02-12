@@ -47,7 +47,11 @@ export class DungeongenService {
                 deadEndRemoval: options.deadEndRemoval,
                 peripheralEgress: options.peripheralEgress,
                 doorDensity: options.doorDensity,
-                stairs: options.stairs
+                peripheralEgress: options.peripheralEgress,
+                doorDensity: options.doorDensity,
+                stairs: options.stairs,
+                stairs: options.stairs,
+                floorTexture: options.floorTexture
             });
 
             console.log("Vibe Scenes | Dungeon generated successfully");

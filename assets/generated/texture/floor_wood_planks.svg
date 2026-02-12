@@ -1,0 +1,30 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+  <defs>
+    <pattern id="wood_pattern" width="128" height="512" patternUnits="userSpaceOnUse">
+      <rect width="128" height="512" fill="#4A342A"/>
+      <path d="M16 0 L16 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M32 0 L32 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M48 0 L48 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M64 0 L64 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M80 0 L80 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M96 0 L96 512" stroke="#2E231F" stroke-width="3"/>
+      <path d="M112 0 L112 512" stroke="#2E231F" stroke-width="3"/>
+      
+      <path d="M0 25 L128 25" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 75 L128 75" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 125 L128 125" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 175 L128 175" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 225 L128 225" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 275 L128 275" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 325 L128 325" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 375 L128 375" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 425 L128 425" stroke="#634B3B" stroke-width="1"/>
+      <path d="M0 475 L128 475" stroke="#634B3B" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#wood_pattern)"/>
+</svg>

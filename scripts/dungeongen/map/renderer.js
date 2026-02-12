@@ -12,6 +12,7 @@ export class DungeonRenderer {
         this.options = {
             cellSize: 20,
             floorColor: '#f0f0f0',
+            floorTexture: null, // Path to floor texture image
             wallColor: '#222222',
             doorColor: '#8b4513',
             wallThickness: 2,
@@ -23,7 +24,17 @@ export class DungeonRenderer {
      * Render dungeon to canvas and return as Blob
      */
     async renderToBlob() {
-        const canvas = this.render();
+        // Load floor texture if needed
+        let floorImage = null;
+        if (this.options.floorTexture) {
+            try {
+                floorImage = await this._loadFloorImage(this.options.floorTexture);
+            } catch (err) {
+                console.warn("Vibe Scenes | Failed to load floor texture:", err);
+            }
+        }
+
+        const canvas = this.render(floorImage);
 
         return new Promise((resolve, reject) => {
             canvas.toBlob(blob => {
@@ -36,7 +47,18 @@ export class DungeonRenderer {
         });
     }
 
-    render() {
+    _loadFloorImage(src) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            // Handle cross-origin if needed, though mostly local
+            img.crossOrigin = "Anonymous";
+            img.src = src;
+        });
+    }
+
+    render(floorImage = null) {
         // Create canvas
         const canvas = document.createElement('canvas');
         const cellSize = this.options.cellSize;
@@ -51,7 +73,7 @@ export class DungeonRenderer {
         ctx.translate(padding, padding);
 
         // 1. Draw Floor
-        this._drawFloor(ctx);
+        this._drawFloor(ctx, floorImage);
 
         // 2. Draw Walls
         this._drawWalls(ctx);
@@ -70,9 +92,30 @@ export class DungeonRenderer {
         return canvas;
     }
 
-    _drawFloor(ctx) {
+    _drawFloor(ctx, floorImage) {
         const cellSize = this.options.cellSize;
-        ctx.fillStyle = this.options.floorColor;
+
+        if (floorImage) {
+            try {
+                // Resize image to match cellSize * specific textureScale
+                const scale = this.options.textureScale || 1.0;
+                const patternSize = cellSize * scale;
+
+                const patternCanvas = document.createElement('canvas');
+                patternCanvas.width = patternSize;
+                patternCanvas.height = patternSize;
+                const pCtx = patternCanvas.getContext('2d');
+                pCtx.drawImage(floorImage, 0, 0, patternSize, patternSize);
+
+                const pattern = ctx.createPattern(patternCanvas, 'repeat');
+                ctx.fillStyle = pattern;
+            } catch (e) {
+                console.warn("Vibe Scenes | Failed to create pattern, falling back to color", e);
+                ctx.fillStyle = this.options.floorColor;
+            }
+        } else {
+            ctx.fillStyle = this.options.floorColor;
+        }
 
         for (let y = 0; y < this.grid.height; y++) {
             for (let x = 0; x < this.grid.width; x++) {

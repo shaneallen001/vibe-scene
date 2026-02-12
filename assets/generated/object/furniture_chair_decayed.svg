@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    rect { shape-rendering: geometricPrecision; }
+    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  </style>
+
+  <!-- Subtle Shadow -->
+  <ellipse cx="256" cy="300" rx="30" ry="10" fill="rgba(0, 0, 0, 0.2)" />
+
+  <!-- Seat -->
+  <rect x="186" y="200" width="140" height="50" rx="5" ry="5" fill="#8B4513" stroke="#542B05" stroke-width="8" />
+  <path d="M186 200 L326 250" stroke="#542B05" stroke-width="8"/>
+  <path d="M186 250 L326 200" stroke="#542B05" stroke-width="8"/>
+
+  <!-- Backrest -->
+  <rect x="196" y="120" width="120" height="80" rx="5" ry="5" fill="#8B4513" stroke="#542B05" stroke-width="8"/>
+  <path d="M196 120 L316 200" stroke="#542B05" stroke-width="8"/>
+  <path d="M196 200 L316 120" stroke="#542B05" stroke-width="8"/>
+
+  <!-- Legs -->
+  <rect x="186" y="250" width="20" height="80" fill="#8B4513" stroke="#542B05" stroke-width="8"/>
+  <rect x="306" y="250" width="20" height="80" fill="#8B4513" stroke="#542B05" stroke-width="8"/>
+    <rect x="186" y="120" width="20" height="80" fill="#8B4513" stroke="#542B05" stroke-width="8"/>
+  <rect x="306" y="120" width="20" height="80" fill="#8B4513" stroke="#542B05" stroke-width="8"/>
+
+    <!-- Breakage (splintered wood) -->
+    <path d="M226 120 L246 100 L266 120" fill="none" stroke="#542B05" stroke-width="8"/>
+</svg>
