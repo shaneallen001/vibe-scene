@@ -54,6 +54,35 @@ export class AiAssetService {
     }
 
     /**
+     * Plan the layout and contents of an entire dungeon
+     * @param {Array} rooms - List of room objects with connections
+     * @param {Array} availableAssets - List of available asset IDs
+     * @returns {Promise<Array>} - List of populated room objects
+     */
+    async planDungeon(rooms, availableAssets = []) {
+        // Strip unnecessary data from rooms to save tokens
+        const minimalRooms = rooms.map(r => ({
+            id: r.id,
+            width: r.width,
+            height: r.height,
+            connections: r.connections
+        }));
+
+        const prompt = `ROOMS: ${JSON.stringify(minimalRooms)}\n\nAVAILABLE_ASSETS: ${JSON.stringify(availableAssets)}`;
+        const system = PROMPTS.DUNGEON_PLANNER;
+
+        try {
+            console.log("Vibe Scenes | Sending dungeon plan request to AI...");
+            const rawText = await this.gemini.generateContent(prompt, system);
+            const cleaned = this._cleanMarkdown(rawText);
+            return JSON.parse(cleaned);
+        } catch (error) {
+            console.error("Vibe Scenes | Failed to plan dungeon:", error);
+            return [];
+        }
+    }
+
+    /**
      * Save a generated asset to the library
      * @param {string} svgContent 
      * @param {string} baseName 

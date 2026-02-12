@@ -42,6 +42,11 @@ export class NetworkConnector {
         for (const edge of selectedEdges) {
             const r1 = this.grid.rooms[edge.u];
             const r2 = this.grid.rooms[edge.v];
+
+            // Store connectivity in room objects for AI context
+            r1.connections.push(r2.id);
+            r2.connections.push(r1.id);
+
             this._routePassage(r1, r2);
         }
     }

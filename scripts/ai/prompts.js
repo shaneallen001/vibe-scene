@@ -98,5 +98,42 @@ export const PROMPTS = {
     - Do not overlap items heavily.
     - Objects should not block all paths (leave walking space).
     - Return ONLY valid JSON.
+    `,
+
+  // Prompt for Whole Dungeon Planning
+  DUNGEON_PLANNER: `
+    You are an expert level designer. Your task is to assign themes and populate a dungeon based on a floorplan graph.
+    
+    INPUT:
+    - ROOMS: List of { id, width, height, connections: [id, id] }.
+    - AVAILABLE_ASSETS: List of item names/IDs in the library.
+    
+    TASK:
+    1. Analyze the connectivity. Use the graph to determine room roles.
+       - Small dead-end rooms might be cells, storage, or bedrooms.
+       - Large central rooms with many connections might be dining halls, throne rooms, or hubs.
+       - A room connected ONLY to a "Dining Hall" is likely a "Kitchen".
+       - A room connected ONLY to a "Bedroom" might be a "Private Study" or "Walk-in Closet".
+    2. Assign a "theme" to EVERY room.
+    3. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
+    
+    OUTPUT:
+    - Return a JSON ARRAY of objects (one per room).
+    - Structure:
+    [
+      {
+        "id": "room_id",
+        "theme": "Assigned Theme (e.g. Kitchen)",
+        "contents": [
+          { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
+        ]
+      }
+    ]
+    
+    CONSTRAINTS:
+    - Ensure logical flow (e.g. Armory near Guard Room).
+    - Do not over-clutter small rooms.
+    - Use "original_id" matching AVAILABLE_ASSETS whenever possible.
+    - Return ONLY valid JSON.
     `
 };
