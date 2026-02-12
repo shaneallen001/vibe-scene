@@ -10,6 +10,8 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 - **Scene Import**: Automatically creates a new Foundry scene with the generated dungeon map
 - **Auto-Walls & Doors**: Automatically constructs vision-blocking walls and interactive doors
 - **AI Asset Generator**: Built-in integration with Google Gemini to generate custom SVG map assets
+- **Smart Room Population**: Uses AI to intelligently furnish the dungeon's "Boss Room" based on your specific asset library
+- **Floor Style Selection**: Choose from available floor textures in your library (e.g., Stone, Wood)
 - **Grid Settings**: Configurable grid size for the generated scenes
 
 ## Installation
@@ -30,6 +32,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
    - **Dungeon Shape**: Rectangle, Round, Cross, Keep, or Cavernous
    - **Symmetry**: None (asymmetric) or Bilateral (mirror)
    - **Room Density**: 0.1 (Sparse) to 1.0 (Dense)
+   - **Floor Style**: Visual style for the dungeon floor (e.g. Stone, Wood)
    - **Corridor Style**: L-Path (Standard), Straight (Jagged), or Wandering
    - **Connectivity**: Standard, Minimal (Tree), Full (Cyclic), or Chain
    - **Seed**: Optional number for reproducible dungeons
@@ -63,6 +66,7 @@ This module includes a complete JavaScript port of the [dungeongen](https://gith
 - **Performance Optimization**: The `WallBuilder` performs **Collinear Merging**, collapsing hundreds of tile-sized sections into single long vector lines to maintain high performance in Foundry VTT.
 - **Canvas Rendering**: Pure JavaScript rendering using the HTML5 Canvas API, employing a multi-layered approach (Floor → Edges/Walls → Doors).
 - **Foundry Vision**: Context-aware door placement and automated wall generation ensure the dungeon is ready for immediate play.
+- **Smart Room Population**: The generator identifies key rooms (e.g., Boss Room) and uses the Gemini API to suggest a thematic layout. It is **context-aware**, prioritizing assets available in your library to ensure a coherent look.
 
 ## Requirements
 

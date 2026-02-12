@@ -83,7 +83,7 @@ export class VibeSceneDialog {
 
         const content = await renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
 
-        new Dialog({
+        const dialog = new Dialog({
             title: "Vibe Scene - Generate Dungeon",
             content: content,
             buttons: {
@@ -136,7 +136,6 @@ export class VibeSceneDialog {
                             deadEndRemoval,
                             peripheralEgress,
                             doorDensity,
-                            doorDensity,
                             stairs: { up: stairsUp, down: stairsDown }
                         });
                     }
@@ -154,11 +153,19 @@ export class VibeSceneDialog {
                     'flex-direction': 'column',
                     'gap': '12px'
                 });
+
+                // Auto-resize on details toggle
+                html.find('details.advanced-options').on('toggle', (event) => {
+                    dialog.setPosition({ height: "auto" });
+                });
             }
         }, {
             width: 420,
+            height: "auto",
             classes: ["vibe-scene-dialog"]
-        }).render(true);
+        });
+
+        dialog.render(true);
     }
 
     static async generateDungeon(options) {
@@ -175,7 +182,7 @@ export class VibeSceneDialog {
 
             // Generate the dungeon image
             // We use the requested gridSize for rendering to ensure 1:1 mapping with the scene grid
-            const { blob: imageData, walls } = await dungeonService.generate({
+            const { blob: imageData, walls, items } = await dungeonService.generate({
                 size,
                 maskType,
                 symmetry,
@@ -185,8 +192,6 @@ export class VibeSceneDialog {
                 seed,
                 gridSize, // Use the prompt's grid size
                 deadEndRemoval,
-                peripheralEgress,
-                doorDensity,
                 peripheralEgress,
                 doorDensity,
                 stairs,
@@ -203,6 +208,7 @@ export class VibeSceneDialog {
                 name: sceneName,
                 imageData,
                 walls,
+                items,
                 gridSize,
                 seed
             });

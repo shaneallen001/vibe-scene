@@ -15,7 +15,7 @@ export class SceneImporter {
      * @returns {Promise<Scene>} - Created scene document
      */
     async createScene(options) {
-        const { name, imageData, walls, gridSize, seed } = options;
+        const { name, imageData, walls, items, gridSize, seed } = options;
 
         console.log("Vibe Scenes | Creating scene:", name);
 
@@ -92,6 +92,20 @@ export class SceneImporter {
         if (walls && walls.length > 0) {
             console.log(`Vibe Scenes | Creating ${walls.length} walls...`);
             await scene.createEmbeddedDocuments("Wall", walls);
+        }
+
+        // Create Tiles (Items) if provided
+        if (items && items.length > 0) {
+            console.log(`Vibe Scenes | Creating ${items.length} tiles...`);
+            const tiles = items.map(item => ({
+                texture: { src: item.texture },
+                x: item.x,
+                y: item.y,
+                width: item.width,
+                height: item.height,
+                rotation: item.rotation
+            }));
+            await scene.createEmbeddedDocuments("Tile", tiles);
         }
 
         console.log("Vibe Scenes | Scene created successfully:", scene.id);

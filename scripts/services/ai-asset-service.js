@@ -28,6 +28,32 @@ export class AiAssetService {
     }
 
     /**
+     * Ask AI to suggest contents for a room
+     * @param {Object} roomData - { type, width, height }
+     * @param {Array} availableAssets - List of asset names/IDs
+     * @returns {Promise<Array>} - List of items { name, x, y, rotation }
+     */
+    async suggestRoomContents(roomData, availableAssets = []) {
+        const type = roomData.type || "Generic Dungeon Room";
+
+        let prompt = `Room Type: ${type}\nWidth: ${roomData.width}\nHeight: ${roomData.height}`;
+        if (availableAssets.length > 0) {
+            prompt += `\nAVAILABLE_ASSETS: ${JSON.stringify(availableAssets)}`;
+        }
+
+        const system = PROMPTS.ROOM_CONTENT;
+
+        try {
+            const rawText = await this.gemini.generateContent(prompt, system);
+            const cleaned = this._cleanMarkdown(rawText);
+            return JSON.parse(cleaned);
+        } catch (error) {
+            console.error("Vibe Scenes | Failed to suggest room contents:", error);
+            return [];
+        }
+    }
+
+    /**
      * Save a generated asset to the library
      * @param {string} svgContent 
      * @param {string} baseName 

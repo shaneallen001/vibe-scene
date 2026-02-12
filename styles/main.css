@@ -93,3 +93,79 @@
 .vibe-scene-dialog .dialog-buttons button[data-button="generate"]:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
+
+/* Grid Layouts */
+.vibe-scene-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.vibe-scene-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.vibe-scene-form .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Compact form elements for grid */
+.vibe-scene-grid-3 .form-group input,
+.vibe-scene-grid-3 .form-group select,
+.vibe-scene-grid-2 .form-group input,
+.vibe-scene-grid-2 .form-group select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Advanced Options */
+details.advanced-options {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px;
+  background: #fdfdfd;
+}
+
+details.advanced-options summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #555;
+  user-select: none;
+}
+
+details.advanced-options summary:hover {
+  color: #333;
+}
+
+details.advanced-options[open] summary {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+/* Checkbox alignment */
+.vibe-scene-form .form-group.check {
+  justify-content: flex-end;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 35px; /* Match input height */
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-wrapper .notes {
+  margin: 0;
+  white-space: nowrap;
+}

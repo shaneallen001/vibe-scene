@@ -4,8 +4,8 @@
  */
 
 export const PROMPTS = {
-    // Base system instruction for all SVG generation
-    _BASE: `
+  // Base system instruction for all SVG generation
+  _BASE: `
     You are an expert SVG artist. Your task is to generate high-quality, game-ready SVG assets for a top-down fantasy RPG map.
     
     STRICT REQUIREMENTS:
@@ -19,8 +19,8 @@ export const PROMPTS = {
     6. Style: Clean, readable at small sizes (map scale), avoid excessive tiny details.
     `,
 
-    // Prompt for Textures (Floors, Ground, Water)
-    SVG_TEXTURE: `
+  // Prompt for Textures (Floors, Ground, Water)
+  SVG_TEXTURE: `
     TYPE: TEXTURE (Floor/Ground/Water)
     
     SPECIFIC GUIDELINES:
@@ -32,8 +32,8 @@ export const PROMPTS = {
     Input Prompt: 
     `,
 
-    // Prompt for Wall Textures (Bricks, Plaster, Rock)
-    SVG_WALL: `
+  // Prompt for Wall Textures (Bricks, Plaster, Rock)
+  SVG_WALL: `
     TYPE: WALL TEXTURE (Vertical Surface Pattern)
     
     SPECIFIC GUIDELINES:
@@ -45,8 +45,8 @@ export const PROMPTS = {
     Input Prompt: 
     `,
 
-    // Prompt for Objects (Furniture, Decor, Items)
-    SVG_OBJECT: `
+  // Prompt for Objects (Furniture, Decor, Items)
+  SVG_OBJECT: `
     TYPE: OBJECT (Furniture/Decor)
     
     SPECIFIC GUIDELINES:
@@ -60,8 +60,8 @@ export const PROMPTS = {
     Input Prompt: 
     `,
 
-    // Prompt for Structures (Tents, Buildings, Large Features)
-    SVG_STRUCTURE: `
+  // Prompt for Structures (Tents, Buildings, Large Features)
+  SVG_STRUCTURE: `
     TYPE: STRUCTURE (Building/Large Object)
     
     SPECIFIC GUIDELINES:
@@ -70,5 +70,33 @@ export const PROMPTS = {
     3. Distinct architectural details.
     
     Input Prompt: 
+    `,
+
+  // Prompt for Room Contents (JSON)
+  ROOM_CONTENT: `
+    You are an expert dungeon master. Your task is to populate a specific room with furniture and items.
+    
+    INPUT:
+    - Room Type/Theme (e.g., "Dungeon Cell", "Throne Room")
+    - Width (in grid cells)
+    - Height (in grid cells)
+    - AVAILABLE_ASSETS (List of item names/IDs that currently exist in the library)
+    
+    OUTPUT:
+    - Return a JSON ARRAY of objects.
+    - Each object must have:
+      - "name": Short visualization description (e.g. "wooden chair", "stone altar").
+      - "original_id": (Optional) The ID from AVAILABLE_ASSETS if used.
+      - "x": Integer grid coordinate (0 to Width-1).
+      - "y": Integer grid coordinate (0 to Height-1).
+      - "rotation": Integer (0, 90, 180, 270).
+    
+    CONSTRAINTS:
+    - PRIORITIZE using items from AVAILABLE_ASSETS.
+    - If a specific item is needed for the theme but not available, you may suggest it (and set "original_id" to null).
+    - Place items logically (e.g., beds against walls, throne in center-back).
+    - Do not overlap items heavily.
+    - Objects should not block all paths (leave walking space).
+    - Return ONLY valid JSON.
     `
 };

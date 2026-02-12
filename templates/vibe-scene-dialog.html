@@ -1,110 +1,121 @@
 <form class="vibe-scene-form">
-  <div class="form-group">
+  <div class="form-group full-width">
     <label for="sceneName">Scene Name</label>
     <input type="text" name="sceneName" id="sceneName" value="Generated Dungeon" placeholder="Enter scene name" />
   </div>
 
-  <div class="form-group">
-    <label for="size">Dungeon Size</label>
-    <select name="size" id="size">
-      {{#each sizeOptions}}
-      <option value="{{value}}" {{#if (eq value "MEDIUM" )}}selected{{/if}}>{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
+  <div class="vibe-scene-grid-3">
+    <div class="form-group">
+      <label for="size">Dungeon Size</label>
+      <select name="size" id="size">
+        {{#each sizeOptions}}
+        <option value="{{value}}" {{#if (eq value "MEDIUM" )}}selected{{/if}}>{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="maskType">Dungeon Shape</label>
-    <select name="maskType" id="maskType">
-      {{#each shapeOptions}}
-      <option value="{{value}}">{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="maskType">Dungeon Shape</label>
+      <select name="maskType" id="maskType">
+        {{#each shapeOptions}}
+        <option value="{{value}}">{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="symmetry">Symmetry</label>
-    <select name="symmetry" id="symmetry">
-      {{#each symmetryOptions}}
-      <option value="{{value}}">{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="density">Room Density: <span id="densityVal">{{density}}</span></label>
-    <input type="range" name="density" id="density" min="0.1" max="1.0" step="0.1" value="{{density}}"
-      oninput="document.getElementById('densityVal').innerText = this.value" />
-  </div>
-
-  <div class="form-group">
-    <label for="corridorStyle">Corridor Style</label>
-    <select name="corridorStyle" id="corridorStyle">
-      {{#each corridorOptions}}
-      <option value="{{value}}">{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="connectivity">Connectivity</label>
-    <select name="connectivity" id="connectivity">
-      {{#each connectivityOptions}}
-      <option value="{{value}}">{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for="floorStyle">Floor Style</label>
-    <select name="floorStyle" id="floorStyle">
-      <option value="">Default (Solid Color)</option>
-      {{#each styles}}
-      <option value="{{this.value}}">{{this.label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <hr>
-  <h3>Advanced Options</h3>
-
-  <div class="form-group">
-    <label for="deadEndRemoval">Dead Ends</label>
-    <select name="deadEndRemoval" id="deadEndRemoval">
-      {{#each deadEndOptions}}
-      <option value="{{value}}">{{label}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group check">
-    <label for="peripheralEgress">Peripheral Egress</label>
-    <input type="checkbox" name="peripheralEgress" id="peripheralEgress" {{#if peripheralEgress}}checked{{/if}} />
-    <p class="notes">Create exits at the edge of the map?</p>
-  </div>
-
-  <div class="form-group">
-    <label for="doorDensity">Door Density: <span id="doorDensityVal">{{doorDensity}}</span></label>
-    <input type="range" name="doorDensity" id="doorDensity" min="0" max="1" step="0.1" value="{{doorDensity}}"
-      oninput="document.getElementById('doorDensityVal').innerText = this.value" />
-  </div>
-
-  <div class="form-group">
-    <label>Stairs (Up / Down)</label>
-    <div class="flex-row" style="display: flex; gap: 10px;">
-      <input type="number" name="stairsUp" value="{{stairs.up}}" min="0" placeholder="Up" style="flex: 1;">
-      <input type="number" name="stairsDown" value="{{stairs.down}}" min="0" placeholder="Down" style="flex: 1;">
+    <div class="form-group">
+      <label for="symmetry">Symmetry</label>
+      <select name="symmetry" id="symmetry">
+        {{#each symmetryOptions}}
+        <option value="{{value}}">{{label}}</option>
+        {{/each}}
+      </select>
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="seed">Seed (optional)</label>
-    <input type="number" name="seed" id="seed" placeholder="Random if empty" />
-    <p class="notes">Leave empty for a random seed. Use a specific number to reproduce the same dungeon.</p>
+  <div class="vibe-scene-grid-3">
+    <div class="form-group">
+      <label for="connectivity">Connectivity</label>
+      <select name="connectivity" id="connectivity">
+        {{#each connectivityOptions}}
+        <option value="{{value}}">{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="corridorStyle">Corridor Style</label>
+      <select name="corridorStyle" id="corridorStyle">
+        {{#each corridorOptions}}
+        <option value="{{value}}">{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="floorStyle">Floor Style</label>
+      <select name="floorStyle" id="floorStyle">
+        <option value="">Default (Solid Color)</option>
+        {{#each styles}}
+        <option value="{{this.value}}">{{this.label}}</option>
+        {{/each}}
+      </select>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="gridSize">Grid Size (pixels)</label>
-    <input type="number" name="gridSize" id="gridSize" value="{{defaultGridSize}}" min="50" max="200" />
+  <div class="vibe-scene-grid-2">
+    <div class="form-group">
+      <label for="density">Room Density: <span id="densityVal">{{density}}</span></label>
+      <input type="range" name="density" id="density" min="0.1" max="1.0" step="0.1" value="{{density}}"
+        oninput="document.getElementById('densityVal').innerText = this.value" />
+    </div>
+
+    <div class="form-group">
+      <label for="doorDensity">Door Density: <span id="doorDensityVal">{{doorDensity}}</span></label>
+      <input type="range" name="doorDensity" id="doorDensity" min="0" max="1" step="0.1" value="{{doorDensity}}"
+        oninput="document.getElementById('doorDensityVal').innerText = this.value" />
+    </div>
   </div>
+
+  <details class="advanced-options">
+    <summary>Advanced Options</summary>
+    <div class="vibe-scene-grid-2">
+      <div class="form-group">
+        <label for="deadEndRemoval">Dead Ends</label>
+        <select name="deadEndRemoval" id="deadEndRemoval">
+          {{#each deadEndOptions}}
+          <option value="{{value}}">{{label}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group check">
+        <label for="peripheralEgress">Peripheral Egress</label>
+        <div class="checkbox-wrapper">
+          <input type="checkbox" name="peripheralEgress" id="peripheralEgress" {{#if peripheralEgress}}checked{{/if}} />
+          <span class="notes">Create exits at the edge?</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vibe-scene-grid-3">
+      <div class="form-group">
+        <label>Stairs (Up / Down)</label>
+        <div class="flex-row" style="display: flex; gap: 5px;">
+          <input type="number" name="stairsUp" value="{{stairs.up}}" min="0" placeholder="Up" style="width: 50%;">
+          <input type="number" name="stairsDown" value="{{stairs.down}}" min="0" placeholder="Down" style="width: 50%;">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="seed">Seed</label>
+        <input type="number" name="seed" id="seed" placeholder="Random" title="Leave empty for random" />
+      </div>
+
+      <div class="form-group">
+        <label for="gridSize">Grid Size (px)</label>
+        <input type="number" name="gridSize" id="gridSize" value="{{defaultGridSize}}" min="50" max="200" />
+      </div>
+    </div>
+  </details>
 </form>
