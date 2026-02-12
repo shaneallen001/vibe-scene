@@ -5,6 +5,7 @@
 
 import { DungeongenService } from "../services/dungeongen-service.js";
 import { SceneImporter } from "../services/scene-importer.js";
+import { AssetLibraryService } from "../services/asset-library-service.js";
 
 // Configuration options for dungeon generation
 const SIZE_OPTIONS = [
@@ -52,21 +53,15 @@ export class VibeSceneDialog {
         // Get default grid size from settings
         const defaultGridSize = game.settings.get("vibe-scenes", "defaultGridSize") || 20;
 
-        // Fetch available floor textures (SVGs)
-        let floorTextures = [];
-        try {
-            // List files in the module's svgs directory
-            const result = await FilePicker.browse("data", "modules/vibe-scenes/svgs", { extensions: [".svg"] });
-            floorTextures = result.files.map(file => {
-                const filename = file.split("/").pop();
-                return {
-                    value: file,
-                    label: filename
-                };
-            });
-        } catch (error) {
-            console.error("Vibe Scenes | Failed to load floor textures:", error);
-        }
+        // Initialize Library Service
+        const library = new AssetLibraryService();
+        await library.load();
+
+        // Fetch available styles
+        const styles = library.getStyles().map(style => ({
+            value: style,
+            label: style
+        }));
 
         // Generate context for template
         const context = {
@@ -76,7 +71,7 @@ export class VibeSceneDialog {
             corridorOptions: CORRIDOR_OPTIONS,
             connectivityOptions: CONNECTIVITY_OPTIONS,
             deadEndOptions: DEAD_END_OPTIONS,
-            floorTextures,
+            styles,
             defaultGridSize,
             // Defaults for new options
             density: 0.4,
@@ -100,7 +95,14 @@ export class VibeSceneDialog {
                         const size = html.find('[name="size"]').val();
                         const maskType = html.find('[name="maskType"]').val(); // Renamed from shape in UI for clarity
                         const symmetry = html.find('[name="symmetry"]').val();
-                        const floorTexture = html.find('[name="floorTexture"]').val();
+
+                        // Style Selection
+                        const floorStyle = html.find('[name="floorStyle"]').val();
+                        let floorTexture = null;
+                        if (floorStyle) {
+                            const asset = library.getFloorForStyle(floorStyle);
+                            if (asset) floorTexture = asset.path;
+                        }
 
                         // New Options
                         const density = parseFloat(html.find('[name="density"]').val());

@@ -56,11 +56,11 @@
   </div>
 
   <div class="form-group">
-    <label for="floorTexture">Floor Texture</label>
-    <select name="floorTexture" id="floorTexture">
+    <label for="floorStyle">Floor Style</label>
+    <select name="floorStyle" id="floorStyle">
       <option value="">Default (Solid Color)</option>
-      {{#each floorTextures}}
-      <option value="{{value}}">{{label}}</option>
+      {{#each styles}}
+      <option value="{{this.value}}">{{this.label}}</option>
       {{/each}}
     </select>
   </div>
