@@ -1,16 +1,13 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    rect { shape-rendering: geometricPrecision; }
-    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-  </style>
   
-  <!-- Contact Shadow -->
+  
+  
   <ellipse cx="256" cy="266" rx="100" ry="40" fill="rgba(0, 0, 0, 0.2)" />
 
-  <!-- Rug Body -->
+  
   <ellipse cx="256" cy="256" rx="120" ry="60" fill="#B30000" stroke="#800000" stroke-width="4" />
 
-  <!-- Gold Trim Pattern (simplified concentric ovals) -->
+  
   <ellipse cx="256" cy="256" rx="110" ry="50" fill="none" stroke="#FFD700" stroke-width="3" />
   <ellipse cx="256" cy="256" rx="100" ry="40" fill="none" stroke="#FFD700" stroke-width="3" />
 </svg>

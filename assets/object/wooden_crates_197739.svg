@@ -1,0 +1,88 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2020/svg" viewBox="0 0 512 512">
+    
+
+    
+    <g transform="translate(100, 100)">
+
+        
+        <rect x="10" y="190" width="200" height="40" rx="15" ry="10" class="shadow"/>
+        
+        <g transform="translate(10, 150)">
+            
+            <rect x="0" y="30" width="200" height="40" class="wood-dark"/>
+            
+            <rect x="170" y="0" width="30" height="70" class="wood-medium"/>
+            
+            <rect x="0" y="0" width="200" height="30" class="wood-light"/>
+            
+            <rect x="0" y="30" width="200" height="40" class="outline"/>
+            <rect x="170" y="0" width="30" height="70" class="outline"/>
+            <rect x="0" y="0" width="200" height="30" class="outline"/>
+            
+            <path d="M 0 15 L 200 15" class="wood-grain"/>
+            <path d="M 0 45 L 200 45" class="wood-grain"/>
+            <path d="M 185 0 L 185 70" class="wood-grain"/>
+        </g>
+
+        
+        <rect x="25" y="145" width="160" height="30" rx="12" ry="8" class="shadow"/>
+        
+        <g transform="translate(25, 120)">
+            
+            <rect x="0" y="25" width="160" height="30" class="wood-dark"/>
+            
+            <rect x="140" y="0" width="20" height="55" class="wood-medium"/>
+            
+            <rect x="0" y="0" width="160" height="25" class="wood-light"/>
+            
+            <rect x="0" y="25" width="160" height="30" class="outline"/>
+            <rect x="140" y="0" width="20" height="55" class="outline"/>
+            <rect x="0" y="0" width="160" height="25" class="outline"/>
+            
+            <path d="M 0 12 L 160 12" class="wood-grain"/>
+            <path d="M 0 38 L 160 38" class="wood-grain"/>
+            <path d="M 150 0 L 150 55" class="wood-grain"/>
+        </g>
+
+        
+        <rect x="40" y="95" width="120" height="25" rx="10" ry="7" class="shadow"/>
+        
+        <g transform="translate(40, 75)">
+            
+            <rect x="0" y="20" width="120" height="25" class="wood-dark"/>
+            
+            <rect x="105" y="0" width="15" height="45" class="wood-medium"/>
+            
+            <rect x="0" y="0" width="120" height="20" class="wood-light"/>
+            
+            <rect x="0" y="20" width="120" height="25" class="outline"/>
+            <rect x="105" y="0" width="15" height="45" class="outline"/>
+            <rect x="0" y="0" width="120" height="20" class="outline"/>
+            
+            <path d="M 0 10 L 120 10" class="wood-grain"/>
+            <path d="M 0 30 L 120 30" class="wood-grain"/>
+            <path d="M 112 0 L 112 45" class="wood-grain"/>
+        </g>
+
+        
+        <rect x="180" y="110" width="140" height="30" rx="12" ry="8" class="shadow"/>
+        
+        <g transform="translate(180, 85)">
+            
+            <rect x="0" y="25" width="140" height="30" class="wood-dark"/>
+            
+            <rect x="120" y="0" width="20" height="55" class="wood-medium"/>
+            
+            <rect x="0" y="0" width="140" height="25" class="wood-light"/>
+            
+            <rect x="0" y="25" width="140" height="30" class="outline"/>
+            <rect x="120" y="0" width="20" height="55" class="outline"/>
+            <rect x="0" y="0" width="140" height="25" class="outline"/>
+            
+            <path d="M 0 12 L 140 12" class="wood-grain"/>
+            <path d="M 0 38 L 140 38" class="wood-grain"/>
+            <path d="M 130 0 L 130 55" class="wood-grain"/>
+        </g>
+
+    </g>
+</svg>

@@ -1,21 +1,18 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    rect { shape-rendering: geometricPrecision; }
-    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-  </style>
   
-  <!-- Shadow (subtle contact shadow) -->
+  
+  
   <rect x="64" y="64" width="384" height="32" fill="rgba(0, 0, 0, 0.1)" rx="4" ry="4"/>
 
-  <!-- Bookshelf -->
+  
   <rect x="64" y="64" width="384" height="384" fill="#A0522D" stroke="#70361A" stroke-width="8" rx="8" ry="8"/>
 
-  <!-- Shelves -->
+  
   <rect x="72" y="128" width="368" height="32" fill="#8B4513" stroke="#70361A" stroke-width="4" rx="4" ry="4"/>
   <rect x="72" y="224" width="368" height="32" fill="#8B4513" stroke="#70361A" stroke-width="4" rx="4" ry="4"/>
   <rect x="72" y="320" width="368" height="32" fill="#8B4513" stroke="#70361A" stroke-width="4" rx="4" ry="4"/>
 
-  <!-- Books (simplified representation) -->
+  
   <rect x="80" y="72" width="24" height="48" fill="#ADD8E6" stroke="#70361A" stroke-width="2" rx="2" ry="2"/>
   <rect x="112" y="72" width="32" height="48" fill="#90EE90" stroke="#70361A" stroke-width="2" rx="2" ry="2"/>
   <rect x="152" y="72" width="24" height="48" fill="#FFFFE0" stroke="#70361A" stroke-width="2" rx="2" ry="2"/>

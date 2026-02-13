@@ -6,6 +6,7 @@
 import { DungeongenService } from "../services/dungeongen-service.js";
 import { SceneImporter } from "../services/scene-importer.js";
 import { AssetLibraryService } from "../services/asset-library-service.js";
+import { AssetLibrary } from "./asset-library.js";
 
 // Configuration options for dungeon generation
 const SIZE_OPTIONS = [
@@ -157,6 +158,14 @@ export class VibeSceneDialog {
                 // Auto-resize on details toggle
                 html.find('details.advanced-options').on('toggle', (event) => {
                     dialog.setPosition({ height: "auto" });
+                });
+
+
+
+                // Open Studio (now Asset Library)
+                html.find('.open-studio').click(async (ev) => {
+                    ev.preventDefault();
+                    new AssetLibrary().render(true);
                 });
             }
         }, {

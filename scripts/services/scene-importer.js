@@ -97,6 +97,11 @@ export class SceneImporter {
         // Create Tiles (Items) if provided
         if (items && items.length > 0) {
             console.log(`Vibe Scenes | Creating ${items.length} tiles...`);
+
+            // LOGGING: Check for bad textures
+            const uniqueTextures = new Set(items.map(i => i.texture));
+            console.log("Vibe Scenes | Unique textures used:", Array.from(uniqueTextures));
+
             const tiles = items.map(item => ({
                 texture: { src: item.texture },
                 x: item.x,

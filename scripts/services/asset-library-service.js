@@ -14,6 +14,7 @@ export class AssetLibraryService {
 
     /**
      * Load the library index from disk
+     * Performs auto-migration if legacy string IDs are found.
      */
     async load() {
         if (this.isLoaded) return;
@@ -21,7 +22,20 @@ export class AssetLibraryService {
         try {
             const response = await fetch(this.indexPath);
             if (response.ok) {
-                this.index = await response.json();
+                const data = await response.json();
+
+                // Check for migration need
+                // If any key is not a number, we likely need to migrate
+                // Or if the structure is legacy
+                const isLegacy = Object.keys(data).some(k => isNaN(parseInt(k)));
+
+                if (isLegacy) {
+                    console.log("Vibe Scenes | Detected legacy library format. Migrating...");
+                    this.index = this._migrate(data);
+                    await this._save();
+                } else {
+                    this.index = data;
+                }
             } else {
                 console.warn("Vibe Scenes | Library index not found, starting fresh.");
                 this.index = {};
@@ -31,6 +45,66 @@ export class AssetLibraryService {
             this.index = {};
         }
         this.isLoaded = true;
+    }
+
+    /**
+     * Migrate legacy string-ID library to sequential integer ID library
+     * @param {Object} oldData 
+     */
+    _migrate(oldData) {
+        const newIndex = {};
+        let idCounter = 1;
+
+        for (const [key, asset] of Object.entries(oldData)) {
+            const newId = idCounter++;
+
+            newIndex[newId] = {
+                ...asset,
+                id: newId,
+                name: key, // Use old key as name
+                prompt: "Legacy",
+                model: "gemini-2.5-flash",
+                // Retain other fields
+            };
+        }
+
+        console.log(`Vibe Scenes | Migrated ${Object.keys(newIndex).length} assets.`);
+        return newIndex;
+    }
+
+    /**
+     * Get the next available Sequential ID
+     */
+    getNextId() {
+        const ids = Object.keys(this.index).map(k => parseInt(k));
+        if (ids.length === 0) return 1;
+        return Math.max(...ids) + 1;
+    }
+
+    /**
+     * Get a single asset by ID
+     * @param {number} id 
+     */
+    getAsset(id) {
+        const asset = this.index[id];
+        if (!asset) return null;
+        return {
+            ...asset,
+            path: this._resolvePath(asset.path)
+        };
+    }
+
+    /**
+     * Delete an asset by ID
+     * @param {number} id 
+     */
+    async deleteAsset(id) {
+        if (this.index[id]) {
+            delete this.index[id];
+            await this._save();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -97,12 +171,25 @@ export class AssetLibraryService {
     async registerAsset(metadata) {
         if (!this.isLoaded) await this.load();
 
-        this.index[metadata.id] = {
-            ...metadata,
-            addedAt: Date.now()
+        const id = this.getNextId();
+
+        // Ensure we only store primitive data in the index
+        this.index[id] = {
+            id,
+            name: metadata.name || "Untitled Asset",
+            prompt: metadata.prompt || "",
+            model: metadata.model || "gemini-2.5-flash",
+            path: metadata.path,
+            fileType: metadata.fileType || "svg",
+            type: metadata.type,
+            tags: metadata.tags || [],
+            width: metadata.width || 1,
+            height: metadata.height || 1,
+            generatedAt: Date.now()
         };
 
         await this._save();
+        return this.index[id];
     }
 
     /**

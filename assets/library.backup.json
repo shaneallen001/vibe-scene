@@ -1,6 +1,6 @@
 {
-  "1": {
-    "id": 1,
+  "floor_stone_paving_clean": {
+    "id": "floor_stone_paving_clean",
     "path": "assets/texture/floor_stone_paving_clean.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -12,13 +12,10 @@
     ],
     "generatedAt": 1770869029612,
     "width": 1,
-    "height": 1,
-    "name": "floor_stone_paving_clean",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "2": {
-    "id": 2,
+  "floor_stone_paving_cracked": {
+    "id": "floor_stone_paving_cracked",
     "path": "assets/texture/floor_stone_paving_cracked.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -30,13 +27,10 @@
     ],
     "generatedAt": 1770869034570,
     "width": 1,
-    "height": 1,
-    "name": "floor_stone_paving_cracked",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "3": {
-    "id": 3,
+  "floor_dirt_packed": {
+    "id": "floor_dirt_packed",
     "path": "assets/texture/floor_dirt_packed.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -48,13 +42,10 @@
     ],
     "generatedAt": 1770869040151,
     "width": 1,
-    "height": 1,
-    "name": "floor_dirt_packed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "4": {
-    "id": 4,
+  "floor_wood_planks": {
+    "id": "floor_wood_planks",
     "path": "assets/texture/floor_wood_planks.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -65,13 +56,10 @@
     ],
     "generatedAt": 1770869047739,
     "width": 1,
-    "height": 1,
-    "name": "floor_wood_planks",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "5": {
-    "id": 5,
+  "water_blue_ripples": {
+    "id": "water_blue_ripples",
     "path": "assets/texture/water_blue_ripples.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -82,13 +70,10 @@
     ],
     "generatedAt": 1770869052723,
     "width": 1,
-    "height": 1,
-    "name": "water_blue_ripples",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "6": {
-    "id": 6,
+  "furniture_bed_wood": {
+    "id": "furniture_bed_wood",
     "path": "assets/object/furniture_bed_wood.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -99,13 +84,10 @@
     ],
     "generatedAt": 1770869058017,
     "width": 2,
-    "height": 2,
-    "name": "furniture_bed_wood",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 2
   },
-  "7": {
-    "id": 7,
+  "furniture_table_round": {
+    "id": "furniture_table_round",
     "path": "assets/object/furniture_table_round.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -116,13 +98,10 @@
     ],
     "generatedAt": 1770869066579,
     "width": 2,
-    "height": 2,
-    "name": "furniture_table_round",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 2
   },
-  "8": {
-    "id": 8,
+  "furniture_bookshelf_full": {
+    "id": "furniture_bookshelf_full",
     "path": "assets/object/furniture_bookshelf_full.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -133,13 +112,10 @@
     ],
     "generatedAt": 1770869075431,
     "width": 2,
-    "height": 1,
-    "name": "furniture_bookshelf_full",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "9": {
-    "id": 9,
+  "decor_chest_wooden": {
+    "id": "decor_chest_wooden",
     "path": "assets/object/decor_chest_wooden.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -151,13 +127,10 @@
     ],
     "generatedAt": 1770869081434,
     "width": 1,
-    "height": 1,
-    "name": "decor_chest_wooden",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "10": {
-    "id": 10,
+  "decor_rug_oval_red": {
+    "id": "decor_rug_oval_red",
     "path": "assets/object/decor_rug_oval_red.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -168,13 +141,10 @@
     ],
     "generatedAt": 1770869085399,
     "width": 2,
-    "height": 2,
-    "name": "decor_rug_oval_red",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 2
   },
-  "11": {
-    "id": 11,
+  "structure_tent_round": {
+    "id": "structure_tent_round",
     "path": "assets/structure/structure_tent_round.svg",
     "fileType": "svg",
     "type": "STRUCTURE",
@@ -186,13 +156,10 @@
     ],
     "generatedAt": 1770869089908,
     "width": 4,
-    "height": 4,
-    "name": "structure_tent_round",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 4
   },
-  "12": {
-    "id": 12,
+  "floor_stone_block_large": {
+    "id": "floor_stone_block_large",
     "path": "assets/texture/floor_stone_block_large.svg",
     "fileType": "svg",
     "type": "TEXTURE",
@@ -204,13 +171,10 @@
     ],
     "generatedAt": 1770870351538,
     "width": 1,
-    "height": 1,
-    "name": "floor_stone_block_large",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "13": {
-    "id": 13,
+  "wall_stone_bricks_grey": {
+    "id": "wall_stone_bricks_grey",
     "path": "assets/wall/wall_stone_bricks_grey.svg",
     "fileType": "svg",
     "type": "WALL",
@@ -222,13 +186,10 @@
     ],
     "generatedAt": 1770870355734,
     "width": 1,
-    "height": 1,
-    "name": "wall_stone_bricks_grey",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "14": {
-    "id": 14,
+  "wall_cave_rock_dark": {
+    "id": "wall_cave_rock_dark",
     "path": "assets/wall/wall_cave_rock_dark.svg",
     "fileType": "svg",
     "type": "WALL",
@@ -240,13 +201,10 @@
     ],
     "generatedAt": 1770870363551,
     "width": 1,
-    "height": 1,
-    "name": "wall_cave_rock_dark",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "15": {
-    "id": 15,
+  "wall_plaster_cracked": {
+    "id": "wall_plaster_cracked",
     "path": "assets/wall/wall_plaster_cracked.svg",
     "fileType": "svg",
     "type": "WALL",
@@ -258,13 +216,10 @@
     ],
     "generatedAt": 1770870370166,
     "width": 1,
-    "height": 1,
-    "name": "wall_plaster_cracked",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "16": {
-    "id": 16,
+  "object_puddle_water": {
+    "id": "object_puddle_water",
     "path": "assets/object/object_puddle_water.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -276,13 +231,10 @@
     ],
     "generatedAt": 1770870375182,
     "width": 1,
-    "height": 1,
-    "name": "object_puddle_water",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "17": {
-    "id": 17,
+  "object_puddle_slime": {
+    "id": "object_puddle_slime",
     "path": "assets/object/object_puddle_slime.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -294,13 +246,10 @@
     ],
     "generatedAt": 1770870381253,
     "width": 1,
-    "height": 1,
-    "name": "object_puddle_slime",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "18": {
-    "id": 18,
+  "furniture_chair_decayed": {
+    "id": "furniture_chair_decayed",
     "path": "assets/object/furniture_chair_decayed.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -312,13 +261,10 @@
     ],
     "generatedAt": 1770870388042,
     "width": 1,
-    "height": 1,
-    "name": "furniture_chair_decayed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "19": {
-    "id": 19,
+  "furniture_table_decayed": {
+    "id": "furniture_table_decayed",
     "path": "assets/object/furniture_table_decayed.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -330,13 +276,10 @@
     ],
     "generatedAt": 1770870403345,
     "width": 2,
-    "height": 1,
-    "name": "furniture_table_decayed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "20": {
-    "id": 20,
+  "decor_pot_ceramic": {
+    "id": "decor_pot_ceramic",
     "path": "assets/object/decor_pot_ceramic.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -348,13 +291,10 @@
     ],
     "generatedAt": 1770870407441,
     "width": 1,
-    "height": 1,
-    "name": "decor_pot_ceramic",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "21": {
-    "id": 21,
+  "decor_pot_broken": {
+    "id": "decor_pot_broken",
     "path": "assets/object/decor_pot_broken.svg",
     "fileType": "svg",
     "type": "OBJECT",
@@ -366,13 +306,10 @@
     ],
     "generatedAt": 1770870414921,
     "width": 1,
-    "height": 1,
-    "name": "decor_pot_broken",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "height": 1
   },
-  "22": {
-    "id": 22,
+  "sarcophagus_with_runes_455763": {
+    "id": "sarcophagus_with_runes_455763",
     "path": "modules/vibe-scenes/assets/object/sarcophagus_with_runes_455763.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -384,13 +321,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770914455773,
-    "name": "sarcophagus_with_runes_455763",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770914455773
   },
-  "23": {
-    "id": 23,
+  "stone_pedestal_055076": {
+    "id": "stone_pedestal_055076",
     "path": "modules/vibe-scenes/assets/object/stone_pedestal_055076.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -402,13 +336,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915055084,
-    "name": "stone_pedestal_055076",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915055084
   },
-  "24": {
-    "id": 24,
+  "ancient_brazier_083204": {
+    "id": "ancient_brazier_083204",
     "path": "modules/vibe-scenes/assets/object/ancient_brazier_083204.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -420,13 +351,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915083209,
-    "name": "ancient_brazier_083204",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915083209
   },
-  "25": {
-    "id": 25,
+  "wall_torch_106826": {
+    "id": "wall_torch_106826",
     "path": "modules/vibe-scenes/assets/object/wall_torch_106826.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -438,13 +366,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915106831,
-    "name": "wall_torch_106826",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915106831
   },
-  "26": {
-    "id": 26,
+  "ornate_tapestry_138189": {
+    "id": "ornate_tapestry_138189",
     "path": "modules/vibe-scenes/assets/object/ornate_tapestry_138189.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -456,13 +381,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915138194,
-    "name": "ornate_tapestry_138189",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915138194
   },
-  "27": {
-    "id": 27,
+  "quill_and_ink_set_148515": {
+    "id": "quill_and_ink_set_148515",
     "path": "modules/vibe-scenes/assets/object/quill_and_ink_set_148515.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -474,13 +396,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915148529,
-    "name": "quill_and_ink_set_148515",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915148529
   },
-  "28": {
-    "id": 28,
+  "parchment_scrolls_185884": {
+    "id": "parchment_scrolls_185884",
     "path": "modules/vibe-scenes/assets/object/parchment_scrolls_185884.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -492,13 +411,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915185890,
-    "name": "parchment_scrolls_185884",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915185890
   },
-  "29": {
-    "id": 29,
+  "wooden_crates_197739": {
+    "id": "wooden_crates_197739",
     "path": "modules/vibe-scenes/assets/object/wooden_crates_197739.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -510,13 +426,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915197744,
-    "name": "wooden_crates_197739",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915197744
   },
-  "30": {
-    "id": 30,
+  "ritual_dagger_218102": {
+    "id": "ritual_dagger_218102",
     "path": "modules/vibe-scenes/assets/object/ritual_dagger_218102.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -528,13 +441,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915218107,
-    "name": "ritual_dagger_218102",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915218107
   },
-  "31": {
-    "id": 31,
+  "weapon_rack_237821": {
+    "id": "weapon_rack_237821",
     "path": "modules/vibe-scenes/assets/object/weapon_rack_237821.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -546,13 +456,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915237826,
-    "name": "weapon_rack_237821",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915237826
   },
-  "32": {
-    "id": 32,
+  "tattered_cloak_286535": {
+    "id": "tattered_cloak_286535",
     "path": "modules/vibe-scenes/assets/object/tattered_cloak_286535.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -564,13 +471,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915286540,
-    "name": "tattered_cloak_286535",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915286540
   },
-  "33": {
-    "id": 33,
+  "ritual_altar_641113": {
+    "id": "ritual_altar_641113",
     "path": "modules/vibe-scenes/assets/object/ritual_altar_641113.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -582,13 +486,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770915641121,
-    "name": "ritual_altar_641113",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770915641121
   },
-  "34": {
-    "id": 34,
+  "iron_maiden_283147": {
+    "id": "iron_maiden_283147",
     "path": "modules/vibe-scenes/assets/object/iron_maiden_283147.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -600,13 +501,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770917283159,
-    "name": "iron_maiden_283147",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770917283159
   },
-  "35": {
-    "id": 35,
+  "shackles_319913": {
+    "id": "shackles_319913",
     "path": "modules/vibe-scenes/assets/object/shackles_319913.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -618,13 +516,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770917319921,
-    "name": "shackles_319913",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770917319921
   },
-  "36": {
-    "id": 36,
+  "wooden_shield_341632": {
+    "id": "wooden_shield_341632",
     "path": "modules/vibe-scenes/assets/object/wooden_shield_341632.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -636,13 +531,10 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770917341639,
-    "name": "wooden_shield_341632",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770917341639
   },
-  "37": {
-    "id": 37,
+  "barrel_of_provisions_377068": {
+    "id": "barrel_of_provisions_377068",
     "path": "modules/vibe-scenes/assets/object/barrel_of_provisions_377068.svg",
     "fileType": "svg",
     "source": "ai-gen",
@@ -654,9 +546,6 @@
     "type": "OBJECT",
     "width": 1,
     "height": 1,
-    "addedAt": 1770917377076,
-    "name": "barrel_of_provisions_377068",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
+    "addedAt": 1770917377076
   }
 }

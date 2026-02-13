@@ -1,0 +1,39 @@
+<form class="vibe-studio-form">
+    <div class="studio-header">
+        <p class="notes">Generate new assets for your library using AI.</p>
+    </div>
+
+    <div class="form-group">
+        <label for="prompt">Asset Description</label>
+        <textarea name="prompt" id="prompt" rows="3"
+            placeholder="e.g. A weathered stone sarcophagus with glowing runes">{{prompt}}</textarea>
+    </div>
+
+    <div class="vibe-scene-grid-2">
+        <div class="form-group">
+            <label for="type">Asset Type</label>
+            <select name="type" id="type">
+                {{#each types}}
+                <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="count">Quantity</label>
+            <input type="number" name="count" id="count" value="1" min="1" max="5">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="style">Visual Style (Optional)</label>
+        <input type="text" name="style" id="style" value="{{style}}"
+            placeholder="e.g. Dark fantasy, cel shaded, realistic">
+    </div>
+
+    <hr>
+
+    <div class="studio-status" style="min-height: 20px; font-style: italic; font-size: 0.9em; color: #666;">
+        <!-- Status messages go here -->
+    </div>
+</form>

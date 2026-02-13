@@ -116,24 +116,33 @@ export const PROMPTS = {
        - A room connected ONLY to a "Bedroom" might be a "Private Study" or "Walk-in Closet".
     2. Assign a "theme" to EVERY room.
     3. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
+    4. **CRITICAL**: If a room needs a specific item for its theme (e.g., a "Throne" for a Throne Room) but it is NOT in AVAILABLE_ASSETS, you MUST add it to the "wishlist".
     
     OUTPUT:
-    - Return a JSON ARRAY of objects (one per room).
+    - Return a JSON Object with two top-level keys: "plan" and "wishlist".
     - Structure:
-    [
-      {
-        "id": "room_id",
-        "theme": "Assigned Theme (e.g. Kitchen)",
-        "contents": [
-          { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
-        ]
-      }
-    ]
+    {
+      "plan": [
+        {
+          "id": "room_id",
+          "theme": "Assigned Theme",
+          "contents": [
+            { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
+          ]
+        }
+      ],
+      "wishlist": [
+        { "name": "stone throne", "type": "OBJECT", "visual_style": "ancient, cracked" },
+        { "name": "iron maiden", "type": "OBJECT", "visual_style": "rusty, torture device" }
+      ]
+    }
     
     CONSTRAINTS:
     - Ensure logical flow (e.g. Armory near Guard Room).
     - Do not over-clutter small rooms.
     - Use "original_id" matching AVAILABLE_ASSETS whenever possible.
+    - Only add to wishlist if the item is truly distinct and missing.
     - Return ONLY valid JSON.
     `
+
 };

@@ -1,39 +1,36 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    rect { shape-rendering: geometricPrecision; }
-    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-  </style>
   
-  <!-- Table Shadow -->
+  
+  
   <ellipse cx="256" cy="266" rx="70" ry="30" fill="rgba(0, 0, 0, 0.2)"/>
 
-  <!-- Table Top -->
+  
   <circle cx="256" cy="240" r="80" fill="#A0522D" stroke="#703214" stroke-width="6"/>
 
-  <!-- Table Legs -->
+  
   <rect x="236" y="290" width="40" height="60" fill="#A0522D" stroke="#703214" stroke-width="6"/>
 
-  <!-- Chair 1 Shadow -->
+  
   <ellipse cx="140" cy="350" rx="20" ry="8" fill="rgba(0, 0, 0, 0.15)"/>
-  <!-- Chair 1 -->
+  
   <rect x="120" y="320" width="40" height="50" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
   <rect x="120" y="300" width="40" height="20" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
 
-  <!-- Chair 2 Shadow -->
+  
   <ellipse cx="372" cy="350" rx="20" ry="8" fill="rgba(0, 0, 0, 0.15)"/>
-  <!-- Chair 2 -->
+  
   <rect x="352" y="320" width="40" height="50" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
    <rect x="352" y="300" width="40" height="20" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
 
-  <!-- Chair 3 Shadow -->
+  
   <ellipse cx="150" cy="140" rx="20" ry="8" fill="rgba(0, 0, 0, 0.15)"/>
-  <!-- Chair 3 -->
+  
   <rect x="130" y="110" width="40" height="50" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
   <rect x="130" y="90" width="40" height="20" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
 
-  <!-- Chair 4 Shadow -->
+  
   <ellipse cx="362" cy="140" rx="20" ry="8" fill="rgba(0, 0, 0, 0.15)"/>
-  <!-- Chair 4 -->
+  
   <rect x="342" y="110" width="40" height="50" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
   <rect x="342" y="90" width="40" height="20" fill="#DEB887" stroke="#A98D6F" stroke-width="4"/>
 </svg>

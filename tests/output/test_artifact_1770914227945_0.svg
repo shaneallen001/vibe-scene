@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <style>
+        rect { shape-rendering: geometricPrecision; }
+        path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    </style>
+    <g id="test-artifact-v1">
+        <!-- Subtle contact shadow directly underneath the object -->
+        <ellipse cx="256" cy="350" rx="70" ry="30" fill="#000000" opacity="0.2"/>
+
+        <!-- Robust base for the artifact -->
+        <rect x="196" y="216" width="120" height="120" rx="15" ry="15" fill="#5C4033" stroke="#333333" stroke-width="4"/>
+
+        <!-- The magical crystal artifact -->
+        <g id="crystal">
+            <!-- Main outer diamond shape of the crystal body -->
+            <path d="M256,170 L306,256 L256,342 L206,256 Z" fill="#8A2BE2" stroke="#4B0082" stroke-width="4"/>
+            
+            <!-- Inner central facet, appearing to glow slightly lighter -->
+            <path d="M256,200 L286,256 L256,312 L226,256 Z" fill="#DDA0DD" stroke="#4B0082" stroke-width="4"/>
+            
+            <!-- Lines connecting inner and outer facets to define the crystal's structure -->
+            <!-- Vertical and horizontal facet lines -->
+            <path d="M256,170 L256,200 M306,256 L286,256 M256,342 L256,312 M206,256 L226,256" stroke="#4B0082" stroke-width="2"/>
+            
+            <!-- Diagonal facet lines for a more complex gem appearance -->
+            <path d="M256,200 L206,256 M256,200 L306,256 M256,312 L206,256 M256,312 L306,256" stroke="#4B0082" stroke-width="2"/>
+        </g>
+    </g>
+</svg>

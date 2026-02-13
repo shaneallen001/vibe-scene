@@ -1,18 +1,15 @@
-<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    rect { shape-rendering: geometricPrecision; }
-    path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-  </style>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   
-  <!-- Shadow -->
+  
+  
   <ellipse cx="256" cy="380" rx="60" ry="20" fill="rgba(0, 0, 0, 0.2)" />
 
-  <!-- Bed Frame -->
+  
   <rect x="100" y="200" width="312" height="160" fill="#A0522D" stroke="#8B4513" stroke-width="8" rx="10" />
 
-  <!-- Blanket -->
+  
   <path d="M120 220 L392 220 Q402 280 392 340 L120 340 Q110 280 120 220 Z" fill="#D2B48C" stroke="#B8860B" stroke-width="6" />
 
-  <!-- Pillow -->
+  
   <rect x="140" y="220" width="100" height="40" fill="white" stroke="#808080" stroke-width="4" rx="5" />
 </svg>

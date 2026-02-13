@@ -1,0 +1,37 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+    
+    <ellipse cx="256" cy="400" rx="100" ry="40" fill="rgba(0,0,0,0.2)"/>
+
+    
+    <ellipse cx="256" cy="380" rx="100" ry="40" fill="#8B4513" stroke="#4A2A0A" stroke-width="4"/>
+    
+    <ellipse cx="256" cy="360" rx="80" ry="30" fill="#B87333" stroke="#4A2A0A" stroke-width="4"/>
+
+    
+    <path d="M 220 360 Q 200 340, 200 300 Q 200 260, 220 240 L 292 240 Q 312 260, 312 300 Q 312 340, 292 360 Z" fill="#B87333" stroke="#4A2A0A" stroke-width="4"/>
+    
+    <ellipse cx="256" cy="270" rx="50" ry="20" fill="#D4AF37" stroke="#4A2A0A" stroke-width="4"/>
+    
+    <path d="M 225 240 Q 210 220, 210 190 Q 210 160, 225 140 L 287 140 Q 302 160, 302 190 Q 302 220, 287 240 Z" fill="#B87333" stroke="#4A2A0A" stroke-width="4"/>
+
+    
+    <path d="M 180 140 C 160 120, 160 80, 256 70 C 352 80, 352 120, 332 140 Z" fill="#B87333" stroke="#4A2A0A" stroke-width="4"/>
+    
+    <ellipse cx="256" cy="80" rx="80" ry="30" fill="#8B4513" stroke="#4A2A0A" stroke-width="4"/>
+    
+    <ellipse cx="256" cy="90" rx="70" ry="25" fill="#4A2A0A"/>
+
+    
+    <path d="M 170 110 C 140 100, 140 120, 170 130 C 180 125, 180 115, 170 110 Z" fill="#D4AF37" stroke="#4A2A0A" stroke-width="3"/>
+    <path d="M 342 110 C 372 100, 372 120, 342 130 C 332 125, 332 115, 342 110 Z" fill="#D4AF37" stroke="#4A2A0A" stroke-width="3"/>
+
+    
+    <g id="embers">
+        <ellipse cx="256" cy="90" rx="60" ry="20" fill="#8B0000"/> 
+        <ellipse cx="256" cy="90" rx="50" ry="18" fill="#FF4500"/> 
+        <ellipse cx="256" cy="90" rx="40" ry="15" fill="#FFA500"/> 
+        <ellipse cx="256" cy="90" rx="30" ry="10" fill="#FFD700"/> 
+        <ellipse cx="256" cy="90" rx="20" ry="7" fill="#FFFFFF"/> 
+    </g>
+</svg>

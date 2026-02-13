@@ -24,7 +24,8 @@ export class AiAssetService {
         const rawText = await this.gemini.generateContent(prompt, fullSystemPrompt);
 
         // Clean up the output
-        return this._cleanMarkdown(rawText);
+        const cleaned = this._cleanMarkdown(rawText);
+        return this._sanitizeSVG(cleaned);
     }
 
     /**
@@ -57,7 +58,7 @@ export class AiAssetService {
      * Plan the layout and contents of an entire dungeon
      * @param {Array} rooms - List of room objects with connections
      * @param {Array} availableAssets - List of available asset IDs
-     * @returns {Promise<Array>} - List of populated room objects
+     * @returns {Promise<Object>} - { plan: Array, wishlist: Array }
      */
     async planDungeon(rooms, availableAssets = []) {
         // Strip unnecessary data from rooms to save tokens
@@ -72,13 +73,24 @@ export class AiAssetService {
         const system = PROMPTS.DUNGEON_PLANNER;
 
         try {
-            console.log("Vibe Scenes | Sending dungeon plan request to AI...");
+            console.log("Vibe Scenes | Sending dungeon plan request to AI with dynamic wishlist...");
             const rawText = await this.gemini.generateContent(prompt, system);
             const cleaned = this._cleanMarkdown(rawText);
-            return JSON.parse(cleaned);
+            const result = JSON.parse(cleaned);
+
+            // Handle legacy/fallback response format (array) just in case
+            if (Array.isArray(result)) {
+                return { plan: result, wishlist: [] };
+            }
+
+            return {
+                plan: result.plan || [],
+                wishlist: result.wishlist || []
+            };
+
         } catch (error) {
             console.error("Vibe Scenes | Failed to plan dungeon:", error);
-            return [];
+            return { plan: [], wishlist: [] };
         }
     }
 
@@ -88,8 +100,9 @@ export class AiAssetService {
      * @param {string} baseName 
      * @param {string} type 
      * @param {Object} tags - tags to infer style
+     * @param {Object} metadata - { prompt, model }
      */
-    async saveAsset(svgContent, baseName, type, tags = []) {
+    async saveAsset(svgContent, baseName, type, tags = [], metadata = {}) {
         // This method assumes Browser Environment (Foundry)
         if (typeof FilePicker === "undefined") {
             console.warn("Vibe Scenes | FilePicker not available (Node.js?). Skipping save to library.");
@@ -100,6 +113,12 @@ export class AiAssetService {
         // types mapping: TEXTURE -> texture, OBJECT -> object
         const folderType = type.toLowerCase();
         const path = `modules/vibe-scenes/assets/${folderType}`;
+        // Ensure path exists (optional, FilePicker usually handles this or throws)
+        // const filePath = `${path}/${fileName}`; 
+
+        // Use FilePicker to upload
+        // Note: FilePicker.upload returns the result, which might contain the actual path?
+        // Usually we construct the path manually for Foundry.
         const filePath = `${path}/${fileName}`;
 
         // Create File
@@ -108,17 +127,26 @@ export class AiAssetService {
         // Upload
         try {
             await FilePicker.upload("data", path, file, {}, { notify: false });
-            console.log(`Vibe Scenes | Saved asset to ${filePath}`);
+
+            // VERIFY: Ensure file is actually accessible before proceeding
+            const verified = await this._verifyAssetAccess(filePath);
+            if (!verified) {
+                console.warn(`Vibe Scenes | Asset saved but not immediately accessible: ${filePath}`);
+            } else {
+                console.log(`Vibe Scenes | Saved and verified asset at ${filePath}`);
+            }
 
             // Register in Library
             await this.library.registerAsset({
-                id: baseName,
+                name: baseName, // Use filename as name
+                prompt: metadata.prompt,
+                model: metadata.model,
                 path: filePath,
                 fileType: "svg",
-                source: "ai-gen", // Keeping for internal logic, but migration script handled tags
+                source: "ai-gen",
                 tags: ["ai-gen", ...tags],
                 type: type,
-                width: 1, // Default, should parse from SVG viewbox if possible
+                width: 1,
                 height: 1
             });
 
@@ -127,6 +155,27 @@ export class AiAssetService {
             console.error("Vibe Scenes | Failed to save asset:", e);
             throw e;
         }
+    }
+
+    /**
+     * Verify that an asset is accessible via HTTP
+     * @param {string} path 
+     * @param {number} retries 
+     */
+    async _verifyAssetAccess(path, retries = 5) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                // Add timestamp to bust cache
+                const url = `${path}?t=${Date.now()}`;
+                const res = await fetch(url, { method: "HEAD" });
+                if (res.ok) return true;
+            } catch (e) {
+                // ignore
+            }
+            // Wait 500ms
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        return false;
     }
 
     /**
@@ -145,5 +194,35 @@ export class AiAssetService {
             cleaned = lines.join("\n").trim();
         }
         return cleaned;
+    }
+
+    /**
+     * Sanitize SVG content to remove potential crash-inducing tags
+     * @param {string} svgContent 
+     */
+    _sanitizeSVG(svgContent) {
+        let content = svgContent;
+
+        // 1. Remove XML Declaration
+        content = content.replace(/<\?xml[^>]*\?>/gi, '');
+
+        // 2. Remove <style> blocks
+        content = content.replace(/<style>[\s\S]*?<\/style>/gi, '');
+
+        // 3. Remove <defs> blocks
+        content = content.replace(/<defs>[\s\S]*?<\/defs>/gi, '');
+
+        // 4. Remove comments
+        content = content.replace(/<!--[\s\S]*?-->/g, '');
+
+        // 5. Trim whitespace
+        content = content.trim();
+
+        // 6. Ensure xmlns
+        if (!content.includes('xmlns="http://www.w3.org/2000/svg"')) {
+            content = content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+
+        return content;
     }
 }

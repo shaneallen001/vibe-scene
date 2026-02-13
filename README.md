@@ -8,6 +8,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 - **Built-in Dungeon Generator**: Procedural dungeon generation runs entirely within Foundry (no external dependencies!)
 - **Dungeon Configuration**: Configure dungeon size, symmetry, water features, and random seed
 - **Scene Import**: Automatically creates a new Foundry scene with the generated dungeon map
+- **AI Asset Library**: Manage your generated assets with a visual library, featuring filtering, sorting, and easy regeneration.
 - **Auto-Walls & Doors**: Automatically constructs vision-blocking walls and interactive doors
 - **AI Asset Generator**: Built-in integration with Google Gemini to generate custom SVG map assets
 - **Smart Room Population**: Uses AI to intelligently furnish the dungeon's "Boss Room" based on your specific asset library

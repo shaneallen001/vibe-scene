@@ -1,0 +1,75 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+
+    
+    <ellipse cx="256" cy="370" rx="120" ry="35" fill="rgba(0,0,0,0.15)"/>
+
+    
+    <g transform="translate(0, -30)">
+        
+        <g id="scroll1">
+            
+            <path d="M120 260 C140 220, 380 220, 400 260 C380 300, 140 300, 120 260 Z"
+                  fill="#FDF5E6" stroke="#4A2C18" stroke-width="6"/>
+            
+            <path d="M120 260 Q130 240 150 240 Q140 280 120 260 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M400 260 Q390 240 370 240 Q380 280 400 260 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M230 250 C256 240, 256 240, 280 250 M230 270 C256 280, 256 280, 280 270"
+                  stroke="#8B4513" stroke-width="8" fill="none"/>
+            <path d="M230 250 L230 270 M280 250 L280 270" stroke="#8B4513" stroke-width="8" fill="none"/>
+            
+            <circle cx="255" cy="260" r="10" fill="#8B4513" stroke="#4A2C18" stroke-width="2"/>
+            
+            <path d="M160 245 C170 238, 180 252, 190 245 M200 250 C210 243, 220 257, 230 250 M290 245 C300 238, 310 252, 320 245 M330 250 C340 243, 350 257, 360 250"
+                  stroke="#4A2C18" stroke-width="2" fill="none" opacity="0.7"/>
+        </g>
+
+        
+        <g id="scroll2" transform="rotate(-15 256 290)">
+            
+            <path d="M180 290 C200 260, 320 260, 340 290 C320 320, 200 320, 180 290 Z"
+                  fill="#FAEBD7" stroke="#4A2C18" stroke-width="6"/>
+            
+            <path d="M180 290 Q190 275 210 275 Q200 305 180 290 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M340 290 Q330 275 310 275 Q320 305 340 290 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M220 280 C250 270, 250 270, 280 280 M220 300 C250 310, 250 310, 280 300"
+                  stroke="#A0522D" stroke-width="8" fill="none"/>
+            <path d="M220 280 L220 300 M280 280 L280 300" stroke="#A0522D" stroke-width="8" fill="none"/>
+            
+            <circle cx="250" cy="290" r="10" fill="#A0522D" stroke="#4A2C18" stroke-width="2"/>
+            
+            <path d="M200 275 C210 268, 220 282, 230 275 M240 280 C250 273, 260 287, 270 280 M290 275 C300 268, 310 282, 320 275"
+                  stroke="#333333" stroke-width="2" fill="none" opacity="0.7"/>
+        </g>
+
+        
+        <g id="scroll3" transform="rotate(10 256 240) translate(20, -60)">
+            
+            <path d="M190 240 C210 215, 300 215, 320 240 C300 265, 210 265, 190 240 Z"
+                  fill="#FDF5E6" stroke="#4A2C18" stroke-width="6"/>
+            
+            <path d="M190 240 Q200 228 220 228 Q210 252 190 240 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M320 240 Q310 228 290 228 Q300 252 320 240 Z"
+                  fill="#F0E6BD" stroke="#4A2C18" stroke-width="4"/>
+            
+            <path d="M220 230 C250 220, 250 220, 280 230 M220 250 C250 260, 250 260, 280 250"
+                  stroke="#8B4513" stroke-width="8" fill="none"/>
+            <path d="M220 230 L220 250 M280 230 L280 250" stroke="#8B4513" stroke-width="8" fill="none"/>
+            
+            <circle cx="250" cy="240" r="10" fill="#8B4513" stroke="#4A2C18" stroke-width="2"/>
+            
+            <path d="M210 225 C220 218, 230 232, 240 225 M260 225 C270 218, 280 232, 290 225"
+                  stroke="#4A2C18" stroke-width="2" fill="none" opacity="0.7"/>
+        </g>
+    </g>
+</svg>

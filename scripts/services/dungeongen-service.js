@@ -120,8 +120,51 @@ export class DungeongenService {
             const availableAssets = objects.map(o => o.id);
 
             // Call the planner
-            const plan = await aiService.planDungeon(grid.rooms, availableAssets);
+            const { plan, wishlist } = await aiService.planDungeon(grid.rooms, availableAssets);
             console.log("Vibe Scenes | Dungeon Plan:", plan);
+            console.log("Vibe Scenes | Asset Wishlist:", wishlist);
+
+            // PROCESS WISHLIST
+            if (wishlist && wishlist.length > 0) {
+                const totalNew = wishlist.length;
+                let current = 0;
+
+                // Notify user - this takes time
+                ui.notifications.info(`AI requested ${totalNew} new assets. This may take a moment...`);
+
+                for (const item of wishlist) {
+                    current++;
+                    // Double check we don't have it (fuzzy match)
+                    const existing = objects.find(o => o.id === item.name.replace(/ /g, "_").toLowerCase());
+                    if (existing) continue;
+
+                    // Update progress (if possible, otherwise just log)
+                    console.log(`Vibe Scenes | Generating missing asset [${current}/${totalNew}]: ${item.name}`);
+                    const msg = `Crafting new asset (${current}/${totalNew}): ${item.name}...`;
+                    ui.notifications.info(msg);
+
+                    try {
+                        let prompt = item.name;
+                        if (item.visual_style) prompt += `\nVisual Style: ${item.visual_style}`;
+
+                        const svg = await aiService.generateSVG(prompt, "OBJECT");
+                        const baseName = item.name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+                        const fileName = `${baseName}_${Date.now().toString().slice(-6)}`;
+
+                        await aiService.saveAsset(svg, fileName, "OBJECT", ["ai-gen", "auto-generated"]);
+                    } catch (e) {
+                        console.error(`Vibe Scenes | Failed to auto-generate ${item.name}:`, e);
+                    }
+                }
+
+                // RELOAD LIBRARY so new assets are available for placement
+                // Add a small delay to allow filesystem to settle
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                await this.library.load();
+                objects = this.library.getAssets("OBJECT");
+                ui.notifications.info("New assets crafted! Arranging rooms...");
+            }
 
             // Map plan to items
             for (const roomPlan of plan) {
@@ -165,6 +208,10 @@ export class DungeongenService {
                                 height: gridSize,
                                 rotation: item.rotation || 0
                             });
+                            // LOGGING: Trace asset usage
+                            console.log(`Vibe Scenes | Placed asset: ${asset.path} at ${items[items.length - 1].x}, ${items[items.length - 1].y}`);
+                        } else {
+                            console.warn(`Vibe Scenes | Failed to find asset for item:`, item);
                         }
                     }
                 }

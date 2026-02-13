@@ -1,0 +1,26 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+    <g id="sarcophagus">
+        
+        <ellipse cx="256" cy="350" rx="130" ry="35" fill="rgba(0,0,0,0.3)"/>
+
+        
+        <rect x="156" y="226" width="200" height="120" rx="10" ry="10" fill="#404040" stroke="#222222" stroke-width="6"/>
+
+        
+        <rect x="146" y="216" width="220" height="140" rx="12" ry="12" fill="#505050" stroke="#222222" stroke-width="6"/>
+
+        
+        <rect x="171" y="241" width="170" height="90" rx="8" ry="8" fill="#606060" stroke="#333333" stroke-width="4"/>
+
+        
+        <g fill="#98FB98">
+            
+            <path d="M 200 280 L 205 275 L 210 280 L 205 290 L 200 285 Z"/>
+            
+            <path d="M 245 275 L 265 275 L 255 295 L 245 275 Z M 255 275 L 255 295"/>
+            
+            <path d="M 290 280 L 295 275 L 300 280 L 295 290 L 290 285 Z"/>
+        </g>
+    </g>
+</svg>

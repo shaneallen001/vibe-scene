@@ -1,0 +1,32 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  
+  <g id="wooden-shield">
+    
+    <ellipse cx="256" cy="380" rx="140" ry="30" fill="rgba(0,0,0,0.2)" />
+
+    
+    <circle cx="256" cy="260" r="160" fill="#8B4513" stroke="#654321" stroke-width="8"/>
+
+    
+    
+    <path d="M256,100 L256,420" stroke="#654321" stroke-width="6" opacity="0.7"/>
+    
+    <path d="M190,120 C190,260 190,260 190,400" stroke="#654321" stroke-width="6" opacity="0.7"/>
+    <path d="M140,180 C150,260 150,260 140,340" stroke="#654321" stroke-width="6" opacity="0.7"/>
+    
+    <path d="M322,120 C322,260 322,260 322,400" stroke="#654321" stroke-width="6" opacity="0.7"/>
+    <path d="M372,180 C362,260 362,260 372,340" stroke="#654321" stroke-width="6" opacity="0.7"/>
+
+    
+    <path d="M220,180 Q230,170 240,180 Q250,190 260,180" stroke="#654321" stroke-width="3" fill="none" opacity="0.3"/>
+    <path d="M280,250 Q270,260 260,250 Q250,240 240,250" stroke="#654321" stroke-width="3" fill="none" opacity="0.3"/>
+    <path d="M200,300 Q210,290 220,300" stroke="#654321" stroke-width="3" fill="none" opacity="0.3"/>
+
+    
+    <circle cx="256" cy="260" r="50" fill="#A9A9A9" stroke="#696969" stroke-width="6"/>
+    
+    <circle cx="256" cy="260" r="20" fill="#696969"/>
+    <circle cx="256" cy="260" r="10" fill="#A9A9A9"/>
+
+  </g>
+</svg>

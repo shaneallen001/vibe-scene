@@ -1,8 +1,5 @@
-<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-<style>
-  rect { shape-rendering: geometricPrecision; }
-  path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-</style>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
 <g>
   <path d="M100,350 l50,-20 l262,0 l50,20 z" fill="#8B4513" stroke="#54331A" stroke-width="8"/>
   <path d="M120,350 l20,-70" stroke="#54331A" stroke-width="8"/>
