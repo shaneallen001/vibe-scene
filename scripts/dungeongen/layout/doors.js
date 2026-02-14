@@ -61,8 +61,7 @@ export class DoorPlacer {
     }
 
     _isOccupied(x, y) {
-        // Check Stairs
-        if (this.grid.stairs.some(s => s.x === x && s.y === y)) return true;
+
         // Check Existing Doors (though we clear them)
         if (this.grid.doors.some(d => d.x === x && d.y === y)) return true;
         return false;

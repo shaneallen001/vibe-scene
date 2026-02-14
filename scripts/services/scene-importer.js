@@ -10,12 +10,14 @@ export class SceneImporter {
      * @param {string} options.name - Scene name
      * @param {Blob} options.imageData - PNG image blob
      * @param {Array} options.walls - Array of wall data objects
+     * @param {Array} options.items - Array of item/tile data objects
+     * @param {Array} options.rooms - Array of room data objects (for journals)
      * @param {number} options.gridSize - Grid size in pixels
      * @param {number} options.seed - Seed used for generation (for metadata)
      * @returns {Promise<Scene>} - Created scene document
      */
     async createScene(options) {
-        const { name, imageData, walls, items, gridSize, seed } = options;
+        const { name, imageData, walls, items, rooms, gridSize, seed } = options;
 
         console.log("Vibe Scenes | Creating scene:", name);
 
@@ -102,15 +104,99 @@ export class SceneImporter {
             const uniqueTextures = new Set(items.map(i => i.texture));
             console.log("Vibe Scenes | Unique textures used:", Array.from(uniqueTextures));
 
-            const tiles = items.map(item => ({
-                texture: { src: item.texture },
-                x: item.x,
-                y: item.y,
-                width: item.width,
-                height: item.height,
-                rotation: item.rotation
-            }));
-            await scene.createEmbeddedDocuments("Tile", tiles);
+            // Verify textures exist before creating
+            for (const texture of uniqueTextures) {
+                try {
+                    const exists = await srcExists(texture);
+                    if (!exists) {
+                        console.error(`Vibe Scenes | MISSING TEXTURE: ${texture}`);
+                    }
+                } catch (e) {
+                    console.error(`Vibe Scenes | Error checking texture ${texture}:`, e);
+                }
+            }
+
+            // Create tiles in batches to avoid overwhelming the system
+            const BATCH_SIZE = 10;
+            for (let i = 0; i < items.length; i += BATCH_SIZE) {
+                const batch = items.slice(i, i + BATCH_SIZE);
+                console.log(`Vibe Scenes | Creating tile batch ${i / BATCH_SIZE + 1}/${Math.ceil(items.length / BATCH_SIZE)}`);
+
+                const tiles = batch.map(item => ({
+                    texture: { src: item.texture },
+                    x: item.x,
+                    y: item.y,
+                    width: item.width,
+                    height: item.height,
+                    rotation: item.rotation
+                }));
+
+                try {
+                    await scene.createEmbeddedDocuments("Tile", tiles);
+                } catch (e) {
+                    console.error("Vibe Scenes | Failed to create tile batch:", e);
+                }
+            }
+        }
+
+        // Create Journal Entries and Notes if rooms provided
+        if (rooms && rooms.length > 0) {
+            console.log("Vibe Scenes | Creating journal entries for rooms...");
+
+            // Get or create folder
+            let folder = game.folders.find(f => f.name === "Vibe Scenes Dungeons" && f.type === "JournalEntry");
+            if (!folder) {
+                folder = await Folder.create({ name: "Vibe Scenes Dungeons", type: "JournalEntry" });
+            }
+
+            // Create a subfolder for this specific scene
+            // We use the scene name + timestamp to avoid collisions if multiple scenes have same name
+            const folderName = `${name} (${new Date().toLocaleTimeString()})`;
+            const sceneFolder = await Folder.create({
+                name: folderName,
+                type: "JournalEntry",
+                parent: folder.id
+            });
+
+            const notes = [];
+
+            for (const room of rooms) {
+                // Only create entries for rooms with descriptions
+                if (room.description) {
+                    const roomName = room.theme || `Room ${room.id}`;
+
+                    // Create Journal Entry
+                    const entry = await JournalEntry.create({
+                        name: roomName,
+                        pages: [{
+                            name: "Description",
+                            type: "text",
+                            text: { content: room.description }
+                        }],
+                        folder: sceneFolder.id
+                    });
+
+                    // Link via Note
+                    // Coordinates need to be centered in room
+                    const centerX = (room.x + room.width / 2) * gridSize;
+                    const centerY = (room.y + room.height / 2) * gridSize;
+
+                    notes.push({
+                        entryId: entry.id,
+                        x: centerX,
+                        y: centerY,
+                        icon: "icons/svg/book.svg",
+                        text: roomName,
+                        fontSize: 20,
+                        iconSize: 48
+                    });
+                }
+            }
+
+            if (notes.length > 0) {
+                console.log(`Vibe Scenes | Creating ${notes.length} map notes...`);
+                await scene.createEmbeddedDocuments("Note", notes);
+            }
         }
 
         console.log("Vibe Scenes | Scene created successfully:", scene.id);

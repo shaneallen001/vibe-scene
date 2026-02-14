@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+    <g>
+        
+        <ellipse cx="256" cy="400" rx="180" ry="70" fill="rgba(0,0,0,0.2)"/>
+
+        
+        <rect x="106" y="300" width="300" height="100" fill="#5a5a5a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        <rect x="106" y="260" width="40" height="60" fill="#5a5a5a" stroke="#2a2a2a" stroke-width="4"/>
+        
+        <rect x="366" y="260" width="40" height="60" fill="#5a5a5a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        <rect x="146" y="270" width="220" height="40" fill="#6a6a6a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        <rect x="146" y="100" width="220" height="180" fill="#5a5a5a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        <rect x="100" y="250" width="50" height="20" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="4"/>
+        
+        <rect x="362" y="250" width="50" height="20" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        <path d="M146 100 H366 L376 70 L256 40 L136 70 Z" fill="#4a4a4a" stroke="#2a2a2a" stroke-width="4"/>
+
+        
+        
+        <path d="M200 130 L180 150 L190 170 M260 120 L270 140 L250 160 M170 200 L180 220 L160 230" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        <path d="M300 150 L320 170 L310 190 M250 200 L260 220 L240 230" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+        
+        <path d="M200 60 L220 70 L210 80 M300 60 L280 70 L290 80" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+        
+        <path d="M180 285 L200 295 L190 305 M300 280 L320 290 L310 300" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+        
+        <path d="M150 320 L170 330 L160 340 M280 310 L290 330 L270 340 M200 360 L220 370 L210 380 M350 350 L360 370 L340 380" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+
+        
+        <path d="M115 270 L125 280 M375 270 L365 280" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        <path d="M115 300 L125 310 M375 300 L365 310" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+        
+        <path d="M110 255 L120 265 M370 255 L380 265" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+    </g>
+</svg>

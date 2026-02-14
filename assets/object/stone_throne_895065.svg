@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+    
+
+    
+    <path d="M256 460 C180 460, 150 440, 150 420 C150 400, 180 380, 256 380 C332 380, 362 400, 362 420 C362 440, 332 460, 256 460 Z" fill="#00000033"/>
+
+    <g transform="translate(0, -20)"> 
+        
+        <rect x="150" y="80" width="212" height="220" rx="10" ry="10" fill="url(#stoneGradientDark)" stroke="#4A4A4A" stroke-width="4"/>
+        
+        <rect x="140" y="70" width="232" height="30" rx="10" ry="10" fill="url(#stoneGradientLight)" stroke="#4A4A4A" stroke-width="4"/>
+        
+        
+        <path d="M256 120 L230 150 L256 180 L282 150 Z" fill="#707070" stroke="#4A4A4A" stroke-width="3"/>
+        <circle cx="256" cy="150" r="15" fill="#707070" stroke="#4A4A4A" stroke-width="3"/>
+        <path d="M256 125 L256 175 M235 150 L277 150" stroke="#4A4A4A" stroke-width="2"/> 
+
+        
+        <rect x="180" y="280" width="152" height="100" rx="8" ry="8" fill="url(#stoneGradientSeat)" stroke="#4A4A4A" stroke-width="4"/>
+        
+        
+        
+        <rect x="130" y="270" width="50" height="120" rx="8" ry="8" fill="url(#stoneGradientDark)" stroke="#4A4A4A" stroke-width="4"/>
+        <rect x="130" y="270" width="50" height="20" rx="8" ry="8" fill="url(#stoneGradientLight)" stroke="#4A4A4A" stroke-width="4"/> 
+        
+        <rect x="332" y="270" width="50" height="120" rx="8" ry="8" fill="url(#stoneGradientDark)" stroke="#4A4A4A" stroke-width="4"/>
+        <rect x="332" y="270" width="50" height="20" rx="8" ry="8" fill="url(#stoneGradientLight)" stroke="#4A4A4A" stroke-width="4"/> 
+
+        
+        
+        <path d="M165 95 Q175 90 185 95 Q195 100 205 95" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M300 90 Q310 85 320 90 Q330 95 340 90" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M190 200 Q180 210 190 220 Q200 230 190 240" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M322 200 Q332 210 322 220 Q312 230 322 240" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M240 105 L245 110 L250 105" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M270 105 L265 110 L260 105" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        
+        
+        <path d="M200 300 Q210 295 220 300 Q230 305 240 300" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M270 305 Q280 300 290 305 Q300 310 310 305" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M220 340 L230 350 L240 340 L250 350" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M280 340 L290 350 L300 340" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+
+        
+        <path d="M140 300 Q145 305 150 300 Q155 295 160 300" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M342 300 Q347 305 352 300 Q357 295 362 300" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M150 340 L160 350" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+        <path d="M352 340 L362 350" stroke="#4A4A4A" stroke-width="2" fill="none"/>
+
+        
+        <path d="M155 120 V250 M165 125 V245" stroke="#4A4A4A" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <path d="M357 120 V250 M347 125 V245" stroke="#4A4A4A" stroke-width="1.5" fill="none" opacity="0.7"/>
+        
+        
+        <path d="M180 310 H185 M180 330 H185" stroke="#4A4A4A" stroke-width="1.5" fill="none" opacity="0.7"/>
+        <path d="M327 310 H332 M327 330 H332" stroke="#4A4A4A" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+    </g>
+</svg>

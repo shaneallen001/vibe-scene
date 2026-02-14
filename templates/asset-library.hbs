@@ -199,7 +199,7 @@
             </div>
 
             <div class="action-buttons">
-                <button class="open-studio-btn" title="Open Asset Studio">
+                <button type="button" class="open-studio-btn" title="Open Asset Studio">
                     <i class="fas fa-plus"></i> Open Studio
                 </button>
             </div>
@@ -218,7 +218,7 @@
                 {{/unless}}
             </div>
             <div class="column-picker-dropdown">
-                <button class="icon-btn toggle-columns" title="Select Columns">
+                <button type="button" class="icon-btn toggle-columns" title="Select Columns">
                     <i class="fas fa-columns"></i>
                 </button>
             </div>
@@ -250,10 +250,11 @@
                             {{/each}}
                         </td>
                         <td class="row-actions">
-                            <button class="icon-btn regenerate-asset" title="Regenerate" data-id="{{this.id}}">
+                            <button type="button" class="icon-btn regenerate-asset" title="Regenerate"
+                                data-id="{{this.id}}">
                                 <i class="fas fa-sync-alt green-text"></i>
                             </button>
-                            <button class="icon-btn delete-asset" title="Delete" data-id="{{this.id}}">
+                            <button type="button" class="icon-btn delete-asset" title="Delete" data-id="{{this.id}}">
                                 <i class="fas fa-trash red-text"></i>
                             </button>
                         </td>

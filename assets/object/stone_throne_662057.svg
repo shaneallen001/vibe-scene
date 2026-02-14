@@ -1,0 +1,55 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  
+  <g>
+    
+    <ellipse cx="256" cy="410" rx="160" ry="40" class="shadow"/>
+
+    
+
+    
+    <path d="M160 360 C140 320 160 280 256 280 C352 280 372 320 352 360 L360 370 C350 390 256 400 162 370 Z" class="stone-main"/>
+    
+    <path d="M180 340 C170 310 180 290 256 290 C332 290 342 310 332 340 L335 345 C330 355 256 360 185 345 Z" class="stone-recess"/>
+
+    
+    
+    <path d="M120 280 L150 280 L160 300 L140 340 L110 320 L100 290 Z" class="stone-main"/>
+    
+    <path d="M392 280 L362 280 L352 300 L372 340 L402 320 L412 290 Z" class="stone-main"/>
+
+    
+    <path d="M110 150 Q100 260 150 270 H362 Q412 260 402 150 Z" class="stone-main"/>
+
+    
+    <path d="M150 160 Q140 250 170 260 H342 Q372 250 362 160 Z" class="stone-recess"/>
+
+    
+    
+    <path d="M256 80 L220 110 L180 100 L190 140 L256 150 L322 140 L332 100 L292 110 Z" class="stone-accent"/>
+    
+    <path d="M140 150 C120 130 150 110 180 120 L170 140 Z" class="stone-accent"/>
+    <path d="M372 150 C392 130 362 110 332 120 L342 140 Z" class="stone-accent"/>
+
+    
+    <path d="M256 180 C230 190 230 220 256 230 C282 220 282 190 256 180 Z" class="stone-accent" stroke-width="4"/>
+    <path d="M256 180 L240 200 L256 220 L272 200 Z" class="stone-accent" fill="none" stroke-width="6"/>
+
+    
+    
+    <path d="M160 170 L175 180 L165 200 L180 210 M300 170 L315 180 L305 200 L320 210" class="stone-crack"/>
+    <path d="M240 230 L230 240 L245 250 L235 260 M280 230 L290 240 L275 250 L285 260" class="stone-crack"/>
+    <path d="M120 180 L130 190 L125 200 M390 180 L380 190 L385 200" class="stone-crack"/>
+    <path d="M200 130 L210 140 L205 150 M310 130 L300 140 L305 150" class="stone-crack"/>
+    <path d="M256 120 L245 130 L256 140 L267 130 Z" class="stone-crack"/> 
+
+    
+    <path d="M190 300 L200 310 L195 320 M320 300 L310 310 L315 320" class="stone-crack"/>
+    <path d="M230 330 L220 340 L235 350 M290 330 L300 340 L285 350" class="stone-crack"/>
+    <path d="M170 360 L180 370 L175 380 M340 360 L330 370 L335 380" class="stone-crack"/>
+
+    
+    <path d="M125 295 L115 305 L120 315 M387 295 L397 305 L392 315" class="stone-crack"/>
+    <path d="M140 285 L145 295 M372 285 L367 295" class="stone-crack"/>
+
+  </g>
+</svg>

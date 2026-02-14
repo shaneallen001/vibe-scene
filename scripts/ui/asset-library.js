@@ -119,6 +119,11 @@ export class AssetLibrary extends Application {
             delete this.filters[key];
             this.render();
         });
+        // Column Picker
+        html.find(".toggle-columns").click((ev) => {
+            ev.preventDefault();
+            this._showColumnPicker();
+        });
     }
 
     _updatePreview(id) {
@@ -129,7 +134,7 @@ export class AssetLibrary extends Application {
             // To avoid flickering entire table, we could manually update DOM
             // But let's try just updating the DOM for the preview
             const previewHtml = `
-                <img src="${asset.path}" alt="${asset.name}" class="preview-image" style="height: 80px; width: 80px; object-fit: contain; background: #000; border: 1px solid #333;" />
+                <img src="${asset.path}" alt="${asset.name}" class="preview-image" style="height: 160px; width: 160px; object-fit: contain; background: #000; border: 1px solid #333;" />
                 <div class="preview-details">
                     <h3>${asset.name}</h3>
                     <p><strong>Prompt:</strong> ${asset.prompt || "N/A"}</p>
@@ -199,6 +204,40 @@ export class AssetLibrary extends Application {
                     label: "Clear",
                     callback: () => {
                         delete this.filters[col];
+                        this.render();
+                    }
+                }
+            },
+            default: "apply"
+        }).render(true);
+    }
+
+    _showColumnPicker() {
+        const allColumns = ["id", "name", "type", "width", "tags"];
+        const content = `
+            <p>Select columns to display:</p>
+            <div class="form-group">
+                ${allColumns.map(col => `
+                <div>
+                    <input type="checkbox" id="col_${col}" name="columns" value="${col}" ${this.visibleColumns.includes(col) ? "checked" : ""}>
+                    <label for="col_${col}">${col.charAt(0).toUpperCase() + col.slice(1)}</label>
+                </div>
+                `).join("")}
+            </div>
+        `;
+
+        new Dialog({
+            title: "Select Columns",
+            content: content,
+            buttons: {
+                apply: {
+                    label: "Apply",
+                    callback: (html) => {
+                        const selected = [];
+                        html.find('input[name="columns"]:checked').each((i, el) => {
+                            selected.push($(el).val());
+                        });
+                        this.visibleColumns = selected;
                         this.render();
                     }
                 }

@@ -9,7 +9,6 @@ import { applyMapEnvelope } from './constraints.js';
 import { RoomPlacer } from './room_placement.js';
 import { NetworkConnector, pruneDeadEnds } from './connectivity.js';
 import { ExitPlacer } from './exits.js';
-import { VerticalPlacer } from './verticality.js';
 import { DoorPlacer } from './doors.js';
 
 export class DungeonGenerator {
@@ -37,8 +36,7 @@ export class DungeonGenerator {
         // Phase 5: Edge & Exit Handling
         this._placeExits();
 
-        // Phase 6: Vertical Connectivity
-        this._placeStairs();
+
 
         // Phase 7: Place Doors (explicitly at room entries)
         // Renumbered to 7 in flow
@@ -52,10 +50,7 @@ export class DungeonGenerator {
         exitPlacer.placeExits();
     }
 
-    _placeStairs() {
-        const placer = new VerticalPlacer(this.grid, this.options);
-        placer.placeStairs();
-    }
+
 
     _placeRooms() {
         const placer = new RoomPlacer(this.grid, this.options);

@@ -12,6 +12,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 - **Auto-Walls & Doors**: Automatically constructs vision-blocking walls and interactive doors
 - **AI Asset Generator**: Built-in integration with Google Gemini to generate custom SVG map assets
 - **Smart Room Population**: Uses AI to intelligently furnish the dungeon's "Boss Room" based on your specific asset library
+- **Roleplay Ready**: Automatically generates descriptive flavor text for each room and creates Journal Entries linked to the map.
 - **Floor Style Selection**: Choose from available floor textures in your library (e.g., Stone, Wood)
 - **Grid Settings**: Configurable grid size for the generated scenes
 
@@ -47,6 +48,7 @@ Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 - **Default Grid Size**: Default grid size in pixels (default: 100)
 - **Map Render Resolution**: Pixels per cell when rendering (default: 100)
 - **Image Storage Path**: Folder for saving dungeon images (default: `vibe-scenes/dungeons`)
+- **Gemini Model**: Strategies for generation (default: `gemini-3-flash-preview`)
 
 ### Advanced Configuration (Generator Options)
 
@@ -54,7 +56,7 @@ The underlying generator options are now fully exposed in the dialog:
 
 - **Dead End Removal**: Controls pruning of dead-end corridors (`none`, `some`, `all`).
 - **Peripheral Egress**: If true, digs exits from the dungeon edge to the map boundary.
-- **Stairs**: Configure number of Up/Down stairs (`{ up: 1, down: 2 }`).
+
 - **Door Density**: Probability (0.0 - 1.0) of placing a door at a valid location.
 
 ## Technical Details

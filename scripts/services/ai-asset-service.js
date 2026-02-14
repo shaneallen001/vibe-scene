@@ -223,6 +223,17 @@ export class AiAssetService {
             content = content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
         }
 
+        // 7. Ensure Width and Height (Pre-emptive fix for PIXI/Foundry hang)
+        // Check if width/height are present. If not, inject them (default to 512x512)
+        if (!content.includes('width=')) {
+            console.log("Vibe Scenes | Injecting width=512 into SVG");
+            content = content.replace('<svg', '<svg width="512"');
+        }
+        if (!content.includes('height=')) {
+            console.log("Vibe Scenes | Injecting height=512 into SVG");
+            content = content.replace('<svg', '<svg height="512"');
+        }
+
         return content;
     }
 }

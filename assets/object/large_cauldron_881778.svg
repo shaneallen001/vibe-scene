@@ -1,0 +1,20 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  
+
+  
+  <ellipse cx="256" cy="400" rx="170" ry="50" fill="rgba(0,0,0,0.3)"/>
+
+  
+  <ellipse cx="256" cy="290" rx="190" ry="110" fill="#222222" stroke="#111111" stroke-width="8"/>
+
+  
+  <ellipse cx="256" cy="256" rx="180" ry="100" fill="#444444" stroke="#111111" stroke-width="6"/>
+
+  
+  <ellipse cx="256" cy="256" rx="160" ry="80" fill="#111111"/>
+
+  
+  <ellipse cx="65" cy="256" rx="25" ry="18" fill="#333333" stroke="#111111" stroke-width="4"/>
+  <ellipse cx="447" cy="256" rx="25" ry="18" fill="#333333" stroke="#111111" stroke-width="4"/>
+
+</svg>

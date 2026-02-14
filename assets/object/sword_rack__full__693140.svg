@@ -1,0 +1,35 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  
+  <g id="sword-rack-full">
+    
+    <ellipse cx="256" cy="320" rx="190" ry="60" fill="rgba(0,0,0,0.2)" />
+
+    
+    
+    <rect x="86" y="180" width="340" height="140" fill="#4A4A4A" stroke="#2C2C2C" stroke-width="4" rx="8" ry="8" />
+    
+    <rect x="96" y="190" width="320" height="120" fill="#3A3A3A" rx="4" ry="4" />
+    
+    
+    
+
+    
+    
+    <g transform="translate(160, 220) rotate(-15)">
+      <use href="#single-sword" />
+    </g>
+    <g transform="translate(210, 235) rotate(5)">
+      <use href="#single-sword" />
+    </g>
+    <g transform="translate(260, 250) rotate(-10)">
+      <use href="#single-sword" />
+    </g>
+    <g transform="translate(310, 265) rotate(10)">
+      <use href="#single-sword" />
+    </g>
+    <g transform="translate(360, 280) rotate(-5)">
+      <use href="#single-sword" />
+    </g>
+
+  </g>
+</svg>

@@ -63,7 +63,7 @@ export class AssetLibraryService {
                 id: newId,
                 name: key, // Use old key as name
                 prompt: "Legacy",
-                model: "gemini-2.5-flash",
+                model: "gemini-3-flash-preview",
                 // Retain other fields
             };
         }
@@ -178,7 +178,7 @@ export class AssetLibraryService {
             id,
             name: metadata.name || "Untitled Asset",
             prompt: metadata.prompt || "",
-            model: metadata.model || "gemini-2.5-flash",
+            model: metadata.model || "gemini-3-flash-preview",
             path: metadata.path,
             fileType: metadata.fileType || "svg",
             type: metadata.type,

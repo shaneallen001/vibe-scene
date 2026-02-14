@@ -8,7 +8,7 @@ const GEMINI_API_VERSION = "v1beta";
 const BASE_URL = "https://generativelanguage.googleapis.com";
 
 export class GeminiService {
-    constructor(apiKey, model = "gemini-2.5-flash") {
+    constructor(apiKey, model = "gemini-3-flash-preview") {
         this.apiKey = apiKey;
         this.model = model;
     }

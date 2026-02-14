@@ -35,7 +35,7 @@ const prompt = process.argv[2] || "A cracked stone dungeon floor tile with moss 
 
 console.log(`Generating SVG for: "${prompt}"...`);
 
-const service = new AiAssetService(config.apiKey, config.model || "gemini-2.5-flash");
+const service = new AiAssetService(config.apiKey, config.model || "gemini-3-flash-preview");
 
 service.generateSVG(prompt).then(svg => {
     // Use a clean filename

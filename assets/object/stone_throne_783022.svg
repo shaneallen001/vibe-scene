@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+    <g transform="translate(0, 50)"> 
+        
+        <ellipse cx="256" cy="400" rx="120" ry="40" fill="rgba(0,0,0,0.2)"/>
+
+        
+        <g stroke="#303030" stroke-width="4">
+            
+            <rect x="150" y="100" width="212" height="200" rx="10" ry="10" fill="#606060"/>
+
+            
+            <path d="M150 100 Q150 70 180 70 L200 50 L256 70 L312 50 L332 70 Q362 70 362 100 Z" fill="#757575"/>
+            <path d="M150 100 Q150 70 180 70 L200 50 L256 70 L312 50 L332 70 Q362 70 362 100 Z" fill="none"/> 
+
+            
+            <rect x="170" y="280" width="172" height="80" rx="8" ry="8" fill="#757575"/>
+
+            
+            <rect x="120" y="280" width="50" height="80" rx="8" ry="8" fill="#606060"/>
+            <rect x="342" y="280" width="50" height="80" rx="8" ry="8" fill="#606060"/>
+
+            
+            <rect x="140" y="360" width="232" height="40" rx="10" ry="10" fill="#606060"/>
+        </g>
+
+        
+        <g stroke="#454545" stroke-width="2" fill="none">
+            
+            <path d="M200 130 L180 145 L210 160"/>
+            <path d="M280 110 L270 125 L290 140"/>
+            <path d="M320 180 L300 195 L330 210"/>
+            <path d="M256 220 L240 235 L260 250"/>
+
+            
+            <path d="M200 300 L210 310 L190 320"/>
+            <path d="M300 310 L290 320 L310 330"/>
+
+            
+            <path d="M140 300 L135 310 L145 320"/>
+            <path d="M370 300 L365 310 L375 320"/>
+
+            
+            <path d="M180 370 L170 380 L190 390"/>
+            <path d="M300 375 L290 385 L310 395"/>
+        </g>
+
+        
+        <g fill="#454545" stroke="#303030" stroke-width="2">
+            
+            <circle cx="256" cy="150" r="15"/>
+            <path d="M256 120 L246 135 L266 135 Z"/> 
+
+            
+            <rect x="135" y="300" width="20" height="40" rx="5" ry="5"/>
+            <rect x="357" y="300" width="20" height="40" rx="5" ry="5"/>
+        </g>
+    </g>
+</svg>

@@ -61,13 +61,11 @@ async function run() {
         {
             name: 'Doors Standard',
             size: 'medium',
-            stairs: { up: 1, down: 1 },
             doorDensity: 1.0 // Max probability
         },
         {
             name: 'Doors Sparse',
             size: 'medium',
-            stairs: { up: 1, down: 1 },
             doorDensity: 0.1 // Low probability
         }
     ];
@@ -83,14 +81,8 @@ async function run() {
 
             // Validation
             let invalidDoors = 0;
-            let stairCollisions = 0;
 
             for (const d of grid.doors) {
-                // Check Collision with Stairs
-                if (grid.stairs.some(s => s.x === d.x && s.y === d.y)) {
-                    console.error(`    ERROR: Door at ${d.x},${d.y} is on top of Stair!`);
-                    stairCollisions++;
-                }
 
                 // Check Floor
                 if (grid.get(d.x, d.y) !== CellType.FLOOR) {
@@ -113,8 +105,7 @@ async function run() {
                 }
             }
 
-            if (invalidDoors === 0 && stairCollisions === 0) console.log("  - All doors valid.");
-            if (stairCollisions > 0) console.error(`  - FAILED: ${stairCollisions} stair collisions.`);
+            if (invalidDoors === 0) console.log("  - All doors valid.");
 
             if (!blob) throw new Error("Failed to generate blob");
             const buffer = await blob.arrayBuffer();

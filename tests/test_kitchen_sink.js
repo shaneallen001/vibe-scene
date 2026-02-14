@@ -64,7 +64,6 @@ async function run() {
         corridorStyle: 'errant',
         deadEndRemoval: 'some',
         peripheralEgress: true,
-        stairs: { up: 1, down: 2 },
         doorDensity: 0.8
     };
 
@@ -79,7 +78,7 @@ async function run() {
         console.log(`Stats:`);
         console.log(`  - Rooms: ${grid.rooms.length}`);
         console.log(`  - Doors: ${grid.doors.length}`);
-        console.log(`  - Stairs: ${grid.stairs.length}`);
+
 
         // Analyze Connectivity
         // (Simple Check: Are we connected? Hard to check fully without traversal, but we trust MST)

@@ -115,8 +115,9 @@ export const PROMPTS = {
        - A room connected ONLY to a "Dining Hall" is likely a "Kitchen".
        - A room connected ONLY to a "Bedroom" might be a "Private Study" or "Walk-in Closet".
     2. Assign a "theme" to EVERY room.
-    3. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
-    4. **CRITICAL**: If a room needs a specific item for its theme (e.g., a "Throne" for a Throne Room) but it is NOT in AVAILABLE_ASSETS, you MUST add it to the "wishlist".
+    3. **DESCRIPTION**: Generate a brief, atmospheric description (flavor text) for each room. Mention sights, smells, sounds, or mood. Keep it to 1-2 sentences.
+    4. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
+    5. **CRITICAL**: If a room needs a specific item for its theme (e.g., a "Throne" for a Throne Room) but it is NOT in AVAILABLE_ASSETS, you MUST add it to the "wishlist".
     
     OUTPUT:
     - Return a JSON Object with two top-level keys: "plan" and "wishlist".
@@ -126,6 +127,7 @@ export const PROMPTS = {
         {
           "id": "room_id",
           "theme": "Assigned Theme",
+          "description": "A damp, echoing chamber smelling of mildew. Shadows dance in the corners.",
           "contents": [
             { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
           ]

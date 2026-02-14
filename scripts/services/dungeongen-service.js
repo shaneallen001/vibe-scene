@@ -30,7 +30,6 @@ export class DungeongenService {
      * @param {string} options.deadEndRemoval - NONE, SOME, ALL
      * @param {boolean} options.peripheralEgress - Create exits at edges
      * @param {number} options.doorDensity - 0.0 to 1.0
-     * @param {Object} options.stairs - { up: number, down: number }
      * @returns {Promise<Object>} - { blob, walls, items }
      */
     async generate(options) {
@@ -51,7 +50,6 @@ export class DungeongenService {
                 deadEndRemoval: options.deadEndRemoval,
                 peripheralEgress: options.peripheralEgress,
                 doorDensity: options.doorDensity,
-                stairs: options.stairs,
                 floorTexture: options.floorTexture
             });
 
@@ -62,7 +60,8 @@ export class DungeongenService {
             return {
                 blob: result.blob,
                 walls: result.walls,
-                items: items
+                items: items,
+                rooms: result.dungeon.rooms
             };
 
         } catch (error) {
@@ -171,8 +170,9 @@ export class DungeongenService {
                 const room = grid.rooms.find(r => r.id === roomPlan.id);
                 if (!room) continue;
 
-                // Store theme on room for debug/future use
+                // Store theme and description on room for debug/future use
                 room.theme = roomPlan.theme;
+                room.description = roomPlan.description;
 
                 if (roomPlan.contents) {
                     for (const item of roomPlan.contents) {
@@ -185,8 +185,8 @@ export class DungeongenService {
                             // Fuzzy search
                             const search = item.name.toLowerCase();
                             asset = objects.find(o =>
-                                o.tags?.some(t => search.includes(t)) ||
-                                o.id.includes(search.replace(/ /g, "_"))
+                                (o.tags && o.tags.some(t => search.includes(t))) ||
+                                (o.name && o.name.toLowerCase().includes(search))
                             );
                         }
                         // Fallback to random if not found (but still meaningful placement)

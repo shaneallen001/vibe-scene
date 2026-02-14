@@ -18,7 +18,7 @@ export class DungeonGrid {
         this.rooms = [];
         this.passages = [];
         this.doors = [];
-        this.stairs = [];
+
     }
 
     get(x, y) {
@@ -120,11 +120,4 @@ export class Door {
     }
 }
 
-export class Stair {
-    constructor(x, y, type = 'down') {
-        this.x = x;
-        this.y = y;
-        this.type = type; // 'up' or 'down'
-        this.id = crypto.randomUUID();
-    }
-}
+

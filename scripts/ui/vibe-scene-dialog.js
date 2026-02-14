@@ -78,8 +78,7 @@ export class VibeSceneDialog {
             density: 0.4,
             peripheralEgress: false,
             doorDensity: 0.5,
-            doorDensity: 0.5,
-            stairs: { up: 1, down: 2 }
+            doorDensity: 0.5
         };
 
         const content = await renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
@@ -114,8 +113,6 @@ export class VibeSceneDialog {
                         const deadEndRemoval = html.find('[name="deadEndRemoval"]').val();
                         const peripheralEgress = html.find('[name="peripheralEgress"]').is(':checked');
                         const doorDensity = parseFloat(html.find('[name="doorDensity"]').val());
-                        const stairsUp = parseInt(html.find('[name="stairsUp"]').val()) || 0;
-                        const stairsDown = parseInt(html.find('[name="stairsDown"]').val()) || 0;
 
                         const seedInput = html.find('[name="seed"]').val();
                         const gridSize = parseInt(html.find('[name="gridSize"]').val()) || 20;
@@ -136,8 +133,7 @@ export class VibeSceneDialog {
                             gridSize,
                             deadEndRemoval,
                             peripheralEgress,
-                            doorDensity,
-                            stairs: { up: stairsUp, down: stairsDown }
+                            doorDensity
                         });
                     }
                 },
@@ -178,7 +174,7 @@ export class VibeSceneDialog {
     }
 
     static async generateDungeon(options) {
-        const { sceneName, size, maskType, symmetry, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity, stairs } = options;
+        const { sceneName, size, maskType, symmetry, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity } = options;
         console.log("Vibe Scenes | generateDungeon called with:", { sceneName, size, maskType, seed });
 
         // Show loading notification
@@ -191,7 +187,7 @@ export class VibeSceneDialog {
 
             // Generate the dungeon image
             // We use the requested gridSize for rendering to ensure 1:1 mapping with the scene grid
-            const { blob: imageData, walls, items } = await dungeonService.generate({
+            const { blob: imageData, walls, items, rooms } = await dungeonService.generate({
                 size,
                 maskType,
                 symmetry,
@@ -203,7 +199,6 @@ export class VibeSceneDialog {
                 deadEndRemoval,
                 peripheralEgress,
                 doorDensity,
-                stairs,
                 floorTexture: options.floorTexture
             });
             console.log("Vibe Scenes | Image data received, size:", imageData?.size || 0, "bytes");
@@ -218,6 +213,7 @@ export class VibeSceneDialog {
                 imageData,
                 walls,
                 items,
+                rooms,
                 gridSize,
                 seed
             });

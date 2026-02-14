@@ -1,0 +1,38 @@
+<svg height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    
+
+    
+    
+    
+    <g transform="translate(50, 50) rotate(-25 260 237.5)">
+        
+        
+        <path d="M 105 275 L 125 255 L 185 260 L 405 205 C 425 215, 425 245, 405 255 L 165 280 L 105 275 Z"
+              fill="rgba(0,0,0,0.2)" />
+
+        
+        <path d="M 100 270 L 120 250 L 180 255 L 160 275 Z"
+              fill="#8B4513" stroke="#333333" stroke-width="6"/>
+
+        
+        <path d="M 180 255 L 400 200 C 420 210, 420 240, 400 250 L 160 275 Z"
+              fill="#A0A0A0" stroke="#333333" stroke-width="6"/>
+        
+        
+        <path d="M 170 265 L 390 230 C 410 240, 410 270, 390 280 L 170 285 Z"
+              fill="#D0D0D0" stroke="none"/>
+
+        
+        <path d="M 185 250 L 395 198" stroke="#BFBFBF" stroke-width="2" opacity="0.7"/>
+
+        
+        <circle cx="130" cy="262" r="6" fill="#555555" stroke="#333333" stroke-width="3"/>
+        <circle cx="150" cy="267" r="6" fill="#555555" stroke="#333333" stroke-width="3"/>
+
+        
+        <path d="M 220 220 L 230 215 M 260 205 L 270 200 M 300 190 L 310 185"
+              stroke="#666666" stroke-width="2" opacity="0.6"/>
+        <path d="M 280 240 L 290 235 M 320 225 L 330 220"
+              stroke="#666666" stroke-width="2" opacity="0.4"/>
+    </g>
+</svg>

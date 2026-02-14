@@ -658,5 +658,328 @@
     "name": "barrel_of_provisions_377068",
     "prompt": "Legacy",
     "model": "gemini-2.5-flash"
+  },
+  "38": {
+    "id": 38,
+    "name": "stone_throne_662057",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_662057.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770964662072
+  },
+  "39": {
+    "id": 39,
+    "name": "sword_rack__full__693140",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/sword_rack__full__693140.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770964693149
+  },
+  "40": {
+    "id": 40,
+    "name": "armor_display__full__725308",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/armor_display__full__725308.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770964725315
+  },
+  "41": {
+    "id": 41,
+    "name": "throne_215935",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/throne_215935.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770965215949
+  },
+  "42": {
+    "id": 42,
+    "name": "forest_floor_519765",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/forest_floor_519765.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "studio",
+      "ai-gen"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770965519777
+  },
+  "43": {
+    "id": 43,
+    "name": "forest_floor_544126",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/forest_floor_544126.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "studio",
+      "ai-gen"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770965544132
+  },
+  "44": {
+    "id": 44,
+    "name": "forest_floor_600525",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/forest_floor_600525.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "studio",
+      "ai-gen"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1770965600532
+  },
+  "45": {
+    "id": 45,
+    "name": "ornate_throne_044657",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/ornate_throne_044657.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771039044671
+  },
+  "46": {
+    "id": 46,
+    "name": "large_cauldron_881778",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/large_cauldron_881778.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771039881793
+  },
+  "47": {
+    "id": 47,
+    "name": "stone_throne_895065",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_895065.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771041895083
+  },
+  "48": {
+    "id": 48,
+    "name": "stone_throne_314008",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_314008.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042314021
+  },
+  "49": {
+    "id": 49,
+    "name": "guard_armor_347735",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/guard_armor_347735.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042347742
+  },
+  "50": {
+    "id": 50,
+    "name": "iron_cell_door_366052",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/iron_cell_door_366052.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042366059
+  },
+  "51": {
+    "id": 51,
+    "name": "large_stone_hearth_398902",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/large_stone_hearth_398902.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042398909
+  },
+  "52": {
+    "id": 52,
+    "name": "butcher_s_knife__large__428137",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/butcher_s_knife__large__428137.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042428145
+  },
+  "53": {
+    "id": 53,
+    "name": "food_rations__dried_meat__bread__436327",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/food_rations__dried_meat__bread__436327.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771042436334
+  },
+  "54": {
+    "id": 54,
+    "name": "stone_throne_419181",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_419181.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771045419194
+  },
+  "55": {
+    "id": 55,
+    "name": "stone_throne_783022",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_783022.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771048783032
+  },
+  "56": {
+    "id": 56,
+    "name": "iron_cell_bars_809027",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/iron_cell_bars_809027.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771048809035
   }
 }

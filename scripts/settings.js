@@ -50,6 +50,6 @@ export function registerModuleSettings() {
     scope: "world",
     config: true,
     type: String,
-    default: "gemini-2.5-flash"
+    default: "gemini-3-flash-preview"
   });
 }

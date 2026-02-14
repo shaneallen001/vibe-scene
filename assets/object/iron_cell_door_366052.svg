@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  
+  <g id="iron-cell-door">
+    
+    <ellipse cx="256" cy="408" rx="96" ry="24" fill="#000" opacity="0.2"/>
+
+    
+    <rect x="160" y="96" width="192" height="320" fill="#222" stroke="#000" stroke-width="4"/>
+
+    
+    <rect x="168" y="104" width="176" height="304" fill="#333" stroke="#000" stroke-width="2"/>
+
+    
+    <rect x="180" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="204" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="228" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="252" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="276" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="300" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+    <rect x="324" y="112" width="12" height="288" fill="#444" stroke="#000" stroke-width="1.5"/>
+
+    
+    <rect x="172" y="160" width="168" height="10" fill="#555" stroke="#000" stroke-width="1.5"/>
+    <rect x="172" y="235" width="168" height="10" fill="#555" stroke="#000" stroke-width="1.5"/>
+    <rect x="172" y="310" width="168" height="10" fill="#555" stroke="#000" stroke-width="1.5"/>
+
+    
+    
+    <path d="M164 100 C170 98, 175 105, 172 110 L165 105 Z" fill="#A0522D" opacity="0.7"/>
+    <path d="M348 102 C342 100, 337 107, 340 112 L347 107 Z" fill="#A0522D" opacity="0.7"/>
+    <path d="M162 390 C168 392, 173 399, 170 404 L163 399 Z" fill="#A0522D" opacity="0.7"/>
+    <path d="M350 392 C344 394, 339 401, 342 406 L349 401 Z" fill="#A0522D" opacity="0.7"/>
+
+    
+    <path d="M185 140 C195 135, 205 145, 200 155 L190 150 Z" fill="#B8860B" opacity="0.6"/>
+    <path d="M240 190 C250 185, 260 195, 255 205 L245 200 Z" fill="#CD853F" opacity="0.6"/>
+    <path d="M300 270 C310 265, 320 275, 315 285 L305 280 Z" fill="#A0522D" opacity="0.6"/>
+    <path d="M200 330 C210 325, 220 335, 215 345 L205 340 Z" fill="#B8860B" opacity="0.6"/>
+    <path d="M260 115 C265 113, 270 120, 268 125 L262 120 Z" fill="#CD853F" opacity="0.6"/>
+    <path d="M310 355 C315 353, 320 360, 318 365 L312 360 Z" fill="#A0522D" opacity="0.6"/>
+
+    
+    <rect x="330" y="230" width="10" height="30" fill="#555" stroke="#000" stroke-width="1"/>
+    <circle cx="335" cy="245" r="3" fill="#222" stroke="#000" stroke-width="1"/>
+  </g>
+</svg>

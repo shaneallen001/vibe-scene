@@ -18,12 +18,12 @@ export { CellType, DungeonGrid, Room, Door } from './layout/models.js';
  * Size presets for dungeon generation
  */
 const SIZE_PRESETS = {
-    tiny: { width: 40, height: 40, numRooms: 5, minSize: 5, maxSize: 10, stairs: { up: 0, down: 1 } },
-    small: { width: 60, height: 60, numRooms: 10, minSize: 6, maxSize: 12, stairs: { up: 1, down: 1 } },
-    medium: { width: 90, height: 90, numRooms: 20, minSize: 8, maxSize: 15, stairs: { up: 1, down: 2 } },
-    large: { width: 120, height: 120, numRooms: 35, minSize: 10, maxSize: 20, stairs: { up: 1, down: 2 } },
-    xlarge: { width: 160, height: 160, numRooms: 50, minSize: 12, maxSize: 25, stairs: { up: 2, down: 3 } },
-    huge: { width: 200, height: 200, numRooms: 75, minSize: 15, maxSize: 30, stairs: { up: 2, down: 4 } }
+    tiny: { width: 40, height: 40, numRooms: 5, minSize: 5, maxSize: 10 },
+    small: { width: 60, height: 60, numRooms: 10, minSize: 6, maxSize: 12 },
+    medium: { width: 90, height: 90, numRooms: 20, minSize: 8, maxSize: 15 },
+    large: { width: 120, height: 120, numRooms: 35, minSize: 10, maxSize: 20 },
+    xlarge: { width: 160, height: 160, numRooms: 50, minSize: 12, maxSize: 25 },
+    huge: { width: 200, height: 200, numRooms: 75, minSize: 15, maxSize: 30 }
 };
 
 /**
@@ -57,7 +57,6 @@ export async function generateDungeon(options = {}) {
         corridorStyle: options.corridorStyle,
         deadEndRemoval: options.deadEndRemoval,
         peripheralEgress: options.peripheralEgress,
-        stairs: options.stairs || config.stairs,
         doorDensity: options.doorDensity
     });
 
@@ -111,7 +110,6 @@ export async function generateDungeonWithData(options = {}) {
         corridorStyle: options.corridorStyle,
         deadEndRemoval: options.deadEndRemoval,
         peripheralEgress: options.peripheralEgress,
-        stairs: options.stairs || config.stairs,
         doorDensity: options.doorDensity
     });
 
