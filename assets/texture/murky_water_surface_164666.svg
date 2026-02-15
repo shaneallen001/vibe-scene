@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+    
+    <defs>
+        <filter id="murkyWaterFilter" x="-10%" y="-10%" width="120%" height="120%">
+            
+            <feTurbulence type="fractalNoise" baseFrequency="0.004 0.005" numOctaves="2" seed="789" result="displacementMap" stitchTiles="stitch"/>
+            <feComponentTransfer in="displacementMap" result="normalizedDisplacement">
+                
+                <feFuncR type="linear" slope="0.5" intercept="0.25"/>
+                <feFuncG type="linear" slope="0.5" intercept="0.25"/>
+                <feFuncB type="linear" slope="0.5" intercept="0.25"/>
+                <feFuncA type="linear" slope="0"/>
+            </feComponentTransfer>
+            
+            <feDisplacementMap in="SourceGraphic" in2="normalizedDisplacement" scale="10" xChannelSelector="R" yChannelSelector="G" result="displacedWater"/>
+
+            
+            <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="4" seed="42" result="turbMurky1" stitchTiles="stitch"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.015" numOctaves="3" seed="123" result="turbMurky2" stitchTiles="stitch"/>
+            <feBlend in="turbMurky1" in2="turbMurky2" mode="multiply" result="combinedMurkyTurb"/>
+            
+            <feColorMatrix in="combinedMurkyTurb" type="matrix" values="0.5 0 0 0 0  
+                                                                         0 0.6 0 0 0  
+                                                                         0 0 0.4 0 0  
+                                                                         0 0 0 0.6 0" result="murkyColor"/>
+            <feGaussianBlur in="murkyColor" stdDeviation="2" result="blurredMurky"/>
+            
+            
+            <feBlend in="displacedWater" in2="blurredMurky" mode="multiply" result="murkyDisplacedWater"/>
+
+            
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.01" numOctaves="3" seed="555" result="reflectionTurb" stitchTiles="stitch"/>
+            
+            <feColorMatrix in="reflectionTurb" type="matrix" values="0 0 0 0 0.35  
+                                                                     0 0 0 0 0.45  
+                                                                     0 0 0 0 0.4   
+                                                                     0 0 0 0.5 0" result="reflectionColor"/>
+            <feGaussianBlur in="reflectionColor" stdDeviation="4" result="blurredReflection"/>
+            
+            
+            <feBlend in="murkyDisplacedWater" in2="blurredReflection" mode="screen" result="finalOutput"/>
+        </filter>
+        
+        
+        <g id="debrisChunk1">
+            <path d="M-5,-5 Q-10,-2 -7,5 Q0,10 5,7 Q10,2 7,-5 Q0,-10 -5,-5 Z" fill="#1F2E23"/>
+        </g>
+        <g id="debrisChunk2">
+            <path d="M-6,-3 Q-11,0 -8,8 Q0,12 6,6 Q10,0 4,-6 Q-2,-10 -6,-3 Z" fill="#3A302A"/>
+        </g>
+        <g id="debrisChunk3">
+            <path d="M-4,-4 Q-8,-1 -5,6 Q0,8 4,5 Q7,-1 2,-6 Q-2,-8 -4,-4 Z" fill="#15201A"/>
+        </g>
+    </defs>
+
+    
+    <rect x="0" y="0" width="512" height="512" fill="#2A3B2F" filter="url(#murkyWaterFilter)"/>
+
+    
+    <use href="#debrisChunk1" transform="translate(50, 80) rotate(15) scale(0.6)"/>
+    <use href="#debrisChunk2" transform="translate(180, 20) rotate(45) scale(0.7)"/>
+    <use href="#debrisChunk3" transform="translate(350, 100) rotate(70) scale(0.5)"/>
+    <use href="#debrisChunk1" transform="translate(450, 250) rotate(25) scale(0.8)"/>
+    <use href="#debrisChunk2" transform="translate(100, 300) rotate(60) scale(0.6)"/>
+    <use href="#debrisChunk3" transform="translate(250, 400) rotate(10) scale(0.7)"/>
+    <use href="#debrisChunk1" transform="translate(400, 450) rotate(80) scale(0.5)"/>
+    <use href="#debrisChunk2" transform="translate(20, 420) rotate(30) scale(0.8)"/>
+    <use href="#debrisChunk3" transform="translate(200, 250) rotate(50) scale(0.6)"/>
+    <use href="#debrisChunk1" transform="translate(300, 180) rotate(0) scale(0.7)"/>
+    <use href="#debrisChunk2" transform="translate(120, 150) rotate(90) scale(0.5)"/>
+    <use href="#debrisChunk3" transform="translate(480, 350) rotate(12) scale(0.8)"/>
+    <use href="#debrisChunk1" transform="translate(70, 200) rotate(35) scale(0.6)"/>
+    <use href="#debrisChunk2" transform="translate(280, 50) rotate(65) scale(0.7)"/>
+    <use href="#debrisChunk3" transform="translate(40, 500) rotate(20) scale(0.5)"/>
+    <use href="#debrisChunk1" transform="translate(490, 70) rotate(55) scale(0.8)"/>
+    <use href="#debrisChunk2" transform="translate(150, 470) rotate(75) scale(0.6)"/>
+    <use href="#debrisChunk3" transform="translate(380, 200) rotate(40) scale(0.7)"/>
+</svg>

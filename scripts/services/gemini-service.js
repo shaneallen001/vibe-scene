@@ -23,6 +23,8 @@ export class GeminiService {
         if (!this.apiKey) {
             throw new Error("Gemini API Key is not configured.");
         }
+        const requestId = `gem-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+        const started = performance.now();
 
         // Combine system instruction and prompt if provided
         // Gemini 1.5 Flash supports system instructions via the API, but for simplicity/compatibility
@@ -54,11 +56,21 @@ export class GeminiService {
         };
 
         try {
+            console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:start`, {
+                model: this.model,
+                promptLength: String(prompt || "").length,
+                hasSystemInstruction: Boolean(systemInstruction)
+            });
             const response = await this._callApi(requestBody);
             const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:success`, {
+                elapsedMs: Math.round(performance.now() - started),
+                candidates: response?.candidates?.length || 0,
+                textChars: text.length
+            });
             return text; // Return raw text, let caller handle cleaning
         } catch (error) {
-            console.error("Vibe Scenes | Gemini Generation Error:", error);
+            console.error(`Vibe Scenes | [${requestId}] Gemini generateContent:failed`, error);
             throw error;
         }
     }
@@ -66,13 +78,31 @@ export class GeminiService {
     /**
      * Internal API call wrapper with basic error handling
      */
-    async _callApi(body) {
+    async _callApi(body, timeoutMs = 90000) {
         const url = `${BASE_URL}/${GEMINI_API_VERSION}/models/${this.model}:generateContent?key=${this.apiKey}`;
-
-        const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), timeoutMs);
+        const requestStart = performance.now();
+        let response;
+        try {
+            response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+                signal: controller.signal
+            });
+        } catch (error) {
+            if (error?.name === "AbortError") {
+                throw new Error(`Gemini API request timed out after ${timeoutMs}ms`);
+            }
+            throw error;
+        } finally {
+            clearTimeout(timeout);
+        }
+        console.log("Vibe Scenes | Gemini API response received", {
+            model: this.model,
+            status: response.status,
+            elapsedMs: Math.round(performance.now() - requestStart)
         });
 
         if (!response.ok) {

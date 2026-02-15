@@ -156,7 +156,8 @@ details.advanced-options[open] summary {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 35px; /* Match input height */
+  height: 35px;
+  /* Match input height */
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -168,4 +169,44 @@ details.advanced-options[open] summary {
 .checkbox-wrapper .notes {
   margin: 0;
   white-space: nowrap;
+}
+
+/* Status Bar */
+.status-bar {
+  margin-top: 10px;
+  padding: 8px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  display: none;
+  /* Hidden by default */
+}
+
+.status-bar.active {
+  display: block;
+}
+
+.status-message {
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  width: 0%;
+  transition: width 0.3s ease;
 }

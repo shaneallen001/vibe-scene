@@ -1,0 +1,37 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="512" height="512">
+  <g shape-rendering="geometricPrecision" stroke-linecap="round" stroke-linejoin="round">
+
+    
+    <ellipse cx="256" cy="435" rx="160" ry="60" fill="#000000" opacity="0.2" />
+
+    
+    <path d="M 256, 90 C 380, 90, 420, 150, 420, 256 C 420, 362, 380, 422, 256, 422 C 132, 422, 92, 362, 92, 256 C 92, 150, 132, 90, 256, 90 Z"
+          fill="#8B6C4F" stroke="#5A3E2B" stroke-width="10" />
+
+    
+    <path d="M 256, 105 C 365, 105, 390, 160, 390, 256 C 390, 352, 365, 407, 256, 407 C 147, 407, 122, 352, 122, 256 C 122, 160, 147, 105, 256, 105 Z"
+          fill="#B79C7E" stroke="#5A3E2B" stroke-width="3" />
+
+    
+    <path d="M 130 180 Q 256 175, 382 180" stroke="#5A3E2B" stroke-width="3" fill="none"/>
+    <path d="M 125 256 Q 256 251, 387 256" stroke="#5A3E2B" stroke-width="3" fill="none"/>
+    <path d="M 130 332 Q 256 327, 382 332" stroke="#5A3E2B" stroke-width="3" fill="none"/>
+
+    
+    <g transform="translate(110 256) rotate(-20)">
+      
+      <rect x="0" y="-5" width="120" height="10" fill="#8B6C4F" stroke="#5A3E2B" stroke-width="2" />
+      
+      <path d="M120 -10 L140 0 L120 10 Z" fill="#8B6C4F" stroke="#5A3E2B" stroke-width="2" />
+    </g>
+
+    
+    <g transform="translate(402 256) rotate(20)">
+      
+      <rect x="-120" y="-5" width="120" height="10" fill="#8B6C4F" stroke="#5A3E2B" stroke-width="2" />
+      
+      <path d="M-120 -10 L-140 0 L-120 10 Z" fill="#8B6C4F" stroke="#5A3E2B" stroke-width="2" />
+    </g>
+
+  </g>
+</svg>

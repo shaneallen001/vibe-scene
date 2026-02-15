@@ -981,5 +981,260 @@
     "width": 1,
     "height": 1,
     "generatedAt": 1771048809035
+  },
+  "57": {
+    "id": 57,
+    "name": "stone_throne_036996",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_throne_036996.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771050037005
+  },
+  "58": {
+    "id": 58,
+    "name": "military_cot_062328",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/military_cot_062328.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771050062336
+  },
+  "59": {
+    "id": 59,
+    "name": "large_oven_084603",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/large_oven_084603.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771050084609
+  },
+  "60": {
+    "id": 60,
+    "name": "cracked_volcanic_rock_805284",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/cracked_volcanic_rock_805284.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771052805297
+  },
+  "61": {
+    "id": 61,
+    "name": "lava_flow_859227",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/lava_flow_859227.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771052859234
+  },
+  "62": {
+    "id": 62,
+    "name": "ice_sheet_904794",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/ice_sheet_904794.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771052904802
+  },
+  "63": {
+    "id": 63,
+    "name": "frozen_treasure_chest_948845",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/frozen_treasure_chest_948845.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771052948852
+  },
+  "64": {
+    "id": 64,
+    "name": "ice_sculpture_997621",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/ice_sculpture_997621.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771053005565
+  },
+  "65": {
+    "id": 65,
+    "name": "cracked_stone_tiles_128977",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771128128990
+  },
+  "66": {
+    "id": 66,
+    "name": "murky_water_surface_164666",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/texture/murky_water_surface_164666.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771128164682
+  },
+  "67": {
+    "id": 67,
+    "name": "wooden_dock_section_039596",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/wooden_dock_section_039596.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771131039607
+  },
+  "68": {
+    "id": 68,
+    "name": "mooring_post_071013",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/mooring_post_071013.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771131071020
+  },
+  "69": {
+    "id": 69,
+    "name": "small_rowboat_094581",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/small_rowboat_094581.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771131094590
+  },
+  "70": {
+    "id": 70,
+    "name": "gangplank_116529",
+    "prompt": "",
+    "model": "gemini-3-flash-preview",
+    "path": "modules/vibe-scenes/assets/object/gangplank_116529.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771131116536
+  },
+  "71": {
+    "id": 71,
+    "name": "fine_desert_sand_450959",
+    "prompt": "fine desert sand",
+    "model": "gemini-2.5-flash",
+    "path": "modules/vibe-scenes/assets/texture/fine_desert_sand_450959.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771138450974
   }
 }

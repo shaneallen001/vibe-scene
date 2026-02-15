@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+    
+    <rect x="188" y="58" width="136" height="408" rx="8" ry="8"
+          fill="rgba(0,0,0,0.15)"
+          shape-rendering="geometricPrecision"/>
+
+    
+    <rect x="200" y="60" width="112" height="392" rx="4" ry="4"
+          fill="#8B5E3C"
+          shape-rendering="geometricPrecision"/>
+
+    
+    <rect x="202" y="62" width="108" height="40" rx="2" ry="2"
+          fill="#A07A58" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="104" width="108" height="40" rx="2" ry="2"
+          fill="#8B5E3C" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="146" width="108" height="40" rx="2" ry="2"
+          fill="#A07A58" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="188" width="108" height="40" rx="2" ry="2"
+          fill="#8B5E3C" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="230" width="108" height="40" rx="2" ry="2"
+          fill="#A07A58" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="272" width="108" height="40" rx="2" ry="2"
+          fill="#8B5E3C" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="314" width="108" height="40" rx="2" ry="2"
+          fill="#A07A58" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="356" width="108" height="40" rx="2" ry="2"
+          fill="#8B5E3C" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    <rect x="202" y="398" width="108" height="40" rx="2" ry="2"
+          fill="#A07A58" stroke="#5A3A22" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+
+    
+    
+    <rect x="190" y="55" width="8" height="402" rx="3" ry="3"
+          fill="#5A3A22" stroke="#4A2F1D" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+    
+    <rect x="314" y="55" width="8" height="402" rx="3" ry="3"
+          fill="#5A3A22" stroke="#4A2F1D" stroke-width="1.5"
+          shape-rendering="geometricPrecision" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  
+  <g id="stone-throne">
+    
+    <ellipse cx="256" cy="380" rx="130" ry="50" fill="rgba(0,0,0,0.3)"/>
+
+    
+    
+    <rect x="140" y="300" width="232" height="60" fill="#7A7A7A" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="150" y="290" width="212" height="60" fill="#999999" stroke="#5C5C5C" stroke-width="4"/>
+
+    
+    
+    <rect x="170" y="270" width="172" height="50" fill="#B8B8B8" stroke="#5C5C5C" stroke-width="4"/>
+
+    
+    
+    <rect x="150" y="260" width="20" height="60" fill="#999999" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="150" y="260" width="20" height="10" fill="#B8B8B8"/>
+    
+    
+    <rect x="342" y="260" width="20" height="60" fill="#999999" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="342" y="260" width="20" height="10" fill="#B8B8B8"/>
+
+    
+    
+    <rect x="150" y="180" width="212" height="80" fill="#999999" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="150" y="180" width="212" height="10" fill="#B8B8B8"/>
+
+    
+    
+    <rect x="165" y="190" width="20" height="50" fill="#7A7A7A" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="327" y="190" width="20" height="50" fill="#7A7A7A" stroke="#5C5C5C" stroke-width="4"/>
+    
+    
+    <rect x="200" y="195" width="112" height="40" fill="#7A7A7A" stroke="#5C5C5C" stroke-width="4"/>
+    
+    <rect x="210" y="205" width="92" height="20" fill="#999999"/>
+  </g>
+</svg>

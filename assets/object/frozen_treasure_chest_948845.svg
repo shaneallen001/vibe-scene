@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  
+  <g transform="translate(128 176)">
+    
+    <ellipse cx="128" cy="190" rx="100" ry="30" fill="rgba(0,0,0,0.2)"/>
+
+    
+    <ellipse cx="128" cy="170" rx="110" ry="40" fill="rgba(180, 220, 255, 0.15)"/>
+
+    
+    <rect x="28" y="70" width="200" height="100" fill="#6B4F3A" stroke="#4A3425" stroke-width="4"/>
+
+    
+    <rect x="20" y="20" width="216" height="60" fill="#8D6F5A" stroke="#4A3425" stroke-width="4"/>
+    <rect x="20" y="20" width="216" height="6" fill="#A5876F"/> 
+
+    
+    <rect x="20" y="30" width="216" height="12" fill="#808080" stroke="#555555" stroke-width="3"/>
+    <rect x="20" y="55" width="216" height="12" fill="#808080" stroke="#555555" stroke-width="3"/>
+
+    
+    <rect x="28" y="80" width="200" height="10" fill="#808080" stroke="#555555" stroke-width="3"/>
+    <rect x="28" y="105" width="200" height="10" fill="#808080" stroke="#555555" stroke-width="3"/>
+    <rect x="28" y="130" width="200" height="10" fill="#808080" stroke="#555555" stroke-width="3"/>
+    <rect x="28" y="155" width="200" height="10" fill="#808080" stroke="#555555" stroke-width="3"/>
+
+    
+    <rect x="100" y="20" width="12" height="150" fill="#808080" stroke="#555555" stroke-width="3"/>
+    <rect x="140" y="20" width="12" height="150" fill="#808080" stroke="#555555" stroke-width="3"/>
+
+    
+    <rect x="110" y="45" width="30" height="30" fill="#B0B0B0" stroke="#555555" stroke-width="3"/>
+    
+    <circle cx="125" cy="55" r="5" fill="#333333" stroke="#222222" stroke-width="1.5"/>
+    <rect x="122" y="58" width="6" height="10" fill="#333333" stroke="#222222" stroke-width="1.5"/>
+
+    
+    <path d="M15 15 C-5 30 10 50 30 55 L35 40 L25 25 Z" fill="rgba(200, 230, 255, 0.9)" stroke="rgba(150, 200, 255, 0.8)" stroke-width="2"/>
+    <path d="M230 15 C250 30 235 50 215 55 L210 40 L220 25 Z" fill="rgba(200, 230, 255, 0.9)" stroke="rgba(150, 200, 255, 0.8)" stroke-width="2"/>
+    <path d="M20 75 L10 85 L20 95 L30 85 Z" fill="rgba(200, 230, 255, 0.9)" stroke="rgba(150, 200, 255, 0.8)" stroke-width="2"/>
+    <path d="M230 75 L240 85 L230 95 L220 85 Z" fill="rgba(200, 230, 255, 0.9)" stroke="rgba(150, 200, 255, 0.8)" stroke-width="2"/>
+
+    
+    <path d="M25 25 L35 20 L40 30 L30 35 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M50 22 L60 18 L65 28 L55 32 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M80 20 L90 15 L95 25 L85 30 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M170 20 L180 15 L185 25 L175 30 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M200 22 L210 18 L215 28 L205 32 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+
+    
+    <path d="M35 75 L45 70 L50 80 L40 85 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M210 75 L220 70 L225 80 L215 85 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M120 160 L130 155 L135 165 L125 170 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M40 100 L45 95 L50 100 L45 105 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+    <path d="M200 120 L205 115 L210 120 L205 125 Z" fill="rgba(220, 240, 255, 0.9)" stroke="rgba(180, 220, 255, 0.8)" stroke-width="1.5"/>
+
+    
+    <path d="M105 40 L108 35 L112 40 L110 45 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M150 40 L153 35 L157 40 L155 45 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M130 50 L133 45 L137 50 L135 55 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M60 45 L63 40 L67 45 L65 50 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M190 48 L193 43 L197 48 L195 53 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+
+    
+    <path d="M115 50 L118 48 L120 52 L117 54 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M130 50 L133 48 L135 52 L132 54 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M122 60 L125 58 L127 62 L124 64 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+
+    
+    <path d="M20 20 L25 18 L28 22 L23 24 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M220 20 L225 18 L228 22 L223 24 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M25 65 L28 63 L30 67 L27 69 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M225 65 L228 63 L230 67 L227 69 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M100 25 L103 23 L105 27 L102 29 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+    <path d="M140 25 L143 23 L145 27 L142 29 Z" fill="rgba(230, 245, 255, 0.9)" stroke="rgba(190, 230, 255, 0.7)" stroke-width="1"/>
+
+    
+    <path d="M18 18 L238 18 L238 178 L18 178 Z" fill="none" stroke="rgba(180, 220, 255, 0.08)" stroke-width="8"/>
+  </g>
+</svg>

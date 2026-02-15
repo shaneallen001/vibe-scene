@@ -60,14 +60,11 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="floorStyle">Floor Style</label>
-      <select name="floorStyle" id="floorStyle">
-        <option value="">Default (Solid Color)</option>
-        {{#each styles}}
-        <option value="{{this.value}}">{{this.label}}</option>
-        {{/each}}
-      </select>
+    <div class="form-group" style="grid-column: span 1;">
+      <label for="dungeonDescription">Dungeon Prompt</label>
+      <textarea name="dungeonDescription" id="dungeonDescription"
+        placeholder="Describe your dungeon (e.g., 'A fiery temple with a frozen treasure room')..."
+        style="width: 100%; height: 60px; resize: vertical;"></textarea>
     </div>
   </div>
 
@@ -120,4 +117,11 @@
       </div>
     </div>
   </details>
+
+  <div class="status-bar">
+    <div class="status-message">Ready</div>
+    <div class="progress-track">
+      <div class="progress-bar" style="width: 0%"></div>
+    </div>
+  </div>
 </form>

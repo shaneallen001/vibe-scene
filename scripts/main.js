@@ -7,11 +7,13 @@ import { registerModuleSettings } from "./settings.js";
 import { addVibeSceneButton } from "./ui/button-injector.js";
 import { VibeSceneDialog } from "./ui/vibe-scene-dialog.js";
 
+Hooks.once("init", () => {
+    console.log("Vibe Scenes | Registering module settings");
+    registerModuleSettings();
+});
+
 Hooks.once("ready", () => {
     console.log("Vibe Scenes | Module initialized");
-
-    // Register module settings
-    registerModuleSettings();
 });
 
 /**

@@ -12,9 +12,7 @@ export const PROMPTS = {
     1. Output ONLY valid XML SVG code. Do not wrap in markdown blocks.
     2. ViewBox MUST be "0 0 512 512".
     3. Background must be transparent (do not add a background rect unless part of the object).
-    4. Use the following CSS styles in a <style> block at the top:
-       rect { shape-rendering: geometricPrecision; }
-       path { stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    4. Apply styling INLINE on elements (e.g. shape-rendering="geometricPrecision", stroke-linecap="round"). Do NOT use <style> blocks.
     5. Perspective: Top-down (orthographic).
     6. Style: Clean, readable at small sizes (map scale), avoid excessive tiny details.
     `,
@@ -102,32 +100,35 @@ export const PROMPTS = {
 
   // Prompt for Whole Dungeon Planning
   DUNGEON_PLANNER: `
-    You are an expert level designer. Your task is to assign themes and populate a dungeon based on a floorplan graph.
+    You are an expert level designer. Your task is to assign themes, floor textures, and populate a dungeon based on a floorplan graph and a user description.
     
     INPUT:
-    - ROOMS: List of { id, width, height, connections: [id, id] }.
-    - AVAILABLE_ASSETS: List of item names/IDs in the library.
+    - DESCRIPTION: User's concept (e.g. "A fire temple with a frozen treasure room").
+    - ROOMS: List of { id, width, height, area, connections: [id, id] }.
+    - AVAILABLE_ASSETS: List of { id, name, type, tags } currently in the library.
     
     TASK:
-    1. Analyze the connectivity. Use the graph to determine room roles.
-       - Small dead-end rooms might be cells, storage, or bedrooms.
-       - Large central rooms with many connections might be dining halls, throne rooms, or hubs.
-       - A room connected ONLY to a "Dining Hall" is likely a "Kitchen".
-       - A room connected ONLY to a "Bedroom" might be a "Private Study" or "Walk-in Closet".
-    2. Assign a "theme" to EVERY room.
-    3. **DESCRIPTION**: Generate a brief, atmospheric description (flavor text) for each room. Mention sights, smells, sounds, or mood. Keep it to 1-2 sentences.
+    1. Analyze the connectivity and DESCRIPTION.
+    2. Assign a "theme" and "floor_texture" to EVERY room.
+      - "floor_texture": Can be an existing asset ID or name (from AVAILABLE_ASSETS) OR a visual description of a new texture (e.g. "lava flow", "ice sheet").
+    3. **DESCRIPTION**: Generate a brief, atmospheric description (flavor text) for each room.
     4. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
-    5. **CRITICAL**: If a room needs a specific item for its theme (e.g., a "Throne" for a Throne Room) but it is NOT in AVAILABLE_ASSETS, you MUST add it to the "wishlist".
+    5. **WISHLIST**:
+       - If a room needs a specific OBJECT or FLOOR TEXTURE that is NOT in AVAILABLE_ASSETS, add it to the "wishlist".
+       - For textures, the type is "TEXTURE".
     
     OUTPUT:
-    - Return a JSON Object with two top-level keys: "plan" and "wishlist".
+    - Return a JSON Object with: "plan", "wishlist", and "default_floor".
+    - "default_floor": Description or ID of the floor texture for corridors and default rooms.
     - Structure:
     {
+      "default_floor": "stone_paving_dark",
       "plan": [
         {
           "id": "room_id",
           "theme": "Assigned Theme",
-          "description": "A damp, echoing chamber smelling of mildew. Shadows dance in the corners.",
+          "floor_texture": "stone_paving_dark", 
+          "description": "Flavor text...",
           "contents": [
             { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
           ]
@@ -135,15 +136,23 @@ export const PROMPTS = {
       ],
       "wishlist": [
         { "name": "stone throne", "type": "OBJECT", "visual_style": "ancient, cracked" },
-        { "name": "iron maiden", "type": "OBJECT", "visual_style": "rusty, torture device" }
+        { "name": "lava flow", "type": "TEXTURE", "visual_style": "molten rock, glowing cracks" }
       ]
     }
     
     CONSTRAINTS:
-    - Ensure logical flow (e.g. Armory near Guard Room).
-    - Do not over-clutter small rooms.
-    - Use "original_id" matching AVAILABLE_ASSETS whenever possible.
-    - Only add to wishlist if the item is truly distinct and missing.
+    - Respect the user's DESCRIPTION. If they say "Sand Dungeon", default_floor should be "sand".
+    - PRIORITIZE AVAILABLE_ASSETS. If you use an existing asset, set "original_id" to the matching AVAILABLE_ASSETS "id" (stable identifier).
+    - Populate by room area:
+      - area < 12: usually 0 items (very small utility spaces).
+      - area 12-35: 1-2 items.
+      - area 36-64: 2-4 items.
+      - area > 64: 4-8 items.
+    - Room role density rules:
+      - Storage / warehouse / armory rooms should be denser than average.
+      - Corridors / hallways / passages can be sparse.
+    - Non-corridor rooms with area >= 12 must have at least 1 item.
+    - Place items logically and leave clear walking lanes from doors to central space.
     - Return ONLY valid JSON.
     `
 

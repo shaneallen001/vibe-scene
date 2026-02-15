@@ -25,8 +25,9 @@ export class VibeStudio {
             style: options.style || ""
         };
 
-        const content = await renderTemplate("modules/vibe-scenes/templates/vibe-studio-dialog.html", context);
+        const content = await foundry.applications.handlebars.renderTemplate("modules/vibe-scenes/templates/vibe-studio-dialog.html", context);
 
+        // TODO: Migrate to foundry.applications.api.DialogV2.wait() (V1 Dialog removed in v16)
         const dialog = new Dialog({
             title: "Vibe Studio - Asset Generator",
             content: content,

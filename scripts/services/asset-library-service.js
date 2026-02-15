@@ -13,6 +13,15 @@ export class AssetLibraryService {
     }
 
     /**
+     * Force a fresh reload of the library index from disk.
+     * Resets the isLoaded flag so the next load() fetches from disk.
+     */
+    async reload() {
+        this.isLoaded = false;
+        await this.load();
+    }
+
+    /**
      * Load the library index from disk
      * Performs auto-migration if legacy string IDs are found.
      */
@@ -214,7 +223,8 @@ export class AssetLibraryService {
 
         try {
             // Upload to the assets folder
-            await FilePicker.upload("data", "modules/vibe-scenes/assets", file, {}, { notify: false });
+            const FP = foundry.applications.apps.FilePicker.implementation;
+            await FP.upload("data", "modules/vibe-scenes/assets", file, {}, { notify: false });
             console.log("Vibe Scenes | Library index saved.");
         } catch (error) {
             console.error("Vibe Scenes | Failed to save library index:", error);

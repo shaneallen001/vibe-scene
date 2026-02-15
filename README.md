@@ -71,9 +71,41 @@ This module includes a complete JavaScript port of the [dungeongen](https://gith
 - **Foundry Vision**: Context-aware door placement and automated wall generation ensure the dungeon is ready for immediate play.
 - **Smart Room Population**: The generator identifies key rooms (e.g., Boss Room) and uses the Gemini API to suggest a thematic layout. It is **context-aware**, prioritizing assets available in your library to ensure a coherent look.
 
+### Dynamic Floor Texture Pipeline
+
+The floor rendering system uses a multi-stage pipeline:
+
+1.  **AI Planning**: `AiAssetService.planDungeon()` receives a list of available assets (with names, types, and tags) and the dungeon description. It returns a `default_floor` and per-room `floor_texture` values.
+2.  **Wishlist Generation**: If the AI requests textures not in the library, they are generated on-the-fly via `AiAssetService.generateSVG()` and registered with `AssetLibraryService`.
+3.  **Library Reload**: After wishlist generation, `AssetLibraryService.reload()` forces a fresh read from `library.json` to pick up newly created assets.
+4.  **Fuzzy Texture Resolution**: `DungeongenService._findTexture()` matches AI-returned texture names to library assets using a three-strategy approach: exact name match, substring match, then keyword overlap scoring.
+5.  **Canvas Rendering**: `DungeonRenderer` loads resolved texture paths as `Image` elements and uses `ctx.createPattern()` to fill room polygons. Per-room textures are clipped to room boundaries and drawn on top of the default floor pattern.
+
+**Debugging**: If floors appear blank (white/gray), check the browser console for `Vibe Scenes |` prefixed warnings about texture resolution or loading failures.
+
 ## Requirements
 
 - Foundry VTT v13 (build 351+)
+
+## Foundry v13 API Compatibility
+
+This module targets the Foundry v13 namespaced API. The following migrations have been applied:
+
+| Deprecated Global | v13 Namespaced Replacement | Removed In |
+|---|---|---|
+| `renderTemplate()` | `foundry.applications.handlebars.renderTemplate()` | v15 |
+| `FilePicker` | `foundry.applications.apps.FilePicker.implementation` | v15 |
+| `mergeObject()` | `foundry.utils.mergeObject()` | v15 |
+| `Dialog.confirm()` | `foundry.applications.api.DialogV2.confirm()` | v16 |
+
+### Remaining V1 Framework Usage (Migration Planned for v16)
+
+The following components still use the V1 Application/Dialog framework, which is deprecated since v13 and scheduled for removal in v16. These are annotated with `TODO` comments in the source:
+
+- **`VibeSceneDialog`** (`vibe-scene-dialog.js`): Uses V1 `new Dialog()` for the main generation form. Requires migration to `DialogV2.wait()` or a custom `ApplicationV2` subclass to preserve the in-dialog progress bar during generation.
+- **`VibeStudio`** (`vibe-studio-dialog.js`): Uses V1 `new Dialog()` for the asset generator form.
+- **`AssetLibrary`** (`asset-library.js`): Extends V1 `Application`. Requires full migration to `ApplicationV2` (different template data flow, event handling, and lifecycle).
+- **Filter/Column dialogs** (`asset-library.js`): Simple V1 `new Dialog()` forms for filtering and column selection.
 
 ## Credits
 
@@ -129,7 +161,7 @@ Once configured in Foundry (Module Settings -> Vibe Scenes -> Gemini API Key), t
 
 ## AI Asset Standards
 
-To ensure generated assets work well in a VTT environment, we enforce specific "Archetypes" via system prompts:
+To ensure generated assets work well in a VTT environment, we enforce specific "Archetypes" via system prompts. All SVG styling must be **inline** (no `<style>` blocks) since the `_sanitizeSVG` pipeline strips `<style>` tags for browser compatibility.
 
 ### 1. Textures (The Base Layer)
 *   **Role**: The "carpet" or "ground" that fills the entire room or corridor.

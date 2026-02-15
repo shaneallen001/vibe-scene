@@ -77,12 +77,12 @@ export class VibeSceneDialog {
             // Defaults for new options
             density: 0.4,
             peripheralEgress: false,
-            doorDensity: 0.5,
             doorDensity: 0.5
         };
 
-        const content = await renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
+        const content = await foundry.applications.handlebars.renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
 
+        // TODO: Migrate to foundry.applications.api.DialogV2.wait() (V1 Dialog removed in v16)
         const dialog = new Dialog({
             title: "Vibe Scene - Generate Dungeon",
             content: content,
@@ -96,13 +96,8 @@ export class VibeSceneDialog {
                         const maskType = html.find('[name="maskType"]').val(); // Renamed from shape in UI for clarity
                         const symmetry = html.find('[name="symmetry"]').val();
 
-                        // Style Selection
-                        const floorStyle = html.find('[name="floorStyle"]').val();
-                        let floorTexture = null;
-                        if (floorStyle) {
-                            const asset = library.getFloorForStyle(floorStyle);
-                            if (asset) floorTexture = asset.path;
-                        }
+                        // Dungeon Description for AI
+                        const dungeonDescription = html.find('[name="dungeonDescription"]').val();
 
                         // New Options
                         const density = parseFloat(html.find('[name="density"]').val());
@@ -125,7 +120,7 @@ export class VibeSceneDialog {
                             size,
                             maskType,
                             symmetry,
-                            floorTexture,
+                            dungeonDescription,
                             corridorStyle,
                             connectivity,
                             density,
@@ -156,7 +151,8 @@ export class VibeSceneDialog {
                     dialog.setPosition({ height: "auto" });
                 });
 
-
+                // Style the status bar initially
+                html.find('.status-bar').hide();
 
                 // Open Studio (now Asset Library)
                 html.find('.open-studio').click(async (ev) => {
@@ -174,19 +170,51 @@ export class VibeSceneDialog {
     }
 
     static async generateDungeon(options) {
-        const { sceneName, size, maskType, symmetry, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity } = options;
-        console.log("Vibe Scenes | generateDungeon called with:", { sceneName, size, maskType, seed });
+        const { sceneName, size, maskType, symmetry, dungeonDescription, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity } = options;
+        const runId = `vs-${seed}-${Date.now().toString(36)}`;
+        const pipelineStart = performance.now();
+        console.groupCollapsed(`Vibe Scenes | [${runId}] generateDungeon`);
+        console.log("Vibe Scenes | Generation request:", {
+            runId,
+            sceneName,
+            size,
+            maskType,
+            symmetry,
+            corridorStyle,
+            connectivity,
+            density,
+            seed,
+            gridSize,
+            deadEndRemoval,
+            peripheralEgress,
+            doorDensity,
+            hasDescription: Boolean(dungeonDescription?.trim())
+        });
 
-        // Show loading notification
-        const notification = ui.notifications.info("Generating dungeon...", { permanent: true });
+        // Show status bar
+        const dialogElement = $('.vibe-scene-dialog');
+        const statusBar = dialogElement.find('.status-bar');
+        const statusMessage = dialogElement.find('.status-message');
+        const progressBar = dialogElement.find('.progress-bar');
+
+        statusBar.addClass('active');
+        const updateStatus = (msg, percent) => {
+            statusMessage.text(msg);
+            progressBar.css('width', `${percent}%`);
+            // Force a repaint so UI updates immediately
+            if (dialogElement[0]) dialogElement[0].offsetHeight;
+        };
+
+        updateStatus("Initializing...", 0);
 
         try {
             // Create the dungeon service (local generation, no URL needed)
             const dungeonService = new DungeongenService();
-            console.log("Vibe Scenes | DungeongenService created, starting generation...");
+            console.log(`Vibe Scenes | [${runId}] DungeongenService created`);
 
             // Generate the dungeon image
             // We use the requested gridSize for rendering to ensure 1:1 mapping with the scene grid
+            const generationStart = performance.now();
             const { blob: imageData, walls, items, rooms } = await dungeonService.generate({
                 size,
                 maskType,
@@ -199,15 +227,22 @@ export class VibeSceneDialog {
                 deadEndRemoval,
                 peripheralEgress,
                 doorDensity,
-                floorTexture: options.floorTexture
+                dungeonDescription: options.dungeonDescription,
+                runId,
+                onProgress: (msg, pct) => updateStatus(msg, Math.floor(pct * 0.5)) // 0-50%
             });
-            console.log("Vibe Scenes | Image data received, size:", imageData?.size || 0, "bytes");
+            console.log(`Vibe Scenes | [${runId}] Generation finished in ${(performance.now() - generationStart).toFixed(0)}ms`, {
+                imageBytes: imageData?.size || 0,
+                walls: walls?.length || 0,
+                items: items?.length || 0,
+                rooms: rooms?.length || 0
+            });
 
-            notification.remove();
-            ui.notifications.info("Dungeon generated! Creating scene...");
+            updateStatus("Dungeon generated! Creating scene...", 50);
 
             // Import as a new scene
             const sceneImporter = new SceneImporter();
+            const importStart = performance.now();
             const scene = await sceneImporter.createScene({
                 name: sceneName,
                 imageData,
@@ -215,26 +250,149 @@ export class VibeSceneDialog {
                 items,
                 rooms,
                 gridSize,
-                seed
+                seed,
+                runId,
+                onProgress: (msg, pct) => updateStatus(msg, 50 + Math.floor(pct * 0.5)) // 50-100%
+            });
+            console.log(`Vibe Scenes | [${runId}] Scene import finished in ${(performance.now() - importStart).toFixed(0)}ms`, {
+                sceneId: scene?.id,
+                sceneName: scene?.name
             });
 
+            updateStatus(`Created scene: ${scene.name}`, 100);
             ui.notifications.info(`Successfully created scene: ${scene.name}`);
 
             // Optionally activate the scene
-            const activateScene = await Dialog.confirm({
-                title: "Activate Scene?",
-                content: "<p>Would you like to activate the new dungeon scene?</p>"
+            console.log(`Vibe Scenes | [${runId}] Prompting user to activate scene`, { sceneId: scene?.id, sceneName: scene?.name });
+            const activateScene = await foundry.applications.api.DialogV2.confirm({
+                window: { title: "Activate Scene?" },
+                content: "<p>Would you like to activate the new dungeon scene?</p>",
+                rejectClose: false
             });
+            console.log(`Vibe Scenes | [${runId}] Activate prompt result`, { activateScene });
 
             if (activateScene) {
-                await scene.activate();
+                updateStatus("Activating scene...", 100);
+                try {
+                    await this._activateSceneWithDiagnostics(scene, runId, updateStatus);
+                } catch (e) {
+                    console.error(`Vibe Scenes | [${runId}] Error activating scene:`, e);
+                    ui.notifications.warn("Scene created but failed to activate automatically.");
+                }
+            } else {
+                console.log(`Vibe Scenes | [${runId}] User declined scene activation`);
             }
 
+            // Close dialog on success
+            // Object.values(ui.windows).find(w => w.title === "Vibe Scene - Generate Dungeon")?.close();
+
         } catch (error) {
-            notification.remove();
-            console.error("Vibe Scenes | Error generating dungeon:", error);
+            console.error(`Vibe Scenes | [${runId}] Error generating dungeon:`, error);
+            updateStatus(`Error: ${error.message}`, 100);
+            progressBar.css('background', '#ff4444');
             ui.notifications.error(`Failed to generate dungeon: ${error.message}`);
+        } finally {
+            console.log(`Vibe Scenes | [${runId}] Pipeline total ${(performance.now() - pipelineStart).toFixed(0)}ms`);
+            console.groupEnd();
         }
+    }
+
+    static async _activateSceneWithDiagnostics(scene, runId, updateStatus) {
+        const activateStart = performance.now();
+        console.log(`Vibe Scenes | [${runId}] Activation start`, {
+            sceneId: scene?.id,
+            sceneName: scene?.name
+        });
+        const hasRequiredResolution = window.innerWidth >= 1024 && window.innerHeight >= 768;
+        if (!hasRequiredResolution) {
+            console.warn(`Vibe Scenes | [${runId}] Window below Foundry minimum resolution`, {
+                innerWidth: window.innerWidth,
+                innerHeight: window.innerHeight,
+                minWidth: 1024,
+                minHeight: 768
+            });
+            ui.notifications.warn("Foundry window is below 1024x768. Scene rendering can stall until the window is resized.");
+        }
+
+        // Track observed scene events so stalled activations can be diagnosed.
+        const eventLog = [];
+        const viewHook = Hooks.on("canvasReady", (canvasRef) => {
+            const observed = canvasRef?.scene?.id;
+            eventLog.push({ event: "canvasReady", observedSceneId: observed, t: Date.now() });
+            console.log(`Vibe Scenes | [${runId}] Hook canvasReady observed`, {
+                observedSceneId: observed,
+                expectedSceneId: scene?.id
+            });
+        });
+
+        try {
+            await Promise.race([
+                scene.activate(),
+                new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error("Scene activation timed out after 60s")), 60000);
+                })
+            ]);
+            console.log(`Vibe Scenes | [${runId}] scene.activate() resolved`, {
+                elapsedMs: Math.round(performance.now() - activateStart)
+            });
+
+            // Force a client-side scene view to trigger draw even if activate() resolves immediately.
+            const viewStart = performance.now();
+            await Promise.race([
+                scene.view(),
+                new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error("scene.view() timed out after 20s")), 20000);
+                })
+            ]);
+            console.log(`Vibe Scenes | [${runId}] scene.view() resolved`, {
+                elapsedMs: Math.round(performance.now() - viewStart)
+            });
+
+            updateStatus("Waiting for canvas ready...", 100);
+            const canvasReady = await this._waitForSceneCanvas(scene?.id, runId, 15000);
+            if (canvasReady) {
+                console.log(`Vibe Scenes | [${runId}] Canvas ready confirmed for activated scene`, {
+                    elapsedMs: Math.round(performance.now() - activateStart)
+                });
+            } else {
+                console.warn(`Vibe Scenes | [${runId}] Canvas ready confirmation timed out`, {
+                    expectedSceneId: scene?.id,
+                    activeSceneId: game.scenes?.active?.id,
+                    currentCanvasSceneId: canvas?.scene?.id,
+                    observedEvents: eventLog
+                });
+                ui.notifications.warn("Scene activation completed, but canvas readiness is delayed. Check window size and console diagnostics.");
+            }
+        } finally {
+            Hooks.off("canvasReady", viewHook);
+        }
+    }
+
+    static async _waitForSceneCanvas(sceneId, runId, timeoutMs = 45000) {
+        if (!sceneId) return false;
+        if (canvas?.scene?.id === sceneId && (canvas?.ready || canvas?.stage)) return true;
+
+        // Polling fallback catches cases where hooks don't fire reliably.
+        const start = Date.now();
+        while ((Date.now() - start) < timeoutMs) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            if (canvas?.scene?.id === sceneId && (canvas?.ready || canvas?.stage)) {
+                console.log(`Vibe Scenes | [${runId}] _waitForSceneCanvas polling success`, {
+                    elapsedMs: Date.now() - start,
+                    canvasReady: Boolean(canvas?.ready),
+                    hasStage: Boolean(canvas?.stage)
+                });
+                return true;
+            }
+        }
+        console.warn(`Vibe Scenes | [${runId}] _waitForSceneCanvas timeout`, {
+            timeoutMs,
+            expectedSceneId: sceneId,
+            currentCanvasSceneId: canvas?.scene?.id,
+            canvasReady: Boolean(canvas?.ready),
+            hasStage: Boolean(canvas?.stage)
+        });
+        return false;
     }
 }
 

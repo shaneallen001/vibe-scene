@@ -1,6 +1,7 @@
 import { AssetLibraryService } from "../services/asset-library-service.js";
 import { VibeStudio } from "./vibe-studio-dialog.js";
 
+// TODO: Migrate to foundry.applications.api.ApplicationV2 (V1 Application removed in v16)
 export class AssetLibrary extends Application {
     constructor(options = {}) {
         super(options);
@@ -13,7 +14,7 @@ export class AssetLibrary extends Application {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             id: "vibe-asset-library",
             title: "Vibe Asset Library",
             template: "modules/vibe-scenes/templates/asset-library.hbs",
@@ -146,9 +147,10 @@ export class AssetLibrary extends Application {
     }
 
     async _onDelete(id) {
-        const confirmed = await Dialog.confirm({
-            title: "Delete Asset",
-            content: "<p>Are you sure you want to delete this asset? This cannot be undone.</p>"
+        const confirmed = await foundry.applications.api.DialogV2.confirm({
+            window: { title: "Delete Asset" },
+            content: "<p>Are you sure you want to delete this asset? This cannot be undone.</p>",
+            rejectClose: false
         });
 
         if (confirmed) {
@@ -184,6 +186,7 @@ export class AssetLibrary extends Application {
             </div>
         `;
 
+        // TODO: Migrate to foundry.applications.api.DialogV2.wait() (V1 Dialog removed in v16)
         new Dialog({
             title: `Filter ${col}`,
             content: content,
@@ -226,6 +229,7 @@ export class AssetLibrary extends Application {
             </div>
         `;
 
+        // TODO: Migrate to foundry.applications.api.DialogV2.wait() (V1 Dialog removed in v16)
         new Dialog({
             title: "Select Columns",
             content: content,
