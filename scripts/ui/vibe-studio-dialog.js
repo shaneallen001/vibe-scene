@@ -77,8 +77,10 @@ export class VibeStudio {
         }
 
         const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
-        const model = game.settings.get("vibe-scenes", "geminiModel");
-        const service = new AiAssetService(apiKey, model);
+        const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
+        const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
+        const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
+        const service = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
 
         // Show progress integration
         // We can't easily keep the dialog open without custom FormApplication, 
@@ -110,7 +112,10 @@ export class VibeStudio {
                     const timestamp = Date.now().toString().slice(-6);
                     const fileName = `${safeName}_${timestamp}`;
 
-                    await service.saveAsset(svg, fileName, type, ["studio", "ai-gen"]);
+                    await service.saveAsset(svg, fileName, type, ["studio", "ai-gen"], {
+                        prompt: currentPrompt,
+                        model: service.svgModel
+                    });
                     successes++;
 
                 } catch (err) {

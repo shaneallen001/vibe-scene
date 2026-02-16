@@ -1,664 +1,4 @@
 {
-  "1": {
-    "id": 1,
-    "path": "assets/texture/floor_stone_paving_clean.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "stone",
-      "floor",
-      "clean",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869029612,
-    "width": 1,
-    "height": 1,
-    "name": "floor_stone_paving_clean",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "2": {
-    "id": 2,
-    "path": "assets/texture/floor_stone_paving_cracked.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "stone",
-      "floor",
-      "ruin",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869034570,
-    "width": 1,
-    "height": 1,
-    "name": "floor_stone_paving_cracked",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "3": {
-    "id": 3,
-    "path": "assets/texture/floor_dirt_packed.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "dirt",
-      "floor",
-      "nature",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869040151,
-    "width": 1,
-    "height": 1,
-    "name": "floor_dirt_packed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "4": {
-    "id": 4,
-    "path": "assets/texture/floor_wood_planks.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "wood",
-      "floor",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869047739,
-    "width": 1,
-    "height": 1,
-    "name": "floor_wood_planks",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "5": {
-    "id": 5,
-    "path": "assets/texture/water_blue_ripples.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "water",
-      "liquid",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869052723,
-    "width": 1,
-    "height": 1,
-    "name": "water_blue_ripples",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "6": {
-    "id": 6,
-    "path": "assets/object/furniture_bed_wood.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "furniture",
-      "bed",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869058017,
-    "width": 2,
-    "height": 2,
-    "name": "furniture_bed_wood",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "7": {
-    "id": 7,
-    "path": "assets/object/furniture_table_round.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "furniture",
-      "table",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869066579,
-    "width": 2,
-    "height": 2,
-    "name": "furniture_table_round",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "8": {
-    "id": 8,
-    "path": "assets/object/furniture_bookshelf_full.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "furniture",
-      "storage",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869075431,
-    "width": 2,
-    "height": 1,
-    "name": "furniture_bookshelf_full",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "9": {
-    "id": 9,
-    "path": "assets/object/decor_chest_wooden.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "container",
-      "treasure",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869081434,
-    "width": 1,
-    "height": 1,
-    "name": "decor_chest_wooden",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "10": {
-    "id": 10,
-    "path": "assets/object/decor_rug_oval_red.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "rug",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869085399,
-    "width": 2,
-    "height": 2,
-    "name": "decor_rug_oval_red",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "11": {
-    "id": 11,
-    "path": "assets/structure/structure_tent_round.svg",
-    "fileType": "svg",
-    "type": "STRUCTURE",
-    "tags": [
-      "structure",
-      "tent",
-      "camp",
-      "ai-gen"
-    ],
-    "generatedAt": 1770869089908,
-    "width": 4,
-    "height": 4,
-    "name": "structure_tent_round",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "12": {
-    "id": 12,
-    "path": "assets/texture/floor_stone_block_large.svg",
-    "fileType": "svg",
-    "type": "TEXTURE",
-    "tags": [
-      "stone",
-      "floor",
-      "dungeon",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870351538,
-    "width": 1,
-    "height": 1,
-    "name": "floor_stone_block_large",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "13": {
-    "id": 13,
-    "path": "assets/wall/wall_stone_bricks_grey.svg",
-    "fileType": "svg",
-    "type": "WALL",
-    "tags": [
-      "wall",
-      "stone",
-      "brick",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870355734,
-    "width": 1,
-    "height": 1,
-    "name": "wall_stone_bricks_grey",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "14": {
-    "id": 14,
-    "path": "assets/wall/wall_cave_rock_dark.svg",
-    "fileType": "svg",
-    "type": "WALL",
-    "tags": [
-      "wall",
-      "rock",
-      "cave",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870363551,
-    "width": 1,
-    "height": 1,
-    "name": "wall_cave_rock_dark",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "15": {
-    "id": 15,
-    "path": "assets/wall/wall_plaster_cracked.svg",
-    "fileType": "svg",
-    "type": "WALL",
-    "tags": [
-      "wall",
-      "plaster",
-      "ruin",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870370166,
-    "width": 1,
-    "height": 1,
-    "name": "wall_plaster_cracked",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "16": {
-    "id": 16,
-    "path": "assets/object/object_puddle_water.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "water",
-      "puddle",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870375182,
-    "width": 1,
-    "height": 1,
-    "name": "object_puddle_water",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "17": {
-    "id": 17,
-    "path": "assets/object/object_puddle_slime.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "slime",
-      "puddle",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870381253,
-    "width": 1,
-    "height": 1,
-    "name": "object_puddle_slime",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "18": {
-    "id": 18,
-    "path": "assets/object/furniture_chair_decayed.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "furniture",
-      "chair",
-      "ruin",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870388042,
-    "width": 1,
-    "height": 1,
-    "name": "furniture_chair_decayed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "19": {
-    "id": 19,
-    "path": "assets/object/furniture_table_decayed.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "furniture",
-      "table",
-      "ruin",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870403345,
-    "width": 2,
-    "height": 1,
-    "name": "furniture_table_decayed",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "20": {
-    "id": 20,
-    "path": "assets/object/decor_pot_ceramic.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "container",
-      "pot",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870407441,
-    "width": 1,
-    "height": 1,
-    "name": "decor_pot_ceramic",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "21": {
-    "id": 21,
-    "path": "assets/object/decor_pot_broken.svg",
-    "fileType": "svg",
-    "type": "OBJECT",
-    "tags": [
-      "decor",
-      "ruin",
-      "pot",
-      "ai-gen"
-    ],
-    "generatedAt": 1770870414921,
-    "width": 1,
-    "height": 1,
-    "name": "decor_pot_broken",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "22": {
-    "id": 22,
-    "path": "modules/vibe-scenes/assets/object/sarcophagus_with_runes_455763.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "studio",
-      "ai-gen"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770914455773,
-    "name": "sarcophagus_with_runes_455763",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "23": {
-    "id": 23,
-    "path": "modules/vibe-scenes/assets/object/stone_pedestal_055076.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915055084,
-    "name": "stone_pedestal_055076",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "24": {
-    "id": 24,
-    "path": "modules/vibe-scenes/assets/object/ancient_brazier_083204.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915083209,
-    "name": "ancient_brazier_083204",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "25": {
-    "id": 25,
-    "path": "modules/vibe-scenes/assets/object/wall_torch_106826.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915106831,
-    "name": "wall_torch_106826",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "26": {
-    "id": 26,
-    "path": "modules/vibe-scenes/assets/object/ornate_tapestry_138189.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915138194,
-    "name": "ornate_tapestry_138189",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "27": {
-    "id": 27,
-    "path": "modules/vibe-scenes/assets/object/quill_and_ink_set_148515.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915148529,
-    "name": "quill_and_ink_set_148515",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "28": {
-    "id": 28,
-    "path": "modules/vibe-scenes/assets/object/parchment_scrolls_185884.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915185890,
-    "name": "parchment_scrolls_185884",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "29": {
-    "id": 29,
-    "path": "modules/vibe-scenes/assets/object/wooden_crates_197739.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915197744,
-    "name": "wooden_crates_197739",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "30": {
-    "id": 30,
-    "path": "modules/vibe-scenes/assets/object/ritual_dagger_218102.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915218107,
-    "name": "ritual_dagger_218102",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "31": {
-    "id": 31,
-    "path": "modules/vibe-scenes/assets/object/weapon_rack_237821.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915237826,
-    "name": "weapon_rack_237821",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "32": {
-    "id": 32,
-    "path": "modules/vibe-scenes/assets/object/tattered_cloak_286535.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915286540,
-    "name": "tattered_cloak_286535",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "33": {
-    "id": 33,
-    "path": "modules/vibe-scenes/assets/object/ritual_altar_641113.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770915641121,
-    "name": "ritual_altar_641113",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "34": {
-    "id": 34,
-    "path": "modules/vibe-scenes/assets/object/iron_maiden_283147.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770917283159,
-    "name": "iron_maiden_283147",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "35": {
-    "id": 35,
-    "path": "modules/vibe-scenes/assets/object/shackles_319913.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770917319921,
-    "name": "shackles_319913",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "36": {
-    "id": 36,
-    "path": "modules/vibe-scenes/assets/object/wooden_shield_341632.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770917341639,
-    "name": "wooden_shield_341632",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
-  "37": {
-    "id": 37,
-    "path": "modules/vibe-scenes/assets/object/barrel_of_provisions_377068.svg",
-    "fileType": "svg",
-    "source": "ai-gen",
-    "tags": [
-      "ai-gen",
-      "ai-gen",
-      "auto-generated"
-    ],
-    "type": "OBJECT",
-    "width": 1,
-    "height": 1,
-    "addedAt": 1770917377076,
-    "name": "barrel_of_provisions_377068",
-    "prompt": "Legacy",
-    "model": "gemini-2.5-flash"
-  },
   "38": {
     "id": 38,
     "name": "stone_throne_662057",
@@ -1222,10 +562,27 @@
   },
   "71": {
     "id": 71,
-    "name": "fine_desert_sand_450959",
-    "prompt": "fine desert sand",
+    "name": "anvil_064544",
+    "prompt": "anvil",
     "model": "gemini-2.5-flash",
-    "path": "modules/vibe-scenes/assets/texture/fine_desert_sand_450959.svg",
+    "path": "modules/vibe-scenes/assets/object/anvil_064544.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771215064569
+  },
+  "72": {
+    "id": 72,
+    "name": "polished_marble_tiles_291936",
+    "prompt": "polished_marble_tiles",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/polished_marble_tiles_291936.svg",
     "fileType": "svg",
     "type": "TEXTURE",
     "tags": [
@@ -1235,6 +592,125 @@
     ],
     "width": 1,
     "height": 1,
-    "generatedAt": 1771138450974
+    "generatedAt": 1771218291950
+  },
+  "73": {
+    "id": 73,
+    "name": "polished_oak_parquet_363380",
+    "prompt": "polished_oak_parquet",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/polished_oak_parquet_363380.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218363398
+  },
+  "74": {
+    "id": 74,
+    "name": "plush_crimson_carpet_430755",
+    "prompt": "plush_crimson_carpet",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/plush_crimson_carpet_430755.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218430763
+  },
+  "75": {
+    "id": 75,
+    "name": "ornate_bench_495284",
+    "prompt": "ornate_bench",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/ornate_bench_495284.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218495292
+  },
+  "76": {
+    "id": 76,
+    "name": "crystal_chandelier_553233",
+    "prompt": "crystal_chandelier",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/crystal_chandelier_553233.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218553242
+  },
+  "77": {
+    "id": 77,
+    "name": "long_banquet_table_616283",
+    "prompt": "long_banquet_table",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/long_banquet_table_616283.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218616290
+  },
+  "78": {
+    "id": 78,
+    "name": "four_poster_bed_676833",
+    "prompt": "four_poster_bed",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/four_poster_bed_676833.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218676841
+  },
+  "79": {
+    "id": 79,
+    "name": "writing_desk_733015",
+    "prompt": "writing_desk",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/writing_desk_733015.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771218733022
   }
 }

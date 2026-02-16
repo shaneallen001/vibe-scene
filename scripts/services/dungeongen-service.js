@@ -165,8 +165,10 @@ export class DungeongenService {
         const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
         if (apiKey) {
             console.log(`Vibe Scenes | [${runId}] Planning dungeon layout with AI...`);
-            const model = game.settings.get("vibe-scenes", "geminiModel");
-            const aiService = new AiAssetService(apiKey, model);
+            const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
+            const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
+            const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
+            const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
 
             // Prepare simplified asset list (Objects AND Textures) with descriptive info
             const availableAssets = [...objects, ...textures].map(o => ({
@@ -235,7 +237,7 @@ export class DungeongenService {
 
                         const filePath = await aiService.saveAsset(svg, fileName, type, ["ai-gen", "auto-generated"], {
                             prompt: item.name,
-                            model
+                            model: aiService.svgModel
                         });
                         console.log(`Vibe Scenes | [${wishTrace}] Wishlist item generated in ${(performance.now() - wishlistItemStart).toFixed(0)}ms`, {
                             name: item.name,

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  
+  <ellipse cx="256" cy="400" rx="180" ry="40" fill="rgba(0,0,0,0.2)" shape-rendering="geometricPrecision" />
+
+  
+  <path d="M 100 380 Q 80 360 80 320 L 100 250 L 120 200 H 390 L 410 250 L 430 320 Q 430 360 410 380 Z"
+        fill="#111111" shape-rendering="geometricPrecision" />
+
+  
+  <path d="M 110 360 Q 95 340 95 300 L 110 230 L 130 180 H 380 L 400 230 L 415 300 Q 415 340 400 360 Z"
+        fill="#222222" stroke="#111111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision" />
+
+  
+  <path d="M 150 150                    
+            H 350                      
+            L 360 170                  
+            C 380 180, 380 220, 360 230  
+            L 350 250                  
+            H 150                      
+            L 140 230                  
+            C 120 220, 120 180, 140 170  
+            Z"                         
+        fill="#333333" stroke="#111111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision" />
+
+  
+  <path d="M 154 154                    
+            H 346                      
+            L 356 170                  
+            C 370 180, 370 220, 356 230  
+            L 346 246                  
+            H 154                      
+            L 144 230                  
+            C 130 220, 130 180, 144 170  
+            Z"
+        fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision" />
+
+  
+  <rect x="300" y="170" width="25" height="25"
+        fill="#111111" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision" />
+
+  
+  <circle cx="270" cy="182" r="12"
+          fill="#111111" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" shape-rendering="geometricPrecision" />
+
+  
+  <rect x="180" y="170" width="120" height="60" rx="3" ry="3"
+        fill="#444444" opacity="0.2" shape-rendering="geometricPrecision" />
+</svg>

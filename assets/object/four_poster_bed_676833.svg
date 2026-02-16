@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5D4037" />
+      <stop offset="50%" stop-color="#3E2723" />
+      <stop offset="100%" stop-color="#261612" />
+    </linearGradient>
+    
+    
+    <radialGradient id="silkGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#E91E63" />
+      <stop offset="60%" stop-color="#880E4F" />
+      <stop offset="100%" stop-color="#380422" />
+    </radialGradient>
+    
+    
+    <linearGradient id="beddingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4" />
+      <stop offset="100%" stop-color="#FBC02D" />
+    </linearGradient>
+
+    
+    <radialGradient id="pillowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#dedede" />
+    </radialGradient>
+
+    
+    <filter id="blurShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
+      <feOffset dx="4" dy="8" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode in="offsetblur"/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+
+  
+  <rect x="60" y="40" width="392" height="440" rx="10" fill="#000000" fill-opacity="0.4" filter="url(#blurShadow)" />
+
+  
+  <g transform="translate(0,0)">
+    
+    <rect x="60" y="40" width="392" height="432" rx="4" fill="url(#woodGrad)" stroke="#261612" stroke-width="2"/>
+    
+    
+    <path d="M60 50 H452 M60 420 H452 M60 80 H452 M60 120 L70 120 M440 120 L452 120" stroke="#261612" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+    <path d="M70 40 V472 M442 40 V472" stroke="#261612" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+  </g>
+
+  
+  <g>
+    
+    <rect x="85" y="65" width="342" height="382" rx="4" fill="#D7CCC8" />
+
+    
+    <rect x="90" y="70" width="332" height="372" rx="2" fill="#EFEBE9" />
+
+    
+    <g transform="translate(0, 10)">
+      
+      <rect x="105" y="75" width="130" height="70" rx="8" fill="url(#pillowGrad)" stroke="#bdbdbd" stroke-width="1"/>
+      
+      <path d="M125 110 Q170 115 215 110" stroke="#dcdcdc" stroke-width="2" fill="none" opacity="0.6"/>
+      
+      
+      <rect x="277" y="75" width="130" height="70" rx="8" fill="url(#pillowGrad)" stroke="#bdbdbd" stroke-width="1"/>
+      <path d="M297 110 Q342 115 387 110" stroke="#dcdcdc" stroke-width="2" fill="none" opacity="0.6"/>
+    </g>
+
+    
+    <path d="M88 200 C88 200 150 190 256 195 C362 190 424 200 424 200 L424 438 C424 445 418 450 410 450 L102 450 C94 450 88 445 88 438 Z" fill="#5D4037" stroke="#3E2723" stroke-width="2"/>
+    
+    
+    <defs>
+      <pattern id="quiltPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M20 0 L40 20 L20 40 L0 20 Z" fill="none" stroke="#4E342E" stroke-width="1" opacity="0.4"/>
+      </pattern>
+    </defs>
+    <path d="M88 200 C88 200 150 190 256 195 C362 190 424 200 424 200 L424 438 C424 445 418 450 410 450 L102 450 C94 450 88 445 88 438 Z" fill="url(#quiltPattern)" opacity="0.6"/>
+
+    
+    <path d="M88 200 C88 200 150 190 256 195 C362 190 424 200 424 200 L424 240 C380 235 320 245 256 245 C192 245 132 235 88 240 Z" fill="#D7CCC8" stroke="#A1887F" stroke-width="1"/>
+    
+    
+    <path d="M120 300 Q200 310 240 290 M300 350 Q360 360 400 340" stroke="#3E2723" stroke-width="2" opacity="0.3" fill="none"/>
+  </g>
+
+  
+  <g>
+    
+    <rect x="50" y="30" width="50" height="50" rx="4" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="2"/>
+    <rect x="58" y="38" width="34" height="34" rx="2" fill="none" stroke="#3E2723" stroke-width="2"/> 
+    <circle cx="75" cy="55" r="12" fill="#261612" opacity="0.5"/> 
+    <circle cx="75" cy="55" r="6" fill="#6D4C41"/> 
+
+    
+    <rect x="412" y="30" width="50" height="50" rx="4" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="2"/>
+    <rect x="420" y="38" width="34" height="34" rx="2" fill="none" stroke="#3E2723" stroke-width="2"/>
+    <circle cx="437" cy="55" r="12" fill="#261612" opacity="0.5"/>
+    <circle cx="437" cy="55" r="6" fill="#6D4C41"/>
+
+    
+    <rect x="50" y="432" width="50" height="50" rx="4" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="2"/>
+    <rect x="58" y="440" width="34" height="34" rx="2" fill="none" stroke="#3E2723" stroke-width="2"/>
+    <circle cx="75" cy="457" r="12" fill="#261612" opacity="0.5"/>
+    <circle cx="75" cy="457" r="6" fill="#6D4C41"/>
+
+    
+    <rect x="412" y="432" width="50" height="50" rx="4" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="2"/>
+    <rect x="420" y="440" width="34" height="34" rx="2" fill="none" stroke="#3E2723" stroke-width="2"/>
+    <circle cx="437" cy="457" r="12" fill="#261612" opacity="0.5"/>
+    <circle cx="437" cy="457" r="6" fill="#6D4C41"/>
+  </g>
+
+  
+  <path d="M75 55 L437 55 M437 55 L437 457 M437 457 L75 457 M75 457 L75 55" stroke="#3E2723" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M75 55 L437 55 M437 55 L437 457 M437 457 L75 457 M75 457 L75 55" stroke="#5D4037" stroke-width="2" fill="none" opacity="0.8"/> 
+
+  
+  <g>
+    
+    <path d="M50 30 Q30 55 45 85 C55 105 85 85 95 65 Q110 40 85 30 Z" fill="url(#silkGrad)" stroke="#380422" stroke-width="1"/>
+    <path d="M55 40 Q65 60 55 80 M70 35 Q80 55 75 75" stroke="#F48FB1" stroke-width="1" opacity="0.4" fill="none"/> 
+
+    
+    <path d="M462 30 Q482 55 467 85 C457 105 427 85 417 65 Q402 40 427 30 Z" fill="url(#silkGrad)" stroke="#380422" stroke-width="1"/>
+    <path d="M457 40 Q447 60 457 80 M442 35 Q432 55 437 75" stroke="#F48FB1" stroke-width="1" opacity="0.4" fill="none"/>
+
+    
+    <path d="M50 482 Q30 457 45 427 C55 407 85 427 95 447 Q110 472 85 482 Z" fill="url(#silkGrad)" stroke="#380422" stroke-width="1"/>
+    <path d="M55 472 Q65 452 55 432 M70 477 Q80 457 75 437" stroke="#F48FB1" stroke-width="1" opacity="0.4" fill="none"/>
+
+    
+    <path d="M462 482 Q482 457 467 427 C457 407 427 427 417 447 Q402 472 427 482 Z" fill="url(#silkGrad)" stroke="#380422" stroke-width="1"/>
+    <path d="M457 472 Q447 452 457 432 M442 477 Q432 457 437 437" stroke="#F48FB1" stroke-width="1" opacity="0.4" fill="none"/>
+    
+    
+    
+    <path d="M95 65 Q256 95 417 65" fill="none" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+    <path d="M95 65 Q256 95 417 65" fill="none" stroke="#E91E63" stroke-width="1" stroke-dasharray="10,5" opacity="0.5"/>
+    
+    
+    <path d="M95 447 Q256 417 417 447" fill="none" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+    
+    
+    <path d="M45 85 Q75 256 45 427" fill="none" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+    
+    
+    <path d="M467 85 Q437 256 467 427" fill="none" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  
+  <radialGradient id="lightingOverlay" cx="40%" cy="40%" r="60%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+    <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+  </radialGradient>
+  <rect x="50" y="30" width="412" height="452" fill="url(#lightingOverlay)" pointer-events="none" rx="4"/>
+
+  
+  <path d="M50 34 L100 34 M412 34 L462 34 M50 432 L100 432" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+
+</svg>

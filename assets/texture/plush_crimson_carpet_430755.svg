@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision" width="512" height="512">
+  
+  <defs>
+    
+    <linearGradient id="plushGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5c0a0a" />
+      <stop offset="50%" stop-color="#450606" />
+      <stop offset="100%" stop-color="#330202" />
+    </linearGradient>
+
+    
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#996515" />
+      <stop offset="20%" stop-color="#ccac00" />
+      <stop offset="40%" stop-color="#f2dca0" />
+      <stop offset="60%" stop-color="#d4af37" />
+      <stop offset="80%" stop-color="#aa8820" />
+      <stop offset="100%" stop-color="#7a5508" />
+    </linearGradient>
+
+    
+    <linearGradient id="goldGradVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8a5c0b" />
+      <stop offset="50%" stop-color="#e6c67c" />
+      <stop offset="100%" stop-color="#8a5c0b" />
+    </linearGradient>
+  </defs>
+
+  
+  
+  <rect width="512" height="512" fill="url(#plushGrad)" />
+
+  
+  
+  <g opacity="0.3">
+    
+    <path d="M50 50 Q150 150 250 50 T450 150 T150 350" fill="none" stroke="#1a0000" stroke-width="60" stroke-linecap="round" filter="blur(20px)" />
+    <path d="M400 400 Q300 300 200 400 T50 300" fill="none" stroke="#1a0000" stroke-width="50" stroke-linecap="round" />
+    <path d="M-50 256 Q100 200 256 256 T562 300" fill="none" stroke="#1a0000" stroke-width="80" stroke-linecap="round" opacity="0.5"/>
+    
+    
+    <circle cx="120" cy="120" r="80" fill="#8f1e1e" opacity="0.4" />
+    <circle cx="380" cy="380" r="90" fill="#8f1e1e" opacity="0.4" />
+    <path d="M200 200 C250 100 350 100 400 200 S350 400 200 400" fill="#9e2323" opacity="0.2" />
+    
+    
+    <g fill="none" stroke="#a32828" stroke-width="2" opacity="0.3">
+       <path d="M20,20 l10,10 M50,80 l15,-5 M100,200 l5,15 M300,50 l20,5 M400,400 l-10,15 M256,256 l15,15 M150,450 l20,-5 M450,100 l-5,20" />
+       <path d="M60,60 l10,10 M90,120 l15,-5 M140,240 l5,15 M340,90 l20,5 M440,440 l-10,15 M296,296 l15,15 M190,490 l20,-5 M490,140 l-5,20" transform="translate(50, -50)"/>
+       <path d="M20,20 l10,10 M50,80 l15,-5 M100,200 l5,15 M300,50 l20,5 M400,400 l-10,15 M256,256 l15,15 M150,450 l20,-5 M450,100 l-5,20" transform="rotate(90, 256, 256)"/>
+    </g>
+  </g>
+
+  
+  
+  <g>
+    
+    <g transform="translate(4, 4)" stroke="#1a0505" stroke-width="12" fill="none" opacity="0.6">
+        
+        <path d="M256 20 L492 256 L256 492 L20 256 Z" />
+        
+        <path d="M-20 -20 L256 -296" /> 
+        <path d="M532 -20 L256 -296" /> 
+        
+        
+        <path d="M0 256 L-236 20" />
+        <path d="M512 256 L748 20" />
+        <path d="M0 256 L-236 492" />
+        <path d="M512 256 L748 492" />
+    </g>
+
+    
+    <g stroke="url(#goldGrad)" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="square">
+        
+        <path d="M256 20 L492 256 L256 492 L20 256 Z" />
+        
+        
+        
+        <path d="M0 0 L20 20" stroke="none" /> 
+        <path d="M-20 256 L256 -20" /> 
+        <path d="M532 256 L256 -20" /> 
+        <path d="M-20 256 L256 532" /> 
+        <path d="M532 256 L256 532" /> 
+        
+        
+        
+        <g stroke-width="4" opacity="0.9">
+            <circle cx="256" cy="256" r="40" />
+            <path d="M256 160 L256 216 M256 296 L256 352 M160 256 L216 256 M296 256 L352 256" />
+        </g>
+        
+        
+        <g stroke-width="4" opacity="0.9">
+            <circle cx="0" cy="0" r="40" />
+            <circle cx="512" cy="0" r="40" />
+            <circle cx="0" cy="512" r="40" />
+            <circle cx="512" cy="512" r="40" />
+        </g>
+    </g>
+
+    
+    <g stroke="#ffebc4" stroke-width="1" fill="none" stroke-dasharray="3,3" opacity="0.8">
+         <path d="M256 24 L488 256 L256 488 L24 256 Z" />
+         <path d="M-16 256 L256 -16" /> 
+         <path d="M528 256 L256 -16" />
+         <path d="M-16 256 L256 528" />
+         <path d="M528 256 L256 528" />
+         
+         <circle cx="256" cy="256" r="38" />
+         <circle cx="0" cy="0" r="38" />
+         <circle cx="512" cy="0" r="38" />
+         <circle cx="0" cy="512" r="38" />
+         <circle cx="512" cy="512" r="38" />
+    </g>
+  </g>
+
+  
+  
+  <g fill="none" stroke="#2b0303" stroke-width="16" opacity="0.4" filter="blur(4px)">
+     <path d="M256 20 L492 256 L256 492 L20 256 Z" />
+     <path d="M-20 256 L256 -20" />
+     <path d="M532 256 L256 -20" />
+     <path d="M-20 256 L256 532" />
+     <path d="M532 256 L256 532" />
+  </g>
+
+  
+  
+  <g opacity="0.4">
+    <circle cx="100" cy="400" r="60" fill="#1a0202" filter="blur(20px)" />
+    <circle cx="450" cy="100" r="50" fill="#1a0202" filter="blur(20px)" />
+    
+    <ellipse cx="256" cy="256" rx="100" ry="100" fill="#8a2323" opacity="0.15" filter="blur(30px)" />
+  </g>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="none" stroke="#000" stroke-width="2" opacity="0.05" />
+
+</svg>

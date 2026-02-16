@@ -17,14 +17,21 @@ export class GeminiService {
      * Generate content based on a prompt and optional system instruction
      * @param {string} prompt - The user's input
      * @param {string} systemInstruction - (Optional) System-level context/instructions
+     * @param {Object} options - Optional generation overrides
+     * @param {string} options.model - Override model name for this request
+     * @param {number} options.temperature - Temperature override
+     * @param {number} options.maxOutputTokens - Max output tokens override
+     * @param {string} options.responseMimeType - Optional response mime type (e.g. application/json)
      * @returns {Promise<string>} - The generated text response
      */
-    async generateContent(prompt, systemInstruction = "") {
+    async generateContent(prompt, systemInstruction = "", options = {}) {
         if (!this.apiKey) {
             throw new Error("Gemini API Key is not configured.");
         }
         const requestId = `gem-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
         const started = performance.now();
+        const model = options?.model || this.model;
+        const temperature = Number.isFinite(options?.temperature) ? options.temperature : 0.7;
 
         // Combine system instruction and prompt if provided
         // Gemini 1.5 Flash supports system instructions via the API, but for simplicity/compatibility
@@ -51,17 +58,23 @@ export class GeminiService {
         const requestBody = {
             contents: contents,
             generationConfig: {
-                temperature: 0.7
+                temperature
             }
         };
+        if (Number.isFinite(options?.maxOutputTokens)) {
+            requestBody.generationConfig.maxOutputTokens = options.maxOutputTokens;
+        }
+        if (typeof options?.responseMimeType === "string" && options.responseMimeType.trim()) {
+            requestBody.generationConfig.responseMimeType = options.responseMimeType.trim();
+        }
 
         try {
             console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:start`, {
-                model: this.model,
+                model,
                 promptLength: String(prompt || "").length,
                 hasSystemInstruction: Boolean(systemInstruction)
             });
-            const response = await this._callApi(requestBody);
+            const response = await this._callApi(requestBody, 90000, model);
             const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "";
             console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:success`, {
                 elapsedMs: Math.round(performance.now() - started),
@@ -78,8 +91,9 @@ export class GeminiService {
     /**
      * Internal API call wrapper with basic error handling
      */
-    async _callApi(body, timeoutMs = 90000) {
-        const url = `${BASE_URL}/${GEMINI_API_VERSION}/models/${this.model}:generateContent?key=${this.apiKey}`;
+    async _callApi(body, timeoutMs = 90000, modelOverride = "") {
+        const activeModel = modelOverride || this.model;
+        const url = `${BASE_URL}/${GEMINI_API_VERSION}/models/${activeModel}:generateContent?key=${this.apiKey}`;
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), timeoutMs);
         const requestStart = performance.now();
@@ -100,7 +114,7 @@ export class GeminiService {
             clearTimeout(timeout);
         }
         console.log("Vibe Scenes | Gemini API response received", {
-            model: this.model,
+            model: activeModel,
             status: response.status,
             elapsedMs: Math.round(performance.now() - requestStart)
         });

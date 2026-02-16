@@ -3,7 +3,7 @@
  * Main entry point - registers hooks and initializes the module
  */
 
-import { registerModuleSettings } from "./settings.js";
+import { migrateGeminiSvgModelDefault, registerModuleSettings } from "./settings.js";
 import { addVibeSceneButton } from "./ui/button-injector.js";
 import { VibeSceneDialog } from "./ui/vibe-scene-dialog.js";
 
@@ -12,8 +12,9 @@ Hooks.once("init", () => {
     registerModuleSettings();
 });
 
-Hooks.once("ready", () => {
+Hooks.once("ready", async () => {
     console.log("Vibe Scenes | Module initialized");
+    await migrateGeminiSvgModelDefault();
 });
 
 /**

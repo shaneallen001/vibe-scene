@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision" width="512" height="512">
+  
+  <defs>
+    
+    <linearGradient id="woodBase" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a1b15" />
+      <stop offset="20%" stop-color="#3e2920" />
+      <stop offset="50%" stop-color="#4a3227" />
+      <stop offset="80%" stop-color="#3e2920" />
+      <stop offset="100%" stop-color="#2a1b15" />
+    </linearGradient>
+    
+    
+    <linearGradient id="tableLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="50%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.4" />
+    </linearGradient>
+
+    
+    <linearGradient id="ironGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#546e7a" />
+      <stop offset="50%" stop-color="#263238" />
+      <stop offset="100%" stop-color="#10171a" />
+    </linearGradient>
+    
+    
+    <radialGradient id="rivetGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#cfd8dc" />
+      <stop offset="40%" stop-color="#78909c" />
+      <stop offset="100%" stop-color="#263238" />
+    </radialGradient>
+  </defs>
+
+  
+  <rect x="140" y="30" width="232" height="460" rx="16" fill="#000000" fill-opacity="0.5" filter="blur(8px)" />
+
+  
+  <g transform="translate(256, 256)">
+    
+    <g transform="translate(-110, -220)">
+      
+      
+      <rect x="0" y="0" width="220" height="440" rx="8" fill="url(#woodBase)" stroke="#1a100c" stroke-width="2" />
+
+      
+      <rect x="20" y="20" width="180" height="400" fill="#35221a" stroke="#150b08" stroke-width="2" />
+
+      
+      <path d="M65 20 L65 420 M110 20 L110 420 M155 20 L155 420" stroke="#1a100c" stroke-width="2" stroke-opacity="0.7" />
+
+      
+      <path d="M30 40 Q40 60 30 80 T30 140 M45 200 Q35 250 45 300 M30 350 Q50 380 30 410" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+      <path d="M50 50 Q60 100 50 150 M35 220 Q55 240 35 280" fill="none" stroke="#23140f" stroke-width="1" stroke-opacity="0.5" />
+
+      
+      <path d="M80 30 Q70 80 80 130 M90 180 Q70 230 90 280 M80 340 Q100 370 80 400" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+      
+      <circle cx="85" cy="150" r="3" fill="#1a100c" fill-opacity="0.4" />
+      <path d="M85 145 A5 5 0 0 1 85 155" fill="none" stroke="#23140f" stroke-width="1" />
+
+      
+      <path d="M110 50 Q120 100 110 150 M110 250 Q100 300 110 350" fill="none" stroke="#5d4037" stroke-width="1" stroke-opacity="0.4" />
+      <path d="M125 30 Q135 60 125 90 M120 380 Q140 400 120 420" fill="none" stroke="#23140f" stroke-width="1" stroke-opacity="0.5" />
+
+      
+      <path d="M140 40 Q130 90 140 140 M150 200 Q130 250 150 300" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+
+      
+      <path d="M170 30 Q180 80 170 130 M165 220 Q185 240 165 280 M175 350 Q160 380 175 410" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+
+      
+      <path d="M10 10 L210 10 M10 430 L210 430" fill="none" stroke="#4e342e" stroke-width="1" stroke-dasharray="20,10,5,15" stroke-opacity="0.5" />
+      <path d="M10 10 L10 430 M210 10 L210 430" fill="none" stroke="#23140f" stroke-width="1" stroke-dasharray="40,20" stroke-opacity="0.3" />
+
+      
+      <path d="M2 8 L218 8 L200 20 L20 20 Z" fill="#6d4c41" fill-opacity="0.3" />
+      <path d="M2 8 L20 20 L20 420 L2 432 Z" fill="#6d4c41" fill-opacity="0.3" />
+
+      
+      <path d="M200 20 L218 8 L218 432 L200 420 Z" fill="#1a100c" fill-opacity="0.5" />
+      <path d="M20 420 L200 420 L218 432 L2 432 Z" fill="#1a100c" fill-opacity="0.5" />
+
+      
+      
+      <path d="M0 0 L40 0 L30 10 L10 10 L10 30 L0 40 Z" fill="url(#ironGrad)" stroke="#10171a" stroke-width="1"/>
+      <circle cx="8" cy="8" r="2.5" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="28" cy="6" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="6" cy="28" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      
+      <path d="M5 5 L15 15" stroke="#78909c" stroke-width="0.5" opacity="0.6" />
+
+      
+      <path d="M220 0 L180 0 L190 10 L210 10 L210 30 L220 40 Z" fill="url(#ironGrad)" stroke="#10171a" stroke-width="1"/>
+      <circle cx="212" cy="8" r="2.5" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="192" cy="6" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="214" cy="28" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+
+      
+      <path d="M0 440 L40 440 L30 430 L10 430 L10 410 L0 400 Z" fill="url(#ironGrad)" stroke="#10171a" stroke-width="1"/>
+      <circle cx="8" cy="432" r="2.5" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="28" cy="434" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="6" cy="412" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+
+      
+      <path d="M220 440 L180 440 L190 430 L210 430 L210 410 L220 400 Z" fill="url(#ironGrad)" stroke="#10171a" stroke-width="1"/>
+      <circle cx="212" cy="432" r="2.5" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="192" cy="434" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="214" cy="412" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+
+      
+      <rect x="-2" y="210" width="224" height="20" fill="url(#ironGrad)" stroke="#10171a" stroke-width="1" rx="2" />
+      <rect x="0" y="212" width="220" height="1" fill="#78909c" opacity="0.3" /> 
+      <circle cx="10" cy="220" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="210" cy="220" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="65" cy="220" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="155" cy="220" r="2" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+      <circle cx="110" cy="220" r="2.5" fill="url(#rivetGrad)" stroke="#000" stroke-width="0.5"/>
+
+      
+      <rect x="0" y="0" width="220" height="440" rx="8" fill="url(#tableLight)" style="mix-blend-mode: overlay;" pointer-events="none" />
+
+      
+      <path d="M8 8 L212 8 M8 8 L8 432" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" fill="none" />
+      <path d="M212 432 L8 432 M212 432 L212 8" stroke="#000000" stroke-width="1" stroke-opacity="0.4" fill="none" />
+
+      
+      <path d="M120 100 L140 105 M130 102 L135 110" stroke="#5d4037" stroke-width="0.5" stroke-opacity="0.5" />
+      <path d="M50 350 L70 345 M60 348 L65 360" stroke="#5d4037" stroke-width="0.5" stroke-opacity="0.5" />
+      <path d="M180 50 L170 60" stroke="#1a100c" stroke-width="0.5" stroke-opacity="0.3" />
+
+    </g>
+  </g>
+</svg>

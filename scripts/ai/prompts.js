@@ -6,26 +6,40 @@
 export const PROMPTS = {
   // Base system instruction for all SVG generation
   _BASE: `
-    You are an expert SVG artist. Your task is to generate high-quality, game-ready SVG assets for a top-down fantasy RPG map.
-    
+    You are an expert SVG artist creating premium-quality top-down fantasy RPG assets.
+
     STRICT REQUIREMENTS:
     1. Output ONLY valid XML SVG code. Do not wrap in markdown blocks.
     2. ViewBox MUST be "0 0 512 512".
     3. Background must be transparent (do not add a background rect unless part of the object).
     4. Apply styling INLINE on elements (e.g. shape-rendering="geometricPrecision", stroke-linecap="round"). Do NOT use <style> blocks.
     5. Perspective: Top-down (orthographic).
-    6. Style: Clean, readable at small sizes (map scale), avoid excessive tiny details.
+    6. Preserve readability at map scale while still using rich material detail.
+    7. Prefer layered construction: base shape, material breakup, wear/damage, and final highlight/shadow pass.
+
+    DETAIL TARGET:
+    - Use enough visual information to feel hand-painted and textured.
+    - Avoid giant flat color regions with no breakup.
+    - Include subtle variation in hue/value so assets do not look sterile.
     `,
 
   // Prompt for Textures (Floors, Ground, Water)
   SVG_TEXTURE: `
     TYPE: TEXTURE (Floor/Ground/Water)
-    
+
     SPECIFIC GUIDELINES:
     1. The asset must fill the ENTIRE 512x512 area (full bleed).
     2. It should be a seamless or near-seamless pattern if possible.
     3. No drop shadows. This is a flat surface.
     4. Perspective: Strictly top-down flat.
+    5. Build 3-5 visual layers:
+      - Primary material shapes (stones/planks/tiles)
+      - Secondary breakup (chips, cracks, seams)
+      - Micro-noise and grime variation
+      - Optional moisture or moss accents
+      - Light value modulation for depth (no directional cast shadow)
+    6. Avoid obvious repeating motif in a small area.
+    7. Keep tile boundaries continuity-safe for repeated pattern use.
     
     Input Prompt: 
     `,
@@ -46,14 +60,16 @@ export const PROMPTS = {
   // Prompt for Objects (Furniture, Decor, Items)
   SVG_OBJECT: `
     TYPE: OBJECT (Furniture/Decor)
-    
+
     SPECIFIC GUIDELINES:
     1. The object must fit within the 512x512 viewbox, but DOES NOT need to fill it.
     2. Leave a small amount of padding around the edge.
     3. Background MUST be transparent.
     4. Perspective: Top-down 2D.
-    5. Subtle styling: clear outlines, distinct colors.
-    6. If the object casts a shadow, it should be a small, subtle contact shadow (semi-transparent black) directly underneath.
+    5. Prioritize a strong silhouette first, then detailed interior rendering.
+    6. Include believable material detail: grain, dents, seams, bindings, scratches, edge wear.
+    7. If the object casts a shadow, use only a small contact shadow (semi-transparent black) directly underneath.
+    8. Maintain clarity at 100px downscale while still looking rich at 512px.
     
     Input Prompt: 
     `,
@@ -68,6 +84,26 @@ export const PROMPTS = {
     3. Distinct architectural details.
     
     Input Prompt: 
+    `,
+
+  SVG_CRITIC: `
+    You are a strict SVG art director. Score the provided SVG for game-ready quality.
+
+    Return ONLY valid JSON using this schema:
+    {
+      "score": 0-100,
+      "must_fix": ["critical issue 1", "..."],
+      "improvements": ["quality improvement 1", "..."],
+      "revision_prompt": "A concise rewrite instruction for the next generation pass."
+    }
+
+    CRITICAL CHECKS:
+    - Valid top-down style for requested asset type
+    - Sufficient detail density (not flat/simple)
+    - Readability at map scale
+    - Texture assets are seamless-oriented
+    - Object assets have transparent background and clear silhouette
+    - Output quality comparable to premium RPG map packs
     `,
 
   // Prompt for Room Contents (JSON)

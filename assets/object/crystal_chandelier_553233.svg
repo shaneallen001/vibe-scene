@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <radialGradient id="shadowGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#000000" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    
+    <linearGradient id="brassLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a6e45"/>
+      <stop offset="30%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#fadd89"/>
+      <stop offset="70%" stop-color="#AA8840"/>
+      <stop offset="100%" stop-color="#5d4037"/>
+    </linearGradient>
+
+    <radialGradient id="brassRadial" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffeeb0"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#5d4037"/>
+    </radialGradient>
+
+    <radialGradient id="waxGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffbf0"/>
+      <stop offset="60%" stop-color="#eaddcf"/>
+      <stop offset="90%" stop-color="#cbb6a3"/>
+      <stop offset="100%" stop-color="#a89078"/>
+    </radialGradient>
+
+    <radialGradient id="flameGradient" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#fff700" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ff9900" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#ff4400" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff0000" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="crystalGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0ffff" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#a0d8ef" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#5080a0" stop-opacity="0.3"/>
+    </radialGradient>
+    
+    <linearGradient id="crystalReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="60%" stop-color="#a0d8ef" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#406080" stop-opacity="0.6"/>
+    </linearGradient>
+
+    
+    
+    <symbol id="bead" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="8" fill="url(#crystalGlow)" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.5"/>
+      <path d="M10 2 L14 10 L10 18 L6 10 Z" fill="url(#crystalReflect)" opacity="0.8"/>
+      <circle cx="7" cy="7" r="2" fill="#ffffff" opacity="0.9"/>
+    </symbol>
+
+    
+    <symbol id="teardrop" viewBox="0 0 40 40">
+      <polygon points="20,2 35,12 35,28 20,38 5,28 5,12" fill="url(#crystalGlow)" stroke="#88ccff" stroke-width="1"/>
+      <path d="M20 2 L35 12 L20 20 L5 12 Z" fill="white" opacity="0.4"/>
+      <path d="M5 12 L20 20 L20 38 L5 28 Z" fill="#6699cc" opacity="0.3"/>
+      <path d="M35 12 L35 28 L20 38 L20 20 Z" fill="#4477aa" opacity="0.4"/>
+      <circle cx="12" cy="10" r="3" fill="white" opacity="0.8"/>
+    </symbol>
+
+    
+    <g id="chandelierArm">
+       
+       <path d="M0,-30 Q10,-100 0,-160" fill="none" stroke="url(#brassLinear)" stroke-width="8" stroke-linecap="round"/>
+       <path d="M0,-30 Q10,-100 0,-160" fill="none" stroke="#5d4037" stroke-width="8" stroke-opacity="0.3" transform="translate(1,1)"/> 
+       
+       
+       <path d="M-2,-60 C-20,-80 -20,-120 -2,-140" fill="none" stroke="#d4af37" stroke-width="3"/>
+
+       
+       <g transform="translate(0, -165)">
+         <circle cx="0" cy="0" r="18" fill="url(#brassRadial)" stroke="#5d4037" stroke-width="1"/>
+         <circle cx="0" cy="0" r="14" fill="none" stroke="#8a6e45" stroke-width="1" stroke-dasharray="2,2"/>
+         
+         
+         <use href="#teardrop" x="-12" y="8" width="24" height="24" transform="rotate(180)"/>
+       </g>
+
+       
+       <g transform="translate(0, -165)">
+         <circle cx="0" cy="0" r="12" fill="url(#waxGradient)"/>
+         
+         <path d="M-8,8 Q-10,10 -12,6" fill="none" stroke="#eaddcf" stroke-width="2" stroke-linecap="round"/>
+         <path d="M6,-9 Q9,-11 11,-5" fill="none" stroke="#eaddcf" stroke-width="2" stroke-linecap="round"/>
+         
+         <circle cx="0" cy="0" r="2" fill="#332211"/>
+       </g>
+
+       
+       
+       <g transform="translate(0, -155) rotate(-22.5)">
+          <path d="M0,0 Q60,40 120,0" fill="none" stroke="#a0d8ef" stroke-width="1" stroke-opacity="0.5"/>
+          <use href="#bead" x="15" y="10" width="12" height="12"/>
+          <use href="#bead" x="35" y="20" width="12" height="12"/>
+          <use href="#bead" x="58" y="24" width="14" height="14"/> 
+          <use href="#bead" x="80" y="18" width="12" height="12"/>
+          <use href="#bead" x="100" y="8" width="12" height="12"/>
+       </g>
+    </g>
+    
+    
+    <g id="candleFlame">
+        <circle cx="0" cy="0" r="14" fill="url(#flameGradient)" opacity="0.8"/>
+        <ellipse cx="0" cy="2" rx="4" ry="6" fill="#ffffff" opacity="0.6"/>
+    </g>
+
+  </defs>
+
+  
+  <ellipse cx="256" cy="256" rx="200" ry="200" fill="url(#shadowGradient)" opacity="0.7"/>
+
+  
+  <g transform="translate(256, 256)">
+  
+    
+    <circle cx="0" cy="0" r="60" fill="none" stroke="url(#crystalReflect)" stroke-width="1" opacity="0.5"/>
+    <g opacity="0.7">
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(0)"/>
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(60)"/>
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(120)"/>
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(180)"/>
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(240)"/>
+        <use href="#teardrop" x="-15" y="-60" width="30" height="30" transform="rotate(300)"/>
+    </g>
+
+    
+    <g>
+      <use href="#chandelierArm" transform="rotate(0)"/>
+      <use href="#chandelierArm" transform="rotate(45)"/>
+      <use href="#chandelierArm" transform="rotate(90)"/>
+      <use href="#chandelierArm" transform="rotate(135)"/>
+      <use href="#chandelierArm" transform="rotate(180)"/>
+      <use href="#chandelierArm" transform="rotate(225)"/>
+      <use href="#chandelierArm" transform="rotate(270)"/>
+      <use href="#chandelierArm" transform="rotate(315)"/>
+    </g>
+
+    
+    <circle cx="0" cy="0" r="45" fill="url(#brassRadial)" stroke="#5d4037" stroke-width="2"/>
+    
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#8a6e45" stroke-width="3" stroke-dasharray="5,3"/>
+    <circle cx="0" cy="0" r="20" fill="#3e2b24" stroke="#d4af37" stroke-width="4"/> 
+    
+    
+    <g>
+       <circle cx="0" cy="0" r="8" fill="#1a110d"/>
+       
+       <rect x="-4" y="-4" width="8" height="8" fill="#5d4037"/>
+       <circle cx="0" cy="0" r="3" fill="#1a110d"/>
+       
+       <path d="M-15,-15 Q0,-25 15,-15" fill="none" stroke="#ffeeb0" stroke-width="2" opacity="0.6"/>
+    </g>
+
+    
+    <g transform="rotate(0) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(45) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(90) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(135) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(180) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(225) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(270) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    <g transform="rotate(315) translate(0, -165)"> <use href="#candleFlame"/> </g>
+    
+    
+    <circle cx="0" cy="0" r="200" fill="url(#flameGradient)" opacity="0.05" pointer-events="none"/>
+
+  </g>
+</svg>

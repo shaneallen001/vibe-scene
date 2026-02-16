@@ -48,7 +48,8 @@ Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 - **Default Grid Size**: Default grid size in pixels (default: 100)
 - **Map Render Resolution**: Pixels per cell when rendering (default: 100)
 - **Image Storage Path**: Folder for saving dungeon images (default: `vibe-scenes/dungeons`)
-- **Gemini Model**: Strategies for generation (default: `gemini-3-flash-preview`)
+- **Gemini Text Model**: Used for planner/layout JSON tasks (default: `gemini-3-flash-preview`)
+- **Gemini SVG Model**: Used for asset SVG generation; set this to a higher-quality model for richer detail (default: `gemini-3-pro-preview`)
 
 ### Advanced Configuration (Generator Options)
 
@@ -162,6 +163,7 @@ Once configured in Foundry (Module Settings -> Vibe Scenes -> Gemini API Key), t
 ## AI Asset Standards
 
 To ensure generated assets work well in a VTT environment, we enforce specific "Archetypes" via system prompts. All SVG styling must be **inline** (no `<style>` blocks) since the `_sanitizeSVG` pipeline strips `<style>` tags for browser compatibility.
+The generator now uses an iterative quality loop (generate -> critique -> refine) to push assets toward a higher detail target before returning the final SVG.
 
 ### 1. Textures (The Base Layer)
 *   **Role**: The "carpet" or "ground" that fills the entire room or corridor.

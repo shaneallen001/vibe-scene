@@ -3,8 +3,11 @@ import { PROMPTS } from "../ai/prompts.js";
 import { AssetLibraryService } from "./asset-library-service.js";
 
 export class AiAssetService {
-    constructor(apiKey, model) {
-        this.gemini = new GeminiService(apiKey, model);
+    constructor(apiKey, modelConfig) {
+        const models = this._resolveModels(modelConfig);
+        this.textModel = models.text;
+        this.svgModel = models.svg;
+        this.gemini = new GeminiService(apiKey, this.textModel);
         this.library = new AssetLibraryService();
     }
 
@@ -14,34 +17,98 @@ export class AiAssetService {
      * @param {string} [type="OBJECT"] - The archetype type (TEXTURE, OBJECT, STRUCTURE, WALL)
      * @returns {Promise<string>} - The cleaned SVG code
      */
-    async generateSVG(prompt, type = "OBJECT") {
+    async generateSVG(prompt, type = "OBJECT", options = {}) {
         const traceId = this._newTraceId("svg");
         const start = performance.now();
+        const normalizedType = String(type || "OBJECT").toUpperCase();
+        const svgOptions = this._normalizeSVGOptions(normalizedType, options);
+        const basePrompt = String(prompt || "").trim();
         console.log(`Vibe Scenes | [${traceId}] generateSVG:start`, {
-            type,
-            promptLength: String(prompt || "").length
+            type: normalizedType,
+            promptLength: basePrompt.length,
+            svgModel: this.svgModel,
+            maxPasses: svgOptions.maxPasses,
+            minScore: svgOptions.minScore
         });
         const baseSystem = PROMPTS._BASE;
-        const typeSystem = PROMPTS[`SVG_${type}`] || PROMPTS.SVG_OBJECT;
-
+        const typeSystem = PROMPTS[`SVG_${normalizedType}`] || PROMPTS.SVG_OBJECT;
         const fullSystemPrompt = `${baseSystem}\n\n${typeSystem}`;
 
-        try {
-            // Call the generic service
-            const rawText = await this.gemini.generateContent(prompt, fullSystemPrompt);
-            console.log(`Vibe Scenes | [${traceId}] generateSVG:response-received`, {
-                chars: rawText?.length || 0
-            });
+        let bestCandidate = null;
+        let revisionPrompt = "";
 
-            // Clean up the output
-            const cleaned = this._cleanMarkdown(rawText);
-            const sanitized = this._sanitizeSVG(cleaned);
-            console.log(`Vibe Scenes | [${traceId}] generateSVG:success`, {
-                cleanedChars: cleaned?.length || 0,
-                sanitizedChars: sanitized?.length || 0,
-                elapsedMs: Math.round(performance.now() - start)
-            });
-            return sanitized;
+        try {
+            for (let pass = 1; pass <= svgOptions.maxPasses; pass++) {
+                const generationPrompt = this._buildGenerationPrompt(basePrompt, revisionPrompt, pass, svgOptions.maxPasses);
+                const rawText = await this.gemini.generateContent(generationPrompt, fullSystemPrompt, {
+                    model: this.svgModel,
+                    temperature: pass === 1 ? svgOptions.initialTemperature : svgOptions.refineTemperature,
+                    maxOutputTokens: svgOptions.maxOutputTokens
+                });
+                console.log(`Vibe Scenes | [${traceId}] generateSVG:response-received`, {
+                    pass,
+                    chars: rawText?.length || 0
+                });
+
+                const cleaned = this._cleanMarkdown(rawText);
+                const sanitized = this._sanitizeSVG(cleaned);
+                const structural = this._validateSVGStructure(sanitized, normalizedType);
+                const critique = await this._critiqueSVG({
+                    svgContent: sanitized,
+                    originalPrompt: basePrompt,
+                    type: normalizedType,
+                    traceId,
+                    pass
+                });
+                const score = this._scoreSVG(structural, critique);
+                const issues = [
+                    ...structural.issues,
+                    ...(Array.isArray(critique.must_fix) ? critique.must_fix : [])
+                ];
+                const candidate = {
+                    svg: sanitized,
+                    score,
+                    pass,
+                    issues,
+                    improvements: Array.isArray(critique.improvements) ? critique.improvements : [],
+                    revisionPrompt: critique.revision_prompt || ""
+                };
+                if (!bestCandidate || candidate.score > bestCandidate.score) {
+                    bestCandidate = candidate;
+                }
+
+                const accepted = structural.ok && score >= svgOptions.minScore;
+                console.log(`Vibe Scenes | [${traceId}] generateSVG:pass-evaluated`, {
+                    pass,
+                    structuralOk: structural.ok,
+                    score,
+                    minScore: svgOptions.minScore,
+                    accepted,
+                    issueCount: issues.length
+                });
+
+                if (accepted) {
+                    console.log(`Vibe Scenes | [${traceId}] generateSVG:success`, {
+                        pass,
+                        score,
+                        sanitizedChars: sanitized?.length || 0,
+                        elapsedMs: Math.round(performance.now() - start)
+                    });
+                    return sanitized;
+                }
+
+                revisionPrompt = this._buildRevisionPrompt(candidate);
+            }
+
+            if (bestCandidate?.svg) {
+                console.warn(`Vibe Scenes | [${traceId}] generateSVG:best-effort-return`, {
+                    bestScore: bestCandidate.score,
+                    bestPass: bestCandidate.pass,
+                    elapsedMs: Math.round(performance.now() - start)
+                });
+                return bestCandidate.svg;
+            }
+            throw new Error("SVG generation returned no usable candidate.");
         } catch (error) {
             console.error(`Vibe Scenes | [${traceId}] generateSVG:failed`, error);
             throw error;
@@ -65,9 +132,13 @@ export class AiAssetService {
         const system = PROMPTS.ROOM_CONTENT;
 
         try {
-            const rawText = await this.gemini.generateContent(prompt, system);
-            const cleaned = this._cleanMarkdown(rawText);
-            return JSON.parse(cleaned);
+            const rawText = await this.gemini.generateContent(prompt, system, {
+                model: this.textModel,
+                temperature: 0.25,
+                responseMimeType: "application/json"
+            });
+            const parsed = this._parseJSON(rawText);
+            return Array.isArray(parsed) ? parsed : [];
         } catch (error) {
             console.error("Vibe Scenes | Failed to suggest room contents:", error);
             return [];
@@ -99,14 +170,18 @@ export class AiAssetService {
             console.log(`Vibe Scenes | [${traceId}] planDungeon:start`, {
                 rooms: minimalRooms.length,
                 availableAssets: availableAssets.length,
-                hasDescription: Boolean(String(description || "").trim())
+                hasDescription: Boolean(String(description || "").trim()),
+                textModel: this.textModel
             });
-            const rawText = await this.gemini.generateContent(prompt, system);
+            const rawText = await this.gemini.generateContent(prompt, system, {
+                model: this.textModel,
+                temperature: 0.25,
+                responseMimeType: "application/json"
+            });
             console.log(`Vibe Scenes | [${traceId}] planDungeon:response-received`, {
                 chars: rawText?.length || 0
             });
-            const cleaned = this._cleanMarkdown(rawText);
-            const result = JSON.parse(cleaned);
+            const result = this._parseJSON(rawText);
 
             // Handle legacy/fallback response format (array) just in case
             if (Array.isArray(result)) {
@@ -114,6 +189,9 @@ export class AiAssetService {
                     planRooms: result.length
                 });
                 return { plan: result, wishlist: [], default_floor: undefined };
+            }
+            if (!result || typeof result !== "object") {
+                throw new Error("Planner response was not a JSON object.");
             }
 
             console.log(`Vibe Scenes | [${traceId}] planDungeon:success`, {
@@ -242,11 +320,148 @@ export class AiAssetService {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    _resolveModels(modelConfig) {
+        const fallbackText = "gemini-3-flash-preview";
+        const fallbackSvg = "gemini-3-pro-preview";
+        if (typeof modelConfig === "string" && modelConfig.trim()) {
+            return { text: modelConfig.trim(), svg: modelConfig.trim() };
+        }
+        if (modelConfig && typeof modelConfig === "object") {
+            const text = String(modelConfig.text || modelConfig.default || fallbackText).trim();
+            const svg = String(modelConfig.svg || modelConfig.default || fallbackSvg || text).trim();
+            return {
+                text: text || fallbackText,
+                svg: svg || fallbackSvg || text || fallbackText
+            };
+        }
+        return { text: fallbackText, svg: fallbackSvg };
+    }
+
+    _normalizeSVGOptions(type, options = {}) {
+        const maxPasses = Number.isFinite(options.maxPasses) ? Math.max(1, Math.min(5, options.maxPasses)) : 3;
+        const minScore = Number.isFinite(options.minScore) ? this._clamp(options.minScore, 0, 100) : this._defaultMinimumScore(type);
+        const maxOutputTokens = Number.isFinite(options.maxOutputTokens) ? Math.max(512, options.maxOutputTokens) : 8192;
+        return {
+            maxPasses,
+            minScore,
+            maxOutputTokens,
+            initialTemperature: Number.isFinite(options.initialTemperature) ? options.initialTemperature : 0.85,
+            refineTemperature: Number.isFinite(options.refineTemperature) ? options.refineTemperature : 0.55
+        };
+    }
+
+    _defaultMinimumScore(type) {
+        const normalized = String(type || "").toUpperCase();
+        if (normalized === "TEXTURE" || normalized === "WALL") return 82;
+        if (normalized === "STRUCTURE") return 80;
+        return 78;
+    }
+
+    _buildGenerationPrompt(basePrompt, revisionPrompt, pass, maxPasses) {
+        let output = String(basePrompt || "").trim();
+        output += `\n\nQUALITY TARGET: premium-quality, highly detailed, game-ready top-down SVG.`;
+        output += `\nPASS: ${pass}/${maxPasses}.`;
+        if (revisionPrompt) {
+            output += `\n\nREVISION GOALS:\n${revisionPrompt}`;
+        }
+        return output;
+    }
+
+    _validateSVGStructure(svgContent, type) {
+        const issues = [];
+        const content = String(svgContent || "").trim();
+        if (!content.startsWith("<svg")) {
+            issues.push("Output does not start with <svg.");
+        }
+        if (!/viewBox\s*=\s*["']0\s+0\s+512\s+512["']/i.test(content)) {
+            issues.push("Missing canonical viewBox 0 0 512 512.");
+        }
+        if (!/<(path|rect|circle|ellipse|polygon|polyline|line|g)\b/i.test(content)) {
+            issues.push("No visible SVG geometry elements detected.");
+        }
+
+        const normalizedType = String(type || "").toUpperCase();
+        if ((normalizedType === "TEXTURE" || normalizedType === "WALL") && !/width\s*=\s*["']512["']/i.test(content)) {
+            issues.push("Texture should explicitly render at full 512 width.");
+        }
+        if ((normalizedType === "TEXTURE" || normalizedType === "WALL") && !/height\s*=\s*["']512["']/i.test(content)) {
+            issues.push("Texture should explicitly render at full 512 height.");
+        }
+        return { ok: issues.length === 0, issues };
+    }
+
+    async _critiqueSVG({ svgContent, originalPrompt, type, traceId, pass }) {
+        const payload = JSON.stringify({
+            type,
+            originalPrompt,
+            svg: svgContent
+        });
+        try {
+            const rawText = await this.gemini.generateContent(payload, PROMPTS.SVG_CRITIC, {
+                model: this.textModel,
+                temperature: 0.1,
+                maxOutputTokens: 1200,
+                responseMimeType: "application/json"
+            });
+            const parsed = this._parseJSON(rawText);
+            const score = this._clamp(Number(parsed?.score ?? 0), 0, 100);
+            return {
+                score,
+                must_fix: Array.isArray(parsed?.must_fix) ? parsed.must_fix : [],
+                improvements: Array.isArray(parsed?.improvements) ? parsed.improvements : [],
+                revision_prompt: typeof parsed?.revision_prompt === "string" ? parsed.revision_prompt : ""
+            };
+        } catch (error) {
+            console.warn(`Vibe Scenes | [${traceId}] generateSVG:critique-failed`, {
+                pass,
+                message: error?.message || String(error)
+            });
+            return {
+                score: 0,
+                must_fix: [],
+                improvements: [],
+                revision_prompt: ""
+            };
+        }
+    }
+
+    _scoreSVG(structural, critique) {
+        let score = 100;
+        score -= structural.issues.length * 20;
+        const critiqueScore = Number(critique?.score);
+        if (Number.isFinite(critiqueScore) && critiqueScore > 0) {
+            score = Math.min(score, critiqueScore);
+        } else if (Array.isArray(critique?.must_fix) && critique.must_fix.length) {
+            score -= critique.must_fix.length * 8;
+        }
+        return this._clamp(Math.round(score), 0, 100);
+    }
+
+    _buildRevisionPrompt(candidate) {
+        const mustFix = Array.isArray(candidate?.issues) ? candidate.issues : [];
+        const improvements = Array.isArray(candidate?.improvements) ? candidate.improvements : [];
+        const revisionParts = [];
+        if (mustFix.length) {
+            revisionParts.push("Must fix: " + mustFix.slice(0, 6).join("; "));
+        }
+        if (improvements.length) {
+            revisionParts.push("Improve: " + improvements.slice(0, 6).join("; "));
+        }
+        if (candidate?.revisionPrompt) {
+            revisionParts.push(candidate.revisionPrompt);
+        }
+        return revisionParts.filter(Boolean).join("\n");
+    }
+
+    _clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
     /**
      * Helper to remove markdown code blocks from LLM output
      */
     _cleanMarkdown(text) {
-        let cleaned = text.trim();
+        let cleaned = String(text || "").trim();
         if (cleaned.startsWith("```")) {
             const lines = cleaned.split("\n");
             // Remove first line (e.g. ```xml or ```svg)
@@ -260,12 +475,37 @@ export class AiAssetService {
         return cleaned;
     }
 
+    _parseJSON(text) {
+        const cleaned = this._cleanMarkdown(text);
+        try {
+            return JSON.parse(cleaned);
+        } catch (error) {
+            const objectMatch = cleaned.match(/\{[\s\S]*\}/);
+            if (objectMatch) {
+                try {
+                    return JSON.parse(objectMatch[0]);
+                } catch (_) {
+                    // Continue to next fallback.
+                }
+            }
+            const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
+            if (arrayMatch) {
+                try {
+                    return JSON.parse(arrayMatch[0]);
+                } catch (_) {
+                    // Continue to throw the original parse error.
+                }
+            }
+            throw error;
+        }
+    }
+
     /**
      * Sanitize SVG content to remove potential crash-inducing tags
      * @param {string} svgContent 
      */
     _sanitizeSVG(svgContent) {
-        let content = svgContent;
+        let content = String(svgContent || "");
 
         // 1. Remove XML Declaration
         content = content.replace(/<\?xml[^>]*\?>/gi, '');
@@ -273,28 +513,18 @@ export class AiAssetService {
         // 2. Remove <style> blocks
         content = content.replace(/<style>[\s\S]*?<\/style>/gi, '');
 
-        // 3. Remove <defs> blocks if they are effectively empty or problematic?
-        // Actually, keep defs for patterns, but maybe sanitize content? 
-        // For now, let's keep <defs> as they are often used for patterns in textures.
-        // The original code removed them, which might satisfy some constraint, but 
-        // patterns NEED defs. The user previously removed them in step 22 (original code showed replace).
-        // Wait, looking at line 214 of original file: `content = content.replace(/<defs>[\s\S]*?<\/defs>/gi, '');`
-        // THIS MIGHT BE WHY TEXTURES FAILED! Textures use <pattern> inside <defs>.
-        // If I remove <defs>, I remove the pattern definition, so the fill="url(#...)" will fail.
-        // I should REMOVE this aggression against <defs>.
-
-        // 4. Remove comments
+        // 3. Remove comments
         content = content.replace(/<!--[\s\S]*?-->/g, '');
 
-        // 5. Trim whitespace
+        // 4. Trim whitespace
         content = content.trim();
 
-        // 6. Ensure xmlns
+        // 5. Ensure xmlns
         if (!content.includes('xmlns="http://www.w3.org/2000/svg"')) {
             content = content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
         }
 
-        // 7. Ensure Width and Height
+        // 6. Ensure Width and Height
         // Regex to find the opening <svg ... > tag
         const svgOpenTagMatch = content.match(/<svg([^>]*)>/);
 

@@ -3,6 +3,10 @@
  * Registers configurable settings for the module
  */
 
+export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-3-flash-preview";
+export const DEFAULT_GEMINI_SVG_MODEL = "gemini-3-pro-preview";
+const PREVIOUS_GEMINI_SVG_DEFAULT = "gemini-3-flash-preview";
+
 export function registerModuleSettings() {
   game.settings.register("vibe-scenes", "defaultGridSize", {
     name: "Default Grid Size",
@@ -45,11 +49,46 @@ export function registerModuleSettings() {
   });
 
   game.settings.register("vibe-scenes", "geminiModel", {
-    name: "Gemini Model",
-    hint: "The specific model version to use for generation",
+    name: "Gemini Model (Legacy Fallback)",
+    hint: "Legacy single-model setting retained for backward compatibility.",
+    scope: "world",
+    config: false,
+    type: String,
+    default: DEFAULT_GEMINI_TEXT_MODEL
+  });
+
+  game.settings.register("vibe-scenes", "geminiTextModel", {
+    name: "Gemini Text Model",
+    hint: "Model used for planning and JSON tasks (room plans, room contents, critiques).",
     scope: "world",
     config: true,
     type: String,
-    default: "gemini-3-flash-preview"
+    default: DEFAULT_GEMINI_TEXT_MODEL
   });
+
+  game.settings.register("vibe-scenes", "geminiSvgModel", {
+    name: "Gemini SVG Model",
+    hint: "Model used for SVG asset generation. Recommended: gemini-3-pro-preview for higher detail.",
+    scope: "world",
+    config: true,
+    type: String,
+    default: DEFAULT_GEMINI_SVG_MODEL
+  });
+}
+
+/**
+ * Upgrade worlds that are still on the original SVG default.
+ * Only the GM can write world settings.
+ */
+export async function migrateGeminiSvgModelDefault() {
+  if (!game.user?.isGM) return;
+  try {
+    const current = String(game.settings.get("vibe-scenes", "geminiSvgModel") || "").trim();
+    if (!current || current === PREVIOUS_GEMINI_SVG_DEFAULT) {
+      await game.settings.set("vibe-scenes", "geminiSvgModel", DEFAULT_GEMINI_SVG_MODEL);
+      console.log("Vibe Scenes | Upgraded geminiSvgModel default to", DEFAULT_GEMINI_SVG_MODEL);
+    }
+  } catch (error) {
+    console.warn("Vibe Scenes | Failed to migrate geminiSvgModel default:", error);
+  }
 }
