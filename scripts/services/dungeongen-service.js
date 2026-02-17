@@ -38,6 +38,7 @@ export class DungeongenService {
         console.groupCollapsed(`Vibe Scenes | [${runId}] DungeongenService.generate`);
         console.log(`Vibe Scenes | [${runId}] Generating dungeon locally with options:`, {
             size: options.size,
+            generationMode: options.generationMode || "procedural",
             maskType: options.maskType,
             symmetry: options.symmetry,
             corridorStyle: options.corridorStyle,
@@ -58,9 +59,8 @@ export class DungeongenService {
             const width = options.size === 'tiny' ? 40 : options.size === 'small' ? 60 : options.size === 'large' ? 120 : options.size === 'xlarge' ? 160 : 90;
             const height = width;
             const numRooms = options.size === 'tiny' ? 5 : options.size === 'small' ? 10 : options.size === 'large' ? 35 : options.size === 'xlarge' ? 50 : 20;
-            console.log(`Vibe Scenes | [${runId}] Layout config`, { width, height, numRooms });
-
-            const generator = new DungeonGenerator(width, height, {
+            const generationMode = options.generationMode || "procedural";
+            const generatorOptions = {
                 numRooms,
                 minRoomSize: options.size === 'tiny' ? 5 : 8,
                 maxRoomSize: options.size === 'tiny' ? 10 : 15,
@@ -71,10 +71,42 @@ export class DungeongenService {
                 deadEndRemoval: options.deadEndRemoval,
                 peripheralEgress: options.peripheralEgress,
                 doorDensity: options.doorDensity
-            });
+            };
+            console.log(`Vibe Scenes | [${runId}] Layout config`, { width, height, numRooms, generationMode, maskType: generatorOptions.maskType });
 
             const layoutStart = performance.now();
-            const grid = generator.generate();
+            let planningContext = {};
+            let grid = null;
+            const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
+            if (generationMode === "intentional" && apiKey) {
+                const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
+                const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
+                const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
+                const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
+                if (options.onProgress) options.onProgress("Designing intentional dungeon outline...", 15);
+                const outline = await aiService.planDungeonOutline({
+                    width,
+                    height,
+                    targetRoomCount: numRooms,
+                    shapePreference: options.maskType || "rectangle",
+                    description: options.dungeonDescription
+                });
+                planningContext = { intentionalOutline: outline };
+                generatorOptions.maskType = outline?.mask_type || generatorOptions.maskType;
+                const generator = new DungeonGenerator(width, height, generatorOptions);
+                grid = generator.generateFromOutline(outline);
+                console.log(`Vibe Scenes | [${runId}] Intentional outline layout generated`, {
+                    outlineRooms: outline?.rooms?.length || 0,
+                    outlineConnections: outline?.connections?.length || 0,
+                    maskType: generatorOptions.maskType
+                });
+            } else {
+                if (generationMode === "intentional" && !apiKey) {
+                    console.warn(`Vibe Scenes | [${runId}] Intentional mode requested, but no Gemini API key found. Falling back to procedural layout.`);
+                }
+                const generator = new DungeonGenerator(width, height, generatorOptions);
+                grid = generator.generate();
+            }
             console.log(`Vibe Scenes | [${runId}] Layout generated in ${(performance.now() - layoutStart).toFixed(0)}ms`, {
                 rooms: grid.rooms?.length || 0
             });
@@ -83,7 +115,7 @@ export class DungeongenService {
 
             // 2. AI Planning & Population (Themes + Textures + Items)
             const planStart = performance.now();
-            const { items, roomTextures, defaultTexture } = await this._planAndPopulate(grid, options);
+            const { items, roomTextures, defaultTexture } = await this._planAndPopulate(grid, options, planningContext);
             console.log(`Vibe Scenes | [${runId}] Planning/population complete in ${(performance.now() - planStart).toFixed(0)}ms`, {
                 placedItems: items?.length || 0,
                 roomTextureOverrides: Object.keys(roomTextures || {}).length,
@@ -141,14 +173,16 @@ export class DungeongenService {
     * Plan and populate the dungeon with items and textures
     * @param {DungeonGrid} grid 
     * @param {Object} options 
+    * @param {Object} planningContext
     */
-    async _planAndPopulate(grid, options) {
+    async _planAndPopulate(grid, options, planningContext = {}) {
         const runId = options.runId || `vs-unknown-${Date.now().toString(36)}`;
         const items = [];
         const roomTextures = {};
         let defaultTexture = null;
         const gridSize = options.gridSize || 20;
         const pixelPadding = gridSize * 2;
+        const intentionalOutline = planningContext.intentionalOutline || null;
 
         // 1. Load Library
         const libStart = performance.now();
@@ -180,7 +214,21 @@ export class DungeongenService {
 
             // Call the planner
             const plannerStart = performance.now();
-            const { plan, wishlist, default_floor } = await aiService.planDungeon(grid.rooms, availableAssets, options.dungeonDescription);
+            let plannerResult = null;
+            if (options.generationMode === "intentional" && intentionalOutline?.rooms?.length) {
+                plannerResult = await aiService.planDungeonFromOutline({
+                    rooms: grid.rooms,
+                    connections: intentionalOutline.connections || [],
+                    maskType: intentionalOutline.mask_type || options.maskType || "rectangle",
+                    defaultFloor: intentionalOutline.default_floor,
+                    description: options.dungeonDescription
+                }, availableAssets);
+            } else {
+                plannerResult = await aiService.planDungeon(grid.rooms, availableAssets, options.dungeonDescription);
+            }
+            const plan = plannerResult?.plan || [];
+            const wishlist = plannerResult?.wishlist || [];
+            const default_floor = plannerResult?.default_floor || intentionalOutline?.default_floor;
             console.log(`Vibe Scenes | [${runId}] AI planner responded in ${(performance.now() - plannerStart).toFixed(0)}ms`, {
                 planRooms: plan?.length || 0,
                 wishlist: wishlist?.length || 0,

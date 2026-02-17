@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <linearGradient id="woodGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5D4037" />
+      <stop offset="50%" stop-color="#3E2723" />
+      <stop offset="100%" stop-color="#281815" />
+    </linearGradient>
+    <linearGradient id="ironGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#546E7A" />
+      <stop offset="50%" stop-color="#37474F" />
+      <stop offset="100%" stop-color="#263238" />
+    </linearGradient>
+    <linearGradient id="ironLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78909C" />
+      <stop offset="100%" stop-color="#455A64" />
+    </linearGradient>
+    <linearGradient id="rustGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8D6E63" opacity="0.6" />
+      <stop offset="100%" stop-color="#5D4037" opacity="0.8" />
+    </linearGradient>
+    <filter id="roughness">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0" in="noise" result="coloredNoise" />
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+    </filter>
+  </defs>
+
+  
+  <path d="M60,110 Q60,110 452,110 Q462,110 462,120 L462,380 Q462,390 452,390 L60,390 Q50,390 50,380 L50,120 Q50,110 60,110 Z" fill="#000000" fill-opacity="0.4" transform="translate(10, 10)" filter="url(#roughness)" />
+
+  
+  <g id="woodRack">
+    
+    <rect x="50" y="100" width="412" height="300" rx="10" ry="10" fill="url(#woodGradient)" stroke="#281815" stroke-width="4" />
+    
+    
+    <g stroke="#281815" stroke-width="2" stroke-opacity="0.5" fill="none" stroke-linecap="round">
+      <path d="M60,140 Q150,130 250,150 T450,130" />
+      <path d="M60,200 Q200,180 300,210 T450,190" />
+      <path d="M60,280 Q150,290 250,270 T450,290" />
+      <path d="M60,350 Q180,360 300,340 T450,360" />
+      
+      <ellipse cx="120" cy="240" rx="15" ry="10" fill="#281815" fill-opacity="0.3" />
+      <path d="M100,240 Q120,210 140,240 Q120,270 100,240" stroke-width="1" />
+      <ellipse cx="380" cy="160" rx="10" ry="6" fill="#281815" fill-opacity="0.3" />
+    </g>
+
+    
+    <path d="M60,110 L452,110 L452,390 L60,390 Z" fill="none" stroke="#6D4C41" stroke-width="3" stroke-opacity="0.5" transform="translate(2,2)" />
+    
+    
+    <g fill="#37474F" stroke="#102027" stroke-width="2">
+      <circle cx="70" cy="120" r="8" />
+      <circle cx="442" cy="120" r="8" />
+      <circle cx="70" cy="380" r="8" />
+      <circle cx="442" cy="380" r="8" />
+    </g>
+    
+    <g fill="#90A4AE" fill-opacity="0.6">
+      <circle cx="68" cy="118" r="3" />
+      <circle cx="440" cy="118" r="3" />
+      <circle cx="68" cy="378" r="3" />
+      <circle cx="440" cy="378" r="3" />
+    </g>
+  </g>
+
+  
+  <g fill="#263238" stroke="none">
+    
+    <path d="M130,160 L140,160 L140,175 L135,180 L130,175 Z" />
+    <path d="M180,160 L190,160 L190,175 L185,180 L180,175 Z" />
+    
+    <path d="M251,160 L261,160 L261,175 L256,180 L251,175 Z" />
+    
+    <path d="M370,160 L380,160 L380,175 L375,180 L370,175 Z" />
+  </g>
+
+  
+  <g id="pincers" transform="translate(100, 180) rotate(-5)">
+    
+    <path d="M10,0 Q-10,100 0,180 L20,200 L40,180 Q50,100 30,0 Z" fill="#000000" fill-opacity="0.5" filter="url(#roughness)" transform="translate(5,5)" />
+    
+    
+    <path d="M20,100 Q5,60 10,10 Q12,0 20,0 L25,0 Q20,10 25,60 L40,100" fill="url(#ironGradient)" stroke="#102027" stroke-width="2" stroke-linejoin="round" />
+    
+    <path d="M40,100 Q55,60 50,10 Q48,0 40,0 L35,0 Q40,10 35,60 L20,100" fill="url(#ironGradient)" stroke="#102027" stroke-width="2" stroke-linejoin="round" />
+    
+    
+    <circle cx="30" cy="90" r="8" fill="#546E7A" stroke="#102027" stroke-width="2" />
+    <circle cx="30" cy="90" r="3" fill="#263238" />
+    
+    
+    <path d="M20,100 Q10,130 30,170 Q35,160 30,140" fill="url(#ironLight)" stroke="#102027" stroke-width="2" />
+    <path d="M40,100 Q50,130 30,170 Q25,160 30,140" fill="url(#ironLight)" stroke="#102027" stroke-width="2" />
+    
+    
+    <path d="M15,40 Q18,45 15,50" stroke="#8D6E63" stroke-width="3" stroke-opacity="0.6" fill="none" />
+    <path d="M45,120 Q48,125 45,130" stroke="#8D6E63" stroke-width="3" stroke-opacity="0.6" fill="none" />
+    
+    
+    <path d="M12,10 Q14,50 22,90" stroke="#CFD8DC" stroke-width="1" fill="none" opacity="0.5" />
+    <path d="M28,140 Q25,155 28,165" stroke="#CFD8DC" stroke-width="1" fill="none" opacity="0.8" />
+  </g>
+
+  
+  <g id="brandingIron" transform="translate(256, 170)">
+    
+    <rect x="-8" y="0" width="16" height="200" rx="5" fill="#000000" fill-opacity="0.5" filter="url(#roughness)" transform="translate(5,5)" />
+    <circle cx="0" cy="200" r="25" fill="#000000" fill-opacity="0.5" filter="url(#roughness)" transform="translate(5,5)" />
+
+    
+    <rect x="-8" y="0" width="16" height="60" rx="5" fill="#5D4037" stroke="#281815" stroke-width="2" />
+    
+    <path d="M-8,10 L8,15 M-8,20 L8,25 M-8,30 L8,35 M-8,40 L8,45" stroke="#3E2723" stroke-width="2" />
+    
+    
+    <rect x="-4" y="60" width="8" height="130" fill="url(#ironGradient)" stroke="#102027" stroke-width="1" />
+    
+    
+    <g transform="translate(0, 200)">
+      <circle cx="0" cy="0" r="22" fill="#37474F" stroke="#102027" stroke-width="3" />
+      <path d="M-10,-5 L10,-5 M-10,5 L10,5 M0,-15 L0,15" stroke="#102027" stroke-width="4" stroke-linecap="round" />
+      
+      <circle cx="0" cy="0" r="18" fill="none" stroke="#546E7A" stroke-width="2" opacity="0.3" />
+      
+      
+      <path d="M-15,-10 Q-5,0 -15,10" stroke="#5D4037" stroke-width="2" fill="none" opacity="0.7" />
+    </g>
+    
+    
+    <path d="M-2,65 L-2,185" stroke="#CFD8DC" stroke-width="1" opacity="0.4" />
+    <path d="M-5,5 L-5,55" stroke="#A1887F" stroke-width="1" opacity="0.5" />
+  </g>
+
+  
+  <g id="meatHook" transform="translate(375, 170)">
+    
+    <path d="M0,0 L0,50 Q0,80 15,90 L30,85 Q10,75 10,50 L10,0" fill="#000000" fill-opacity="0.5" filter="url(#roughness)" transform="translate(5,5)" />
+    
+    
+    <ellipse cx="0" cy="10" rx="10" ry="15" fill="none" stroke="#37474F" stroke-width="5" />
+    
+    
+    <rect x="-4" y="25" width="8" height="80" fill="url(#ironGradient)" stroke="#102027" stroke-width="1" />
+    
+    
+    <path d="M0,105 Q0,140 35,130 L40,125 L35,120 Q10,125 10,105" fill="url(#ironLight)" stroke="#102027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    
+    
+    <path d="M40,125 L35,130 L35,120 Z" fill="#CFD8DC" />
+    
+    
+    <path d="M30,125 Q25,128 32,128" stroke="#3E2723" stroke-width="3" opacity="0.8" fill="none" />
+    <circle cx="35" cy="125" r="2" fill="#3E2723" opacity="0.7" />
+    
+    
+    <path d="M-2,30 L-2,100" stroke="#CFD8DC" stroke-width="1" opacity="0.4" />
+    <path d="M5,110 Q5,120 20,120" stroke="#CFD8DC" stroke-width="1" fill="none" opacity="0.6" />
+  </g>
+
+  
+  <g opacity="0.15" pointer-events="none">
+    <path d="M60,110 L450,390 M450,110 L60,390" stroke="#000000" stroke-width="100" stroke-dasharray="5,15" filter="url(#roughness)" />
+  </g>
+
+  
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="50" y="100" width="412" height="300" rx="10" ry="10" fill="url(#shine)" pointer-events="none"/>
+
+</svg>

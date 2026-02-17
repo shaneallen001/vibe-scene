@@ -191,5 +191,103 @@ export const PROMPTS = {
     - Place items logically and leave clear walking lanes from doors to central space.
     - Return ONLY valid JSON.
     `
+  ,
+
+  // Prompt for Intentional Outline-First Planning
+  DUNGEON_OUTLINE_PLANNER: `
+    You are an expert dungeon architect. Build an intentional dungeon outline first.
+
+    INPUT:
+    - DESCRIPTION: User fantasy concept.
+    - BOUNDS: { width, height } in grid cells.
+    - TARGET_ROOM_COUNT: desired room count target.
+    - SHAPE_PREFERENCE: preferred macro shape (rectangle/round/cross/keep/cavernous).
+
+    TASK:
+    1. Choose a macro "mask_type" that best fits the concept.
+    2. Design a coherent room network with meaningful pacing (entrance, progression, climax, support spaces).
+    3. Output room rectangles and thematic flavor, not item placements.
+
+    OUTPUT (JSON object only):
+    {
+      "mask_type": "keep",
+      "default_floor": "ancient stone flagstones",
+      "rooms": [
+        {
+          "id": "entrance_hall",
+          "x": 10,
+          "y": 12,
+          "width": 12,
+          "height": 10,
+          "theme": "Guarded Entry",
+          "description": "Cold torchlight and old banners mark the threshold."
+        }
+      ],
+      "connections": [
+        { "from": "entrance_hall", "to": "inner_gallery" }
+      ]
+    }
+
+    CONSTRAINTS:
+    - Keep every room inside bounds and avoid room overlaps.
+    - Use integer coordinates and sizes.
+    - Room sizes should usually be 4-20 cells wide/high.
+    - Aim near TARGET_ROOM_COUNT (within +/- 30% is fine).
+    - Every room should have at least one connection unless it is a deliberate secret/optional room.
+    - Return ONLY valid JSON.
+    `,
+
+  // Prompt for Intentional Content Pass
+  DUNGEON_CONTENT_PLANNER: `
+    You are an expert level dresser. Given an intentional room outline, generate room contents and wishlist gaps.
+
+    INPUT:
+    - DESCRIPTION: User fantasy concept.
+    - OUTLINE: {
+        mask_type,
+        default_floor,
+        rooms: [{ id, width, height, area, theme, description, connections }],
+        connections
+      }
+    - AVAILABLE_ASSETS: [{ id, name, type, tags }]
+
+    TASK:
+    1. Keep each room's theme/description aligned with the outline intent.
+    2. Assign floor textures per room where needed.
+    3. Generate item placements per room.
+    4. Produce wishlist entries for missing OBJECT or TEXTURE assets.
+
+    OUTPUT:
+    {
+      "default_floor": "stone_paving_dark",
+      "plan": [
+        {
+          "id": "entrance_hall",
+          "theme": "Guarded Entry",
+          "floor_texture": "stone_paving_dark",
+          "description": "Cold torchlight and old banners mark the threshold.",
+          "contents": [
+            { "name": "weapon rack", "original_id": "123", "x": 2, "y": 1, "rotation": 90 }
+          ]
+        }
+      ],
+      "wishlist": [
+        { "name": "broken portcullis", "type": "OBJECT", "visual_style": "rusted iron, bent bars" }
+      ]
+    }
+
+    CONSTRAINTS:
+    - PRIORITIZE AVAILABLE_ASSETS.
+    - If using an existing asset, set "original_id" to AVAILABLE_ASSETS.id.
+    - Populate by room area:
+      - area < 12: usually 0 items.
+      - area 12-35: 1-2 items.
+      - area 36-64: 2-4 items.
+      - area > 64: 4-8 items.
+    - Corridors/passages should be sparse.
+    - Non-corridor rooms with area >= 12 should have at least 1 item.
+    - Keep coordinates in room-local space: 0..width-1 and 0..height-1.
+    - Return ONLY valid JSON.
+    `
 
 };

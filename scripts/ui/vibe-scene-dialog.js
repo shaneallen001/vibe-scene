@@ -49,6 +49,11 @@ const DEAD_END_OPTIONS = [
     { value: "all", label: "All (Keep all)" }
 ];
 
+const GENERATION_MODE_OPTIONS = [
+    { value: "procedural", label: "Procedural (Random Rooms/Hallways)" },
+    { value: "intentional", label: "Intentional (AI Outline First)" }
+];
+
 export class VibeSceneDialog {
     static async show() {
         // Get default grid size from settings
@@ -72,12 +77,14 @@ export class VibeSceneDialog {
             corridorOptions: CORRIDOR_OPTIONS,
             connectivityOptions: CONNECTIVITY_OPTIONS,
             deadEndOptions: DEAD_END_OPTIONS,
+            generationModeOptions: GENERATION_MODE_OPTIONS,
             styles,
             defaultGridSize,
             // Defaults for new options
             density: 0.4,
             peripheralEgress: false,
-            doorDensity: 0.5
+            doorDensity: 0.5,
+            generationMode: "procedural"
         };
 
         const content = await foundry.applications.handlebars.renderTemplate("modules/vibe-scenes/templates/vibe-scene-dialog.html", context);
@@ -98,6 +105,7 @@ export class VibeSceneDialog {
 
                         // Dungeon Description for AI
                         const dungeonDescription = html.find('[name="dungeonDescription"]').val();
+                        const generationMode = html.find('[name="generationMode"]').val() || "procedural";
 
                         // New Options
                         const density = parseFloat(html.find('[name="density"]').val());
@@ -121,6 +129,7 @@ export class VibeSceneDialog {
                             maskType,
                             symmetry,
                             dungeonDescription,
+                            generationMode,
                             corridorStyle,
                             connectivity,
                             density,
@@ -170,7 +179,7 @@ export class VibeSceneDialog {
     }
 
     static async generateDungeon(options) {
-        const { sceneName, size, maskType, symmetry, dungeonDescription, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity } = options;
+        const { sceneName, size, maskType, symmetry, dungeonDescription, generationMode, corridorStyle, connectivity, density, seed, gridSize, deadEndRemoval, peripheralEgress, doorDensity } = options;
         const runId = `vs-${seed}-${Date.now().toString(36)}`;
         const pipelineStart = performance.now();
         console.groupCollapsed(`Vibe Scenes | [${runId}] generateDungeon`);
@@ -180,6 +189,7 @@ export class VibeSceneDialog {
             size,
             maskType,
             symmetry,
+            generationMode,
             corridorStyle,
             connectivity,
             density,
@@ -219,6 +229,7 @@ export class VibeSceneDialog {
                 size,
                 maskType,
                 symmetry,
+                generationMode,
                 corridorStyle,
                 connectivity,
                 density,

@@ -1,0 +1,232 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    
+    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5a5a60" />
+      <stop offset="50%" stop-color="#45454a" />
+      <stop offset="100%" stop-color="#35353a" />
+    </linearGradient>
+    
+    
+    <linearGradient id="ironGrad" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#4a4a50" />
+      <stop offset="50%" stop-color="#2a2a30" />
+      <stop offset="100%" stop-color="#15151a" />
+    </linearGradient>
+
+    
+    <radialGradient id="rustSpot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6e4635" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#6e4635" stop-opacity="0" />
+    </radialGradient>
+    
+    
+    <radialGradient id="boltGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#7a7a80" />
+      <stop offset="100%" stop-color="#1a1a20" />
+    </radialGradient>
+  </defs>
+
+  
+  <g fill="#000000" fill-opacity="0.35" filter="blur(4px)">
+    
+    <path d="M110,80 Q256,90 402,80 L402,120 Q256,130 110,120 Z" />
+    
+    <ellipse cx="180" cy="350" rx="55" ry="45" />
+    <ellipse cx="332" cy="350" rx="55" ry="45" />
+    
+    <path d="M160,120 Q150,250 170,320" stroke="#000" stroke-width="12" fill="none" />
+    <path d="M352,120 Q362,250 342,320" stroke="#000" stroke-width="12" fill="none" />
+  </g>
+
+  
+  <g transform="translate(0, 10)">
+    
+    <path d="M120,40 L392,40 C398,40 402,44 402,50 L402,110 C402,116 398,120 392,120 L120,120 C114,120 110,116 110,110 L110,50 C110,44 114,40 120,40 Z" 
+          fill="url(#stoneGrad)" stroke="#2a2a2e" stroke-width="2" />
+    
+    
+    <path d="M130,50 L145,65 M380,100 L365,85 M250,45 L250,70" stroke="#25252a" stroke-width="1.5" stroke-linecap="round" fill="none" />
+    <path d="M120,110 L140,110 L145,100 M390,50 L370,50 L365,60" fill="none" stroke="#6a6a70" stroke-width="1" opacity="0.5" />
+    
+    
+    <circle cx="150" cy="80" r="2" fill="#2a2a2a" opacity="0.3" />
+    <circle cx="180" cy="60" r="1.5" fill="#2a2a2a" opacity="0.3" />
+    <circle cx="350" cy="90" r="2.5" fill="#2a2a2a" opacity="0.3" />
+    <circle cx="300" cy="50" r="1.5" fill="#2a2a2a" opacity="0.3" />
+
+    
+    <path d="M120,42 L392,42" stroke="#7a7a80" stroke-width="2" opacity="0.6" stroke-linecap="round" />
+  </g>
+
+  
+  <g transform="translate(0, 10)">
+    
+    <rect x="140" y="55" width="40" height="50" rx="4" fill="url(#ironGrad)" stroke="#1a1a1e" stroke-width="1" />
+    <circle cx="145" cy="60" r="3" fill="url(#boltGrad)" />
+    <circle cx="175" cy="60" r="3" fill="url(#boltGrad)" />
+    <circle cx="145" cy="100" r="3" fill="url(#boltGrad)" />
+    <circle cx="175" cy="100" r="3" fill="url(#boltGrad)" />
+    
+    
+    <rect x="332" y="55" width="40" height="50" rx="4" fill="url(#ironGrad)" stroke="#1a1a1e" stroke-width="1" />
+    <circle cx="337" cy="60" r="3" fill="url(#boltGrad)" />
+    <circle cx="367" cy="60" r="3" fill="url(#boltGrad)" />
+    <circle cx="337" cy="100" r="3" fill="url(#boltGrad)" />
+    <circle cx="367" cy="100" r="3" fill="url(#boltGrad)" />
+
+    
+    <path d="M150,90 Q160,115 170,90" fill="none" stroke="#3a3a40" stroke-width="6" stroke-linecap="round" />
+    <path d="M342,90 Q352,115 362,90" fill="none" stroke="#3a3a40" stroke-width="6" stroke-linecap="round" />
+  </g>
+
+  
+  <g stroke-linecap="round" stroke-linejoin="round">
+    
+    
+    <path d="M160,105 C155,115 155,125 160,135 C165,125 165,115 160,105" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    <path d="M160,105 C155,115 155,125 160,135" stroke="#5a5a60" stroke-width="1" fill="none" opacity="0.5" />
+    
+    
+    <ellipse cx="160" cy="145" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+    <ellipse cx="160" cy="145" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    
+    
+    <path d="M160,155 C155,165 152,175 162,185 C168,175 165,165 160,155" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    
+    <g transform="rotate(10, 162, 195)">
+        <ellipse cx="162" cy="195" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+        <ellipse cx="162" cy="195" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    </g>
+
+    
+    <path d="M166,205 C164,215 165,225 170,235 C174,225 173,215 166,205" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+
+    
+    <g transform="rotate(-5, 172, 245)">
+        <ellipse cx="172" cy="245" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+        <ellipse cx="172" cy="245" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    </g>
+
+    
+    <path d="M172,255 C170,265 172,275 178,285 C182,275 180,265 172,255" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+
+    
+    
+    <path d="M352,105 C357,115 357,125 352,135 C347,125 347,115 352,105" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    
+    <ellipse cx="352" cy="145" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+    <ellipse cx="352" cy="145" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    
+    
+    <path d="M352,155 C357,165 360,175 350,185 C344,175 347,165 352,155" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    
+    <g transform="rotate(-10, 350, 195)">
+        <ellipse cx="350" cy="195" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+        <ellipse cx="350" cy="195" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    </g>
+
+    
+    <path d="M346,205 C348,215 347,225 342,235 C338,225 339,215 346,205" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+
+    
+    <g transform="rotate(5, 340, 245)">
+        <ellipse cx="340" cy="245" rx="10" ry="14" fill="none" stroke="#2f2f35" stroke-width="5" />
+        <ellipse cx="340" cy="245" rx="10" ry="14" fill="none" stroke="#101010" stroke-width="1" />
+    </g>
+
+    
+    <path d="M340,255 C342,265 340,275 334,285 C330,275 332,265 340,255" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+  </g>
+
+  
+  
+  <g transform="translate(180, 350) rotate(15)">
+    
+    <path d="M-35,-15 A 35,35 0 0,0 35,-15" fill="none" stroke="#1f1f23" stroke-width="16" />
+    <path d="M-35,-15 A 35,35 0 0,0 35,-15" fill="none" stroke="#3a3a40" stroke-width="12" />
+    
+    
+    <ellipse cx="0" cy="0" rx="35" ry="30" fill="#15151a" fill-opacity="0.8" />
+    
+    
+    <path d="M-35,-15 A 35,35 0 1,1 35,-15" fill="none" stroke="#1f1f23" stroke-width="16" />
+    <path d="M-35,-15 A 35,35 0 1,1 35,-15" fill="none" stroke="url(#ironGrad)" stroke-width="12" />
+    
+    
+    <rect x="-42" y="-25" width="14" height="20" rx="2" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    <rect x="28" y="-25" width="20" height="20" rx="2" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    <circle cx="38" cy="-15" r="3" fill="#000" />
+    
+    
+    <path d="M-5,-45 L5,-45 L8,-60 L-8,-60 Z" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    <circle cx="0" cy="-65" r="8" fill="none" stroke="#3a3a40" stroke-width="4" />
+    
+    
+    <path d="M-25,20 Q0,35 25,20" fill="none" stroke="#6a6a70" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
+    <path d="M-30,10 L-20,15" stroke="#000" stroke-width="1" opacity="0.5" />
+  </g>
+
+  
+  <g transform="translate(332, 350) rotate(-15)">
+    
+    <path d="M-35,-15 A 35,35 0 0,0 35,-15" fill="none" stroke="#1f1f23" stroke-width="16" />
+    <path d="M-35,-15 A 35,35 0 0,0 35,-15" fill="none" stroke="#3a3a40" stroke-width="12" />
+    
+    
+    <ellipse cx="0" cy="0" rx="35" ry="30" fill="#15151a" fill-opacity="0.8" />
+    
+    
+    <path d="M-35,-15 A 35,35 0 1,1 35,-15" fill="none" stroke="#1f1f23" stroke-width="16" />
+    <path d="M-35,-15 A 35,35 0 1,1 35,-15" fill="none" stroke="url(#ironGrad)" stroke-width="12" />
+    
+    
+    <rect x="-48" y="-25" width="20" height="20" rx="2" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    <circle cx="-38" cy="-15" r="3" fill="#000" />
+    
+    
+    <rect x="28" y="-25" width="14" height="20" rx="2" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    
+    
+    <path d="M-5,-45 L5,-45 L8,-60 L-8,-60 Z" fill="#2a2a30" stroke="#101010" stroke-width="1" />
+    <circle cx="0" cy="-65" r="8" fill="none" stroke="#3a3a40" stroke-width="4" />
+
+    
+    <path d="M-25,20 Q0,35 25,20" fill="none" stroke="#6a6a70" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
+    <path d="M10,25 L15,35" stroke="#000" stroke-width="1" opacity="0.5" />
+  </g>
+  
+  
+  <g pointer-events="none">
+     
+     <circle cx="160" cy="110" r="15" fill="url(#rustSpot)" mix-blend-mode="multiply" />
+     
+     <circle cx="352" cy="110" r="15" fill="url(#rustSpot)" mix-blend-mode="multiply" />
+     
+     
+     <circle cx="150" cy="350" r="20" fill="url(#rustSpot)" mix-blend-mode="multiply" opacity="0.7" />
+     <circle cx="360" cy="350" r="20" fill="url(#rustSpot)" mix-blend-mode="multiply" opacity="0.7" />
+     
+     
+     <circle cx="145" cy="70" r="8" fill="url(#rustSpot)" mix-blend-mode="multiply" opacity="0.8" />
+     <circle cx="367" cy="70" r="8" fill="url(#rustSpot)" mix-blend-mode="multiply" opacity="0.8" />
+  </g>
+  
+  
+  <g stroke="#ffffff" stroke-width="1" stroke-linecap="round" opacity="0.3">
+      
+      <path d="M165,140 L165,150" />
+      <path d="M357,140 L357,150" />
+      <path d="M140,55 L180,55" />
+      <path d="M332,55 L372,55" />
+      
+      <path d="M160,325 Q180,315 200,325" />
+      <path d="M312,325 Q332,315 352,325" />
+  </g>
+
+</svg>

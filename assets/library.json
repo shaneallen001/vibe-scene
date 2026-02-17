@@ -712,5 +712,107 @@
     "width": 1,
     "height": 1,
     "generatedAt": 1771218733022
+  },
+  "80": {
+    "id": 80,
+    "name": "torture_rack_446453",
+    "prompt": "torture rack",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/torture_rack_446453.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220446462
+  },
+  "81": {
+    "id": 81,
+    "name": "wall_shackles_519090",
+    "prompt": "wall shackles",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/wall_shackles_519090.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220519100
+  },
+  "82": {
+    "id": 82,
+    "name": "pile_of_straw_574861",
+    "prompt": "pile of straw",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/pile_of_straw_574861.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220574869
+  },
+  "83": {
+    "id": 83,
+    "name": "iron_bound_chest_637240",
+    "prompt": "iron-bound chest",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/iron_bound_chest_637240.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220637246
+  },
+  "84": {
+    "id": 84,
+    "name": "bookshelf_with_ledgers_703640",
+    "prompt": "bookshelf with ledgers",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/bookshelf_with_ledgers_703640.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220703647
+  },
+  "85": {
+    "id": 85,
+    "name": "wall_mounted_iron_tools_768980",
+    "prompt": "wall-mounted iron tools",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/wall_mounted_iron_tools_768980.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771220768987
   }
 }

@@ -6,6 +6,14 @@
 export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-3-flash-preview";
 export const DEFAULT_GEMINI_SVG_MODEL = "gemini-3-pro-preview";
 const PREVIOUS_GEMINI_SVG_DEFAULT = "gemini-3-flash-preview";
+const KNOWN_GOOD_GEMINI_MODELS = {
+  "gemini-2.0-flash-lite": "gemini-2.0-flash-lite",
+  "gemini-2.0-flash": "gemini-2.0-flash",
+  "gemini-2.5-flash": "gemini-2.5-flash",
+  "gemini-2.5-pro": "gemini-2.5-pro",
+  "gemini-3-flash-preview": "gemini-3-flash-preview",
+  "gemini-3-pro-preview": "gemini-3-pro-preview"
+};
 
 export function registerModuleSettings() {
   game.settings.register("vibe-scenes", "defaultGridSize", {
@@ -59,19 +67,21 @@ export function registerModuleSettings() {
 
   game.settings.register("vibe-scenes", "geminiTextModel", {
     name: "Gemini Text Model",
-    hint: "Model used for planning and JSON tasks (room plans, room contents, critiques).",
+    hint: "Model used for planning and JSON tasks (room plans, room contents, critiques). Uses known-good model options.",
     scope: "world",
     config: true,
     type: String,
+    choices: KNOWN_GOOD_GEMINI_MODELS,
     default: DEFAULT_GEMINI_TEXT_MODEL
   });
 
   game.settings.register("vibe-scenes", "geminiSvgModel", {
     name: "Gemini SVG Model",
-    hint: "Model used for SVG asset generation. Recommended: gemini-3-pro-preview for higher detail.",
+    hint: "Model used for SVG asset generation. Recommended: gemini-3-pro-preview for higher detail. Uses known-good model options.",
     scope: "world",
     config: true,
     type: String,
+    choices: KNOWN_GOOD_GEMINI_MODELS,
     default: DEFAULT_GEMINI_SVG_MODEL
   });
 }

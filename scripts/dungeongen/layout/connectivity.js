@@ -51,6 +51,36 @@ export class NetworkConnector {
         }
     }
 
+    /**
+     * Connect specific room pairs from an outline.
+     * @param {Array} roomPairs - [{from, to}]
+     */
+    connectSpecificRooms(roomPairs = []) {
+        if (this.grid.rooms.length < 2 || !Array.isArray(roomPairs) || roomPairs.length === 0) return 0;
+        const byId = new Map(this.grid.rooms.map(room => [String(room.id), room]));
+        const seen = new Set();
+        let connectedCount = 0;
+
+        for (const pair of roomPairs) {
+            const fromId = String(pair?.from || '').trim();
+            const toId = String(pair?.to || '').trim();
+            if (!fromId || !toId || fromId === toId) continue;
+            const key = fromId < toId ? `${fromId}::${toId}` : `${toId}::${fromId}`;
+            if (seen.has(key)) continue;
+
+            const r1 = byId.get(fromId);
+            const r2 = byId.get(toId);
+            if (!r1 || !r2) continue;
+
+            if (!r1.connections.includes(r2.id)) r1.connections.push(r2.id);
+            if (!r2.connections.includes(r1.id)) r2.connections.push(r1.id);
+            this._routePassage(r1, r2);
+            seen.add(key);
+            connectedCount += 1;
+        }
+        return connectedCount;
+    }
+
     _generateEdges() {
         const rooms = this.grid.rooms;
         const edges = [];

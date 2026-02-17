@@ -216,6 +216,136 @@ export class AiAssetService {
     }
 
     /**
+     * Plan an intentional dungeon outline (macro shape + rooms + room flavor).
+     * @param {Object} input
+     * @param {number} input.width
+     * @param {number} input.height
+     * @param {number} input.targetRoomCount
+     * @param {string} input.shapePreference
+     * @param {string} input.description
+     * @returns {Promise<Object>} - { mask_type, default_floor, rooms, connections }
+     */
+    async planDungeonOutline(input = {}) {
+        const traceId = this._newTraceId("outline");
+        const start = performance.now();
+        const payload = {
+            description: String(input.description || "").trim() || "A generic fantasy dungeon.",
+            bounds: {
+                width: Number(input.width) || 90,
+                height: Number(input.height) || 90
+            },
+            target_room_count: Math.max(3, Number(input.targetRoomCount) || 20),
+            shape_preference: String(input.shapePreference || "rectangle")
+        };
+
+        try {
+            console.log(`Vibe Scenes | [${traceId}] planDungeonOutline:start`, {
+                width: payload.bounds.width,
+                height: payload.bounds.height,
+                targetRoomCount: payload.target_room_count,
+                shapePreference: payload.shape_preference,
+                hasDescription: Boolean(payload.description)
+            });
+            const rawText = await this.gemini.generateContent(
+                `DESCRIPTION: ${payload.description}\n\nBOUNDS: ${JSON.stringify(payload.bounds)}\n\nTARGET_ROOM_COUNT: ${payload.target_room_count}\n\nSHAPE_PREFERENCE: ${payload.shape_preference}`,
+                PROMPTS.DUNGEON_OUTLINE_PLANNER,
+                {
+                    model: this.textModel,
+                    temperature: 0.35,
+                    responseMimeType: "application/json"
+                }
+            );
+            const parsed = this._parseJSON(rawText);
+            const rooms = Array.isArray(parsed?.rooms) ? parsed.rooms : [];
+            const connections = Array.isArray(parsed?.connections) ? parsed.connections : [];
+            console.log(`Vibe Scenes | [${traceId}] planDungeonOutline:success`, {
+                rooms: rooms.length,
+                connections: connections.length,
+                maskType: parsed?.mask_type || payload.shape_preference,
+                elapsedMs: Math.round(performance.now() - start)
+            });
+            return {
+                mask_type: parsed?.mask_type || payload.shape_preference || "rectangle",
+                default_floor: parsed?.default_floor,
+                rooms,
+                connections
+            };
+        } catch (error) {
+            console.error(`Vibe Scenes | [${traceId}] planDungeonOutline:failed`, error);
+            return {
+                mask_type: payload.shape_preference || "rectangle",
+                default_floor: undefined,
+                rooms: [],
+                connections: []
+            };
+        }
+    }
+
+    /**
+     * Generate detailed room contents/wishlist from an intentional outline.
+     * @param {Object} input
+     * @param {Array} input.rooms
+     * @param {Array} input.connections
+     * @param {string} input.maskType
+     * @param {string} input.defaultFloor
+     * @param {string} input.description
+     * @param {Array} availableAssets
+     * @returns {Promise<Object>} - { plan, wishlist, default_floor }
+     */
+    async planDungeonFromOutline(input = {}, availableAssets = []) {
+        const traceId = this._newTraceId("outline-content");
+        const start = performance.now();
+        const rooms = Array.isArray(input.rooms) ? input.rooms : [];
+        const minimalRooms = rooms.map(r => ({
+            id: r.id,
+            width: r.width,
+            height: r.height,
+            area: (r.width || 0) * (r.height || 0),
+            theme: r.theme || "",
+            description: r.description || "",
+            connections: Array.isArray(r.connections) ? r.connections : []
+        }));
+        const outline = {
+            mask_type: input.maskType || "rectangle",
+            default_floor: input.defaultFloor || "",
+            rooms: minimalRooms,
+            connections: Array.isArray(input.connections) ? input.connections : []
+        };
+        const prompt = `DESCRIPTION: ${input.description || "A generic fantasy dungeon."}\n\nOUTLINE: ${JSON.stringify(outline)}\n\nAVAILABLE_ASSETS: ${JSON.stringify(availableAssets)}`;
+
+        try {
+            console.log(`Vibe Scenes | [${traceId}] planDungeonFromOutline:start`, {
+                rooms: minimalRooms.length,
+                connections: outline.connections.length,
+                availableAssets: availableAssets.length
+            });
+            const rawText = await this.gemini.generateContent(prompt, PROMPTS.DUNGEON_CONTENT_PLANNER, {
+                model: this.textModel,
+                temperature: 0.25,
+                responseMimeType: "application/json"
+            });
+            const result = this._parseJSON(rawText);
+            if (!result || typeof result !== "object") {
+                throw new Error("Outline content planner response was not a JSON object.");
+            }
+            console.log(`Vibe Scenes | [${traceId}] planDungeonFromOutline:success`, {
+                planRooms: result.plan?.length || 0,
+                wishlist: result.wishlist?.length || 0,
+                hasDefaultFloor: Boolean(result.default_floor),
+                elapsedMs: Math.round(performance.now() - start)
+            });
+            return {
+                plan: result.plan || [],
+                wishlist: result.wishlist || [],
+                default_floor: result.default_floor
+            };
+        } catch (error) {
+            console.error(`Vibe Scenes | [${traceId}] planDungeonFromOutline:failed`, error);
+            return { plan: [], wishlist: [], default_floor: input.defaultFloor };
+        }
+    }
+
+    /**
      * Save a generated asset to the library
      * @param {string} svgContent 
      * @param {string} baseName 
