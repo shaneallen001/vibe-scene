@@ -1,0 +1,131 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    
+    <filter id="mudTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" in="noise" result="coloredNoise" />
+      <feComposite operator="arithmetic" k1="1" k2="0" k3="0" k4="0" in="coloredNoise" in2="SourceGraphic" result="composite" />
+    </filter>
+
+    
+    <filter id="rockRoughness">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="4" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2">
+        <feDistantLight azimuth="45" elevation="60" />
+      </feDiffuseLighting>
+      <feComposite operator="in" in2="SourceGraphic" />
+      <feBlend mode="multiply" in2="SourceGraphic" />
+    </filter>
+
+    
+    <filter id="wetShine" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feSpecularLighting in="blur" surfaceScale="3" specularConstant="1.2" specularExponent="20" lighting-color="#cceeff" result="specular">
+        <fePointLight x="256" y="256" z="300" />
+      </feSpecularLighting>
+      <feComposite in="specular" in2="SourceAlpha" operator="in" result="composite" />
+    </filter>
+    
+    
+    <filter id="insetShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+      <feOffset dx="1" dy="2" result="offsetblur" />
+      <feFlood flood-color="#000000" flood-opacity="0.6" />
+      <feComposite in2="offsetblur" operator="in" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#2e2621" />
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="#3d322b" filter="url(#mudTexture)" opacity="0.6" />
+  
+  
+  <path d="M50,50 Q150,20 200,80 T350,150 T500,100 V0 H0 Z" fill="#1a1410" opacity="0.4" filter="url(#mudTexture)" />
+  <path d="M0,512 Q100,400 250,450 T512,400 V512 Z" fill="#1a1410" opacity="0.5" filter="url(#mudTexture)" />
+  <path d="M300,300 Q400,250 450,300 T400,400 T300,350 Z" fill="#1a1410" opacity="0.4" filter="url(#mudTexture)" />
+
+  
+  <g filter="url(#insetShadow)">
+    
+    <path d="M120,150 C90,140 80,180 100,210 C120,240 160,230 170,200 C180,170 150,160 120,150 Z" fill="#4a4d52" filter="url(#rockRoughness)" />
+    <path d="M380,80 C350,70 340,110 360,140 C380,170 420,160 430,130 C440,100 410,90 380,80 Z" fill="#55585d" filter="url(#rockRoughness)" />
+    <path d="M280,380 C250,370 240,410 260,440 C280,470 320,460 330,430 C340,400 310,390 280,380 Z" fill="#424549" filter="url(#rockRoughness)" />
+    
+    
+    <path d="M50,350 C40,340 30,360 40,380 C50,400 70,390 75,370 C80,350 60,360 50,350 Z" fill="#5a5d63" filter="url(#rockRoughness)" />
+    <path d="M450,250 C430,240 420,260 430,280 C440,300 460,290 470,270 C480,250 460,260 450,250 Z" fill="#52555a" filter="url(#rockRoughness)" />
+    <path d="M220,100 C210,90 200,110 210,130 C220,150 240,140 245,120 C250,100 230,110 220,100 Z" fill="#484b50" filter="url(#rockRoughness)" />
+    
+    
+    <circle cx="180" cy="300" r="8" fill="#606368" />
+    <circle cx="195" cy="285" r="5" fill="#55585d" />
+    <circle cx="320" cy="200" r="6" fill="#4a4d52" />
+    <circle cx="400" cy="450" r="7" fill="#5a5d63" />
+    <circle cx="80" cy="80" r="6" fill="#65686d" />
+  </g>
+
+  
+  <path d="M120,170 L130,180 M140,190 L135,200" stroke="#2b2e33" stroke-width="2" opacity="0.6" stroke-linecap="round" />
+  <path d="M380,100 L390,110 M400,105 L395,120" stroke="#2b2e33" stroke-width="2" opacity="0.6" stroke-linecap="round" />
+
+  
+  <g opacity="0.85">
+    
+    <path d="M180,280 Q150,250 120,280 T80,320 Q100,360 150,350 T200,320 Q210,290 180,280 Z" fill="#1b2226" />
+    <path d="M180,280 Q150,250 120,280 T80,320 Q100,360 150,350 T200,320 Q210,290 180,280 Z" fill="#2f3a42" opacity="0.4" transform="scale(0.9) translate(20,20)" />
+    
+    
+    <path d="M450,50 Q420,30 380,60 T340,100 Q360,140 410,130 T480,90 Q490,60 450,50 Z" fill="#1b2226" />
+    
+    
+    <path d="M300,450 Q280,440 270,460 T280,490 Q300,500 320,480 T300,450 Z" fill="#1b2226" />
+  </g>
+
+  
+  <path d="M100,210 Q90,230 110,240 T140,235" stroke="#3a4a30" stroke-width="4" stroke-linecap="round" opacity="0.6" filter="url(#mudTexture)" />
+  <path d="M360,140 Q350,160 370,170 T400,165" stroke="#3a4a30" stroke-width="4" stroke-linecap="round" opacity="0.6" filter="url(#mudTexture)" />
+  <path d="M180,280 L200,285 L170,295 Z" fill="#2d3826" opacity="0.5" filter="url(#mudTexture)" />
+
+  
+  
+  <g fill="#ffffff" opacity="0.15" filter="url(#wetShine)">
+    <ellipse cx="250" cy="150" rx="40" ry="20" transform="rotate(10)" />
+    <ellipse cx="100" cy="450" rx="50" ry="25" transform="rotate(-5)" />
+    <ellipse cx="400" cy="300" rx="30" ry="15" transform="rotate(20)" />
+  </g>
+
+  
+  <g fill="#ffffff" opacity="0.3">
+    <path d="M130,160 Q150,155 160,170" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4" />
+    <circle cx="125" cy="165" r="2" opacity="0.6" />
+    
+    <path d="M390,90 Q410,85 420,100" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4" />
+    <circle cx="385" cy="95" r="2" opacity="0.6" />
+    
+    <path d="M290,390 Q310,385 320,400" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4" />
+  </g>
+
+  
+  <g fill="#aaccff" opacity="0.2">
+    <path d="M100,300 Q120,290 160,300 T180,310 L180,315 Q150,305 100,315 Z" />
+    <ellipse cx="160" cy="330" rx="10" ry="3" />
+    
+    <path d="M370,80 Q400,70 440,80 L440,85 Q400,75 370,85 Z" />
+    <ellipse cx="420" cy="110" rx="8" ry="2" />
+  </g>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#vignetteGrad)" opacity="0.3" pointer-events="none" />
+  <defs>
+    <radialGradient id="vignetteGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.6" />
+    </radialGradient>
+  </defs>
+</svg>

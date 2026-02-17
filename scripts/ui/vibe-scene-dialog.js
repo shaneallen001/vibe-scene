@@ -208,11 +208,22 @@ export class VibeSceneDialog {
         const progressBar = dialogElement.find('.progress-bar');
 
         statusBar.addClass('active');
+
+        // Track last notification to avoid spamming identical messages
+        let lastNotification = "";
         const updateStatus = (msg, percent) => {
             statusMessage.text(msg);
             progressBar.css('width', `${percent}%`);
             // Force a repaint so UI updates immediately
             if (dialogElement[0]) dialogElement[0].offsetHeight;
+        };
+
+        // Show a Foundry notification for significant milestones (deduped)
+        const notifyMilestone = (msg) => {
+            if (msg !== lastNotification) {
+                lastNotification = msg;
+                ui.notifications.info(`Vibe Scenes | ${msg}`);
+            }
         };
 
         updateStatus("Initializing...", 0);
@@ -222,8 +233,7 @@ export class VibeSceneDialog {
             const dungeonService = new DungeongenService();
             console.log(`Vibe Scenes | [${runId}] DungeongenService created`);
 
-            // Generate the dungeon image
-            // We use the requested gridSize for rendering to ensure 1:1 mapping with the scene grid
+            // Generation phase gets 0-80% of the bar (it does most of the heavy lifting)
             const generationStart = performance.now();
             const { blob: imageData, walls, items, rooms } = await dungeonService.generate({
                 size,
@@ -234,24 +244,34 @@ export class VibeSceneDialog {
                 connectivity,
                 density,
                 seed,
-                gridSize, // Use the prompt's grid size
+                gridSize,
                 deadEndRemoval,
                 peripheralEgress,
                 doorDensity,
                 dungeonDescription: options.dungeonDescription,
                 runId,
-                onProgress: (msg, pct) => updateStatus(msg, Math.floor(pct * 0.5)) // 0-50%
+                onProgress: (msg, pct) => {
+                    const mapped = Math.floor(pct * 0.8); // 0-80%
+                    updateStatus(msg, mapped);
+                    // Notify on key milestones
+                    if (pct <= 5) notifyMilestone("Starting dungeon generation...");
+                    else if (pct >= 22 && pct < 30) notifyMilestone("Dungeon layout ready — planning content...");
+                    else if (pct >= 30 && pct < 35 && msg.includes("asset")) notifyMilestone(msg);
+                    else if (pct >= 80) notifyMilestone("Rendering dungeon map...");
+                }
             });
-            console.log(`Vibe Scenes | [${runId}] Generation finished in ${(performance.now() - generationStart).toFixed(0)}ms`, {
+            const genSec = ((performance.now() - generationStart) / 1000).toFixed(1);
+            console.log(`Vibe Scenes | [${runId}] Generation finished in ${genSec}s`, {
                 imageBytes: imageData?.size || 0,
                 walls: walls?.length || 0,
                 items: items?.length || 0,
                 rooms: rooms?.length || 0
             });
 
-            updateStatus("Dungeon generated! Creating scene...", 50);
+            updateStatus("Dungeon generated! Creating Foundry scene...", 82);
+            notifyMilestone(`Dungeon generated in ${genSec}s — importing scene...`);
 
-            // Import as a new scene
+            // Import phase gets 82-100%
             const sceneImporter = new SceneImporter();
             const importStart = performance.now();
             const scene = await sceneImporter.createScene({
@@ -263,7 +283,7 @@ export class VibeSceneDialog {
                 gridSize,
                 seed,
                 runId,
-                onProgress: (msg, pct) => updateStatus(msg, 50 + Math.floor(pct * 0.5)) // 50-100%
+                onProgress: (msg, pct) => updateStatus(msg, 82 + Math.floor(pct * 0.18)) // 82-100%
             });
             console.log(`Vibe Scenes | [${runId}] Scene import finished in ${(performance.now() - importStart).toFixed(0)}ms`, {
                 sceneId: scene?.id,
@@ -271,7 +291,7 @@ export class VibeSceneDialog {
             });
 
             updateStatus(`Created scene: ${scene.name}`, 100);
-            ui.notifications.info(`Successfully created scene: ${scene.name}`);
+            ui.notifications.info(`Vibe Scenes | Scene "${scene.name}" created successfully!`);
 
             // Optionally activate the scene
             console.log(`Vibe Scenes | [${runId}] Prompting user to activate scene`, { sceneId: scene?.id, sceneName: scene?.name });

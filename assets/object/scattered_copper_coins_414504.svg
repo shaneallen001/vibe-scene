@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <linearGradient id="copperGrad" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#e89f66" />
+      <stop offset="40%" stop-color="#b86e28" />
+      <stop offset="100%" stop-color="#5e3212" />
+    </linearGradient>
+    
+    
+    <linearGradient id="copperDarkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a66b3e" />
+      <stop offset="100%" stop-color="#3d200b" />
+    </linearGradient>
+
+    
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe4c4" />
+      <stop offset="100%" stop-color="#8a4b1f" />
+    </linearGradient>
+
+    
+    <radialGradient id="glint" cx="30%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#fff5e6" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#ffccaa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#b86e28" stop-opacity="0"/>
+    </radialGradient>
+    
+    
+    <filter id="roughness">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0" in="noise" result="coloredNoise"/>
+    </filter>
+  </defs>
+
+  
+  <path d="M150,300 Q180,380 260,390 Q380,380 400,280 Q390,200 300,180 Q180,170 150,300 Z" fill="#1a0f05" fill-opacity="0.5" filter="blur(8px)"/>
+
+  
+  <g transform="translate(0,0)">
+    
+    <g transform="translate(200, 200) rotate(15)">
+      <circle cx="0" cy="0" r="38" fill="url(#copperDarkGrad)" stroke="#2e1705" stroke-width="1"/>
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#5c3312" stroke-width="2" stroke-dasharray="5,2"/>
+    </g>
+    
+    <g transform="translate(310, 220) rotate(-40)">
+      <ellipse cx="0" cy="0" rx="36" ry="34" fill="#6e3e1a" stroke="#2b1606" stroke-width="1"/>
+    </g>
+    
+    <g transform="translate(260, 310) rotate(80)">
+      <circle cx="0" cy="0" r="40" fill="url(#copperDarkGrad)"/>
+      <path d="M-20,-20 L20,20 M-20,20 L20,-20" stroke="#4a2810" stroke-width="3" opacity="0.5"/>
+    </g>
+    
+    <g transform="translate(160, 280) rotate(10)">
+      <circle cx="0" cy="0" r="35" fill="#5e3212"/>
+    </g>
+    
+    <g transform="translate(360, 290) rotate(5)">
+      <circle cx="0" cy="0" r="37" fill="#75421c" stroke="#3d200b"/>
+    </g>
+  </g>
+
+  
+  <g>
+    
+    <g transform="translate(230, 250) rotate(-10)">
+      <circle cx="0" cy="0" r="42" fill="#221105" fill-opacity="0.6" transform="translate(4,4)"/> 
+      <circle cx="0" cy="0" r="42" fill="url(#copperGrad)" stroke="#5e3212" stroke-width="1"/>
+      <circle cx="0" cy="0" r="35" fill="none" stroke="#7a4419" stroke-width="2"/>
+      
+      <path d="M-15,-15 H15 V5 Q15,20 0,25 Q-15,20 -15,5 Z" fill="#9e5a26" opacity="0.6"/>
+    </g>
+
+    
+    <g transform="translate(290, 270) rotate(30)">
+      <ellipse cx="0" cy="0" rx="42" ry="38" fill="#221105" fill-opacity="0.6" transform="translate(3,3)"/>
+      <ellipse cx="0" cy="0" rx="42" ry="38" fill="url(#copperGrad)" stroke="#5e3212" stroke-width="1"/>
+      <path d="M-25,0 L25,0 M0,-25 L0,25" stroke="#8c4e20" stroke-width="2" opacity="0.7"/>
+    </g>
+
+    
+    <g transform="translate(190, 320) rotate(120)">
+      <circle cx="0" cy="0" r="39" fill="#221105" fill-opacity="0.6" transform="translate(2,4)"/>
+      <circle cx="0" cy="0" r="39" fill="url(#copperGrad)"/>
+      <circle cx="0" cy="0" r="39" fill="url(#roughness)" style="mix-blend-mode: multiply" opacity="0.5"/>
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#ffdcb0" stroke-width="1" opacity="0.3"/>
+    </g>
+
+    
+    <g transform="translate(330, 330) rotate(-20)">
+      <circle cx="0" cy="0" r="40" fill="#221105" fill-opacity="0.6" transform="translate(3,2)"/>
+      <circle cx="0" cy="0" r="40" fill="url(#copperGrad)"/>
+      
+      <path d="M20,10 Q25,15 20,20" stroke="#3d200b" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+
+  
+  <g>
+    
+    <g transform="translate(256, 290) rotate(5)">
+      
+      <circle cx="2" cy="4" r="44" fill="#000" fill-opacity="0.5"/>
+      
+      
+      <circle cx="0" cy="0" r="44" fill="url(#copperGrad)" stroke="#703e1a" stroke-width="1"/>
+      
+      
+      <circle cx="0" cy="0" r="36" fill="none" stroke="#c98344" stroke-width="3"/>
+      <circle cx="0" cy="0" r="36" fill="none" stroke="#592d0d" stroke-width="1" transform="translate(0.5,0.5)"/> 
+
+      
+      <path d="M-10,-15 C-5,-15 5,-10 5,0 C5,10 -5,15 -10,15 L-10,25 L10,25 C20,25 20,-25 10,-25 L-10,-25 Z" fill="#915221"/>
+      
+      
+      <path d="M-20,10 L-10,12 M15,-10 L25,-8" stroke="#ffe4c4" stroke-width="0.5" opacity="0.6"/>
+      <path d="M-5,20 L5,22" stroke="#3d200b" stroke-width="0.5" opacity="0.6"/>
+
+      
+      <circle cx="-15" cy="-15" r="20" fill="url(#glint)" opacity="0.8"/>
+      <path d="M-40,-10 Q-44,0 -40,10" stroke="#ffebcd" stroke-width="2" opacity="0.6" fill="none" stroke-linecap="round"/>
+    </g>
+
+    
+    <g transform="translate(180, 240) rotate(-25)">
+      <ellipse cx="2" cy="3" rx="41" ry="39" fill="#000" fill-opacity="0.4"/>
+      <ellipse cx="0" cy="0" rx="41" ry="39" fill="url(#copperGrad)" stroke="#5e3212" stroke-width="1"/>
+      
+      
+      <path d="M0,-25 L3,-15 L12,-12 L3,-9 L0,0 L-3,-9 L-12,-12 L-3,-15 Z" fill="#75421c" transform="translate(0, 5)"/>
+      <circle cx="0" cy="0" r="32" fill="none" stroke="#b06c33" stroke-width="1.5" stroke-dasharray="2,2"/>
+      
+      
+      <ellipse cx="-10" cy="-15" rx="15" ry="10" fill="url(#glint)" opacity="0.6"/>
+    </g>
+
+    
+    <g transform="translate(340, 230) rotate(45)">
+      <circle cx="3" cy="3" r="40" fill="#000" fill-opacity="0.4"/>
+      <circle cx="0" cy="0" r="40" fill="url(#copperGrad)" stroke="#5e3212" stroke-width="1"/>
+      
+      
+      <circle cx="0" cy="0" r="40" fill="url(#roughness)" opacity="0.3"/>
+      
+      
+      <rect x="-15" y="-15" width="30" height="30" rx="5" fill="none" stroke="#8f4f1f" stroke-width="3"/>
+      <circle cx="0" cy="0" r="5" fill="#8f4f1f"/>
+      
+      
+      <path d="M-38,-10 A39,39 0 0,1 -10,-38" stroke="#ffdaad" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </g>
+
+    
+    <g transform="translate(280, 350) rotate(190)">
+      <ellipse cx="2" cy="2" rx="38" ry="36" fill="#000" fill-opacity="0.4"/>
+      <ellipse cx="0" cy="0" rx="38" ry="36" fill="url(#copperGrad)"/>
+      
+      <circle cx="0" cy="0" r="28" fill="none" stroke="#6b3b17" stroke-width="4" opacity="0.5"/>
+      <path d="M-10,20 L10,-20" stroke="#5e3212" stroke-width="1" opacity="0.3"/>
+      <path d="M-25,-10 L-15,-5" stroke="#ffe4c4" stroke-width="1" opacity="0.5"/>
+    </g>
+    
+     
+    <g transform="translate(390, 320) rotate(15)">
+      <circle cx="2" cy="2" r="25" fill="#000" fill-opacity="0.3"/>
+      <circle cx="0" cy="0" r="25" fill="url(#copperGrad)"/>
+      <rect x="-8" y="-8" width="16" height="16" fill="#8a4b1f" opacity="0.8"/>
+    </g>
+    
+     
+    <g transform="translate(130, 210) rotate(-60)">
+      <circle cx="3" cy="3" r="28" fill="#000" fill-opacity="0.3"/>
+      <circle cx="0" cy="0" r="28" fill="url(#copperDarkGrad)"/>
+      <circle cx="0" cy="0" r="20" stroke="#592d0d" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+
+  
+  <circle cx="256" cy="256" r="180" fill="url(#glint)" fill-opacity="0.1" pointer-events="none"/>
+
+</svg>

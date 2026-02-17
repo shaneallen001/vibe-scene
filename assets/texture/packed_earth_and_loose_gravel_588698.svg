@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="soil-texture" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" seed="10" result="noise" />
+      <feColorMatrix type="matrix" in="noise" result="coloredNoise"
+        values="0.4 0 0 0 0.2 
+                0 0.35 0 0 0.15 
+                0 0 0.3 0 0.1 
+                0 0 0 1 0" />
+      <feComposite operator="arithmetic" k1="0" k2="1" k3="0.4" k4="0" in="coloredNoise" in2="SourceGraphic" result="blended" />
+    </filter>
+
+    
+    <filter id="grit" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" seed="5" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0" />
+      <feComposite operator="in" in2="SourceGraphic" />
+    </filter>
+
+    
+    <filter id="rock-displacement" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="3" result="turb" />
+      <feDisplacementMap in2="turb" in="SourceGraphic" scale="8" xChannelSelector="R" yChannelSelector="G" />
+      <feGaussianBlur stdDeviation="0.3" />
+      <feComponentTransfer>
+         <feFuncR type="linear" slope="1.1" intercept="-0.05"/>
+         <feFuncG type="linear" slope="1.1" intercept="-0.05"/>
+         <feFuncB type="linear" slope="1.1" intercept="-0.05"/>
+      </feComponentTransfer>
+    </filter>
+
+    
+    <linearGradient id="rockGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9e9e9e" />
+      <stop offset="100%" stop-color="#616161" />
+    </linearGradient>
+    <linearGradient id="rockGrad2" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#8d6e63" />
+      <stop offset="100%" stop-color="#4e342e" />
+    </linearGradient>
+    <linearGradient id="rockGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cfd8dc" />
+      <stop offset="100%" stop-color="#78909c" />
+    </linearGradient>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#3e2723" />
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="#5d4037" filter="url(#soil-texture)" opacity="0.8" />
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="#000" filter="url(#grit)" opacity="0.3" style="mix-blend-mode: multiply;" />
+
+  
+  <g filter="url(#rock-displacement)" fill="#281a16" opacity="0.6">
+    <circle cx="50" cy="50" r="12" />
+    <circle cx="150" cy="80" r="15" />
+    <circle cx="300" cy="40" r="10" />
+    <circle cx="450" cy="90" r="14" />
+    <circle cx="60" cy="200" r="11" />
+    <circle cx="200" cy="180" r="16" />
+    <circle cx="350" cy="220" r="9" />
+    <circle cx="480" cy="190" r="13" />
+    <circle cx="40" cy="350" r="14" />
+    <circle cx="180" cy="320" r="10" />
+    <circle cx="320" cy="360" r="15" />
+    <circle cx="460" cy="340" r="11" />
+    <circle cx="100" cy="450" r="12" />
+    <circle cx="250" cy="420" r="14" />
+    <circle cx="400" cy="460" r="10" />
+  </g>
+
+  
+  
+  <path d="
+    M 20,20 l 4,2 l -2,4 z 
+    M 80,40 l 5,-2 l 2,5 z
+    M 140,25 l 3,3 l -3,2 z
+    M 220,50 l 4,0 l 1,4 z
+    M 310,30 l -3,3 l 4,2 z
+    M 420,60 l 5,1 l -1,5 z
+    M 490,20 l -4,2 l 1,4 z
+    M 30,120 l 3,3 l -2,3 z
+    M 110,150 l 4,-1 l 2,4 z
+    M 190,110 l 3,3 l -3,3 z
+    M 280,140 l 4,1 l -1,4 z
+    M 360,120 l 3,-2 l 2,4 z
+    M 440,150 l -3,3 l 3,2 z
+    M 50,220 l 4,2 l -2,4 z
+    M 130,240 l 3,-1 l 2,3 z
+    M 210,210 l -3,2 l 2,3 z
+    M 290,230 l 4,0 l 1,4 z
+    M 380,210 l -2,3 l 3,2 z
+    M 470,240 l 4,-1 l -1,4 z
+    M 20,320 l 3,2 l -2,3 z
+    M 100,350 l 4,1 l -1,4 z
+    M 180,310 l -3,2 l 3,2 z
+    M 260,340 l 3,-1 l 2,3 z
+    M 340,320 l 4,2 l -2,3 z
+    M 430,350 l -2,3 l 3,2 z
+    M 40,420 l 3,3 l -3,2 z
+    M 120,450 l 4,-1 l 1,4 z
+    M 200,410 l -3,2 l 3,3 z
+    M 280,440 l 4,1 l -2,4 z
+    M 370,420 l 3,-2 l 2,3 z
+    M 460,450 l -3,3 l 3,2 z
+    M 250,250 l 6,2 l -3,5 z
+    M 15,480 l 4,1 l -1,4 z
+    M 500,490 l -3,-2 l -2,3 z
+    " fill="#6d4c41" opacity="0.8" stroke="none" filter="url(#rock-displacement)" />
+
+  
+  <g filter="url(#rock-displacement)">
+    
+    <g transform="translate(2, 3)" fill="#1a100d" opacity="0.5">
+       <path d="M 90,60 Q 110,50 120,70 Q 115,90 95,85 Q 80,75 90,60 Z" />
+       <path d="M 340,130 Q 360,120 370,140 Q 360,160 340,155 Q 320,145 340,130 Z" />
+       <path d="M 180,250 Q 200,240 210,260 Q 200,280 180,275 Q 160,265 180,250 Z" />
+       <path d="M 420,380 Q 440,370 450,390 Q 440,410 420,405 Q 400,395 420,380 Z" />
+       <path d="M 60,400 Q 80,390 90,410 Q 80,430 60,425 Q 40,415 60,400 Z" />
+       <path d="M 280,40 Q 295,35 305,50 Q 295,65 280,60 Q 265,50 280,40 Z" />
+       <path d="M 460,250 Q 475,245 485,260 Q 475,275 460,270 Q 445,260 460,250 Z" />
+       <path d="M 140,360 Q 155,355 165,370 Q 155,385 140,380 Q 125,370 140,360 Z" />
+       <path d="M 240,150 Q 255,145 265,160 Q 255,175 240,170 Q 225,160 240,150 Z" />
+    </g>
+
+    
+    <g fill="url(#rockGrad1)" stroke="#424242" stroke-width="1">
+       <path d="M 90,60 Q 110,50 120,70 Q 115,90 95,85 Q 80,75 90,60 Z" />
+       <path d="M 420,380 Q 440,370 450,390 Q 440,410 420,405 Q 400,395 420,380 Z" />
+       <path d="M 280,40 Q 295,35 305,50 Q 295,65 280,60 Q 265,50 280,40 Z" />
+    </g>
+
+    
+    <g fill="url(#rockGrad2)" stroke="#3e2723" stroke-width="1">
+       <path d="M 340,130 Q 360,120 370,140 Q 360,160 340,155 Q 320,145 340,130 Z" />
+       <path d="M 60,400 Q 80,390 90,410 Q 80,430 60,425 Q 40,415 60,400 Z" />
+       <path d="M 140,360 Q 155,355 165,370 Q 155,385 140,380 Q 125,370 140,360 Z" />
+    </g>
+
+    
+    <g fill="url(#rockGrad3)" stroke="#546e7a" stroke-width="1">
+       <path d="M 180,250 Q 200,240 210,260 Q 200,280 180,275 Q 160,265 180,250 Z" />
+       <path d="M 460,250 Q 475,245 485,260 Q 475,275 460,270 Q 445,260 460,250 Z" />
+       <path d="M 240,150 Q 255,145 265,160 Q 255,175 240,170 Q 225,160 240,150 Z" />
+    </g>
+  </g>
+
+  
+  
+  <g opacity="0.4" fill="#ffffff" filter="url(#rock-displacement)">
+      <path d="M 92,62 Q 105,58 110,65" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M 342,132 Q 355,128 360,135" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M 182,252 Q 195,248 200,255" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M 422,382 Q 435,378 440,385" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M 62,402 Q 75,398 80,405" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M 242,152 Q 250,148 255,155" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" />
+  </g>
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#soil-texture)" opacity="0.15" style="mix-blend-mode: overlay;" pointer-events="none"/>
+
+</svg>

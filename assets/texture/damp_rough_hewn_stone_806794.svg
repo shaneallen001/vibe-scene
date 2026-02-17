@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <filter id="stoneTexture" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="5" seed="5" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.6 0" in="noise" result="noiseSoft"/>
+      <feDiffuseLighting in="noise" lighting-color="#b0b5ba" surfaceScale="3" result="diffuse">
+        <feDistantLight azimuth="135" elevation="45"/>
+      </feDiffuseLighting>
+      <feComposite operator="arithmetic" k1="1" k2="0.3" k3="0" k4="0" in="diffuse" in2="noiseSoft" result="texturedStone"/>
+    </filter>
+
+    
+    <filter id="wetSheen" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="3" seed="10" result="liquidNoise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 -1.5 1.2" in="liquidNoise" result="liquidMask"/>
+      <feSpecularLighting in="liquidNoise" surfaceScale="6" specularConstant="1.8" specularExponent="35" lighting-color="#eef6ff" result="specular">
+        <fePointLight x="256" y="-200" z="400"/>
+      </feSpecularLighting>
+      <feComposite operator="in" in="specular" in2="liquidMask" result="wetHighlights"/>
+    </filter>
+
+    
+    <filter id="groutShadow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feOffset dx="1" dy="2" result="offsetBlur"/>
+      <feComponentTransfer in="offsetBlur">
+        <feFuncA type="linear" slope="0.8"/>
+      </feComponentTransfer>
+    </filter>
+
+    
+    <pattern id="grain" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+       <rect width="64" height="64" fill="#000" fill-opacity="0.1"/>
+       <circle cx="32" cy="32" r="16" fill="#fff" fill-opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  
+  <rect width="512" height="512" fill="#1a1c1e"/>
+  
+  
+  <g stroke="#0e1012" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    
+    
+    <path d="M-10,-10 L140,-10 L120,110 L10,130 Z" fill="#3a3e42" filter="url(#stoneTexture)"/>
+    <path d="M150,-10 L300,-10 L320,80 L160,100 Z" fill="#42464a" filter="url(#stoneTexture)"/>
+    <path d="M310,-10 L522,-10 L522,120 L330,90 Z" fill="#383c40" filter="url(#stoneTexture)"/>
+
+    
+    <path d="M-10,140 L110,120 L150,230 L-10,250 Z" fill="#464b50" filter="url(#stoneTexture)"/>
+    <path d="M130,120 L310,90 L340,210 L160,240 Z" fill="#35393d" filter="url(#stoneTexture)"/>
+    <path d="M320,100 L522,130 L522,260 L350,220 Z" fill="#4a5055" filter="url(#stoneTexture)"/>
+
+    
+    <path d="M-10,260 L140,240 L120,380 L-10,360 Z" fill="#3e4246" filter="url(#stoneTexture)"/>
+    <path d="M150,250 L330,220 L310,350 L160,390 Z" fill="#41474d" filter="url(#stoneTexture)"/>
+    <path d="M340,230 L522,270 L522,380 L320,360 Z" fill="#363a3e" filter="url(#stoneTexture)"/>
+
+    
+    <path d="M-10,370 L110,390 L130,522 L-10,522 Z" fill="#454a4f" filter="url(#stoneTexture)"/>
+    <path d="M120,400 L300,360 L340,522 L140,522 Z" fill="#3b3f43" filter="url(#stoneTexture)"/>
+    <path d="M310,370 L522,390 L522,522 L350,522 Z" fill="#484d52" filter="url(#stoneTexture)"/>
+    
+    
+    <path d="M125,105 L155,105 L155,125 L125,115 Z" fill="#2f3336" filter="url(#stoneTexture)"/>
+    <path d="M315,215 L345,215 L340,235 L310,225 Z" fill="#2f3336" filter="url(#stoneTexture)"/>
+    <path d="M150,385 L170,385 L160,405 L140,395 Z" fill="#2f3336" filter="url(#stoneTexture)"/>
+  </g>
+
+  
+  
+  <g fill="#000000" fill-opacity="0.3" filter="url(#groutShadow)">
+    <path d="M120,110 Q140,115 160,100 L165,105 L125,120 Z"/>
+    <path d="M320,80 Q330,90 330,90 L310,100 Z"/>
+    <path d="M160,240 L340,210 L345,220 L155,255 Z"/>
+    <path d="M320,360 L310,370 L300,360 Z"/>
+  </g>
+
+  
+  
+  <g opacity="0.7">
+    
+    
+    <path d="M10,10 L120,20 L100,100 L20,110 Z" fill="#607080" filter="url(#wetSheen)" opacity="0.6"/>
+    
+    <path d="M160,130 L280,110 L300,200 L180,220 Z" fill="#607080" filter="url(#wetSheen)" opacity="0.8"/>
+    
+    <path d="M350,130 L500,150 L480,240 L370,210 Z" fill="#607080" filter="url(#wetSheen)" opacity="0.5"/>
+    
+    <path d="M30,280 L120,270 L100,350 L20,340 Z" fill="#607080" filter="url(#wetSheen)" opacity="0.6"/>
+    
+    <path d="M350,400 L500,410 L480,480 L360,490 Z" fill="#607080" filter="url(#wetSheen)" opacity="0.7"/>
+  </g>
+
+  
+  <path d="M130,110 Q140,120 150,110 Q145,100 130,110 Z" fill="#1a2530" fill-opacity="0.8" stroke="none"/>
+  <ellipse cx="140" cy="110" rx="8" ry="4" fill="#aaccff" fill-opacity="0.1"/>
+  
+  <path d="M320,215 Q335,225 350,215 Q335,205 320,215 Z" fill="#1a2530" fill-opacity="0.8" stroke="none"/>
+  <ellipse cx="335" cy="215" rx="10" ry="5" fill="#aaccff" fill-opacity="0.1"/>
+
+  
+  <filter id="mossNoise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0.2  0 0 0 0 0.35  0 0 0 0 0.1  0 0 0 0.4 0"/>
+  </filter>
+  
+  <rect x="0" y="0" width="512" height="512" filter="url(#mossNoise)" opacity="0.3" style="mix-blend-mode: multiply;"/>
+
+  
+  <radialGradient id="vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.2"/>
+  </radialGradient>
+  <rect width="512" height="512" fill="url(#vignette)" style="mix-blend-mode: overlay;"/>
+
+</svg>

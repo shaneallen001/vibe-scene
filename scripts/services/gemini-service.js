@@ -1,11 +1,19 @@
 /**
  * Gemini Service
- * Handles interactions with Google's Gemini API for SVG generation
+ * Handles interactions with Google's Gemini API for SVG generation.
+ * Includes automatic retry with exponential backoff for rate-limit (429) errors.
  */
 
 // Configuration constants
 const GEMINI_API_VERSION = "v1beta";
 const BASE_URL = "https://generativelanguage.googleapis.com";
+
+const RETRY_DEFAULTS = {
+    maxRetries: 4,
+    baseDelayMs: 2000,
+    maxDelayMs: 60000,
+    retryableStatuses: [429, 500, 503]
+};
 
 export class GeminiService {
     constructor(apiKey, model = "gemini-3-flash-preview") {
@@ -89,43 +97,64 @@ export class GeminiService {
     }
 
     /**
-     * Internal API call wrapper with basic error handling
+     * Internal API call wrapper with automatic retry and exponential backoff.
+     * Retries on 429 (rate limit), 500, and 503 errors.
      */
     async _callApi(body, timeoutMs = 90000, modelOverride = "") {
         const activeModel = modelOverride || this.model;
         const url = `${BASE_URL}/${GEMINI_API_VERSION}/models/${activeModel}:generateContent?key=${this.apiKey}`;
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), timeoutMs);
-        const requestStart = performance.now();
-        let response;
-        try {
-            response = await fetch(url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-                signal: controller.signal
-            });
-        } catch (error) {
-            if (error?.name === "AbortError") {
-                throw new Error(`Gemini API request timed out after ${timeoutMs}ms`);
+        const { maxRetries, baseDelayMs, maxDelayMs, retryableStatuses } = RETRY_DEFAULTS;
+
+        for (let attempt = 0; attempt <= maxRetries; attempt++) {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), timeoutMs);
+            const requestStart = performance.now();
+            let response;
+            try {
+                response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body),
+                    signal: controller.signal
+                });
+            } catch (error) {
+                clearTimeout(timeout);
+                if (error?.name === "AbortError") {
+                    throw new Error(`Gemini API request timed out after ${timeoutMs}ms`);
+                }
+                throw error;
+            } finally {
+                clearTimeout(timeout);
             }
-            throw error;
-        } finally {
-            clearTimeout(timeout);
-        }
-        console.log("Vibe Scenes | Gemini API response received", {
-            model: activeModel,
-            status: response.status,
-            elapsedMs: Math.round(performance.now() - requestStart)
-        });
 
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(`Gemini API Error ${response.status}: ${errorData.error?.message || response.statusText}`);
-        }
+            const elapsedMs = Math.round(performance.now() - requestStart);
+            console.log("Vibe Scenes | Gemini API response received", {
+                model: activeModel,
+                status: response.status,
+                attempt: attempt + 1,
+                elapsedMs
+            });
 
-        return await response.json();
+            if (response.ok) {
+                return await response.json();
+            }
+
+            const isRetryable = retryableStatuses.includes(response.status);
+            if (!isRetryable || attempt >= maxRetries) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(`Gemini API Error ${response.status}: ${errorData.error?.message || response.statusText}`);
+            }
+
+            // Compute backoff: honour Retry-After header if present, else exponential
+            let delayMs;
+            const retryAfter = response.headers?.get?.("Retry-After");
+            if (retryAfter && Number.isFinite(Number(retryAfter))) {
+                delayMs = Math.min(Number(retryAfter) * 1000, maxDelayMs);
+            } else {
+                delayMs = Math.min(baseDelayMs * Math.pow(2, attempt) + Math.random() * 1000, maxDelayMs);
+            }
+            console.warn(`Vibe Scenes | Gemini API ${response.status} — retrying in ${Math.round(delayMs)}ms (attempt ${attempt + 1}/${maxRetries})`, { model: activeModel });
+            await new Promise(resolve => setTimeout(resolve, delayMs));
+        }
     }
-
-
 }

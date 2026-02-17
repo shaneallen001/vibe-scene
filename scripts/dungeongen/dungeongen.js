@@ -69,9 +69,8 @@ export async function generateDungeon(options = {}) {
     const renderer = new DungeonRenderer(grid, {
         cellSize: options.gridSize || 20,
         drawNumbers: false,
-        cellSize: options.gridSize || 20,
-        drawNumbers: false,
-        floorTexture: options.floorTexture || 'modules/vibe-scenes/assets/generated/texture/floor_stone_block_large.svg'
+        floorTexture: options.floorTexture || 'modules/vibe-scenes/assets/generated/texture/floor_stone_block_large.svg',
+        wallTexture: options.wallTexture || null,
     });
 
     console.log("Dungeongen | Rendering to blob...");
@@ -119,9 +118,8 @@ export async function generateDungeonWithData(options = {}) {
     const renderer = new DungeonRenderer(grid, {
         cellSize: options.gridSize || 20,
         drawNumbers: true,
-        cellSize: options.gridSize || 20,
-        drawNumbers: true,
-        floorTexture: options.floorTexture || 'modules/vibe-scenes/assets/generated/texture/floor_stone_block_large.svg'
+        floorTexture: options.floorTexture || 'modules/vibe-scenes/assets/generated/texture/floor_stone_block_large.svg',
+        wallTexture: options.wallTexture || null,
     });
 
     const blob = await renderer.renderToBlob();

@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" width="512" height="512">
+  <defs>
+    
+    <filter id="woolTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0.15 0" in="noise" result="coloredNoise"/>
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic"/>
+    </filter>
+
+    
+    <linearGradient id="rollGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2c3e50" />
+      <stop offset="15%" stop-color="#455a64" />
+      <stop offset="50%" stop-color="#607d8b" />
+      <stop offset="85%" stop-color="#455a64" />
+      <stop offset="100%" stop-color="#263238" />
+    </linearGradient>
+
+    
+    <linearGradient id="creviceShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    
+    
+    <linearGradient id="strapGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3e2723"/>
+      <stop offset="50%" stop-color="#5d4037"/>
+      <stop offset="100%" stop-color="#3e2723"/>
+    </linearGradient>
+  </defs>
+
+  
+  <ellipse cx="256" cy="280" rx="220" ry="110" fill="#000000" fill-opacity="0.4" filter="blur(8px)"/>
+
+  
+  <g transform="translate(0, 20)">
+    
+    
+    <path d="M60,180 Q60,280 256,290 Q452,280 452,180 L440,180 Q440,260 256,270 Q72,260 72,180 Z" fill="#37474f" stroke="#263238" stroke-width="2"/>
+
+    
+    <path d="M50,140 C50,80 100,60 256,60 C412,60 462,80 462,140 L462,240 C462,300 412,320 256,320 C100,320 50,300 50,240 Z" 
+          fill="url(#rollGradient)" stroke="#263238" stroke-width="1.5"/>
+    
+    
+    <path d="M52,142 C52,82 102,62 256,62 C410,62 460,82 460,142 L460,238 C460,298 410,318 256,318 C102,318 52,298 52,238 Z" 
+          fill="url(#rollGradient)" filter="url(#woolTexture)" opacity="0.9"/>
+
+    
+    <path d="M55,180 Q256,210 457,180" fill="none" stroke="#263238" stroke-width="3" stroke-opacity="0.6"/>
+    <path d="M55,182 Q256,212 457,182 L455,200 Q256,230 57,200 Z" fill="#455a64" fill-opacity="0.5" filter="url(#woolTexture)"/>
+
+    
+    <g fill="none" stroke="#102027" stroke-width="3" stroke-linecap="round">
+      
+      <path d="M65,160 Q75,180 65,200 M75,150 Q95,180 75,210" opacity="0.6"/>
+      
+      <path d="M447,160 Q437,180 447,200 M437,150 Q417,180 437,210" opacity="0.6"/>
+    </g>
+
+    
+    <g fill="none" stroke="#263238" stroke-width="1" stroke-opacity="0.3">
+      <path d="M120,80 Q140,120 125,160"/>
+      <path d="M380,90 Q360,130 385,170"/>
+      <path d="M250,70 Q260,150 245,220"/>
+      <path d="M180,280 Q220,290 260,285"/>
+    </g>
+
+    
+    <g fill="#1a1a1a">
+      
+      <path d="M140,100 Q145,95 150,100 Q155,105 150,110 Q145,115 140,110 Q135,105 140,100 Z" stroke="#78909c" stroke-width="1"/>
+      <path d="M142,102 L148,108" stroke="#78909c" stroke-width="0.5" opacity="0.5"/>
+      
+      
+      <path d="M240,160 Q245,155 250,162 Q255,165 248,170 Q240,172 238,165 Z" stroke="#78909c" stroke-width="1"/>
+      <circle cx="260" cy="150" r="3" stroke="#78909c" stroke-width="0.5"/>
+      
+      
+      <path d="M400,200 Q405,190 415,195 Q420,205 410,210 Q400,215 395,205 Z" stroke="#78909c" stroke-width="1"/>
+      
+      
+      <path d="M135,95 L140,100 M150,95 L150,100 M155,110 L160,112" stroke="#cfd8dc" stroke-width="1" stroke-linecap="round"/>
+      <path d="M235,165 L240,165 M250,170 L252,175" stroke="#cfd8dc" stroke-width="1" stroke-linecap="round"/>
+    </g>
+
+    
+    <g>
+      
+      <path d="M100,65 Q100,20 100,20 L130,20 Q130,65 130,65 L130,315 Q130,340 130,340 L100,340 Q100,315 100,315 Z" 
+            fill="url(#strapGradient)" stroke="#261a15" stroke-width="1"/>
+      
+      <path d="M130,65 L135,65 L135,315 L130,315 Z" fill="#000000" fill-opacity="0.3"/>
+      
+      <rect x="95" y="160" width="40" height="25" rx="3" fill="#8d6e63" stroke="#3e2723"/>
+      <rect x="105" y="165" width="20" height="15" rx="1" fill="#3e2723"/>
+      <line x1="115" y1="165" x2="115" y2="180" stroke="#a1887f" stroke-width="2"/>
+
+      
+      <path d="M380,68 Q380,20 380,20 L410,20 Q410,68 410,68 L415,180 L405,312 Q405,335 405,335 L375,335 Q375,312 375,312 L380,180 Z" 
+            fill="url(#strapGradient)" stroke="#261a15" stroke-width="1"/>
+       
+      <path d="M410,68 L415,68 L410,312 L405,312 Z" fill="#000000" fill-opacity="0.3"/>
+      
+      <rect x="370" y="170" width="45" height="25" rx="3" fill="#8d6e63" stroke="#3e2723" transform="rotate(5 392 182)"/>
+      <rect x="382" y="175" width="20" height="15" rx="1" fill="#3e2723" transform="rotate(5 392 182)"/>
+      
+      
+      <path d="M390,195 Q380,230 360,240" fill="none" stroke="#5d4037" stroke-width="20" stroke-linecap="round"/>
+      <path d="M390,195 Q380,230 360,240" fill="none" stroke="#3e2723" stroke-width="2" stroke-dasharray="2,2" opacity="0.5"/>
+    </g>
+
+    
+    
+    <path d="M60,120 Q256,90 452,120" fill="none" stroke="#cfd8dc" stroke-width="30" stroke-opacity="0.1" filter="blur(8px)"/>
+    
+    
+    <path d="M50,140 C50,80 100,60 256,60 C412,60 462,80 462,140" fill="none" stroke="#b0bec5" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="10, 5"/>
+    
+    
+    <path d="M100,315 L130,315 L130,320 L100,320 Z" fill="#000000" fill-opacity="0.5"/>
+    <path d="M375,312 L405,312 L405,317 L375,317 Z" fill="#000000" fill-opacity="0.5"/>
+
+  </g>
+</svg>

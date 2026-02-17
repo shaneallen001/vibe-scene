@@ -68,15 +68,12 @@ export class WallBuilder {
     }
 
     _extractSegments() {
-        // Identify all cell edges that should be walls
-        // We iterate through all cells. If a cell is FLOOR and its neighbor is EMPTY (or OOB), 
-        // the shared edge is a wall.
+        // Identify all cell edges that should be walls.
+        // Vision-blocking walls are placed at the FLOOR/non-FLOOR boundary,
+        // i.e. where walkable floor meets the wall band (or empty space).
 
-        // Track vertical and horizontal segments separately for merging later
-        // Format: { x, y, length, type } where x,y is top-left of the edge
-
-        // Helper to check if a cell is solid (Floor)
-        const isFloor = (x, y) => this.grid.get(x, y) !== CellType.EMPTY;
+        // Helper: true only for walkable FLOOR cells (not WALL texture cells)
+        const isFloor = (x, y) => this.grid.get(x, y) === CellType.FLOOR;
 
         // Helper to check if a specific edge is occupied by a door
         const getDoorAt = (x, y, dir) => {

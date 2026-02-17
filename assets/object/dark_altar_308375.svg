@@ -1,0 +1,102 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="obsidianSurface" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a35"/>
+      <stop offset="50%" stop-color="#15151a"/>
+      <stop offset="100%" stop-color="#08080a"/>
+    </linearGradient>
+    <linearGradient id="obsidianSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a4a55" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#5a5a65" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4a4a55" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="necroGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#33ff99" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#115533" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bloodPool" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#8a1c1c"/>
+      <stop offset="70%" stop-color="#4a0a0a"/>
+      <stop offset="100%" stop-color="#2e0505"/>
+    </radialGradient>
+  </defs>
+
+  
+  <ellipse cx="256" cy="280" rx="160" ry="110" fill="url(#shadowGrad)" shape-rendering="geometricPrecision"/>
+
+  
+  <path d="M120,160 L140,340 L256,380 L372,340 L392,160 L256,120 Z" fill="#1a1820" stroke="#0d0c10" stroke-width="2" stroke-linejoin="round"/>
+  
+  <path d="M125,165 L142,335 L256,370 L370,335 L387,165 L256,128 Z" fill="#25222b" stroke="none"/>
+  
+  
+  <path d="M150,150 L150,310 L256,350 L362,310 L362,150 L256,100 Z" fill="#0f0f12" stroke="#050505" stroke-width="4" stroke-linejoin="round"/>
+
+  
+  <path d="M150,310 L256,350 L362,310 L362,280 L256,320 L150,280 Z" fill="#15151a"/> 
+  <path d="M150,150 L150,310 L256,350 L256,190 Z" fill="#1a1a20" fill-opacity="0.5"/> 
+  <path d="M362,150 L362,310 L256,350 L256,190 Z" fill="#050508" fill-opacity="0.7"/> 
+
+  
+  <path d="M160,150 L160,290 L256,320 L352,290 L352,150 L256,110 Z" fill="url(#obsidianSurface)" stroke="#3a3a45" stroke-width="1"/>
+
+  
+  
+  <path d="M160,150 L200,180 L256,170 L300,140" fill="none" stroke="#3a3a45" stroke-width="0.5" opacity="0.4"/>
+  <path d="M352,290 L300,260 L256,280 L200,300" fill="none" stroke="#3a3a45" stroke-width="0.5" opacity="0.3"/>
+  <path d="M160,290 L210,250 L210,190 L160,150" fill="#2a2a35" fill-opacity="0.1"/>
+  <path d="M352,150 L300,190 L300,250 L352,290" fill="#000000" fill-opacity="0.2"/>
+
+  
+  <g transform="translate(256, 215) scale(0.9)">
+    
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#1a1a1a" stroke-width="4"/>
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#2effa6" stroke-width="1.5" stroke-opacity="0.4"/>
+    
+    
+    <path d="M-20,-20 L0,20 L20,-20 L0,-10 Z" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M-20,-20 L0,20 L20,-20 L0,-10 Z" fill="none" stroke="#2effa6" stroke-width="1" stroke-linejoin="round" stroke-opacity="0.6"/>
+    
+    
+    <path d="M0,-45 L0,-65 M40,25 L55,35 M-40,25 L-55,35" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M0,-45 L0,-65 M40,25 L55,35 M-40,25 L-55,35" stroke="#2effa6" stroke-width="1" stroke-linecap="round" stroke-opacity="0.5"/>
+    
+    
+    <circle cx="0" cy="0" r="30" fill="url(#necroGlow)" opacity="0.3" pointer-events="none"/>
+  </g>
+
+  
+  
+  <path d="M230,200 Q250,190 270,205 Q280,220 275,235 Q260,250 240,240 Q220,230 230,200 Z" fill="url(#bloodPool)" opacity="0.9" style="mix-blend-mode: multiply;"/>
+  
+  
+  <path d="M275,235 Q290,245 300,260 Q305,270 300,280 Q290,290 280,280 Q270,260 275,235" fill="#4a0a0a" opacity="0.85"/>
+  <path d="M300,280 L302,300 Q303,310 300,315 Q297,310 298,300 L296,282" fill="#3a0505" opacity="0.9"/>
+
+  
+  <circle cx="210" cy="220" r="3" fill="#4a0a0a" opacity="0.8"/>
+  <circle cx="220" cy="260" r="5" fill="#5a1010" opacity="0.7"/>
+  <path d="M320,180 Q325,175 330,180 Q335,185 330,190 Q325,195 320,190 Z" fill="#3a0505" opacity="0.8"/>
+
+  
+  
+  <path d="M160,150 L256,110 L352,150" fill="none" stroke="#707080" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
+  <path d="M160,150 L160,290 L256,320" fill="none" stroke="#505060" stroke-width="1" stroke-opacity="0.4"/>
+  <path d="M352,150 L352,290 L256,320" fill="none" stroke="#303040" stroke-width="1" stroke-opacity="0.3"/>
+
+  
+  <path d="M256,110 L265,114" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="240" cy="210" r="1.5" fill="#ffaaaa" opacity="0.6"/> 
+  <path d="M160,150 L165,160" stroke="#aaccff" stroke-width="1.5" opacity="0.7"/>
+  <path d="M352,290 L345,285" stroke="#aaccff" stroke-width="1" opacity="0.5"/>
+
+  
+  <path d="M200,310 L210,305 L205,295" fill="none" stroke="#000000" stroke-width="1.5" opacity="0.6"/>
+  <path d="M340,160 L330,170" fill="none" stroke="#000000" stroke-width="1" opacity="0.6"/>
+
+</svg>

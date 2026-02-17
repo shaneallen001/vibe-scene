@@ -814,5 +814,328 @@
     "width": 1,
     "height": 1,
     "generatedAt": 1771220768987
+  },
+  "86": {
+    "id": 86,
+    "name": "broken_stone_statue_515534",
+    "prompt": "broken stone statue",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/broken_stone_statue_515534.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298515552
+  },
+  "87": {
+    "id": 87,
+    "name": "thick_spider_webbing_572611",
+    "prompt": "thick spider webbing",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/thick_spider_webbing_572611.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298572622
+  },
+  "88": {
+    "id": 88,
+    "name": "desiccated_prey_cocoon_632145",
+    "prompt": "desiccated prey cocoon",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/desiccated_prey_cocoon_632145.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298632157
+  },
+  "89": {
+    "id": 89,
+    "name": "hanging_vines_751070",
+    "prompt": "hanging vines",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/hanging_vines_751070.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298751078
+  },
+  "90": {
+    "id": 90,
+    "name": "damp_rough_hewn_stone_806794",
+    "prompt": "damp rough-hewn stone",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/damp_rough_hewn_stone_806794.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298806803
+  },
+  "91": {
+    "id": 91,
+    "name": "damp_cave_floor_861499",
+    "prompt": "damp cave floor",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/damp_cave_floor_861499.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771298861512
+  },
+  "92": {
+    "id": 92,
+    "name": "thick_smoke_cloud_351390",
+    "prompt": "thick smoke cloud",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/thick_smoke_cloud_351390.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300351404
+  },
+  "93": {
+    "id": 93,
+    "name": "wall_mounted_torch_371939",
+    "prompt": "wall-mounted torch",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/wall_mounted_torch_371939.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300371946
+  },
+  "94": {
+    "id": 94,
+    "name": "scattered_copper_coins_414504",
+    "prompt": "scattered copper coins",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/scattered_copper_coins_414504.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300414512
+  },
+  "95": {
+    "id": 95,
+    "name": "moth_eaten_bedroll_426739",
+    "prompt": "moth-eaten bedroll",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/moth_eaten_bedroll_426739.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300426746
+  },
+  "96": {
+    "id": 96,
+    "name": "spilled_grog_puddle_461555",
+    "prompt": "spilled grog puddle",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/spilled_grog_puddle_461555.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300461563
+  },
+  "97": {
+    "id": 97,
+    "name": "stack_of_wooden_crates_486914",
+    "prompt": "stack of wooden crates",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/stack_of_wooden_crates_486914.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300486922
+  },
+  "98": {
+    "id": 98,
+    "name": "large_ale_barrel_521815",
+    "prompt": "large ale barrel",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/large_ale_barrel_521815.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300521834
+  },
+  "99": {
+    "id": 99,
+    "name": "half_empty_bottle_of_rum_555795",
+    "prompt": "half-empty bottle of rum",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/half_empty_bottle_of_rum_555795.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300555802
+  },
+  "100": {
+    "id": 100,
+    "name": "packed_earth_and_loose_gravel_588698",
+    "prompt": "packed earth and loose gravel",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/packed_earth_and_loose_gravel_588698.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771300588705
+  },
+  "101": {
+    "id": 101,
+    "name": "dark_altar_308375",
+    "prompt": "dark altar",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/dark_altar_308375.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771302308387
+  },
+  "102": {
+    "id": 102,
+    "name": "stone_sarcophagus_311440",
+    "prompt": "stone sarcophagus",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/stone_sarcophagus_311440.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771302311448
+  },
+  "103": {
+    "id": 103,
+    "name": "necrotic_rune_circle_362017",
+    "prompt": "necrotic rune circle",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/necrotic_rune_circle_362017.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771302362029
+  },
+  "104": {
+    "id": 104,
+    "name": "stone_walls_etched_with_glowing_green_runes_369594",
+    "prompt": "stone walls etched with glowing green runes",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/stone_walls_etched_with_glowing_green_runes_369594.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771302369603
   }
 }

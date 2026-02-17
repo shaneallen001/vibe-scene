@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="graniteTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="4" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0" in="noise" result="coloredNoise" />
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic" />
+    </filter>
+
+    
+    <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 18 -7" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    
+    
+    <filter id="insetShadow">
+      <feOffset dx="2" dy="4" />
+      <feGaussianBlur stdDeviation="3" result="offset-blur" />
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
+      <feFlood flood-color="black" flood-opacity="0.8" result="color" />
+      <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+      <feComposite operator="over" in="shadow" in2="SourceGraphic" />
+    </filter>
+
+    
+    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a3a40" />
+      <stop offset="50%" stop-color="#2a2a30" />
+      <stop offset="100%" stop-color="#1a1a20" />
+    </linearGradient>
+
+    
+    <radialGradient id="crackGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#39ff14" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#051a05" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#0a0a0c" />
+
+  
+  <g fill="url(#crackGlow)">
+    
+    <rect x="160" y="0" width="20" height="512" opacity="0.4" />
+    <rect x="360" y="0" width="20" height="512" opacity="0.4" />
+    
+    <rect x="0" y="120" width="512" height="20" opacity="0.4" />
+    <rect x="0" y="300" width="512" height="20" opacity="0.4" />
+    <rect x="0" y="480" width="512" height="20" opacity="0.4" />
+  </g>
+
+  
+  <g filter="url(#insetShadow)">
+    
+    
+    
+    <path d="M-10,-10 L150,-10 L155,110 L10,115 L-10,110 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M175,-10 L345,-10 L340,115 L180,110 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M365,-10 L522,-10 L522,110 L370,115 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+
+    
+    
+    <path d="M-40,135 L80,130 L85,290 L-40,285 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M105,135 L330,130 L325,295 L110,290 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M350,130 L540,135 L540,285 L355,290 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+
+    
+    
+    <path d="M-10,315 L160,310 L155,470 L-10,475 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M180,315 L350,310 L345,465 L185,470 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    
+    <path d="M370,310 L522,315 L522,475 L375,470 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+
+    
+    <path d="M-10,495 L150,490 L155,530 L-10,530 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    <path d="M175,490 L345,495 L340,530 L180,530 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+    <path d="M365,495 L522,490 L522,530 L370,530 Z" fill="url(#stoneGrad)" stroke="#111" stroke-width="2" filter="url(#graniteTexture)" />
+  </g>
+
+  
+  <g stroke="#000" stroke-width="1.5" opacity="0.6" fill="none" stroke-linecap="round">
+    <path d="M50,50 L70,70 M60,60 L50,80" />
+    <path d="M250,200 L270,220 M260,210 L280,200" />
+    <path d="M400,400 L420,410 M410,405 L405,425" />
+    <path d="M120,350 Q130,360 125,370" />
+    <path d="M300,50 Q310,60 305,70" />
+  </g>
+
+  
+  <g stroke="#39ff14" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#greenGlow)">
+    
+    <path d="M60,30 L80,80 L100,30 M60,30 L100,30" opacity="0.9" />
+    
+    
+    <path d="M240,40 L240,90 M220,50 L260,50 M220,80 L260,80" opacity="0.8" />
+    
+    
+    <path d="M420,30 L440,80 L460,50 L420,50" opacity="0.9" />
+
+    
+    <path d="M200,180 L220,230 L240,180 M220,180 L220,230" opacity="0.9" />
+    
+    
+    <path d="M400,180 Q420,160 440,180 T480,180 M440,180 L440,230" opacity="0.8" />
+
+    
+    <path d="M60,360 L60,410 L100,385 Z" opacity="0.9" />
+
+    
+    <path d="M250,350 L230,400 L270,400 L250,350 M250,370 L250,420" opacity="0.85" />
+  </g>
+
+  
+  <g stroke="#4aff4a" stroke-width="1" fill="none" opacity="0.5" filter="url(#greenGlow)">
+    <path d="M165,10 L160,120 M160,120 L168,130" />
+    <path d="M350,10 L355,120" />
+    <path d="M10,120 L500,118" />
+    <path d="M90,300 L340,295" />
+  </g>
+
+  
+  <g stroke="white" stroke-width="1.5" fill="none" opacity="0.15">
+    <path d="M15,110 L10,10 L140,10" /> 
+    <path d="M185,110 L180,10 L335,10" /> 
+    <path d="M375,110 L370,10 L512,10" /> 
+    
+    <path d="M-30,285 L-35,140 L70,135" /> 
+    <path d="M115,290 L110,140 L320,135" /> 
+    <path d="M360,290 L355,140 L530,135" /> 
+
+    <path d="M15,470 L10,320 L150,315" /> 
+    <path d="M190,465 L185,320 L340,315" /> 
+    <path d="M380,470 L375,320 L512,315" /> 
+  </g>
+
+  
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="70%" stop-color="#000" stop-opacity="0" />
+    <stop offset="100%" stop-color="#000" stop-opacity="0.6" />
+  </radialGradient>
+  <rect width="512" height="512" fill="url(#vignette)" style="pointer-events:none;" />
+
+</svg>

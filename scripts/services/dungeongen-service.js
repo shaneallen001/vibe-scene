@@ -74,6 +74,8 @@ export class DungeongenService {
             };
             console.log(`Vibe Scenes | [${runId}] Layout config`, { width, height, numRooms, generationMode, maskType: generatorOptions.maskType });
 
+            if (options.onProgress) options.onProgress("Generating dungeon layout...", 5);
+
             const layoutStart = performance.now();
             let planningContext = {};
             let grid = null;
@@ -83,7 +85,7 @@ export class DungeongenService {
                 const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
                 const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
                 const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
-                if (options.onProgress) options.onProgress("Designing intentional dungeon outline...", 15);
+                if (options.onProgress) options.onProgress("Designing intentional dungeon outline...", 10);
                 const outline = await aiService.planDungeonOutline({
                     width,
                     height,
@@ -91,6 +93,7 @@ export class DungeongenService {
                     shapePreference: options.maskType || "rectangle",
                     description: options.dungeonDescription
                 });
+                if (options.onProgress) options.onProgress("Building rooms from outline...", 18);
                 planningContext = { intentionalOutline: outline };
                 generatorOptions.maskType = outline?.mask_type || generatorOptions.maskType;
                 const generator = new DungeonGenerator(width, height, generatorOptions);
@@ -104,35 +107,36 @@ export class DungeongenService {
                 if (generationMode === "intentional" && !apiKey) {
                     console.warn(`Vibe Scenes | [${runId}] Intentional mode requested, but no Gemini API key found. Falling back to procedural layout.`);
                 }
+                if (options.onProgress) options.onProgress("Carving rooms and corridors...", 12);
                 const generator = new DungeonGenerator(width, height, generatorOptions);
                 grid = generator.generate();
             }
             console.log(`Vibe Scenes | [${runId}] Layout generated in ${(performance.now() - layoutStart).toFixed(0)}ms`, {
                 rooms: grid.rooms?.length || 0
             });
-
-            if (options.onProgress) options.onProgress("Consulting the Oracle...", 30);
+            if (options.onProgress) options.onProgress(`Layout complete — ${grid.rooms?.length || 0} rooms. Planning content...`, 22);
 
             // 2. AI Planning & Population (Themes + Textures + Items)
             const planStart = performance.now();
-            const { items, roomTextures, defaultTexture } = await this._planAndPopulate(grid, options, planningContext);
+            const { items, roomTextures, defaultTexture, wallTexture, roomWallTextures } = await this._planAndPopulate(grid, options, planningContext);
             console.log(`Vibe Scenes | [${runId}] Planning/population complete in ${(performance.now() - planStart).toFixed(0)}ms`, {
                 placedItems: items?.length || 0,
                 roomTextureOverrides: Object.keys(roomTextures || {}).length,
-                hasDefaultTexture: Boolean(defaultTexture)
+                hasDefaultTexture: Boolean(defaultTexture),
+                hasWallTexture: Boolean(wallTexture),
+                roomWallTextureOverrides: Object.keys(roomWallTextures || {}).length
             });
 
-            if (options.onProgress) options.onProgress("Rendering map...", 80);
+            if (options.onProgress) options.onProgress(`Rendering map with ${items?.length || 0} items...`, 80);
 
             // 3. Render Map
-            // Use the determined default texture or fallback
-            // Use roomTextures for specific rooms
             const renderer = new DungeonRenderer(grid, {
                 cellSize: options.gridSize || 20,
-                drawNumbers: true, // Maybe make this configurable?
+                drawNumbers: true,
                 floorTexture: defaultTexture,
                 roomTextures: roomTextures || {},
-                // ... color options ...
+                wallTexture: wallTexture,
+                roomWallTextures: roomWallTextures || {},
             });
 
             console.log(`Vibe Scenes | [${runId}] Rendering to blob...`);
@@ -142,6 +146,8 @@ export class DungeongenService {
                 bytes: blob?.size || 0
             });
 
+            if (options.onProgress) options.onProgress("Building walls and doors...", 90);
+
             // 4. Build Walls
             const wallStart = performance.now();
             const pad = (options.gridSize || 20) * 2;
@@ -150,6 +156,7 @@ export class DungeongenService {
                 walls: walls?.length || 0
             });
 
+            if (options.onProgress) options.onProgress(`Generation complete — ${walls?.length || 0} walls, ${items?.length || 0} items`, 95);
             console.log(`Vibe Scenes | [${runId}] Generation complete in ${(performance.now() - startTime).toFixed(0)}ms`);
 
             return {
@@ -179,7 +186,9 @@ export class DungeongenService {
         const runId = options.runId || `vs-unknown-${Date.now().toString(36)}`;
         const items = [];
         const roomTextures = {};
+        const roomWallTextures = {};
         let defaultTexture = null;
+        let wallTexture = null;
         const gridSize = options.gridSize || 20;
         const pixelPadding = gridSize * 2;
         const intentionalOutline = planningContext.intentionalOutline || null;
@@ -189,24 +198,27 @@ export class DungeongenService {
         console.log(`Vibe Scenes | [${runId}] Loading asset library...`);
         await this.library.load();
         let objects = this.library.getAssets("OBJECT");
-        let textures = this.library.getAssets("TEXTURE"); // Load textures too
+        let textures = this.library.getAssets("TEXTURE");
+        let wallAssets = this.library.getAssets("WALL");
         console.log(`Vibe Scenes | [${runId}] Library loaded in ${(performance.now() - libStart).toFixed(0)}ms`, {
             objects: objects.length,
-            textures: textures.length
+            textures: textures.length,
+            walls: wallAssets.length
         });
 
         // 2. AI Dungeon Planning
         const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
         if (apiKey) {
+            if (options.onProgress) options.onProgress("Consulting the Oracle for room themes...", 24);
             console.log(`Vibe Scenes | [${runId}] Planning dungeon layout with AI...`);
             const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
             const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
             const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
             const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
 
-            // Prepare simplified asset list (Objects AND Textures) with descriptive info
-            const availableAssets = [...objects, ...textures].map(o => ({
-                id: String(o.id), // Stable numeric library ID as string for JSON-safe matching
+            // Prepare simplified asset list (Objects, Textures, AND Walls) with descriptive info
+            const availableAssets = [...objects, ...textures, ...wallAssets].map(o => ({
+                id: String(o.id),
                 name: o.name,
                 type: o.type,
                 tags: o.tags || []
@@ -216,6 +228,7 @@ export class DungeongenService {
             const plannerStart = performance.now();
             let plannerResult = null;
             if (options.generationMode === "intentional" && intentionalOutline?.rooms?.length) {
+                if (options.onProgress) options.onProgress("Planning content from outline...", 26);
                 plannerResult = await aiService.planDungeonFromOutline({
                     rooms: grid.rooms,
                     connections: intentionalOutline.connections || [],
@@ -224,96 +237,128 @@ export class DungeongenService {
                     description: options.dungeonDescription
                 }, availableAssets);
             } else {
+                if (options.onProgress) options.onProgress("Planning room themes and contents...", 26);
                 plannerResult = await aiService.planDungeon(grid.rooms, availableAssets, options.dungeonDescription);
             }
             const plan = plannerResult?.plan || [];
             const wishlist = plannerResult?.wishlist || [];
             const default_floor = plannerResult?.default_floor || intentionalOutline?.default_floor;
-            console.log(`Vibe Scenes | [${runId}] AI planner responded in ${(performance.now() - plannerStart).toFixed(0)}ms`, {
+            const default_wall = plannerResult?.default_wall || intentionalOutline?.default_wall;
+            const planElapsed = (performance.now() - plannerStart).toFixed(0);
+            console.log(`Vibe Scenes | [${runId}] AI planner responded in ${planElapsed}ms`, {
                 planRooms: plan?.length || 0,
                 wishlist: wishlist?.length || 0,
-                hasDefaultFloor: Boolean(default_floor)
+                hasDefaultFloor: Boolean(default_floor),
+                hasDefaultWall: Boolean(default_wall)
             });
+            if (options.onProgress) {
+                const wishMsg = wishlist.length > 0 ? ` — ${wishlist.length} new asset${wishlist.length > 1 ? "s" : ""} needed` : "";
+                options.onProgress(`Oracle responded with ${plan.length} room plan${plan.length !== 1 ? "s" : ""}${wishMsg}`, 28);
+            }
 
             console.log(`Vibe Scenes | [${runId}] Dungeon Plan:`, plan);
             console.log(`Vibe Scenes | [${runId}] Asset Wishlist:`, wishlist);
 
-            // PROCESS WISHLIST (Objects AND Textures)
+            // PROCESS WISHLIST (Objects AND Textures) — parallel with concurrency limit
             if (wishlist && wishlist.length > 0) {
-                const totalNew = wishlist.length;
-                let current = 0;
-                ui.notifications.info(`AI requested ${totalNew} new assets. This may take a moment...`);
-                console.log(`Vibe Scenes | [${runId}] Starting wishlist generation`, { totalNew });
-
+                // Filter out items that already exist before counting
+                const itemsToGenerate = [];
                 for (const item of wishlist) {
-                    current++;
                     const type = (item.type || "OBJECT").toUpperCase();
-                    const wishTrace = `${runId}-wish-${current}`;
-
-                    // Double check (fuzzy match)
-                    const searchList = type === "TEXTURE" ? textures : objects;
+                    const searchList = type === "TEXTURE" ? textures : type === "WALL" ? wallAssets : objects;
                     const existing = searchList.find(o => o.id === item.name.replace(/ /g, "_").toLowerCase());
                     if (existing) {
-                        console.log(`Vibe Scenes | [${wishTrace}] Wishlist item already exists, skipping`, {
-                            name: item.name,
-                            type,
-                            existingPath: existing.path
+                        console.log(`Vibe Scenes | [${runId}] Wishlist item already exists, skipping`, {
+                            name: item.name, type, existingPath: existing.path
                         });
-                        continue;
-                    }
-
-                    const msg = `Crafting ${item.name}...`;
-                    if (options.onProgress) options.onProgress(msg, 30 + Math.floor((current / totalNew) * 40));
-
-                    try {
-                        const wishlistItemStart = performance.now();
-                        let prompt = item.name;
-                        if (item.visual_style) prompt += `\nVisual Style: ${item.visual_style}`;
-                        console.log(`Vibe Scenes | [${wishTrace}] Wishlist generation request`, {
-                            name: item.name,
-                            type,
-                            promptLength: prompt.length
-                        });
-
-                        const svg = await aiService.generateSVG(prompt, type);
-                        console.log(`Vibe Scenes | [${wishTrace}] Wishlist SVG received`, {
-                            name: item.name,
-                            svgChars: svg?.length || 0
-                        });
-                        const baseName = item.name.toLowerCase().replace(/[^a-z0-9]/g, "_");
-                        const fileName = `${baseName}_${Date.now().toString().slice(-6)}`;
-
-                        const filePath = await aiService.saveAsset(svg, fileName, type, ["ai-gen", "auto-generated"], {
-                            prompt: item.name,
-                            model: aiService.svgModel
-                        });
-                        console.log(`Vibe Scenes | [${wishTrace}] Wishlist item generated in ${(performance.now() - wishlistItemStart).toFixed(0)}ms`, {
-                            name: item.name,
-                            type,
-                            filePath
-                        });
-                    } catch (e) {
-                        console.error(`Vibe Scenes | [${wishTrace}] Failed to auto-generate ${item.name}:`, e);
-                        console.warn(`Vibe Scenes | [${wishTrace}] Fallback: proceeding without this generated asset`);
+                    } else {
+                        itemsToGenerate.push(item);
                     }
                 }
 
-                // RELOAD LIBRARY (force refresh to pick up newly generated assets)
-                const reloadStart = performance.now();
-                console.log(`Vibe Scenes | [${runId}] Waiting briefly before library reload for filesystem consistency`);
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                await this.library.reload();
-                objects = this.library.getAssets("OBJECT");
-                textures = this.library.getAssets("TEXTURE");
-                console.log(`Vibe Scenes | [${runId}] Library reloaded in ${(performance.now() - reloadStart).toFixed(0)}ms`, {
-                    objects: objects.length,
-                    textures: textures.length
-                });
+                const totalNew = itemsToGenerate.length;
+                if (totalNew > 0) {
+                    if (options.onProgress) options.onProgress(`Generating ${totalNew} new asset${totalNew > 1 ? "s" : ""}...`, 30);
+                    ui.notifications.info(`Generating ${totalNew} new asset${totalNew > 1 ? "s" : ""} — this may take a moment...`);
+                    console.log(`Vibe Scenes | [${runId}] Starting parallel wishlist generation`, { totalNew, concurrency: DungeongenService.WISHLIST_CONCURRENCY });
+
+                    let completed = 0;
+                    const concurrency = DungeongenService.WISHLIST_CONCURRENCY;
+
+                    /**
+                     * Process a single wishlist item: generate SVG + save.
+                     * Returns silently on failure so one bad item doesn't block the batch.
+                     */
+                    const processItem = async (item, index) => {
+                        const type = (item.type || "OBJECT").toUpperCase();
+                        const wishTrace = `${runId}-wish-${index + 1}`;
+                        try {
+                            const wishlistItemStart = performance.now();
+                            let prompt = item.name;
+                            if (item.visual_style) prompt += `\nVisual Style: ${item.visual_style}`;
+                            console.log(`Vibe Scenes | [${wishTrace}] Wishlist generation request`, {
+                                name: item.name, type, promptLength: prompt.length
+                            });
+
+                            const svg = await aiService.generateSVG(prompt, type);
+                            console.log(`Vibe Scenes | [${wishTrace}] Wishlist SVG received`, {
+                                name: item.name, svgChars: svg?.length || 0
+                            });
+                            const baseName = item.name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+                            const fileName = `${baseName}_${Date.now().toString().slice(-6)}`;
+
+                            const filePath = await aiService.saveAsset(svg, fileName, type, ["ai-gen", "auto-generated"], {
+                                prompt: item.name, model: aiService.svgModel
+                            });
+                            console.log(`Vibe Scenes | [${wishTrace}] Wishlist item generated in ${(performance.now() - wishlistItemStart).toFixed(0)}ms`, {
+                                name: item.name, type, filePath
+                            });
+                        } catch (e) {
+                            console.error(`Vibe Scenes | [${wishTrace}] Failed to auto-generate ${item.name}:`, e);
+                            console.warn(`Vibe Scenes | [${wishTrace}] Fallback: proceeding without this generated asset`);
+                        } finally {
+                            completed++;
+                            const pct = 30 + Math.floor((completed / totalNew) * 40);
+                            if (options.onProgress) options.onProgress(`Crafted ${completed}/${totalNew}: ${item.name}`, pct);
+                        }
+                    };
+
+                    // Run with bounded concurrency (pool pattern)
+                    const queue = itemsToGenerate.map((item, i) => ({ item, index: i }));
+                    const workers = [];
+                    for (let w = 0; w < Math.min(concurrency, queue.length); w++) {
+                        workers.push((async () => {
+                            while (queue.length > 0) {
+                                const { item, index } = queue.shift();
+                                await processItem(item, index);
+                            }
+                        })());
+                    }
+                    await Promise.all(workers);
+
+                    console.log(`Vibe Scenes | [${runId}] Wishlist generation complete`, { generated: completed, total: totalNew });
+                    if (options.onProgress) options.onProgress("Refreshing asset library...", 72);
+
+                    // RELOAD LIBRARY (force refresh to pick up newly generated assets)
+                    const reloadStart = performance.now();
+                    console.log(`Vibe Scenes | [${runId}] Waiting briefly before library reload for filesystem consistency`);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    await this.library.reload();
+                    objects = this.library.getAssets("OBJECT");
+                    textures = this.library.getAssets("TEXTURE");
+                    wallAssets = this.library.getAssets("WALL");
+                    console.log(`Vibe Scenes | [${runId}] Library reloaded in ${(performance.now() - reloadStart).toFixed(0)}ms`, {
+                        objects: objects.length, textures: textures.length, walls: wallAssets.length
+                    });
+                } else {
+                    console.log(`Vibe Scenes | [${runId}] All wishlist assets already exist, skipping generation`);
+                }
             } else {
                 console.log(`Vibe Scenes | [${runId}] No wishlist assets requested by AI`);
             }
 
-            // RESOLVE DEFAULT TEXTURE
+            // RESOLVE DEFAULT FLOOR TEXTURE
+            if (options.onProgress) options.onProgress("Resolving floor textures...", 74);
             if (default_floor) {
                 const tex = this._findTexture(textures, default_floor);
                 if (tex) {
@@ -326,7 +371,21 @@ export class DungeongenService {
                 console.warn(`Vibe Scenes | [${runId}] AI did not specify a default_floor texture.`);
             }
 
+            // RESOLVE DEFAULT WALL TEXTURE
+            if (default_wall) {
+                const tex = this._findTexture(wallAssets, default_wall);
+                if (tex) {
+                    wallTexture = tex.path;
+                    console.log(`Vibe Scenes | [${runId}] Resolved default wall texture: "${default_wall}" → ${tex.path}`);
+                } else {
+                    console.warn(`Vibe Scenes | [${runId}] Could not resolve default wall texture: "${default_wall}". Available wall assets: [${wallAssets.map(t => t.name).join(', ')}]`);
+                }
+            } else {
+                console.warn(`Vibe Scenes | [${runId}] AI did not specify a default_wall texture.`);
+            }
+
             // MAP PLAN TO ITEMS AND TEXTURES
+            if (options.onProgress) options.onProgress("Placing items in rooms...", 76);
             for (const roomPlan of plan) {
                 const room = grid.rooms.find(r => r.id === roomPlan.id);
                 if (!room) {
@@ -348,6 +407,17 @@ export class DungeongenService {
                         console.log(`Vibe Scenes | [${runId}] Room ${room.id} floor: "${roomPlan.floor_texture}" → ${tex.path}`);
                     } else {
                         console.warn(`Vibe Scenes | [${runId}] Room ${room.id}: Could not resolve floor texture "${roomPlan.floor_texture}"`);
+                    }
+                }
+
+                // Resolve Wall Texture (per-room override)
+                if (roomPlan.wall_texture) {
+                    const tex = this._findTexture(wallAssets, roomPlan.wall_texture);
+                    if (tex) {
+                        roomWallTextures[room.id] = tex.path;
+                        console.log(`Vibe Scenes | [${runId}] Room ${room.id} wall: "${roomPlan.wall_texture}" → ${tex.path}`);
+                    } else {
+                        console.warn(`Vibe Scenes | [${runId}] Room ${room.id}: Could not resolve wall texture "${roomPlan.wall_texture}"`);
                     }
                 }
 
@@ -472,7 +542,7 @@ export class DungeongenService {
         }
 
         console.log(`Vibe Scenes | [${runId}] Placed ${items.length} items in dungeon.`);
-        return { items, roomTextures, defaultTexture };
+        return { items, roomTextures, defaultTexture, wallTexture, roomWallTextures };
     }
 
     _resolveObjectAsset(objects, item, roomId, seed) {
@@ -618,3 +688,11 @@ export class DungeongenService {
         return x - Math.floor(x);
     }
 }
+
+/**
+ * Maximum number of wishlist SVG generations to run in parallel.
+ * Each generation can trigger up to 6 Gemini API calls (3 passes × [SVG + critique]).
+ * Paid Tier 1 allows 150-300 RPM, so 2 concurrent items is safe.
+ * Free tier (5-10 RPM) relies on the retry/backoff in GeminiService.
+ */
+DungeongenService.WISHLIST_CONCURRENCY = 2;

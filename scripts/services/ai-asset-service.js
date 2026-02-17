@@ -188,7 +188,7 @@ export class AiAssetService {
                 console.warn(`Vibe Scenes | [${traceId}] planDungeon:legacy-array-response-fallback`, {
                     planRooms: result.length
                 });
-                return { plan: result, wishlist: [], default_floor: undefined };
+                return { plan: result, wishlist: [], default_floor: undefined, default_wall: undefined };
             }
             if (!result || typeof result !== "object") {
                 throw new Error("Planner response was not a JSON object.");
@@ -198,12 +198,14 @@ export class AiAssetService {
                 planRooms: result.plan?.length || 0,
                 wishlist: result.wishlist?.length || 0,
                 hasDefaultFloor: Boolean(result.default_floor),
+                hasDefaultWall: Boolean(result.default_wall),
                 elapsedMs: Math.round(performance.now() - start)
             });
             return {
                 plan: result.plan || [],
                 wishlist: result.wishlist || [],
-                default_floor: result.default_floor
+                default_floor: result.default_floor,
+                default_wall: result.default_wall
             };
 
         } catch (error) {
@@ -211,7 +213,7 @@ export class AiAssetService {
             console.warn(`Vibe Scenes | [${traceId}] planDungeon:fallback-empty-plan`, {
                 elapsedMs: Math.round(performance.now() - start)
             });
-            return { plan: [], wishlist: [], default_floor: undefined };
+            return { plan: [], wishlist: [], default_floor: undefined, default_wall: undefined };
         }
     }
 
@@ -267,6 +269,7 @@ export class AiAssetService {
             return {
                 mask_type: parsed?.mask_type || payload.shape_preference || "rectangle",
                 default_floor: parsed?.default_floor,
+                default_wall: parsed?.default_wall,
                 rooms,
                 connections
             };
@@ -275,6 +278,7 @@ export class AiAssetService {
             return {
                 mask_type: payload.shape_preference || "rectangle",
                 default_floor: undefined,
+                default_wall: undefined,
                 rooms: [],
                 connections: []
             };
@@ -332,16 +336,18 @@ export class AiAssetService {
                 planRooms: result.plan?.length || 0,
                 wishlist: result.wishlist?.length || 0,
                 hasDefaultFloor: Boolean(result.default_floor),
+                hasDefaultWall: Boolean(result.default_wall),
                 elapsedMs: Math.round(performance.now() - start)
             });
             return {
                 plan: result.plan || [],
                 wishlist: result.wishlist || [],
-                default_floor: result.default_floor
+                default_floor: result.default_floor,
+                default_wall: result.default_wall
             };
         } catch (error) {
             console.error(`Vibe Scenes | [${traceId}] planDungeonFromOutline:failed`, error);
-            return { plan: [], wishlist: [], default_floor: input.defaultFloor };
+            return { plan: [], wishlist: [], default_floor: input.defaultFloor, default_wall: undefined };
         }
     }
 

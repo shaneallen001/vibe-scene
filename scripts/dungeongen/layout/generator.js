@@ -42,6 +42,9 @@ export class DungeonGenerator {
         // Renumbered to 7 in flow
         this._placeDoors();
 
+        // Phase 8: Carve wall perimeter (EMPTY cells adjacent to FLOOR become WALL)
+        this.grid.carveWallPerimeter(1);
+
         return this.grid;
     }
 
@@ -96,6 +99,9 @@ export class DungeonGenerator {
 
         // Phase 7: Place Doors
         this._placeDoors();
+
+        // Phase 8: Carve wall perimeter (EMPTY cells adjacent to FLOOR become WALL)
+        this.grid.carveWallPerimeter(1);
 
         return this.grid;
     }

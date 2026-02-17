@@ -136,12 +136,12 @@ export const PROMPTS = {
 
   // Prompt for Whole Dungeon Planning
   DUNGEON_PLANNER: `
-    You are an expert level designer. Your task is to assign themes, floor textures, and populate a dungeon based on a floorplan graph and a user description.
+    You are an expert level designer. Your task is to assign themes, floor textures, wall textures, and populate a dungeon based on a floorplan graph and a user description.
     
     INPUT:
     - DESCRIPTION: User's concept (e.g. "A fire temple with a frozen treasure room").
     - ROOMS: List of { id, width, height, area, connections: [id, id] }.
-    - AVAILABLE_ASSETS: List of { id, name, type, tags } currently in the library.
+    - AVAILABLE_ASSETS: List of { id, name, type, tags } currently in the library. Types include OBJECT, TEXTURE, and WALL.
     
     TASK:
     1. Analyze the connectivity and DESCRIPTION.
@@ -149,21 +149,27 @@ export const PROMPTS = {
       - "floor_texture": Can be an existing asset ID or name (from AVAILABLE_ASSETS) OR a visual description of a new texture (e.g. "lava flow", "ice sheet").
     3. **DESCRIPTION**: Generate a brief, atmospheric description (flavor text) for each room.
     4. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
-    5. **WISHLIST**:
-       - If a room needs a specific OBJECT or FLOOR TEXTURE that is NOT in AVAILABLE_ASSETS, add it to the "wishlist".
-       - For textures, the type is "TEXTURE".
+    5. **WALL TEXTURES**: Assign a "default_wall" for the dungeon and optionally a "wall_texture" per room.
+      - Wall textures describe the architectural material of the walls (e.g. "rough hewn stone blocks", "ancient sandstone with glyphs", "dark wood paneling").
+      - "wall_texture" per room is OPTIONAL — only set it if the room differs from the default (e.g. a throne room with ornate marble walls in an otherwise rough stone dungeon).
+    6. **WISHLIST**:
+       - If a room needs a specific OBJECT, FLOOR TEXTURE, or WALL TEXTURE that is NOT in AVAILABLE_ASSETS, add it to the "wishlist".
+       - For floor textures, the type is "TEXTURE". For wall textures, the type is "WALL".
     
     OUTPUT:
-    - Return a JSON Object with: "plan", "wishlist", and "default_floor".
+    - Return a JSON Object with: "plan", "wishlist", "default_floor", and "default_wall".
     - "default_floor": Description or ID of the floor texture for corridors and default rooms.
+    - "default_wall": Description or ID of the wall texture for the dungeon's walls (e.g. "rough stone blocks", "mortared brick").
     - Structure:
     {
       "default_floor": "stone_paving_dark",
+      "default_wall": "rough hewn stone blocks",
       "plan": [
         {
           "id": "room_id",
           "theme": "Assigned Theme",
-          "floor_texture": "stone_paving_dark", 
+          "floor_texture": "stone_paving_dark",
+          "wall_texture": null,
           "description": "Flavor text...",
           "contents": [
             { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
@@ -172,13 +178,16 @@ export const PROMPTS = {
       ],
       "wishlist": [
         { "name": "stone throne", "type": "OBJECT", "visual_style": "ancient, cracked" },
-        { "name": "lava flow", "type": "TEXTURE", "visual_style": "molten rock, glowing cracks" }
+        { "name": "lava flow", "type": "TEXTURE", "visual_style": "molten rock, glowing cracks" },
+        { "name": "rough hewn stone blocks", "type": "WALL", "visual_style": "dark gray irregular stone blocks with mortar lines" }
       ]
     }
     
     CONSTRAINTS:
-    - Respect the user's DESCRIPTION. If they say "Sand Dungeon", default_floor should be "sand".
+    - Respect the user's DESCRIPTION. If they say "Sand Dungeon", default_floor should be "sand" and default_wall should match (e.g. "ancient sandstone blocks").
     - PRIORITIZE AVAILABLE_ASSETS. If you use an existing asset, set "original_id" to the matching AVAILABLE_ASSETS "id" (stable identifier).
+    - The "default_wall" MUST always be set. Choose a wall material that fits the dungeon concept.
+    - Per-room "wall_texture" should only be set when a room has distinctly different walls from the rest of the dungeon.
     - Populate by room area:
       - area < 12: usually 0 items (very small utility spaces).
       - area 12-35: 1-2 items.
@@ -212,6 +221,7 @@ export const PROMPTS = {
     {
       "mask_type": "keep",
       "default_floor": "ancient stone flagstones",
+      "default_wall": "rough hewn stone blocks",
       "rooms": [
         {
           "id": "entrance_hall",
@@ -239,7 +249,7 @@ export const PROMPTS = {
 
   // Prompt for Intentional Content Pass
   DUNGEON_CONTENT_PLANNER: `
-    You are an expert level dresser. Given an intentional room outline, generate room contents and wishlist gaps.
+    You are an expert level dresser. Given an intentional room outline, generate room contents, wall textures, and wishlist gaps.
 
     INPUT:
     - DESCRIPTION: User fantasy concept.
@@ -249,22 +259,25 @@ export const PROMPTS = {
         rooms: [{ id, width, height, area, theme, description, connections }],
         connections
       }
-    - AVAILABLE_ASSETS: [{ id, name, type, tags }]
+    - AVAILABLE_ASSETS: [{ id, name, type, tags }] — types include OBJECT, TEXTURE, and WALL.
 
     TASK:
     1. Keep each room's theme/description aligned with the outline intent.
     2. Assign floor textures per room where needed.
-    3. Generate item placements per room.
-    4. Produce wishlist entries for missing OBJECT or TEXTURE assets.
+    3. Assign a "default_wall" texture for the dungeon and optionally a "wall_texture" per room where the walls differ from the default.
+    4. Generate item placements per room.
+    5. Produce wishlist entries for missing OBJECT, TEXTURE, or WALL assets.
 
     OUTPUT:
     {
       "default_floor": "stone_paving_dark",
+      "default_wall": "rough hewn stone blocks",
       "plan": [
         {
           "id": "entrance_hall",
           "theme": "Guarded Entry",
           "floor_texture": "stone_paving_dark",
+          "wall_texture": null,
           "description": "Cold torchlight and old banners mark the threshold.",
           "contents": [
             { "name": "weapon rack", "original_id": "123", "x": 2, "y": 1, "rotation": 90 }
@@ -272,13 +285,16 @@ export const PROMPTS = {
         }
       ],
       "wishlist": [
-        { "name": "broken portcullis", "type": "OBJECT", "visual_style": "rusted iron, bent bars" }
+        { "name": "broken portcullis", "type": "OBJECT", "visual_style": "rusted iron, bent bars" },
+        { "name": "rough hewn stone blocks", "type": "WALL", "visual_style": "dark gray irregular stone blocks with mortar lines" }
       ]
     }
 
     CONSTRAINTS:
     - PRIORITIZE AVAILABLE_ASSETS.
     - If using an existing asset, set "original_id" to AVAILABLE_ASSETS.id.
+    - The "default_wall" MUST always be set. Choose a wall material that fits the dungeon concept.
+    - Per-room "wall_texture" should only be set when a room has distinctly different walls from the rest of the dungeon.
     - Populate by room area:
       - area < 12: usually 0 items.
       - area 12-35: 1-2 items.

@@ -1,0 +1,185 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="512" height="512">
+  <defs>
+    
+    <filter id="shadowBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="fireGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+    </filter>
+    <filter id="metalNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0" in="noise" result="coloredNoise"/>
+    </filter>
+    
+    
+    <linearGradient id="ironGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a5568"/>
+      <stop offset="50%" stop-color="#2d3748"/>
+      <stop offset="100%" stop-color="#1a202c"/>
+    </linearGradient>
+    
+    <radialGradient id="cupGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="40%" stop-color="#2d3748"/>
+      <stop offset="85%" stop-color="#1a202c"/>
+      <stop offset="100%" stop-color="#4a5568"/>
+    </radialGradient>
+
+    <radialGradient id="fireBase" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#ff9800"/>
+      <stop offset="70%" stop-color="#ff5722" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#bf360c" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="fireCore" cx="50%" cy="50%" r="50%" fx="50%" fy="60%">
+      <stop offset="0%" stop-color="#fffde7"/>
+      <stop offset="30%" stop-color="#ffeb3b"/>
+      <stop offset="80%" stop-color="#ff9800" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff5722" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="ambientLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff5722" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff5722" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  
+  <g filter="url(#shadowBlur)" transform="translate(0, 15)">
+    
+    <path d="M190 30 L322 30 L310 100 L202 100 Z" fill="#000"/>
+    
+    <path d="M236 90 L276 90 L266 220 L246 220 Z" fill="#000"/>
+    
+    <circle cx="256" cy="256" r="65" fill="#000"/>
+  </g>
+
+  
+  <g id="WallBracket">
+    
+    <path d="M200 40 L312 40 L300 95 L212 95 Z" fill="url(#ironGrad)" stroke="#1a202c" stroke-width="2"/>
+    
+    <path d="M202 42 L310 42 L300 93 L212 93 Z" fill="none" stroke="#718096" stroke-width="1" opacity="0.5"/>
+    
+    <rect x="200" y="40" width="112" height="55" fill="url(#metalNoise)" opacity="0.4" clip-path="inset(0 0 0 0)"/>
+    
+    
+    <circle cx="215" cy="55" r="5" fill="#1a202c"/>
+    <circle cx="215" cy="55" r="3" fill="#4a5568"/>
+    <circle cx="215" cy="54" r="1.5" fill="#a0aec0" opacity="0.8"/> 
+
+    <circle cx="297" cy="55" r="5" fill="#1a202c"/>
+    <circle cx="297" cy="55" r="3" fill="#4a5568"/>
+    <circle cx="297" cy="54" r="1.5" fill="#a0aec0" opacity="0.8"/> 
+
+    <circle cx="215" cy="80" r="5" fill="#1a202c"/>
+    <circle cx="215" cy="80" r="3" fill="#4a5568"/>
+    <circle cx="215" cy="79" r="1.5" fill="#a0aec0" opacity="0.8"/> 
+
+    <circle cx="297" cy="80" r="5" fill="#1a202c"/>
+    <circle cx="297" cy="80" r="3" fill="#4a5568"/>
+    <circle cx="297" cy="79" r="1.5" fill="#a0aec0" opacity="0.8"/> 
+  </g>
+
+  
+  <g id="Arm">
+    <path d="M240 90 L272 90 L268 200 L244 200 Z" fill="#2d3748" stroke="#1a202c" stroke-width="2"/>
+    
+    <path d="M245 110 Q256 115 267 110" fill="none" stroke="#1a202c" stroke-width="2" opacity="0.5"/>
+    <path d="M247 140 Q256 145 265 140" fill="none" stroke="#1a202c" stroke-width="2" opacity="0.5"/>
+    <path d="M249 170 Q256 175 263 170" fill="none" stroke="#1a202c" stroke-width="2" opacity="0.5"/>
+    
+    <path d="M256 90 L256 200" fill="none" stroke="#718096" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  
+  <g id="Sconce">
+    
+    <circle cx="256" cy="256" r="60" fill="url(#cupGrad)" stroke="#1a202c" stroke-width="3"/>
+    
+    
+    <circle cx="256" cy="256" r="55" fill="none" stroke="#1a202c" stroke-width="1" stroke-dasharray="10, 10" opacity="0.5"/>
+    
+    
+    <circle cx="256" cy="256" r="45" fill="#0f0f0f"/>
+    
+    
+    <path d="M196 256 A 60 60 0 0 1 316 256" fill="none" stroke="#718096" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    
+    <path d="M211 256 A 45 45 0 0 1 301 256" fill="none" stroke="#d35400" stroke-width="2" opacity="0.4"/>
+  </g>
+
+  
+  <g id="Fuel">
+    
+    <circle cx="256" cy="256" r="40" fill="#3e2723"/>
+    
+    <circle cx="256" cy="256" r="35" fill="#212121" opacity="0.7"/>
+    
+    <path d="M230 240 Q256 220 280 240 Q290 260 270 280 Q256 290 240 280 Q220 260 230 240" fill="#1a1a1a"/>
+  </g>
+
+  
+  <g id="Fire">
+    
+    <circle cx="256" cy="256" r="180" fill="url(#ambientLight)" filter="url(#fireGlow)"/>
+    
+    
+    <path d="M256 290 Q220 280 216 250 Q210 210 240 190 Q256 180 272 190 Q302 210 296 250 Q292 280 256 290" 
+          fill="url(#fireBase)" opacity="0.9"/>
+          
+    
+    <path d="M256 280 Q230 270 230 240 Q230 200 250 160 Q260 140 270 160 Q282 200 282 240 Q282 270 256 280" 
+          fill="#ff9800" opacity="0.8">
+      <animate attributeName="d" 
+               dur="0.8s" 
+               repeatCount="indefinite" 
+               values="
+                 M256 280 Q230 270 230 240 Q230 200 250 160 Q260 140 270 160 Q282 200 282 240 Q282 270 256 280;
+                 M256 280 Q235 270 235 245 Q225 205 245 155 Q265 135 275 165 Q285 205 278 245 Q278 270 256 280;
+                 M256 280 Q230 270 230 240 Q230 200 250 160 Q260 140 270 160 Q282 200 282 240 Q282 270 256 280"
+      />
+    </path>
+
+    
+    <path d="M256 270 Q245 260 245 240 Q245 220 256 200 Q267 220 267 240 Q267 260 256 270" 
+          fill="url(#fireCore)" opacity="0.9">
+       <animate attributeName="d" 
+               dur="0.4s" 
+               repeatCount="indefinite" 
+               values="
+                 M256 270 Q245 260 245 240 Q245 220 256 200 Q267 220 267 240 Q267 260 256 270;
+                 M256 270 Q248 260 248 240 Q250 215 256 205 Q262 215 264 240 Q264 260 256 270;
+                 M256 270 Q245 260 245 240 Q245 220 256 200 Q267 220 267 240 Q267 260 256 270"
+      />
+    </path>
+    
+    
+    <circle cx="240" cy="220" r="1.5" fill="#ffeb3b" opacity="0.8">
+      <animate attributeName="cy" values="220; 180" dur="1.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8; 0" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="270" cy="230" r="1" fill="#ffeb3b" opacity="0.8">
+      <animate attributeName="cy" values="230; 190" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+      <animate attributeName="opacity" values="0.8; 0" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+     <circle cx="256" cy="200" r="1.2" fill="#ffeb3b" opacity="0.8">
+      <animate attributeName="cy" values="200; 150" dur="1s" repeatCount="indefinite" begin="0.6s"/>
+      <animate attributeName="opacity" values="0.8; 0" dur="1s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+  </g>
+
+  
+  <g id="WearAndTear" opacity="0.3">
+    
+    <path d="M200 240 L220 250 M300 230 L290 240 M250 310 L260 300" stroke="#000" stroke-width="1"/>
+    
+    <circle cx="220" cy="60" r="2" fill="#3e2723"/>
+    <circle cx="300" cy="85" r="3" fill="#3e2723"/>
+    <path d="M260 120 L255 130" stroke="#000" stroke-width="1"/>
+  </g>
+
+</svg>

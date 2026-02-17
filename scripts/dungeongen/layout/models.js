@@ -6,7 +6,7 @@
 export const CellType = {
     EMPTY: 0,
     FLOOR: 1,
-    WALL: 2 // Wall might not be explicitly used in grid if we just have empty/floor
+    WALL: 2 // Perimeter cells adjacent to FLOOR — rendered with wall texture
 };
 
 export class DungeonGrid {
@@ -73,6 +73,35 @@ export class DungeonGrid {
             }
         }
         return true;
+    }
+
+    /**
+     * Mark EMPTY cells adjacent to FLOOR cells as WALL.
+     * Creates a visible wall band around rooms and corridors.
+     * @param {number} thickness - How many cells deep the wall band extends (default 1)
+     */
+    carveWallPerimeter(thickness = 1) {
+        const toMark = [];
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                if (this.get(x, y) !== CellType.EMPTY) continue;
+                let shouldMark = false;
+                for (let dy = -thickness; dy <= thickness && !shouldMark; dy++) {
+                    for (let dx = -thickness; dx <= thickness && !shouldMark; dx++) {
+                        if (dx === 0 && dy === 0) continue;
+                        if (this.get(x + dx, y + dy) === CellType.FLOOR) {
+                            shouldMark = true;
+                        }
+                    }
+                }
+                if (shouldMark) {
+                    toMark.push(x, y);
+                }
+            }
+        }
+        for (let i = 0; i < toMark.length; i += 2) {
+            this.set(toMark[i], toMark[i + 1], CellType.WALL);
+        }
     }
 
     /**
