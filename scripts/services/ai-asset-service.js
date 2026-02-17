@@ -364,6 +364,59 @@ export class AiAssetService {
     }
 
     /**
+     * Review a rendered dungeon map image and suggest bounded visual corrections.
+     * @param {Object} input
+     * @param {string} input.imageBase64 - PNG image bytes encoded as base64 (without data URL prefix)
+     * @param {Object} input.metadata - Summary payload for the reviewer
+     * @returns {Promise<Object>} - Normalized review contract
+     */
+    async reviewRenderedMap(input = {}) {
+        const traceId = this._newTraceId("map-review");
+        const start = performance.now();
+        const imageBase64 = String(input.imageBase64 || "").trim();
+        const metadata = (input.metadata && typeof input.metadata === "object") ? input.metadata : {};
+
+        if (!imageBase64) {
+            return this._normalizeMapCritiqueResponse({});
+        }
+
+        try {
+            console.log(`Vibe Scenes | [${traceId}] reviewRenderedMap:start`, {
+                metadataChars: JSON.stringify(metadata).length,
+                imageChars: imageBase64.length
+            });
+            const rawText = await this.gemini.generateContent(
+                JSON.stringify(metadata),
+                PROMPTS.MAP_CRITIC,
+                {
+                    model: this.textModel,
+                    temperature: 0.15,
+                    maxOutputTokens: 1400,
+                    responseMimeType: "application/json",
+                    inlineDataParts: [{ mimeType: "image/png", data: imageBase64 }]
+                }
+            );
+            const parsed = this._parseJSON(rawText);
+            const normalized = this._normalizeMapCritiqueResponse(parsed);
+            console.log(`Vibe Scenes | [${traceId}] reviewRenderedMap:success`, {
+                score: normalized.score,
+                needsChanges: normalized.needs_changes,
+                removeItems: normalized.changes.remove_item_indices.length,
+                roomFloorEdits: normalized.changes.room_floor.length,
+                roomWallEdits: normalized.changes.room_wall.length,
+                elapsedMs: Math.round(performance.now() - start)
+            });
+            return normalized;
+        } catch (error) {
+            console.warn(`Vibe Scenes | [${traceId}] reviewRenderedMap:failed`, {
+                message: error?.message || String(error),
+                elapsedMs: Math.round(performance.now() - start)
+            });
+            return this._normalizeMapCritiqueResponse({});
+        }
+    }
+
+    /**
      * Save a generated asset to the library
      * @param {string} svgContent 
      * @param {string} baseName 
@@ -610,6 +663,51 @@ export class AiAssetService {
             revisionParts.push(candidate.revisionPrompt);
         }
         return revisionParts.filter(Boolean).join("\n");
+    }
+
+    _normalizeNullableString(value) {
+        if (value === null || value === undefined) return null;
+        const text = String(value).trim();
+        return text ? text : null;
+    }
+
+    _normalizeMapRoomTextureEdits(list) {
+        if (!Array.isArray(list)) return [];
+        return list
+            .map(entry => {
+                const roomId = String(entry?.room_id ?? "").trim();
+                if (!roomId) return null;
+                return {
+                    room_id: roomId,
+                    texture: this._normalizeNullableString(entry?.texture)
+                };
+            })
+            .filter(Boolean);
+    }
+
+    _normalizeMapCritiqueResponse(parsed) {
+        const data = (parsed && typeof parsed === "object") ? parsed : {};
+        const changes = (data.changes && typeof data.changes === "object") ? data.changes : {};
+        const removeItemIndices = Array.isArray(changes.remove_item_indices)
+            ? [...new Set(
+                changes.remove_item_indices
+                    .map(v => Number(v))
+                    .filter(v => Number.isInteger(v) && v >= 0)
+              )]
+            : [];
+
+        return {
+            score: this._clamp(Number(data.score) || 0, 0, 100),
+            needs_changes: Boolean(data.needs_changes),
+            reasoning: String(data.reasoning || "").trim(),
+            changes: {
+                default_floor: this._normalizeNullableString(changes.default_floor),
+                default_wall: this._normalizeNullableString(changes.default_wall),
+                room_floor: this._normalizeMapRoomTextureEdits(changes.room_floor),
+                room_wall: this._normalizeMapRoomTextureEdits(changes.room_wall),
+                remove_item_indices: removeItemIndices
+            }
+        };
     }
 
     _clamp(value, min, max) {

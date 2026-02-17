@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <filter id="rockNoise" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2" result="diffuse">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feDiffuseLighting>
+      <feComposite operator="in" in="diffuse" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic"/>
+    </filter>
+
+    
+    <radialGradient id="abyssGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#050505" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#1a1515" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#2b2222" stop-opacity="1"/>
+    </radialGradient>
+
+    
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="2" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode in="offsetblur"/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+
+  
+  <g transform="translate(0,0)" filter="url(#dropShadow)">
+    
+    
+    
+    <path d="M256,20 
+             C280,40 310,35 330,60 
+             L350,100 C365,130 340,150 355,190 
+             L380,240 C390,270 370,300 360,340 
+             L340,400 C330,430 300,450 280,480 
+             L256,490 
+             L230,480 C200,460 190,430 180,400 
+             L160,330 C150,300 170,260 160,220 
+             L145,160 C140,120 170,90 180,60 
+             L210,30 Z" 
+          fill="#4a4444" opacity="0.4" stroke="none" filter="url(#rockNoise)"/>
+
+    
+    <g stroke="#262121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.7">
+      <path d="M350,190 L390,180 M390,180 L410,165"/>
+      <path d="M160,220 L120,230 M120,230 L100,245"/>
+      <path d="M340,400 L370,420"/>
+      <path d="M180,400 L140,415"/>
+      <path d="M330,60 L360,40"/>
+      <path d="M180,60 L150,40"/>
+    </g>
+
+    
+    <path d="M265,45 
+             L285,95 L275,135 L305,185 L285,255 L315,315 L275,395 L265,465 
+             L245,465 
+             L235,395 L205,325 L225,245 L195,175 L235,125 L215,85 L245,45 Z" 
+          fill="#2e2828" stroke="#1f1a1a" stroke-width="4" stroke-linejoin="round" shape-rendering="geometricPrecision"/>
+
+    
+    <path d="M260,55 
+             L275,100 L265,140 L290,190 L270,260 L295,320 L265,390 L258,450 
+             L252,450 
+             L245,390 L220,320 L240,250 L215,180 L250,130 L230,90 L250,55 Z" 
+          fill="url(#abyssGradient)" stroke="none"/>
+
+    
+    <path d="M260,55 L250,55 L230,90 L250,130 L215,180 L240,250 L220,320 L245,390 L252,450 
+             L258,450 L255,400 L230,330 L250,260 L225,190 L260,140 L240,100 Z" 
+          fill="#000000" opacity="0.6"/>
+
+    
+    
+    <path d="M215,85 L235,125 M195,175 L225,245 M205,325 L235,395" 
+          stroke="#756e6e" stroke-width="2" fill="none" opacity="0.8"/>
+    
+    
+    <path d="M265,45 L285,95 L275,135 L305,185 L285,255 L315,315 L275,395" 
+          stroke="#8c8585" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.9"/>
+
+    
+    <path d="M285,95 L287,97 M305,185 L307,187 M315,315 L317,317" 
+          stroke="#b0aaaa" stroke-width="2" stroke-linecap="round" opacity="1.0"/>
+
+    
+    <g fill="#5e5757" stroke="#2b2626" stroke-width="1">
+      <path d="M300,100 L305,105 L302,110 L295,105 Z"/>
+      <path d="M320,200 L328,202 L325,210 L318,205 Z"/>
+      <path d="M180,180 L185,185 L180,190 L175,182 Z"/>
+      <path d="M200,350 L208,352 L205,360 L195,355 Z"/>
+      <path d="M300,420 L305,425 L300,430 L295,422 Z"/>
+    </g>
+    
+    
+    <path d="M280,255 L290,250 M230,245 L220,240 M275,395 L285,390" 
+          stroke="#3b3333" stroke-width="1" opacity="0.6"/>
+
+  </g>
+</svg>

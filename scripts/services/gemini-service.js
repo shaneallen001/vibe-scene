@@ -30,6 +30,7 @@ export class GeminiService {
      * @param {number} options.temperature - Temperature override
      * @param {number} options.maxOutputTokens - Max output tokens override
      * @param {string} options.responseMimeType - Optional response mime type (e.g. application/json)
+     * @param {Array<{mimeType: string, data: string}>} options.inlineDataParts - Optional inline binary parts (e.g. images) as base64 strings
      * @returns {Promise<string>} - The generated text response
      */
     async generateContent(prompt, systemInstruction = "", options = {}) {
@@ -46,22 +47,26 @@ export class GeminiService {
         // with the existing structure, we prepending it to the prompt is often safer unless using the specific system_instruction field.
         // However, v1beta API supports 'system_instruction'. Let's use the robust approach of parts.
 
-        const contents = [];
-
-        if (systemInstruction) {
-            // For v1beta, system instructions are often passed as a separate field or just prepended.
-            // We'll prepend it to the user prompt to ensure it's handled effectively by all models including those that might treat system_instruction strictly.
-            // Or better, let's just use the 'contents' array structure.
-            contents.push({
-                role: "user",
-                parts: [{ text: systemInstruction + "\n\n" + prompt }]
-            });
-        } else {
-            contents.push({
-                role: "user",
-                parts: [{ text: prompt }]
-            });
+        const textPart = systemInstruction ? (systemInstruction + "\n\n" + prompt) : prompt;
+        const parts = [{ text: textPart }];
+        if (Array.isArray(options?.inlineDataParts)) {
+            for (const part of options.inlineDataParts) {
+                const mimeType = String(part?.mimeType || "").trim();
+                const data = String(part?.data || "").trim();
+                if (!mimeType || !data) continue;
+                parts.push({
+                    inlineData: {
+                        mimeType,
+                        data
+                    }
+                });
+            }
         }
+
+        const contents = [{
+            role: "user",
+            parts
+        }];
 
         const requestBody = {
             contents: contents,
@@ -80,7 +85,8 @@ export class GeminiService {
             console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:start`, {
                 model,
                 promptLength: String(prompt || "").length,
-                hasSystemInstruction: Boolean(systemInstruction)
+                hasSystemInstruction: Boolean(systemInstruction),
+                inlineParts: parts.length - 1
             });
             const response = await this._callApi(requestBody, 90000, model);
             const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "";

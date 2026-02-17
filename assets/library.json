@@ -1414,5 +1414,77 @@
     "height": 1,
     "placement": "ambient",
     "generatedAt": 1771306067435
+  },
+  "121": {
+    "id": 121,
+    "name": "rusted_cart_tracks_006854",
+    "prompt": "rusted cart tracks",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/rusted_cart_tracks_006854.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771307006866
+  },
+  "122": {
+    "id": 122,
+    "name": "rusted_mine_cart_009979",
+    "prompt": "rusted mine cart",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/rusted_mine_cart_009979.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771307009985
+  },
+  "123": {
+    "id": 123,
+    "name": "crack_in_the_wall_075286",
+    "prompt": "crack in the wall",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/crack_in_the_wall_075286.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771307075297
+  },
+  "124": {
+    "id": 124,
+    "name": "timber_braced_stone_walls_075387",
+    "prompt": "timber-braced stone walls",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/timber_braced_stone_walls_075387.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771307075394
   }
 }

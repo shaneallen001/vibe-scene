@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  
+  <defs>
+    <filter id="shadowBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <linearGradient id="railGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3d2e24"/>
+      <stop offset="40%" stop-color="#5c4535"/>
+      <stop offset="60%" stop-color="#7a5c45"/>
+      <stop offset="100%" stop-color="#2b1f18"/>
+    </linearGradient>
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b322b"/>
+      <stop offset="50%" stop-color="#26201b"/>
+      <stop offset="100%" stop-color="#1a1512"/>
+    </linearGradient>
+  </defs>
+
+  
+  <g opacity="0.6" filter="url(#shadowBlur)">
+    
+    <path d="M70,80 L440,85 L435,140 L75,135 Z" fill="#000000"/>
+    
+    <path d="M65,240 L445,235 L450,295 L60,300 Z" fill="#000000"/>
+    
+    <path d="M75,400 L435,405 L440,460 L80,455 Z" fill="#000000"/>
+  </g>
+
+  
+  <g transform="translate(0, -10)">
+    
+    <path d="M72,90 Q65,115 74,140 L150,142 L300,139 L438,143 Q445,115 436,92 L250,94 Z" fill="url(#woodGrad)" stroke="#1a120d" stroke-width="2"/>
+    
+    <path d="M80,100 C150,98 350,102 430,98" stroke="#4a3e35" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <path d="M85,115 C150,118 350,114 420,120" stroke="#14100d" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <path d="M90,130 C160,128 340,132 410,128" stroke="#4a3e35" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.3"/>
+    
+    <path d="M120,90 L130,110 L128,125" stroke="#0d0a08" stroke-width="2" fill="none"/>
+    <path d="M380,143 L375,120" stroke="#0d0a08" stroke-width="2" fill="none"/>
+    
+    <path d="M72,90 L100,92 L105,110 L74,140 Z" fill="#2f3326" opacity="0.6"/>
+  </g>
+
+  
+  <g transform="rotate(1.5, 256, 256)">
+    
+    <path d="M65,245 Q60,270 68,295 L200,292 L445,298 Q450,270 442,242 L250,246 Z" fill="url(#woodGrad)" stroke="#1a120d" stroke-width="2"/>
+    
+    <path d="M75,255 C150,258 350,252 435,255" stroke="#4a3e35" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <path d="M70,275 C150,278 350,272 440,278" stroke="#14100d" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+    
+    <path d="M445,298 L430,280 L448,270" fill="#1a1512"/>
+    
+    <path d="M250,246 L255,270 L248,290" stroke="#0d0a08" stroke-width="2" fill="none"/>
+  </g>
+
+  
+  <g transform="translate(0, 10)">
+    
+    <path d="M78,405 Q70,430 80,455 L256,458 L435,452 Q442,430 432,408 L256,410 Z" fill="url(#woodGrad)" stroke="#1a120d" stroke-width="2"/>
+    
+    <path d="M85,415 C160,418 340,412 425,415" stroke="#4a3e35" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <path d="M90,435 C160,438 340,432 420,438" stroke="#14100d" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+    
+    <path d="M200,410 C210,430 240,435 260,410 Z" fill="#1f1a15" opacity="0.8"/>
+  </g>
+
+  
+  <g>
+    
+    <path d="M135,0 L135,512 L185,512 L185,0 Z" fill="#000000" opacity="0.3" transform="translate(5, 5)"/>
+    
+    
+    <path d="M140,0 L138,120 L142,250 L139,380 L141,512 L178,512 L180,380 L176,250 L179,120 L177,0 Z" fill="url(#railGrad)"/>
+    
+    
+    <path d="M140,0 L145,512 L170,512 L165,0" fill="#7a3e26" opacity="0.6"/>
+    <path d="M145,50 Q155,60 145,70 T145,90 M170,200 Q160,220 170,240 M150,350 L160,370 L150,390" stroke="#8f4628" stroke-width="12" stroke-linecap="round" opacity="0.7" fill="none" stroke-dasharray="20, 40"/>
+    
+    
+    <path d="M150,110 L160,115 L155,125 Z M165,300 L172,310 L162,315 Z M148,450 L158,455 L152,465 Z" fill="#422116"/>
+    
+    
+    <path d="M152,0 L150,120 L154,250 L151,380 L153,512" stroke="#a69485" stroke-width="3" fill="none" opacity="0.6"/>
+    <path d="M168,0 L166,120 L170,250 L167,380 L169,512" stroke="#634a3b" stroke-width="2" fill="none" opacity="0.8"/>
+  </g>
+
+  
+  <g>
+    
+    <path d="M335,0 L335,512 L385,512 L385,0 Z" fill="#000000" opacity="0.3" transform="translate(5, 5)"/>
+
+    
+    <path d="M340,0 L342,130 L338,260 L341,390 L339,512 L376,512 L379,390 L375,260 L378,130 L377,0 Z" fill="url(#railGrad)"/>
+
+    
+    <path d="M340,0 L345,512 L370,512 L365,0" fill="#7a3e26" opacity="0.6"/>
+    <path d="M370,30 Q360,50 370,70 M345,150 Q355,170 345,190 M360,400 L370,420 L360,440" stroke="#8f4628" stroke-width="12" stroke-linecap="round" opacity="0.7" fill="none" stroke-dasharray="30, 50"/>
+
+    
+    <path d="M350,80 L360,85 L355,95 Z M365,220 L372,230 L362,235 Z M348,380 L358,385 L352,395 Z" fill="#422116"/>
+
+    
+    <path d="M352,0 L354,130 L350,260 L353,390 L351,512" stroke="#a69485" stroke-width="3" fill="none" opacity="0.6"/>
+    <path d="M368,0 L370,130 L366,260 L369,390 L367,512" stroke="#634a3b" stroke-width="2" fill="none" opacity="0.8"/>
+  </g>
+
+  
+  
+  <g transform="translate(0, -10)">
+    
+    <circle cx="130" cy="115" r="6" fill="#291d16"/>
+    <rect x="175" y="105" width="12" height="12" rx="2" fill="#5c3a26"/>
+    <rect x="176" y="106" width="8" height="8" rx="1" fill="#8f593b" opacity="0.8"/>
+    
+    <rect x="325" y="105" width="12" height="12" rx="2" fill="#5c3a26"/>
+    <circle cx="390" cy="115" r="6" fill="#291d16"/>
+    <rect x="326" y="106" width="8" height="8" rx="1" fill="#8f593b" opacity="0.8"/>
+  </g>
+
+  
+  <g transform="rotate(1.5, 256, 256)">
+    
+    <path d="M125,260 L135,260 L135,270 L125,270 Z" fill="#4a2e20" stroke="#1f1510" stroke-width="1"/>
+    <path d="M185,260 L195,260 L195,270 L185,270 Z" fill="#6e432b"/>
+    
+    <path d="M325,260 L335,260 L335,270 L325,270 Z" fill="#6e432b"/>
+    <path d="M385,260 L395,260 L395,270 L385,270 Z" fill="#4a2e20"/>
+    
+    
+    <circle cx="190" cy="265" r="2" fill="#b06c49"/>
+    <circle cx="330" cy="265" r="2" fill="#b06c49"/>
+  </g>
+
+  
+  <g transform="translate(0, 10)">
+    
+    <rect x="125" y="425" width="14" height="14" rx="3" fill="#3d281e"/>
+    <rect x="180" y="425" width="14" height="14" rx="3" fill="#5e3926"/>
+    <path d="M182,427 L192,427 L192,437 L182,437 Z" fill="#915e40"/>
+    
+    <rect x="320" y="425" width="14" height="14" rx="3" fill="#5e3926"/>
+    <path d="M322,427 L332,427 L332,437 L322,437 Z" fill="#915e40"/>
+    <rect x="380" y="425" width="14" height="14" rx="3" fill="#3d281e"/>
+  </g>
+
+  
+  <g opacity="0.2">
+    <path d="M150,50 L160,55 L155,65 Z M350,150 L360,155 L355,165 Z M150,450 L160,455 L155,465 Z" fill="#000000"/>
+    <path d="M170,20 L165,30 L175,25 Z M370,480 L365,490 L375,485 Z" fill="#5e3a28"/>
+  </g>
+
+</svg>

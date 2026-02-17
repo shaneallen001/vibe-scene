@@ -80,11 +80,9 @@ export class DungeongenService {
             let planningContext = {};
             let grid = null;
             const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
+            const modelConfig = this._getModelConfig();
             if (generationMode === "intentional" && apiKey) {
-                const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
-                const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
-                const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
-                const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
+                const aiService = this._createAiService(apiKey, modelConfig);
                 if (options.onProgress) options.onProgress("Designing intentional dungeon outline...", 10);
                 const outline = await aiService.planDungeonOutline({
                     width,
@@ -118,7 +116,12 @@ export class DungeongenService {
 
             // 2. AI Planning & Population (Themes + Textures + Items)
             const planStart = performance.now();
-            const { items, roomTextures, defaultTexture, wallTexture, roomWallTextures } = await this._planAndPopulate(grid, options, planningContext);
+            const planned = await this._planAndPopulate(grid, options, planningContext);
+            let items = planned.items || [];
+            let roomTextures = planned.roomTextures || {};
+            let defaultTexture = planned.defaultTexture || null;
+            let wallTexture = planned.wallTexture || null;
+            let roomWallTextures = planned.roomWallTextures || {};
             console.log(`Vibe Scenes | [${runId}] Planning/population complete in ${(performance.now() - planStart).toFixed(0)}ms`, {
                 placedItems: items?.length || 0,
                 roomTextureOverrides: Object.keys(roomTextures || {}).length,
@@ -141,10 +144,53 @@ export class DungeongenService {
 
             console.log(`Vibe Scenes | [${runId}] Rendering to blob...`);
             const renderStart = performance.now();
-            const blob = await renderer.renderToBlob();
+            let blob = await renderer.renderToBlob();
             console.log(`Vibe Scenes | [${runId}] Renderer produced blob in ${(performance.now() - renderStart).toFixed(0)}ms`, {
                 bytes: blob?.size || 0
             });
+
+            // 3b. Optional visual QA pass: let AI inspect the rendered image and propose bounded edits.
+            if (apiKey && options.visualReview !== false) {
+                if (options.onProgress) options.onProgress("Reviewing rendered map visuals...", 84);
+                const visualPass = await this._runVisualReviewPass({
+                    runId,
+                    apiKey,
+                    modelConfig,
+                    grid,
+                    options,
+                    previewBlob: blob,
+                    items,
+                    roomTextures,
+                    defaultTexture,
+                    wallTexture,
+                    roomWallTextures
+                });
+
+                if (visualPass?.applied) {
+                    items = visualPass.items;
+                    roomTextures = visualPass.roomTextures;
+                    defaultTexture = visualPass.defaultTexture;
+                    wallTexture = visualPass.wallTexture;
+                    roomWallTextures = visualPass.roomWallTextures;
+
+                    if (options.onProgress) options.onProgress("Applying visual adjustments and re-rendering...", 87);
+                    console.log(`Vibe Scenes | [${runId}] Re-rendering after visual review`, {
+                        score: visualPass.score,
+                        removedItems: visualPass.removedItems,
+                        floorEdits: visualPass.floorEdits,
+                        wallEdits: visualPass.wallEdits
+                    });
+                    const reviewedRenderer = new DungeonRenderer(grid, {
+                        cellSize: options.gridSize || 20,
+                        drawNumbers: true,
+                        floorTexture: defaultTexture,
+                        roomTextures: roomTextures || {},
+                        wallTexture: wallTexture,
+                        roomWallTextures: roomWallTextures || {},
+                    });
+                    blob = await reviewedRenderer.renderToBlob();
+                }
+            }
 
             if (options.onProgress) options.onProgress("Building walls and doors...", 90);
 
@@ -211,10 +257,7 @@ export class DungeongenService {
         if (apiKey) {
             if (options.onProgress) options.onProgress("Consulting the Oracle for room themes...", 24);
             console.log(`Vibe Scenes | [${runId}] Planning dungeon layout with AI...`);
-            const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
-            const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
-            const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
-            const aiService = new AiAssetService(apiKey, { text: textModel, svg: svgModel });
+            const aiService = this._createAiService(apiKey);
 
             // Prepare simplified asset list (Objects, Textures, AND Walls) with descriptive info
             const availableAssets = [...objects, ...textures, ...wallAssets].map(o => ({
@@ -613,6 +656,266 @@ export class DungeongenService {
 
         console.log(`Vibe Scenes | [${runId}] Placed ${items.length} items in dungeon.`);
         return { items, roomTextures, defaultTexture, wallTexture, roomWallTextures };
+    }
+
+    _getModelConfig() {
+        const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
+        const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
+        const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;
+        return { text: textModel, svg: svgModel };
+    }
+
+    _createAiService(apiKey, modelConfig = null) {
+        if (!apiKey) return null;
+        return new AiAssetService(apiKey, modelConfig || this._getModelConfig());
+    }
+
+    async _runVisualReviewPass({
+        runId,
+        apiKey,
+        modelConfig,
+        grid,
+        options,
+        previewBlob,
+        items,
+        roomTextures,
+        defaultTexture,
+        wallTexture,
+        roomWallTextures
+    }) {
+        try {
+            const aiService = this._createAiService(apiKey, modelConfig);
+            if (!aiService || !previewBlob) return { applied: false };
+
+            const textures = this.library.getAssets("TEXTURE") || [];
+            const wallAssets = this.library.getAssets("WALL") || [];
+            const objects = this.library.getAssets("OBJECT") || [];
+            if (textures.length === 0 && wallAssets.length === 0) {
+                return { applied: false };
+            }
+
+            const gridSize = options.gridSize || 20;
+            const pixelPadding = gridSize * 2;
+            const maxRoomContext = 80;
+            const maxItemContext = 180;
+            const imageBase64 = await this._blobToBase64(previewBlob);
+            const roomList = Array.isArray(grid?.rooms) ? grid.rooms : [];
+            const roomSummaries = roomList.slice(0, maxRoomContext).map(room => ({
+                id: String(room.id),
+                width: room.width,
+                height: room.height,
+                theme: room.theme || "",
+                description: room.description || "",
+                floor_texture: this._assetLabelFromPath(textures, roomTextures?.[room.id]),
+                wall_texture: this._assetLabelFromPath(wallAssets, roomWallTextures?.[room.id])
+            }));
+            const itemSummaries = (items || []).slice(0, maxItemContext).map((item, index) => ({
+                index,
+                placement: item.placement || "blocking",
+                x: Math.floor((Number(item.x) - pixelPadding) / gridSize),
+                y: Math.floor((Number(item.y) - pixelPadding) / gridSize),
+                width_cells: Math.max(1, Math.round((Number(item.width) || gridSize) / gridSize)),
+                height_cells: Math.max(1, Math.round((Number(item.height) || gridSize) / gridSize)),
+                texture: this._assetLabelFromPath(objects, item.texture)
+            }));
+            const metadata = {
+                map: {
+                    width: grid.width,
+                    height: grid.height,
+                    room_count: roomList.length,
+                    item_count: items?.length || 0,
+                    generation_mode: options.generationMode || "procedural",
+                    dungeon_description: String(options.dungeonDescription || "")
+                },
+                current: {
+                    default_floor: this._assetLabelFromPath(textures, defaultTexture),
+                    default_wall: this._assetLabelFromPath(wallAssets, wallTexture),
+                    room_floor_overrides_count: Object.keys(roomTextures || {}).length,
+                    room_wall_overrides_count: Object.keys(roomWallTextures || {}).length
+                },
+                context_limits: {
+                    rooms_included: roomSummaries.length,
+                    items_included: itemSummaries.length,
+                    total_rooms: roomList.length,
+                    total_items: items?.length || 0
+                },
+                rooms: roomSummaries,
+                items: itemSummaries,
+                available_floor_textures: textures.slice(0, 120).map(tex => ({
+                    name: tex.name,
+                    tags: tex.tags || []
+                })),
+                available_wall_textures: wallAssets.slice(0, 120).map(tex => ({
+                    name: tex.name,
+                    tags: tex.tags || []
+                }))
+            };
+
+            const review = await aiService.reviewRenderedMap({ imageBase64, metadata });
+            const suggested = review?.changes || {};
+            const hasDefaultFloorField = Object.prototype.hasOwnProperty.call(suggested, "default_floor");
+            const hasDefaultWallField = Object.prototype.hasOwnProperty.call(suggested, "default_wall");
+            const hasSuggestions =
+                hasDefaultFloorField ||
+                hasDefaultWallField ||
+                (Array.isArray(suggested.room_floor) && suggested.room_floor.length > 0) ||
+                (Array.isArray(suggested.room_wall) && suggested.room_wall.length > 0) ||
+                (Array.isArray(suggested.remove_item_indices) && suggested.remove_item_indices.length > 0);
+            if (!hasSuggestions) {
+                console.log(`Vibe Scenes | [${runId}] Visual review made no actionable suggestions`, {
+                    score: review?.score || 0
+                });
+                return { applied: false, score: review?.score || 0 };
+            }
+
+            let nextDefaultTexture = defaultTexture || null;
+            let nextWallTexture = wallTexture || null;
+            const nextRoomTextures = { ...(roomTextures || {}) };
+            const nextRoomWallTextures = { ...(roomWallTextures || {}) };
+            const nextItems = Array.isArray(items) ? [...items] : [];
+            let floorEdits = 0;
+            let wallEdits = 0;
+
+            if (hasDefaultFloorField) {
+                if (suggested.default_floor === null && nextDefaultTexture) {
+                    nextDefaultTexture = null;
+                    floorEdits += 1;
+                } else {
+                    const applyDefaultFloor = this._findTexture(textures, suggested.default_floor);
+                    if (applyDefaultFloor && applyDefaultFloor.path !== nextDefaultTexture) {
+                        nextDefaultTexture = applyDefaultFloor.path;
+                        floorEdits += 1;
+                    }
+                }
+            }
+
+            if (hasDefaultWallField) {
+                if (suggested.default_wall === null && nextWallTexture) {
+                    nextWallTexture = null;
+                    wallEdits += 1;
+                } else {
+                    const applyDefaultWall = this._findTexture(wallAssets, suggested.default_wall);
+                    if (applyDefaultWall && applyDefaultWall.path !== nextWallTexture) {
+                        nextWallTexture = applyDefaultWall.path;
+                        wallEdits += 1;
+                    }
+                }
+            }
+
+            const validRoomIds = new Set((grid.rooms || []).map(room => String(room.id)));
+            if (Array.isArray(suggested.room_floor)) {
+                for (const edit of suggested.room_floor) {
+                    const roomId = String(edit?.room_id || "").trim();
+                    if (!roomId || !validRoomIds.has(roomId)) continue;
+                    if (edit.texture === null) {
+                        if (Object.prototype.hasOwnProperty.call(nextRoomTextures, roomId)) {
+                            delete nextRoomTextures[roomId];
+                            floorEdits += 1;
+                        }
+                        continue;
+                    }
+                    const match = this._findTexture(textures, edit.texture);
+                    if (match && nextRoomTextures[roomId] !== match.path) {
+                        nextRoomTextures[roomId] = match.path;
+                        floorEdits += 1;
+                    }
+                }
+            }
+
+            if (Array.isArray(suggested.room_wall)) {
+                for (const edit of suggested.room_wall) {
+                    const roomId = String(edit?.room_id || "").trim();
+                    if (!roomId || !validRoomIds.has(roomId)) continue;
+                    if (edit.texture === null) {
+                        if (Object.prototype.hasOwnProperty.call(nextRoomWallTextures, roomId)) {
+                            delete nextRoomWallTextures[roomId];
+                            wallEdits += 1;
+                        }
+                        continue;
+                    }
+                    const match = this._findTexture(wallAssets, edit.texture);
+                    if (match && nextRoomWallTextures[roomId] !== match.path) {
+                        nextRoomWallTextures[roomId] = match.path;
+                        wallEdits += 1;
+                    }
+                }
+            }
+
+            let removedItems = 0;
+            const removeIndices = Array.isArray(suggested.remove_item_indices)
+                ? [...new Set(suggested.remove_item_indices
+                    .map(v => Number(v))
+                    .filter(v => Number.isInteger(v) && v >= 0)
+                  )].sort((a, b) => b - a)
+                : [];
+            for (const idx of removeIndices) {
+                if (idx >= nextItems.length) continue;
+                nextItems.splice(idx, 1);
+                removedItems += 1;
+            }
+
+            const applied = floorEdits > 0 || wallEdits > 0 || removedItems > 0;
+            if (!applied) {
+                return { applied: false, score: review?.score || 0 };
+            }
+
+            console.log(`Vibe Scenes | [${runId}] Visual review adjustments applied`, {
+                score: review?.score || 0,
+                needsChanges: review?.needs_changes || false,
+                reasoning: review?.reasoning || "",
+                floorEdits,
+                wallEdits,
+                removedItems
+            });
+
+            return {
+                applied: true,
+                score: review?.score || 0,
+                floorEdits,
+                wallEdits,
+                removedItems,
+                items: nextItems,
+                roomTextures: nextRoomTextures,
+                defaultTexture: nextDefaultTexture,
+                wallTexture: nextWallTexture,
+                roomWallTextures: nextRoomWallTextures
+            };
+        } catch (error) {
+            console.warn(`Vibe Scenes | [${runId}] Visual review pass failed; keeping first render`, {
+                message: error?.message || String(error)
+            });
+            return { applied: false };
+        }
+    }
+
+    async _blobToBase64(blob) {
+        if (!blob) return "";
+        const buffer = await blob.arrayBuffer();
+        const bytes = new Uint8Array(buffer);
+        const chunkSize = 0x8000;
+        let binary = "";
+        for (let i = 0; i < bytes.length; i += chunkSize) {
+            binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+        }
+        return btoa(binary);
+    }
+
+    _assetLabelFromPath(assets, path) {
+        if (!path) return null;
+        const normalizedPath = String(path).replace(/\\/g, "/").toLowerCase();
+        const normalizedAssetPath = value => String(value || "").replace(/\\/g, "/").toLowerCase();
+
+        let match = (assets || []).find(asset => normalizedAssetPath(asset.path) === normalizedPath);
+        if (!match) {
+            match = (assets || []).find(asset => {
+                const candidate = normalizedAssetPath(asset.path);
+                return candidate && normalizedPath.endsWith(candidate);
+            });
+        }
+        if (match) return match.name || match.id;
+
+        const fileName = normalizedPath.split("/").pop() || normalizedPath;
+        return fileName.replace(/\.[a-z0-9]+$/i, "").replace(/_/g, " ").trim() || normalizedPath;
     }
 
     _resolveObjectAsset(objects, item, roomId, seed) {

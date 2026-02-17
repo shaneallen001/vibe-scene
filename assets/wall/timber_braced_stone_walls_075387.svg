@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision" width="512" height="512">
+  <defs>
+    
+    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7a7f85" />
+      <stop offset="100%" stop-color="#555a5f" />
+    </linearGradient>
+    
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3e2723" />
+      <stop offset="20%" stop-color="#4e342e" />
+      <stop offset="50%" stop-color="#5d4037" />
+      <stop offset="80%" stop-color="#3e2723" />
+      <stop offset="100%" stop-color="#281a16" />
+    </linearGradient>
+    
+    <linearGradient id="dropShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#2c2c2a" />
+
+  
+  
+  <g fill="url(#stoneGrad)" stroke="#1a1a18" stroke-width="2" stroke-linejoin="round">
+    
+    <path d="M40 10 l80 5 l90 -5 l20 40 l-60 10 l-130 -10 z" fill="#606468" />
+    <path d="M40 60 l120 10 l50 -10 l20 60 l-80 10 l-110 -5 z" fill="#70757a" />
+    <path d="M40 140 l100 -5 l90 10 l0 50 l-70 10 l-120 -5 z" fill="#5a5e63" />
+    <path d="M40 210 l120 5 l70 -5 l0 60 l-90 5 l-100 -10 z" fill="#6e7276" />
+    <path d="M40 280 l110 0 l80 10 l0 70 l-100 5 l-90 -10 z" fill="#55595d" />
+    <path d="M40 370 l100 -5 l90 5 l0 60 l-80 10 l-110 -5 z" fill="#656a6e" />
+    <path d="M40 440 l120 5 l70 -5 l0 60 l-100 5 l-90 -5 z" fill="#505458" />
+
+    
+    <path d="M296 10 l90 5 l80 -5 l20 50 l-70 5 l-120 -10 z" fill="#656a6e" />
+    <path d="M296 70 l110 -5 l80 10 l20 60 l-100 10 l-110 -5 z" fill="#55595d" />
+    <path d="M296 150 l100 5 l90 -5 l20 50 l-90 10 l-120 -5 z" fill="#70757a" />
+    <path d="M296 220 l120 -5 l70 10 l20 60 l-100 5 l-110 -10 z" fill="#606468" />
+    <path d="M296 300 l110 5 l80 -5 l20 70 l-90 10 l-120 -5 z" fill="#5a5e63" />
+    <path d="M296 380 l100 0 l90 5 l20 60 l-100 5 l-110 -10 z" fill="#6e7276" />
+    <path d="M296 450 l120 5 l70 -5 l20 50 l-90 5 l-120 -5 z" fill="#55595d" />
+  </g>
+
+  
+  <g fill="none" stroke="#000" stroke-opacity="0.2" stroke-width="1" stroke-linecap="round">
+    <path d="M60 30 q20 5 40 0" />
+    <path d="M180 80 q-10 10 -20 20" />
+    <path d="M80 160 q30 -5 60 5" />
+    <path d="M320 40 q10 10 20 20" />
+    <path d="M420 100 q-20 5 -40 0" />
+    <path d="M350 320 q30 10 60 0" />
+    <path d="M100 400 q40 -10 80 0" />
+  </g>
+  <g fill="none" stroke="#fff" stroke-opacity="0.1" stroke-width="1">
+    <path d="M45 15 l50 0" />
+    <path d="M45 65 l40 0" />
+    <path d="M300 155 l60 0" />
+    <path d="M300 385 l50 0" />
+  </g>
+
+  
+
+  
+  <rect x="0" y="140" width="512" height="10" fill="url(#dropShadow)" opacity="0.7" />
+  <rect x="0" y="396" width="512" height="10" fill="url(#dropShadow)" opacity="0.7" />
+
+  
+  
+  <rect x="0" y="0" width="32" height="512" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="1" />
+  
+  <rect x="256" y="0" width="32" height="512" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="1" />
+  
+  
+  
+  <rect x="0" y="116" width="512" height="24" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="1" />
+  
+  <rect x="0" y="372" width="512" height="24" fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="1" />
+
+  
+  <g fill="none" stroke="#281a16" stroke-width="1" opacity="0.6">
+    
+    <path d="M10 0 v512 M20 0 v512 M266 0 v512 M276 0 v512" stroke-dasharray="100 50" />
+    <path d="M15 20 v60 M15 200 v100 M270 50 v80 M270 300 v120" stroke-width="2" />
+    
+    
+    <path d="M0 124 h512 M0 132 h512 M0 380 h512 M0 388 h512" stroke-dasharray="80 40" />
+    <path d="M50 128 h100 M300 128 h100 M100 384 h80 M400 384 h80" stroke-width="2" />
+  </g>
+
+  
+  <g fill="none" stroke="#8d6e63" stroke-width="1" opacity="0.5">
+    <path d="M2 0 v512 M258 0 v512" /> 
+    <path d="M0 117 h512 M0 373 h512" /> 
+  </g>
+
+  
+  <g fill="#212121" stroke="#424242" stroke-width="1">
+    
+    <circle cx="16" cy="128" r="4" />
+    <circle cx="16" cy="384" r="4" />
+    
+    
+    <circle cx="272" cy="128" r="4" />
+    <circle cx="272" cy="384" r="4" />
+  </g>
+
+  
+  <g fill="url(#woodGrad)" stroke="#1a0f0d" stroke-width="1">
+     
+     <path d="M32 140 l32 32 l8 -8 l-32 -32 z" /> 
+     <path d="M256 140 l-32 32 l-8 -8 l32 -32 z" />
+     
+     
+     <path d="M288 396 l32 32 l8 -8 l-32 -32 z" />
+     
+     
+     <path d="M288 116 l32 -32 l8 8 l-32 32 z" />
+  </g>
+
+  
+  <g opacity="0.15" fill="#000">
+    <circle cx="50" cy="50" r="30" filter="blur(10)" />
+    <circle cx="450" cy="450" r="40" filter="blur(10)" />
+    <circle cx="256" cy="256" r="60" filter="blur(20)" />
+    <path d="M0 512 L512 512 L512 480 L0 480 Z" /> 
+  </g>
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#dropShadow)" opacity="0.1" style="mix-blend-mode: multiply;" pointer-events="none" />
+
+</svg>
