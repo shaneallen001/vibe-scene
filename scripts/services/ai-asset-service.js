@@ -23,14 +23,26 @@ export class AiAssetService {
         const normalizedType = String(type || "OBJECT").toUpperCase();
         const svgOptions = this._normalizeSVGOptions(normalizedType, options);
         const basePrompt = String(prompt || "").trim();
+
+        // Multi-cell viewBox support: width/height in grid cells → pixel viewBox
+        const cellW = Math.max(1, Math.round(Number(options.width) || 1));
+        const cellH = Math.max(1, Math.round(Number(options.height) || 1));
+        const viewBoxW = cellW * 512;
+        const viewBoxH = cellH * 512;
+
         console.log(`Vibe Scenes | [${traceId}] generateSVG:start`, {
             type: normalizedType,
             promptLength: basePrompt.length,
             svgModel: this.svgModel,
             maxPasses: svgOptions.maxPasses,
-            minScore: svgOptions.minScore
+            minScore: svgOptions.minScore,
+            cellSize: `${cellW}x${cellH}`,
+            viewBox: `0 0 ${viewBoxW} ${viewBoxH}`
         });
-        const baseSystem = PROMPTS._BASE;
+        const baseSystem = PROMPTS._BASE.replace(
+            'ViewBox MUST be "0 0 512 512".',
+            `ViewBox MUST be "0 0 ${viewBoxW} ${viewBoxH}".`
+        );
         const typeSystem = PROMPTS[`SVG_${normalizedType}`] || PROMPTS.SVG_OBJECT;
         const fullSystemPrompt = `${baseSystem}\n\n${typeSystem}`;
 
@@ -378,12 +390,19 @@ export class AiAssetService {
         // Create File
         const file = new File([svgContent], fileName, { type: "image/svg+xml" });
 
+        // Resolve dimensions and placement from metadata
+        const assetWidth = Math.max(1, Math.round(Number(metadata.width) || 1));
+        const assetHeight = Math.max(1, Math.round(Number(metadata.height) || 1));
+        const placement = (metadata.placement === "ambient") ? "ambient" : "blocking";
+
         // Upload
         try {
             console.log(`Vibe Scenes | [${traceId}] saveAsset:upload-start`, {
                 filePath,
                 svgChars: svgContent?.length || 0,
-                tagsCount: tags?.length || 0
+                tagsCount: tags?.length || 0,
+                dimensions: `${assetWidth}x${assetHeight}`,
+                placement
             });
             await FP.upload("data", path, file, {}, { notify: false });
             console.log(`Vibe Scenes | [${traceId}] saveAsset:upload-success`);
@@ -399,7 +418,7 @@ export class AiAssetService {
             // Register in Library
             console.log(`Vibe Scenes | [${traceId}] saveAsset:library-register-start`);
             await this.library.registerAsset({
-                name: baseName, // Use filename as name
+                name: baseName,
                 prompt: metadata.prompt,
                 model: metadata.model,
                 path: filePath,
@@ -407,11 +426,14 @@ export class AiAssetService {
                 source: "ai-gen",
                 tags: ["ai-gen", ...tags],
                 type: type,
-                width: 1,
-                height: 1
+                width: assetWidth,
+                height: assetHeight,
+                placement: placement
             });
             console.log(`Vibe Scenes | [${traceId}] saveAsset:library-register-success`, {
                 filePath,
+                dimensions: `${assetWidth}x${assetHeight}`,
+                placement,
                 elapsedMs: Math.round(performance.now() - start)
             });
 
@@ -509,8 +531,9 @@ export class AiAssetService {
         if (!content.startsWith("<svg")) {
             issues.push("Output does not start with <svg.");
         }
-        if (!/viewBox\s*=\s*["']0\s+0\s+512\s+512["']/i.test(content)) {
-            issues.push("Missing canonical viewBox 0 0 512 512.");
+        // Accept any valid viewBox starting with "0 0" (multi-cell objects may have non-square viewBoxes)
+        if (!/viewBox\s*=\s*["']0\s+0\s+\d+\s+\d+["']/i.test(content)) {
+            issues.push("Missing valid viewBox (expected '0 0 W H').");
         }
         if (!/<(path|rect|circle|ellipse|polygon|polyline|line|g)\b/i.test(content)) {
             issues.push("No visible SVG geometry elements detected.");
@@ -660,28 +683,29 @@ export class AiAssetService {
             content = content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
         }
 
-        // 6. Ensure Width and Height
-        // Regex to find the opening <svg ... > tag
+        // 6. Ensure Width and Height (derive from viewBox if present, else default 512)
         const svgOpenTagMatch = content.match(/<svg([^>]*)>/);
 
         if (svgOpenTagMatch) {
             let attributes = svgOpenTagMatch[1];
             let newAttributes = attributes;
 
-            // Check if width exists IN THE OPEN TAG
+            // Parse viewBox to get intended dimensions
+            const vbMatch = attributes.match(/viewBox\s*=\s*["']0\s+0\s+(\d+)\s+(\d+)["']/i);
+            const vbW = vbMatch ? vbMatch[1] : "512";
+            const vbH = vbMatch ? vbMatch[2] : "512";
+
             if (!/width\s*=\s*["']/.test(attributes)) {
-                newAttributes += ' width="512"';
+                newAttributes += ` width="${vbW}"`;
             }
-            // Check if height exists IN THE OPEN TAG
             if (!/height\s*=\s*["']/.test(attributes)) {
-                newAttributes += ' height="512"';
+                newAttributes += ` height="${vbH}"`;
             }
 
             if (newAttributes !== attributes) {
                 content = content.replace(svgOpenTagMatch[0], `<svg${newAttributes}>`);
             }
         } else {
-            // Fallback if no svg tag found (weird)
             console.warn("Vibe Scenes | Could not find <svg> tag for sanitization");
         }
 

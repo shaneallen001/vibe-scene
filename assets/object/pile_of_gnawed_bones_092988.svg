@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="gradShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#1a1512" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#1a1512" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1a1512" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="boneGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2ebd4"/>
+      <stop offset="50%" stop-color="#d6c6a1"/>
+      <stop offset="100%" stop-color="#a38f6b"/>
+    </linearGradient>
+    <linearGradient id="boneGradDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c4b28a"/>
+      <stop offset="100%" stop-color="#8f7a54"/>
+    </linearGradient>
+    <radialGradient id="socketGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#2b221a"/>
+      <stop offset="100%" stop-color="#4a3b2e"/>
+    </radialGradient>
+    <filter id="roughness">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feDiffuseLighting>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  
+  <path d="M120,250 Q90,350 160,420 Q256,480 380,430 Q450,380 430,280 Q400,180 300,150 Q180,120 120,250 Z" fill="url(#gradShadow)" shape-rendering="geometricPrecision"/>
+
+  
+  <g id="bottom_debris">
+    
+    <path d="M180,380 L200,410 L240,400 L230,370 Z" fill="#6b5b45" stroke="#3d3226" stroke-width="2"/>
+    
+    <path d="M350,360 L380,380 L370,340 Z" fill="#7a684f" stroke="#3d3226" stroke-width="2"/>
+    
+    <path d="M150,220 L130,250 L160,260 Z" fill="#6b5b45" stroke="#3d3226" stroke-width="2"/>
+    
+    <path d="M280,420 C320,440 380,420 400,380" fill="none" stroke="#5e503d" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  
+  <g id="mid_layer_bones">
+    
+    <path d="M200,300 C180,320 160,350 170,380 C190,410 240,400 260,370 C280,340 260,310 240,300 C230,290 210,290 200,300 Z" fill="#a89671" stroke="#4a3b2a" stroke-width="2"/>
+    <path d="M210,330 C220,340 230,340 240,330" fill="none" stroke="#4a3b2a" stroke-width="1" opacity="0.5"/>
+
+    
+    <path d="M140,340 C120,330 110,300 130,280 L180,240 L195,255 L140,340 Z" fill="#b5a47d" stroke="#4f402f" stroke-width="2"/>
+    <path d="M180,240 L195,255 L185,265 Z" fill="#4a3627"/> 
+
+    
+    <g transform="translate(320, 320) rotate(-20)">
+      <path d="M0,0 C-10,-5 -15,10 -5,20 C5,25 20,20 25,10 C30,0 15,-10 0,0 Z" fill="#c2b088" stroke="#5c4d39" stroke-width="1.5"/>
+      <path d="M22,8 C15,5 10,18 20,28 C30,33 45,28 50,18 C55,8 40,-2 22,8 Z" fill="#baa880" stroke="#5c4d39" stroke-width="1.5"/>
+    </g>
+
+    
+    <path d="M350,200 C380,180 420,190 440,220 L430,230 C415,205 385,195 360,210 Z" fill="#d1c29e" stroke="#5e4e38" stroke-width="1.5"/>
+    <path d="M340,230 C370,210 410,220 430,250 L420,260 C405,235 375,225 350,240 Z" fill="#cfbf99" stroke="#5e4e38" stroke-width="1.5"/>
+  </g>
+
+  
+  <g id="hero_bones">
+    
+    
+    <g transform="translate(180, 200) rotate(45)">
+      
+      <path d="M10,20 L150,20 C170,20 180,30 180,45 C180,60 170,70 150,70 L10,70" fill="#2b221a" opacity="0.4" transform="translate(5,5)"/>
+      
+      
+      <path d="M20,25 L140,30 C155,28 170,30 175,45 C180,60 165,75 140,70 L20,65" fill="url(#boneGrad1)" stroke="#594a36" stroke-width="2" stroke-linejoin="round"/>
+      
+      
+      <path d="M140,30 C160,20 185,25 190,45 C195,65 170,80 140,70" fill="url(#boneGrad1)" stroke="#594a36" stroke-width="2"/>
+      <path d="M160,40 C170,45 170,55 160,60" fill="none" stroke="#b09b6b" stroke-width="2"/>
+      
+      
+      <path d="M20,25 L5,35 L15,45 L0,55 L20,65 Z" fill="#4f3e2e" stroke="#3d3024" stroke-width="1"/>
+      <path d="M20,25 L25,65" fill="none" stroke="#e8dfc5" stroke-width="1" opacity="0.5"/>
+      
+      
+      <path d="M80,30 L90,35 M85,30 L95,35 M100,28 L110,33" stroke="#5c4836" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+
+    
+    <g transform="translate(260, 200) rotate(15)">
+      
+      <path d="M10,20 Q-10,60 20,90 Q50,110 90,90 Q120,60 100,20 Q60,-10 10,20 Z" fill="#1a1512" opacity="0.5" transform="translate(10,10)"/>
+
+      
+      <path d="M10,20 Q-10,60 20,90 Q50,110 90,90 Q120,60 100,20 Q60,-10 10,20 Z" fill="#e3dac9" stroke="#5e4e38" stroke-width="2"/>
+      
+      
+      <path d="M10,20 Q-10,60 20,90 Q50,110 90,90 Q120,60 100,20 Q60,-10 10,20 Z" fill="url(#boneGradDark)" opacity="0.3"/>
+
+      
+      <path d="M20,60 Q25,80 45,75 Q50,55 35,50 Q20,45 20,60 Z" fill="url(#socketGrad)" stroke="#3d2f24" stroke-width="1"/>
+      <path d="M65,75 Q85,80 90,60 Q85,45 70,50 Q55,55 65,75 Z" fill="url(#socketGrad)" stroke="#3d2f24" stroke-width="1"/>
+
+      
+      <path d="M48,85 L52,95 L58,85 L53,80 Z" fill="#2e241b"/>
+
+      
+      <path d="M95,50 Q115,55 105,80" fill="none" stroke="#d1c4a7" stroke-width="4" stroke-linecap="round"/>
+      <path d="M15,50 Q-5,55 5,80" fill="none" stroke="#d1c4a7" stroke-width="4" stroke-linecap="round"/>
+
+      
+      <path d="M30,10 L35,15 L40,10 L45,15 L50,10 L55,15 L60,10" fill="none" stroke="#8f7a54" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M50,10 L50,35" fill="none" stroke="#8f7a54" stroke-width="1" stroke-dasharray="2,2"/>
+      
+      
+      <path d="M80,30 L70,40 L75,50" fill="none" stroke="#3d2f24" stroke-width="1.5"/>
+    </g>
+
+    
+    <g transform="translate(220, 360) rotate(-60)">
+      <rect x="0" y="0" width="60" height="15" rx="5" fill="#c9b995" stroke="#5e4e38" stroke-width="1.5"/>
+      <path d="M60,0 L55,15" fill="none" stroke="#5e4e38" stroke-width="1"/>
+      
+      <path d="M20,0 L20,5 M25,0 L25,5 M30,0 L30,5" stroke="#4a3b2a" stroke-width="1"/>
+    </g>
+  </g>
+
+  
+  <g id="texture_pass" opacity="0.6">
+    
+    <circle cx="280" cy="220" r="1.5" fill="#4a3b2a"/>
+    <circle cx="290" cy="215" r="1" fill="#4a3b2a"/>
+    <circle cx="350" cy="350" r="2" fill="#4a3b2a"/>
+    
+    
+    <path d="M30,30 Q50,20 70,30" transform="translate(260, 200) rotate(15)" fill="none" stroke="#fffaeb" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+    
+    
+    <path d="M40,35 L120,40" transform="translate(180, 200) rotate(45)" fill="none" stroke="#fffaeb" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  </g>
+  
+  
+  <path d="M0,0" fill="none" stroke="#000" stroke-width="1" /> 
+  <g id="grime" opacity="0.2" style="mix-blend-mode: multiply;">
+     <circle cx="256" cy="256" r="100" fill="url(#gradShadow)"/>
+  </g>
+
+</svg>

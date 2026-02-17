@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <linearGradient id="iceDeep" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0b1a33" />
+      <stop offset="50%" stop-color="#1c4e80" />
+      <stop offset="100%" stop-color="#3894bf" />
+    </linearGradient>
+
+    
+    <linearGradient id="iceFacetLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dff6ff" />
+      <stop offset="60%" stop-color="#80d4ff" />
+      <stop offset="100%" stop-color="#2a8cbd" />
+    </linearGradient>
+
+    
+    <linearGradient id="iceFacetShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#184b7c" />
+      <stop offset="100%" stop-color="#081426" />
+    </linearGradient>
+
+    
+    <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fffff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#4fffff" stop-opacity="0" />
+    </radialGradient>
+    
+    
+    <filter id="frostNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0" in="noise" result="coloredNoise"/>
+    </filter>
+  </defs>
+
+  
+  <ellipse cx="256" cy="380" rx="160" ry="80" fill="#000000" fill-opacity="0.4" filter="blur(15px)" shape-rendering="geometricPrecision"/>
+
+  
+  <path d="M150,350 Q200,420 300,400 T400,320 Q350,280 250,300 T150,350" fill="#aeeeff" fill-opacity="0.3" stroke="none" filter="url(#frostNoise)"/>
+  <path d="M160,360 Q210,410 290,390 T380,330 Q340,300 260,320 T160,360" fill="#ffffff" fill-opacity="0.1" stroke="none"/>
+
+  
+  <g transform="translate(0, -20)">
+    
+    <path d="M180,280 L140,220 L200,180 L220,250 Z" fill="url(#iceFacetShadow)" stroke="#2f6f9e" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M140,220 L180,280 L130,300 L110,250 Z" fill="#0f2842" stroke="#2f6f9e" stroke-width="1" stroke-linejoin="round"/>
+    
+    <path d="M340,270 L380,210 L320,190 L300,250 Z" fill="url(#iceFacetShadow)" stroke="#2f6f9e" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M380,210 L340,270 L390,290 L410,240 Z" fill="#0f2842" stroke="#2f6f9e" stroke-width="1" stroke-linejoin="round"/>
+  </g>
+
+  
+  
+  
+  <g transform="translate(256, 256)">
+    
+    
+    
+    <path d="M-40,-140 L40,-100 L0,0 L-70,-40 Z" fill="url(#iceFacetLight)" stroke="#cceeff" stroke-width="1" shape-rendering="geometricPrecision"/>
+    
+    
+    <path d="M40,-100 L90,-20 L0,0 Z" fill="#4dabf7" stroke="#8ecfff" stroke-width="1" shape-rendering="geometricPrecision"/>
+    
+    
+    <path d="M90,-20 L50,110 L0,0 Z" fill="url(#iceDeep)" stroke="#3b82a3" stroke-width="1" shape-rendering="geometricPrecision"/>
+    
+    
+    <path d="M50,110 L-60,90 L-70,-40 L0,0 Z" fill="#183654" stroke="#3b82a3" stroke-width="1" shape-rendering="geometricPrecision"/>
+
+    
+    <path d="M-20,-80 L10,-40 L-10,10" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.4"/>
+    <path d="M30,-50 L10,20" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
+    
+    
+    <path d="M-40,-140 L-35,-130 L35,-95 L40,-100 Z" fill="#ffffff" fill-opacity="0.8"/>
+    <path d="M0,0 L50,110" fill="none" stroke="#68d1ff" stroke-width="1" stroke-opacity="0.5"/>
+  </g>
+
+  
+  <g transform="translate(160, 300)">
+    <path d="M0,-80 L40,-40 L10,40 L-40,20 L-30,-50 Z" fill="url(#iceDeep)" stroke="#2a6f96" stroke-width="1"/>
+    
+    <path d="M0,-80 L40,-40 L10,10 L-30,-50 Z" fill="#a6dfff" stroke="#ffffff" stroke-width="0.5"/>
+    
+    <path d="M-30,-50 L10,10 L-40,20 Z" fill="#2d6f96" opacity="0.8"/>
+    <path d="M10,10 L40,-40 L10,40 Z" fill="#102a45" opacity="0.6"/>
+    
+    <path d="M-30,-50 L0,-80" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  
+  <g transform="translate(350, 290)">
+    <path d="M10,-90 L50,-30 L20,50 L-30,30 L-20,-60 Z" fill="url(#iceDeep)" stroke="#2a6f96" stroke-width="1"/>
+    
+    <path d="M10,-90 L50,-30 L10,0 L-20,-60 Z" fill="#cceeff" stroke="#ffffff" stroke-width="0.5"/>
+    
+    <path d="M-20,-60 L10,0 L-30,30 Z" fill="#5cabdb"/>
+    <path d="M10,0 L50,-30 L20,50 Z" fill="#0b1e36"/>
+    
+    <path d="M-20,-60 L10,-90" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  
+  <path d="M220,380 L230,350 L245,370 Z" fill="#aeeeff" stroke="#4dabf7" stroke-width="0.5"/>
+  <path d="M280,390 L290,360 L305,385 Z" fill="#80d4ff" stroke="#4dabf7" stroke-width="0.5"/>
+  <path d="M190,360 L200,330 L215,355 Z" fill="#5cabdb" stroke="#2a6f96" stroke-width="0.5"/>
+  <path d="M320,350 L310,320 L335,335 Z" fill="#1c4e80" stroke="#2a6f96" stroke-width="0.5"/>
+
+  
+  <g stroke="none" fill="#ffffff">
+    
+    <circle cx="216" cy="116" r="3" fill-opacity="0.9" filter="blur(1px)"/>
+    <path d="M216,110 L218,116 L216,122 L214,116 Z" fill-opacity="1"/>
+    
+    
+    <circle cx="360" cy="200" r="2" fill-opacity="0.8"/>
+    
+    
+    <circle cx="160" cy="220" r="2" fill-opacity="0.8"/>
+  </g>
+
+  
+  <path d="M216,116 L296,156 L306,246" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.4" stroke-linecap="round"/>
+  
+  
+  <circle cx="256" cy="256" r="100" fill="url(#innerGlow)" style="mix-blend-mode: screen; pointer-events: none;"/>
+
+</svg>

@@ -194,6 +194,7 @@ export class AssetLibraryService {
             tags: metadata.tags || [],
             width: metadata.width || 1,
             height: metadata.height || 1,
+            placement: metadata.placement || "blocking",
             generatedAt: Date.now()
         };
 

@@ -1137,5 +1137,282 @@
     "width": 1,
     "height": 1,
     "generatedAt": 1771302369603
+  },
+  "105": {
+    "id": 105,
+    "name": "matted_refuse_and_filth_033354",
+    "prompt": "matted refuse and filth",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/matted_refuse_and_filth_033354.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771304033363
+  },
+  "106": {
+    "id": 106,
+    "name": "pile_of_gnawed_bones_092988",
+    "prompt": "pile of gnawed bones",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/pile_of_gnawed_bones_092988.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771304092995
+  },
+  "107": {
+    "id": 107,
+    "name": "damp_cave_walls_095233",
+    "prompt": "damp cave walls",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/damp_cave_walls_095233.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771304095241
+  },
+  "108": {
+    "id": 108,
+    "name": "shiny_trinket_pile_151188",
+    "prompt": "shiny trinket pile",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/shiny_trinket_pile_151188.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771304151195
+  },
+  "109": {
+    "id": 109,
+    "name": "stolen_animal_furs_151614",
+    "prompt": "stolen animal furs",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/stolen_animal_furs_151614.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771304151620
+  },
+  "110": {
+    "id": 110,
+    "name": "rusted_sewer_valve_262143",
+    "prompt": "rusted sewer valve",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/rusted_sewer_valve_262143.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305262152
+  },
+  "111": {
+    "id": 111,
+    "name": "giant_rat_nest_268727",
+    "prompt": "giant rat nest",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/giant_rat_nest_268727.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305268734
+  },
+  "112": {
+    "id": 112,
+    "name": "mossy_concrete_wall_315160",
+    "prompt": "mossy concrete wall",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/mossy_concrete_wall_315160.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305315181
+  },
+  "113": {
+    "id": 113,
+    "name": "melted_candle_clusters_497125",
+    "prompt": "melted candle clusters",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/melted_candle_clusters_497125.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305497133
+  },
+  "114": {
+    "id": 114,
+    "name": "dark__soot_stained_stone_blocks_503691",
+    "prompt": "dark, soot-stained stone blocks",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/dark__soot_stained_stone_blocks_503691.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305503697
+  },
+  "115": {
+    "id": 115,
+    "name": "chalk_drawn_floor_sigils_548310",
+    "prompt": "chalk-drawn floor sigils",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/chalk_drawn_floor_sigils_548310.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "generatedAt": 1771305548317
+  },
+  "116": {
+    "id": 116,
+    "name": "frozen_lake_surface_951278",
+    "prompt": "frozen_lake_surface",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/frozen_lake_surface_951278.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771305951303
+  },
+  "117": {
+    "id": 117,
+    "name": "translucent_ice_blocks_with_frozen_bubbles_974609",
+    "prompt": "translucent ice blocks with frozen bubbles",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/translucent_ice_blocks_with_frozen_bubbles_974609.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771305974616
+  },
+  "118": {
+    "id": 118,
+    "name": "bioluminescent_fungi_016569",
+    "prompt": "bioluminescent fungi",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/bioluminescent_fungi_016569.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771306016578
+  },
+  "119": {
+    "id": 119,
+    "name": "ice_crystals_025750",
+    "prompt": "ice crystals",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/ice_crystals_025750.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771306025760
+  },
+  "120": {
+    "id": 120,
+    "name": "crack_in_the_ice_067426",
+    "prompt": "crack in the ice",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/crack_in_the_ice_067426.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771306067435
   }
 }

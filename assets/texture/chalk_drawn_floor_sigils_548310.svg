@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="stoneNoise" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2">
+        <feDistantLight azimuth="45" elevation="60" />
+      </feDiffuseLighting>
+      <feComposite operator="arithmetic" k1="1" k2="0" k3="0" k4="0" in2="SourceGraphic" />
+      <feColorMatrix type="saturate" values="0.2" />
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="0.7" intercept="0.1"/>
+        <feFuncG type="linear" slope="0.7" intercept="0.1"/>
+        <feFuncB type="linear" slope="0.8" intercept="0.15"/>
+      </feComponentTransfer>
+      <feBlend mode="multiply" in2="SourceGraphic" />
+    </filter>
+
+    
+    <filter id="chalkDistort" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      <feGaussianBlur stdDeviation="0.4" />
+    </filter>
+
+    
+    <filter id="smudge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+
+    
+    <filter id="crackDepth" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="0.5" result="blur" />
+      <feOffset dx="1" dy="1" in="blur" result="offsetBlur" />
+      <feComposite in="SourceGraphic" in2="offsetBlur" operator="out" result="inverse" />
+    </filter>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#1a1c21" />
+
+  
+  <g filter="url(#stoneNoise)" stroke="#0e1012" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M-10,-10 L200,-10 L180,150 L-10,120 Z" fill="#2a2d33" />
+    
+    <path d="M200,-10 L522,-10 L522,180 L250,220 L180,150 Z" fill="#2e3238" />
+    
+    <path d="M-10,120 L180,150 L250,220 L220,380 L-10,350 Z" fill="#32363d" />
+    
+    <path d="M-10,350 L220,380 L200,522 L-10,522 Z" fill="#282b30" />
+    
+    <path d="M220,380 L250,220 L522,180 L522,522 L200,522 Z" fill="#2f3339" />
+  </g>
+
+  
+  <g fill="none" stroke="#08090a" stroke-width="1.5" stroke-linecap="round" opacity="0.7">
+    <path d="M40,40 Q60,60 50,80 T70,110" />
+    <path d="M450,480 Q430,460 440,440" />
+    <path d="M250,220 L260,240 L245,255" opacity="0.5"/> 
+    <path d="M100,300 L120,310 L110,330" opacity="0.6"/>
+  </g>
+
+  
+  <g filter="url(#smudge)" opacity="0.3" fill="none" stroke="#eec" stroke-width="15">
+    <circle cx="256" cy="256" r="180" />
+    <circle cx="256" cy="256" r="100" />
+    <path d="M256,60 L420,380 L92,380 Z" />
+  </g>
+
+  
+  <g filter="url(#chalkDistort)" stroke="#fdfdf5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    
+    
+    <circle cx="256" cy="256" r="220" stroke-width="4" opacity="0.6" stroke-dasharray="100 40" />
+    <circle cx="256" cy="256" r="200" stroke-width="3" />
+    <circle cx="256" cy="256" r="185" stroke-width="1.5" />
+
+    
+    
+    <path d="M256,76 L340,380 L86,190 L426,190 L172,380 L256,76" stroke-width="2.5" />
+    <path d="M256,76 L172,380" stroke-width="2.5" /> 
+    
+    
+    <path d="M256,156 L342,306 L170,306 Z" stroke-width="3" />
+    <circle cx="256" cy="246" r="30" stroke-width="2" />
+    <line x1="256" y1="216" x2="256" y2="276" stroke-width="2" />
+    <line x1="226" y1="246" x2="286" y2="246" stroke-width="2" />
+
+    
+    <g transform="translate(256, 256)">
+      
+      <path d="M-10,-192 L10,-192 M0,-192 L0,-208 M-8,-200 L8,-200" />
+      
+      <path d="M192,-10 L192,10 M192,0 L208,0 M200,-8 L200,8" transform="rotate(90)" />
+      
+      <path d="M-10,192 L10,192 M0,192 L0,208 L8,200" transform="rotate(180)" />
+      
+      <path d="M-192,-10 L-192,10 M-200,-8 L-192,0 L-200,8" transform="rotate(270)" />
+      
+      
+      <path d="M135,-135 L145,-145 M135,-145 L145,-135" />
+      <path d="M-135,-135 L-145,-145 M-140,-135 L-140,-145" />
+      <path d="M135,135 L145,145 M135,145 L145,135 M140,135 L140,145" />
+      <path d="M-135,135 L-145,145 M-145,135 L-135,145" />
+    </g>
+  </g>
+
+  
+  <g filter="url(#chalkDistort)" stroke="#fdfdf5" stroke-width="2" fill="none" opacity="0.6">
+    
+    <path d="M256,56 Q300,56 320,100" />
+    <path d="M256,456 Q210,456 190,410" />
+    
+    
+    <circle cx="100" cy="100" r="2" fill="#fff" stroke="none" />
+    <circle cx="412" cy="100" r="2" fill="#fff" stroke="none" />
+    <circle cx="100" cy="412" r="2" fill="#fff" stroke="none" />
+    <circle cx="412" cy="412" r="2" fill="#fff" stroke="none" />
+  </g>
+
+  
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0" />
+      <stop offset="70%" stop-color="#000" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#0b0c0e" stop-opacity="0.6" />
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="512" height="512" fill="url(#vignette)" style="mix-blend-mode: multiply;" pointer-events="none"/>
+  
+  
+  <rect x="0" y="0" width="512" height="512" fill="#4a5060" opacity="0.05" style="mix-blend-mode: overlay;" pointer-events="none"/>
+
+</svg>

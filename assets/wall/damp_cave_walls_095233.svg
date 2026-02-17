@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <filter id="stoneGrit" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" result="noise" />
+      <feDiffuseLighting in="noise" lighting-color="#ffffff" surfaceScale="2">
+        <feDistantLight azimuth="45" elevation="60" />
+      </feDiffuseLighting>
+      <feComposite operator="in" in2="SourceGraphic" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0" />
+    </filter>
+
+    
+    <filter id="mossDisplace" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="turbulence" baseFrequency="0.08" numOctaves="3" result="turb" />
+      <feDisplacementMap in2="turb" in="SourceGraphic" scale="15" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+
+    
+    <linearGradient id="rockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a3e45" />
+      <stop offset="50%" stop-color="#2a2d33" />
+      <stop offset="100%" stop-color="#18161d" />
+    </linearGradient>
+
+    
+    <radialGradient id="mossGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#6b8c3e" />
+      <stop offset="100%" stop-color="#2f3a1e" />
+    </radialGradient>
+  </defs>
+
+  
+  <rect width="512" height="512" fill="#121016" />
+
+  
+  
+  
+  
+  
+  <g fill="url(#rockGrad)" stroke="#0b0a0e" stroke-width="2" stroke-linejoin="miter">
+    
+    
+    <path d="M-40,-40 L60,-20 L40,60 L-30,80 Z" transform="translate(0,0)" />
+    <path d="M-40,-40 L60,-20 L40,60 L-30,80 Z" transform="translate(512,0)" />
+    <path d="M-40,-40 L60,-20 L40,60 L-30,80 Z" transform="translate(0,512)" />
+    <path d="M-40,-40 L60,-20 L40,60 L-30,80 Z" transform="translate(512,512)" />
+
+    
+    <g>
+        <path d="M120,-30 L200,-10 L230,50 L140,80 L90,20 Z" /> 
+        <path d="M300,-40 L420,-20 L400,70 L320,50 Z" />       
+    </g>
+    <g transform="translate(0, 512)">
+        <path d="M120,-30 L200,-10 L230,50 L140,80 L90,20 Z" />
+        <path d="M300,-40 L420,-20 L400,70 L320,50 Z" />
+    </g>
+
+    
+    <g>
+        <path d="M-20,150 L50,130 L80,200 L20,260 L-30,240 Z" /> 
+        <path d="M-30,350 L60,320 L70,420 L-20,450 Z" />         
+    </g>
+    <g transform="translate(512, 0)">
+        <path d="M-20,150 L50,130 L80,200 L20,260 L-30,240 Z" />
+        <path d="M-30,350 L60,320 L70,420 L-20,450 Z" />
+    </g>
+
+    
+    <path d="M100,100 L220,80 L250,180 L180,220 L80,190 Z" />
+    <path d="M280,120 L450,90 L480,200 L350,230 L260,180 Z" />
+    <path d="M60,280 L180,250 L210,380 L120,420 L40,360 Z" />
+    <path d="M240,260 L360,240 L400,350 L300,400 L220,320 Z" />
+    <path d="M420,280 L500,260 L530,380 L440,420 Z" />
+    <path d="M150,450 L300,430 L320,500 L180,520 Z" />
+  </g>
+
+  
+  
+  <rect width="512" height="512" fill="#000" opacity="0.4" filter="url(#stoneGrit)" style="mix-blend-mode: overlay;" pointer-events="none"/>
+
+  
+  
+  <g filter="url(#mossDisplace)" fill="url(#mossGrad)" opacity="0.85">
+    
+    <path d="M-10,-10 L30,10 L10,40 Z" transform="translate(0,0)" />
+    <path d="M-10,-10 L30,10 L10,40 Z" transform="translate(512,0)" />
+    <path d="M-10,-10 L30,10 L10,40 Z" transform="translate(0,512)" />
+    <path d="M-10,-10 L30,10 L10,40 Z" transform="translate(512,512)" />
+
+    <path d="M150,20 L200,40 L180,70 Z" />
+    <path d="M150,20 L200,40 L180,70 Z" transform="translate(0, 512)" />
+
+    <path d="M120,120 L180,140 L150,180 Z" />
+    <path d="M300,150 L350,170 L330,200 Z" />
+    <path d="M80,300 L130,320 L100,350 Z" />
+    <path d="M420,300 L460,320 L440,360 Z" />
+    
+    
+    <path d="M220,220 L260,240 L240,280 Z" fill="#2f3a1e" />
+  </g>
+
+  
+  
+  <g fill="#e0f7fa" opacity="0.5" style="mix-blend-mode: screen;">
+    
+    <path d="M-35,-35 L20,-25 L-20,0 Z" transform="translate(0,0)" />
+    <path d="M-35,-35 L20,-25 L-20,0 Z" transform="translate(512,0)" />
+    <path d="M-35,-35 L20,-25 L-20,0 Z" transform="translate(0,512)" />
+    <path d="M-35,-35 L20,-25 L-20,0 Z" transform="translate(512,512)" />
+
+    
+    <path d="M125,-25 L190,-15 L140,10 Z" />
+    <path d="M125,-25 L190,-15 L140,10 Z" transform="translate(0,512)" />
+    
+    <path d="M305,-35 L400,-25 L330,0 Z" />
+    <path d="M305,-35 L400,-25 L330,0 Z" transform="translate(0,512)" />
+
+    
+    <path d="M105,105 L200,90 L130,130 Z" />
+    <path d="M285,125 L430,100 L320,150 Z" />
+    <path d="M65,285 L160,260 L90,300 Z" />
+    <path d="M245,265 L340,250 L270,290 Z" />
+    <path d="M425,285 L490,270 L440,300 Z" />
+    
+    
+    <g fill="#ffffff" opacity="0.8">
+       <path d="M110,105 L140,100 L115,110 Z" />
+       <path d="M290,125 L330,115 L300,130 Z" />
+       <path d="M250,265 L290,255 L260,270 Z" />
+    </g>
+  </g>
+  
+  
+  <path d="M0,0 H512 V512 H0 Z" fill="none" stroke="#000" stroke-width="4" opacity="0.3" />
+
+</svg>

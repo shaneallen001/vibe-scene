@@ -221,7 +221,10 @@ export class DungeongenService {
                 id: String(o.id),
                 name: o.name,
                 type: o.type,
-                tags: o.tags || []
+                tags: o.tags || [],
+                width: o.width || 1,
+                height: o.height || 1,
+                placement: o.placement || "blocking"
             }));
 
             // Call the planner
@@ -292,15 +295,25 @@ export class DungeongenService {
                     const processItem = async (item, index) => {
                         const type = (item.type || "OBJECT").toUpperCase();
                         const wishTrace = `${runId}-wish-${index + 1}`;
+                        const itemW = Math.max(1, Math.round(Number(item.width) || 1));
+                        const itemH = Math.max(1, Math.round(Number(item.height) || 1));
+                        const itemPlacement = (item.placement === "ambient") ? "ambient" : "blocking";
                         try {
                             const wishlistItemStart = performance.now();
                             let prompt = item.name;
                             if (item.visual_style) prompt += `\nVisual Style: ${item.visual_style}`;
+                            if (itemW > 1 || itemH > 1) {
+                                prompt += `\nGrid footprint: ${itemW}x${itemH} cells. Fill the ${itemW * 512}x${itemH * 512} viewBox proportionally.`;
+                            }
                             console.log(`Vibe Scenes | [${wishTrace}] Wishlist generation request`, {
-                                name: item.name, type, promptLength: prompt.length
+                                name: item.name, type, promptLength: prompt.length,
+                                dimensions: `${itemW}x${itemH}`, placement: itemPlacement
                             });
 
-                            const svg = await aiService.generateSVG(prompt, type);
+                            const svg = await aiService.generateSVG(prompt, type, {
+                                width: itemW,
+                                height: itemH
+                            });
                             console.log(`Vibe Scenes | [${wishTrace}] Wishlist SVG received`, {
                                 name: item.name, svgChars: svg?.length || 0
                             });
@@ -308,10 +321,12 @@ export class DungeongenService {
                             const fileName = `${baseName}_${Date.now().toString().slice(-6)}`;
 
                             const filePath = await aiService.saveAsset(svg, fileName, type, ["ai-gen", "auto-generated"], {
-                                prompt: item.name, model: aiService.svgModel
+                                prompt: item.name, model: aiService.svgModel,
+                                width: itemW, height: itemH, placement: itemPlacement
                             });
                             console.log(`Vibe Scenes | [${wishTrace}] Wishlist item generated in ${(performance.now() - wishlistItemStart).toFixed(0)}ms`, {
-                                name: item.name, type, filePath
+                                name: item.name, type, filePath,
+                                dimensions: `${itemW}x${itemH}`, placement: itemPlacement
                             });
                         } catch (e) {
                             console.error(`Vibe Scenes | [${wishTrace}] Failed to auto-generate ${item.name}:`, e);
@@ -421,25 +436,34 @@ export class DungeongenService {
                     }
                 }
 
-                // Resolve Items
+                // Resolve Items (blocking + ambient)
+                let blockingPlaced = 0;
+                let ambientPlaced = 0;
                 if (Array.isArray(roomPlan.contents)) {
                     for (const item of roomPlan.contents) {
                         const asset = this._resolveObjectAsset(objects, item, room.id, options.seed);
 
                         if (asset) {
-                            // Ensure coordinates are within room bounds
-                            const ix = Math.max(0, Math.min(item.x, room.width - 1));
-                            const iy = Math.max(0, Math.min(item.y, room.height - 1));
+                            // Use item dimensions from AI plan, falling back to asset library, then 1x1
+                            const cellW = Math.max(1, Math.round(Number(item.width) || Number(asset.width) || 1));
+                            const cellH = Math.max(1, Math.round(Number(item.height) || Number(asset.height) || 1));
+                            const placement = (item.placement === "ambient" || asset.placement === "ambient") ? "ambient" : "blocking";
+
+                            // Ensure coordinates keep the multi-cell footprint within room bounds
+                            const ix = Math.max(0, Math.min(item.x, room.width - cellW));
+                            const iy = Math.max(0, Math.min(item.y, room.height - cellH));
 
                             items.push({
                                 x: (room.x + ix) * gridSize + pixelPadding,
                                 y: (room.y + iy) * gridSize + pixelPadding,
                                 texture: asset.path,
-                                width: gridSize,
-                                height: gridSize,
-                                rotation: item.rotation || 0
+                                width: cellW * gridSize,
+                                height: cellH * gridSize,
+                                rotation: item.rotation || 0,
+                                placement
                             });
-                            itemsPlaced += 1;
+                            if (placement === "ambient") ambientPlaced += 1;
+                            else blockingPlaced += 1;
                         } else {
                             console.warn(`Vibe Scenes | [${runId}] Could not resolve room content item`, {
                                 roomId: room.id,
@@ -451,24 +475,45 @@ export class DungeongenService {
                 }
 
                 // Ensure thematic minimum density even if AI under-populates the room.
-                const minDesired = this._getDesiredRoomItemCount(roomArea, roomPlan.theme, room);
-                for (let i = itemsPlaced; i < minDesired; i++) {
+                const { blocking: minBlocking, ambient: minAmbient } = this._getDesiredRoomItemCounts(roomArea, roomPlan.theme, room);
+                for (let i = blockingPlaced; i < minBlocking; i++) {
                     if (!objects.length) break;
                     const asset = this._pickDeterministicAsset(objects, `${options.seed}-${room.id}-fill-${i}`);
                     if (!asset) break;
+                    const cellW = Math.max(1, Number(asset.width) || 1);
+                    const cellH = Math.max(1, Number(asset.height) || 1);
                     const point = this._pickRoomCell(room, 1, `${options.seed}-${room.id}-fill-pt-${i}`);
+                    items.push({
+                        x: point.x * gridSize + pixelPadding,
+                        y: point.y * gridSize + pixelPadding,
+                        texture: asset.path,
+                        width: cellW * gridSize,
+                        height: cellH * gridSize,
+                        rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-rot-${i}`) * 4) * 90,
+                        placement: asset.placement || "blocking"
+                    });
+                    blockingPlaced += 1;
+                }
+
+                // Fill ambient items along walls if AI under-populated
+                for (let i = ambientPlaced; i < minAmbient; i++) {
+                    if (!objects.length) break;
+                    const asset = this._pickDeterministicAsset(objects, `${options.seed}-${room.id}-amb-${i}`);
+                    if (!asset) break;
+                    const point = this._pickWallAdjacentCell(room, `${options.seed}-${room.id}-amb-pt-${i}`);
                     items.push({
                         x: point.x * gridSize + pixelPadding,
                         y: point.y * gridSize + pixelPadding,
                         texture: asset.path,
                         width: gridSize,
                         height: gridSize,
-                        rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-rot-${i}`) * 4) * 90
+                        rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-amb-rot-${i}`) * 4) * 90,
+                        placement: "ambient"
                     });
-                    itemsPlaced += 1;
+                    ambientPlaced += 1;
                 }
 
-                room._populated = itemsPlaced > 0;
+                room._populated = (blockingPlaced + ambientPlaced) > 0;
             }
         } else {
             console.warn(`Vibe Scenes | [${runId}] No Gemini API key configured. Falling back to deterministic non-AI room population.`);
@@ -481,27 +526,49 @@ export class DungeongenService {
 
         for (const room of grid.rooms) {
             if (room._populated) continue;
-            // Only populate if we have objects
             if (objects.length === 0) continue;
             fallbackRooms += 1;
 
             const area = room.width * room.height;
-            const desired = this._getDesiredRoomItemCount(area, room.theme, room);
-            for (let i = 0; i < desired; i++) {
+            const { blocking: desiredBlocking, ambient: desiredAmbient } = this._getDesiredRoomItemCounts(area, room.theme, room);
+
+            // Place blocking items
+            for (let i = 0; i < desiredBlocking; i++) {
                 const asset = this._pickDeterministicAsset(objects, `${options.seed}-${room.id}-fallback-${i}`);
                 if (!asset) break;
+                const cellW = Math.max(1, Number(asset.width) || 1);
+                const cellH = Math.max(1, Number(asset.height) || 1);
                 const point = this._pickRoomCell(room, PADDING, `${options.seed}-${room.id}-fallback-pt-${i}`);
+                items.push({
+                    x: point.x * gridSize + pixelPadding,
+                    y: point.y * gridSize + pixelPadding,
+                    texture: asset.path,
+                    width: cellW * gridSize,
+                    height: cellH * gridSize,
+                    rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-fallback-rot-${i}`) * 4) * 90,
+                    placement: asset.placement || "blocking"
+                });
+                fallbackItems += 1;
+            }
+
+            // Place ambient items along walls
+            for (let i = 0; i < desiredAmbient; i++) {
+                const asset = this._pickDeterministicAsset(objects, `${options.seed}-${room.id}-fallback-amb-${i}`);
+                if (!asset) break;
+                const point = this._pickWallAdjacentCell(room, `${options.seed}-${room.id}-fallback-amb-pt-${i}`);
                 items.push({
                     x: point.x * gridSize + pixelPadding,
                     y: point.y * gridSize + pixelPadding,
                     texture: asset.path,
                     width: gridSize,
                     height: gridSize,
-                    rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-fallback-rot-${i}`) * 4) * 90
+                    rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-fallback-amb-rot-${i}`) * 4) * 90,
+                    placement: "ambient"
                 });
                 fallbackItems += 1;
             }
-            room._populated = desired > 0;
+
+            room._populated = (desiredBlocking + desiredAmbient) > 0;
         }
         if (fallbackRooms > 0) {
             console.log(`Vibe Scenes | [${runId}] Fallback population applied`, { fallbackRooms, fallbackItems });
@@ -512,8 +579,8 @@ export class DungeongenService {
         if (objects.length > 0) {
             for (const room of grid.rooms) {
                 const area = room.width * room.height;
-                const desired = this._getDesiredRoomItemCount(area, room.theme, room);
-                if (desired <= 0) continue;
+                const { blocking: desiredBlocking } = this._getDesiredRoomItemCounts(area, room.theme, room);
+                if (desiredBlocking <= 0) continue;
 
                 const roomItemCount = items.filter(item => {
                     const gx = Math.floor((item.x - pixelPadding) / gridSize);
@@ -524,14 +591,17 @@ export class DungeongenService {
 
                 const asset = this._pickDeterministicAsset(objects, `${options.seed}-${room.id}-postpass`);
                 if (!asset) continue;
+                const cellW = Math.max(1, Number(asset.width) || 1);
+                const cellH = Math.max(1, Number(asset.height) || 1);
                 const point = this._pickRoomCell(room, 1, `${options.seed}-${room.id}-postpass-pt`);
                 items.push({
                     x: point.x * gridSize + pixelPadding,
                     y: point.y * gridSize + pixelPadding,
                     texture: asset.path,
-                    width: gridSize,
-                    height: gridSize,
-                    rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-postpass-rot`) * 4) * 90
+                    width: cellW * gridSize,
+                    height: cellH * gridSize,
+                    rotation: Math.floor(this._pseudoRandom(`${options.seed}-${room.id}-postpass-rot`) * 4) * 90,
+                    placement: asset.placement || "blocking"
                 });
                 room._populated = true;
                 postPassPlaced += 1;
@@ -610,6 +680,30 @@ export class DungeongenService {
         };
     }
 
+    /**
+     * Pick a cell along the wall perimeter of a room (for ambient items).
+     * Cycles through the four walls deterministically based on seed.
+     */
+    _pickWallAdjacentCell(room, seedToken) {
+        const rng = this._pseudoRandom(seedToken);
+        const perimeter = [];
+
+        // Top wall (y = 0)
+        for (let x = 0; x < room.width; x++) perimeter.push({ x: room.x + x, y: room.y });
+        // Bottom wall (y = height-1)
+        for (let x = 0; x < room.width; x++) perimeter.push({ x: room.x + x, y: room.y + room.height - 1 });
+        // Left wall (y = 1..height-2)
+        for (let y = 1; y < room.height - 1; y++) perimeter.push({ x: room.x, y: room.y + y });
+        // Right wall (y = 1..height-2)
+        for (let y = 1; y < room.height - 1; y++) perimeter.push({ x: room.x + room.width - 1, y: room.y + y });
+
+        if (perimeter.length === 0) {
+            return { x: room.x, y: room.y };
+        }
+        const idx = Math.floor(rng * perimeter.length);
+        return perimeter[Math.max(0, Math.min(idx, perimeter.length - 1))];
+    }
+
     _isLikelyCorridor(room, theme = '') {
         const normalizedTheme = String(theme || '').toLowerCase();
         if (normalizedTheme.includes('corridor') || normalizedTheme.includes('hallway') || normalizedTheme.includes('passage')) {
@@ -618,15 +712,48 @@ export class DungeongenService {
         return room.width <= 3 || room.height <= 3;
     }
 
-    _getDesiredRoomItemCount(area, theme = '', room = null) {
-        if (area < 12) return 0;
-        if (room && this._isLikelyCorridor(room, theme)) return 0;
-
-        let count = Math.max(1, Math.floor(area / 24));
+    /**
+     * Returns desired item counts split by blocking and ambient.
+     * @returns {{ blocking: number, ambient: number }}
+     */
+    _getDesiredRoomItemCounts(area, theme = '', room = null) {
+        const isCorridor = room && this._isLikelyCorridor(room, theme);
         const normalizedTheme = String(theme || '').toLowerCase();
-        if (normalizedTheme.includes('storage') || normalizedTheme.includes('warehouse') || normalizedTheme.includes('armory')) count += 1;
-        if (normalizedTheme.includes('library') || normalizedTheme.includes('barracks') || normalizedTheme.includes('throne')) count += 1;
-        return Math.max(1, Math.min(count, 8));
+        const isDense = normalizedTheme.includes('storage') || normalizedTheme.includes('warehouse') ||
+            normalizedTheme.includes('armory') || normalizedTheme.includes('library') ||
+            normalizedTheme.includes('barracks') || normalizedTheme.includes('throne');
+
+        // Blocking items
+        let blocking = 0;
+        if (!isCorridor && area >= 12) {
+            if (area < 36) blocking = 1;
+            else if (area < 64) blocking = 2;
+            else blocking = 3;
+            if (isDense) blocking += 1;
+            blocking = Math.max(1, Math.min(blocking, 8));
+        }
+
+        // Ambient items (always place some — even in corridors and small rooms)
+        let ambient;
+        if (area < 12) ambient = 1;
+        else if (area < 36) ambient = 2;
+        else if (area < 64) ambient = 3;
+        else ambient = 4;
+        if (isCorridor) {
+            blocking = 0;
+            ambient = Math.min(ambient, 2);
+        }
+        if (isDense) ambient += 1;
+
+        return { blocking, ambient };
+    }
+
+    /**
+     * @deprecated Use _getDesiredRoomItemCounts instead
+     */
+    _getDesiredRoomItemCount(area, theme = '', room = null) {
+        const { blocking, ambient } = this._getDesiredRoomItemCounts(area, theme, room);
+        return blocking + ambient;
     }
 
     /**

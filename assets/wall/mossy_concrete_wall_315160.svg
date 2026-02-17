@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="concreteNoise" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="4" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 0.4 0" in="noise" result="monoNoise"/>
+      <feComposite operator="arithmetic" k1="0" k2="1" k3="1" k4="0" in="SourceGraphic" in2="monoNoise"/>
+    </filter>
+
+    
+    <filter id="mossRoughness" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="turbulence" baseFrequency="0.08" numOctaves="3" result="turb"/>
+      <feDisplacementMap in2="turb" in="SourceGraphic" scale="15" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+
+    
+    <filter id="streakBlur" x="0%" y="-20%" width="100%" height="140%">
+      <feGaussianBlur stdDeviation="1 8"/>
+    </filter>
+
+    
+    <filter id="crackInset" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feOffset dx="1" dy="1" result="offsetBlur"/>
+      <feComposite in="SourceGraphic" in2="offsetBlur" operator="out" result="inverse"/>
+      <feFlood flood-color="#000" flood-opacity="0.8"/>
+      <feComposite in2="inverse" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    
+    <linearGradient id="streakGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2c2e" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#1a1c1e" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#1a1c1e" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#2a2c2e" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="mossGrad1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6d8c3e" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#4a6b28" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#2f451b" stop-opacity="0.9"/>
+    </radialGradient>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#75777a" filter="url(#concreteNoise)"/>
+  
+  
+  <g opacity="0.4">
+    <path d="M0,0 Q128,50 256,0 T512,0 V150 Q300,200 0,100 Z" fill="#585a5d"/>
+    <path d="M0,512 Q150,400 300,512 Z" fill="#585a5d"/>
+    <circle cx="400" cy="300" r="120" fill="#606265" filter="url(#streakBlur)"/>
+  </g>
+
+  
+  <g filter="url(#streakBlur)" opacity="0.7">
+    
+    <rect x="100" y="0" width="40" height="512" fill="url(#streakGrad)" opacity="0.5"/>
+    <rect x="350" y="50" width="60" height="462" fill="url(#streakGrad)" opacity="0.6"/>
+    <rect x="220" y="0" width="20" height="300" fill="url(#streakGrad)" opacity="0.4"/>
+    
+    <path d="M120,0 L120,400" stroke="#151617" stroke-width="2" opacity="0.3"/>
+    <path d="M380,0 L380,512" stroke="#151617" stroke-width="3" opacity="0.4"/>
+    <path d="M400,100 L400,350" stroke="#151617" stroke-width="1.5" opacity="0.3"/>
+  </g>
+
+  
+  
+  <g stroke="#2b2d30" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8">
+    <path d="M50,400 L70,420 L65,450 L90,480" filter="url(#crackInset)"/>
+    <path d="M450,50 L430,80 L440,110 L420,130" filter="url(#crackInset)"/>
+    <path d="M200,250 L220,255 L240,245" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  
+  
+  <g filter="url(#mossRoughness)">
+    
+    <path d="M80,20 Q120,40 140,80 Q130,120 100,140 Q60,130 50,90 Q40,50 80,20 Z" fill="url(#mossGrad1)"/>
+    <circle cx="110" cy="60" r="15" fill="#3b4d24"/>
+    <circle cx="90" cy="110" r="10" fill="#3b4d24"/>
+    
+    
+    <path d="M350,150 Q400,140 420,180 Q430,250 380,280 Q340,260 330,200 Z" fill="url(#mossGrad1)"/>
+    <path d="M360,280 Q390,300 380,350 Q360,370 350,340 Z" fill="url(#mossGrad1)"/>
+    
+    
+    <path d="M200,450 Q250,430 300,460 Q280,500 220,510 Z" fill="url(#mossGrad1)"/>
+    
+    
+    <circle cx="220" cy="220" r="5" fill="#4a6b28" opacity="0.8"/>
+    <circle cx="230" cy="235" r="3" fill="#4a6b28" opacity="0.8"/>
+    <circle cx="150" cy="300" r="6" fill="#4a6b28" opacity="0.6"/>
+  </g>
+
+  
+  
+  <g fill="#9ea1a3" opacity="0.3">
+    <circle cx="50" cy="50" r="1"/> <circle cx="150" cy="450" r="1.5"/>
+    <circle cx="300" cy="200" r="1"/> <circle cx="400" cy="100" r="2"/>
+    <circle cx="250" cy="350" r="1"/> <circle cx="100" cy="300" r="1"/>
+    <path d="M10,10 h2 v2 h-2 z M500,500 h2 v2 h-2 z M256,256 h2 v2 h-2 z" opacity="0.5"/>
+  </g>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#streakGrad)" opacity="0.1" style="mix-blend-mode: multiply;"/>
+
+</svg>

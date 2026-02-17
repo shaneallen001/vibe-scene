@@ -1,0 +1,169 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    
+    <linearGradient id="deepIce" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a3b5c" />
+      <stop offset="50%" stop-color="#265c7d" />
+      <stop offset="100%" stop-color="#1a3b5c" />
+    </linearGradient>
+    
+    
+    <radialGradient id="blockGlow" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#89d7f0" stop-opacity="0.4" />
+      <stop offset="70%" stop-color="#3e8eb5" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#1a3b5c" stop-opacity="0" />
+    </radialGradient>
+
+    
+    <radialGradient id="bubbleGrad" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="80%" stop-color="#cceeff" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.6" />
+    </radialGradient>
+
+    
+    <filter id="iceBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+    <filter id="deepBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" />
+    </filter>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#deepIce)" />
+
+  
+  <g opacity="0.5">
+    
+    <path d="M-50,100 Q150,50 256,150 T562,100 V300 H-50 Z" fill="#2d6e91" filter="url(#deepBlur)" />
+    <path d="M-50,400 Q200,350 300,450 T562,400 V550 H-50 Z" fill="#2d6e91" filter="url(#deepBlur)" />
+    <path d="M200,-50 Q250,150 200,300 Q150,450 200,562" stroke="#4fa4c6" stroke-width="40" fill="none" filter="url(#deepBlur)" opacity="0.4" />
+  </g>
+
+  
+  
+  
+  
+  <rect x="-10" y="-10" width="276" height="190" fill="url(#blockGlow)" />
+  <rect x="256" y="-10" width="266" height="190" fill="url(#blockGlow)" />
+  
+  
+  <rect x="-10" y="160" width="150" height="190" fill="url(#blockGlow)" />
+  <rect x="130" y="160" width="256" height="190" fill="url(#blockGlow)" />
+  <rect x="376" y="160" width="146" height="190" fill="url(#blockGlow)" />
+
+  
+  <rect x="-10" y="340" width="276" height="182" fill="url(#blockGlow)" />
+  <rect x="256" y="340" width="266" height="182" fill="url(#blockGlow)" />
+
+  
+  
+  <g fill="url(#bubbleGrad)" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.4">
+    
+    <g filter="url(#iceBlur)" opacity="0.4" fill="#a0d9ef" stroke="none">
+       <circle cx="50" cy="50" r="8" />
+       <circle cx="60" cy="45" r="5" />
+       <circle cx="450" cy="100" r="12" />
+       <circle cx="460" cy="115" r="6" />
+       <circle cx="200" cy="300" r="10" />
+       <circle cx="300" cy="450" r="15" />
+       <circle cx="100" cy="400" r="8" />
+    </g>
+
+    
+    <g opacity="0.6">
+       
+       <circle cx="150" cy="100" r="4" />
+       <circle cx="152" cy="90" r="3" />
+       <circle cx="148" cy="80" r="5" />
+       
+       <circle cx="350" cy="250" r="5" />
+       <circle cx="355" cy="240" r="2" />
+       <circle cx="348" cy="230" r="4" />
+       
+       <circle cx="80" cy="450" r="3" />
+       <circle cx="82" cy="440" r="4" />
+       <circle cx="78" cy="460" r="2" />
+       
+       <circle cx="500" cy="300" r="4" />
+       <circle cx="505" cy="290" r="3" /> 
+       
+       <circle cx="-12" cy="300" r="4" />
+       <circle cx="-7" cy="290" r="3" />
+    </g>
+    
+    
+    <g opacity="0.8" stroke-width="1">
+       <circle cx="256" cy="170" r="2" />
+       <circle cx="20" cy="20" r="3" />
+       <circle cx="400" cy="400" r="4" />
+       <circle cx="220" cy="80" r="2" />
+       <circle cx="330" cy="330" r="3" />
+    </g>
+  </g>
+
+  
+  
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    
+    
+    
+    <path d="M0,170 L50,165 L100,172 L180,168 L256,170 L320,175 L400,168 L480,172 L512,170" 
+          stroke="#0f2638" stroke-width="4" opacity="0.6" />
+    <path d="M0,170 L50,165 L100,172 L180,168 L256,170 L320,175 L400,168 L480,172 L512,170" 
+          stroke="#a8e1f3" stroke-width="1" opacity="0.4" transform="translate(0,1)" />
+
+    
+    <path d="M0,340 L60,345 L130,338 L200,342 L280,339 L350,344 L420,338 L480,342 L512,340" 
+          stroke="#0f2638" stroke-width="4" opacity="0.6" />
+    <path d="M0,340 L60,345 L130,338 L200,342 L280,339 L350,344 L420,338 L480,342 L512,340" 
+          stroke="#a8e1f3" stroke-width="1" opacity="0.4" transform="translate(0,1)" />
+
+    
+    
+    <path d="M256,0 L250,50 L260,100 L256,170" stroke="#0f2638" stroke-width="3" opacity="0.5" />
+    <path d="M256,0 L250,50 L260,100 L256,170" stroke="#bef2ff" stroke-width="1" opacity="0.3" transform="translate(1,0)"/>
+    
+    
+    <path d="M130,170 L135,220 L125,280 L130,340" stroke="#0f2638" stroke-width="3" opacity="0.5" />
+    <path d="M130,170 L135,220 L125,280 L130,340" stroke="#bef2ff" stroke-width="1" opacity="0.3" transform="translate(1,0)"/>
+    
+    
+    <path d="M380,170 L375,230 L385,290 L380,340" stroke="#0f2638" stroke-width="3" opacity="0.5" />
+    <path d="M380,170 L375,230 L385,290 L380,340" stroke="#bef2ff" stroke-width="1" opacity="0.3" transform="translate(1,0)"/>
+
+    
+    <path d="M256,340 L262,400 L250,460 L256,512" stroke="#0f2638" stroke-width="3" opacity="0.5" />
+    <path d="M256,340 L262,400 L250,460 L256,512" stroke="#bef2ff" stroke-width="1" opacity="0.3" transform="translate(1,0)"/>
+  </g>
+
+  
+  <g stroke="#ffffff" stroke-width="0.5" fill="none" opacity="0.3">
+     
+     <path d="M50,50 L70,70 M60,50 L50,80 M200,20 L220,40" />
+     
+     <path d="M300,300 L310,310 L305,320 L320,315" opacity="0.6" stroke-width="1" />
+     
+     <path d="M400,100 L410,120 L405,130 L420,140" />
+     
+     <path d="M100,400 L150,450" stroke-dasharray="2,2" opacity="0.5"/>
+  </g>
+
+  
+  
+  <g fill="#ffffff" opacity="0.2">
+    
+    <path d="M10,172 L250,172 L250,176 L10,176 Z" filter="url(#iceBlur)" />
+    <path d="M270,172 L500,172 L500,176 L270,176 Z" filter="url(#iceBlur)" />
+    <path d="M10,342 L120,342 L120,346 L10,346 Z" filter="url(#iceBlur)" />
+    <path d="M140,342 L370,342 L370,346 L140,346 Z" filter="url(#iceBlur)" />
+    
+    
+    <path d="M258,20 L258,150 L262,150 L262,20 Z" filter="url(#iceBlur)" opacity="0.5"/>
+  </g>
+
+  
+  <rect width="512" height="512" fill="url(#deepIce)" mix-blend-mode="overlay" opacity="0.2" pointer-events="none"/>
+
+</svg>

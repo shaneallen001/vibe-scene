@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <radialGradient id="deepWaterGrad" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#1a3b50" />
+      <stop offset="60%" stop-color="#0e2330" />
+      <stop offset="100%" stop-color="#050e14" />
+    </radialGradient>
+
+    
+    <linearGradient id="iceSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+
+    
+    <filter id="deepBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+      <feColorMatrix type="matrix" values="0.6 0 0 0 0  0 0.7 0 0 0  0 0 0.8 0 0  0 0 0 0.6 0" />
+    </filter>
+
+    
+    <filter id="iceTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.7  0 0 0 0 0.85  0 0 0 0 0.95  0 0 0 0.3 0" result="coloredNoise" />
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" />
+    </filter>
+    
+    
+    <filter id="surfaceGrit">
+      <feTurbulence type="turbulence" baseFrequency="0.4" numOctaves="2" result="grit" />
+      <feColorMatrix in="grit" type="matrix" values="1 0 0 0 1  1 0 0 0 1  1 0 0 0 1  0 0 0 0.15 0" />
+    </filter>
+
+    
+    <filter id="crackGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#deepWaterGrad)" />
+
+  
+  <g filter="url(#deepBlur)" opacity="0.8">
+    
+    <path d="M150,300 C180,280 200,280 230,300" stroke="#000" stroke-width="12" fill="none" stroke-linecap="round" />
+    <path d="M160,330 C190,310 210,310 240,330" stroke="#000" stroke-width="10" fill="none" stroke-linecap="round" />
+    <path d="M170,360 C200,340 220,340 250,360" stroke="#000" stroke-width="8" fill="none" stroke-linecap="round" />
+    
+    <path d="M350,150 Q400,120 450,160 T500,220 Q480,280 420,290 T320,240 Z" fill="#000" />
+    
+    <path d="M100,100 L180,180" stroke="#000" stroke-width="14" stroke-linecap="square" />
+    <line x1="160" y1="160" x2="190" y2="130" stroke="#000" stroke-width="8" />
+  </g>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#80c4de" opacity="0.3" filter="url(#iceTexture)" />
+
+  
+  <g fill="#cceeff" opacity="0.5">
+    
+    <circle cx="120" cy="120" r="3" opacity="0.4" />
+    <circle cx="128" cy="110" r="2" opacity="0.4" />
+    <circle cx="350" cy="400" r="4" opacity="0.3" />
+    <circle cx="360" cy="390" r="2" opacity="0.3" />
+    <circle cx="50" cy="250" r="3" opacity="0.5" />
+    
+    <circle cx="250" cy="250" r="1.5" />
+    <circle cx="255" cy="245" r="2" />
+    <circle cx="260" cy="252" r="1" />
+    <circle cx="400" cy="80" r="2.5" />
+    <circle cx="410" cy="90" r="1.5" />
+  </g>
+
+  
+  <g stroke="#e0f5ff" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#crackGlow)">
+    
+    <path d="M50,450 L120,380 L180,390 L240,320 L280,330 L350,250 L420,260 L480,180" stroke-width="2.5" opacity="0.8" />
+    
+    <path d="M240,320 L200,250 L210,180" stroke-width="1.5" opacity="0.6" />
+    <path d="M350,250 L400,280 L450,350" stroke-width="1.5" opacity="0.6" />
+    
+    <path d="M80,80 L120,100 L110,140 L160,160" stroke-width="1.5" opacity="0.7" />
+    <path d="M400,450 L420,400 L460,390" stroke-width="1" opacity="0.5" />
+  </g>
+
+  
+  <g stroke="#ffffff" fill="none" opacity="0.3" stroke-width="0.5">
+    <path d="M200,200 L220,210 M210,205 L230,190" />
+    <path d="M300,100 L320,105 M310,90 L330,110" />
+    <path d="M100,400 L130,410 M50,350 L80,360" />
+    <path d="M400,100 Q420,120 440,110" />
+    
+    <line x1="50" y1="50" x2="70" y2="60" />
+    <line x1="450" y1="450" x2="430" y2="470" />
+  </g>
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="#ffffff" opacity="0.15" filter="url(#surfaceGrit)" style="mix-blend-mode: overlay;" />
+
+  
+  <rect x="0" y="0" width="512" height="512" fill="url(#iceSheen)" style="mix-blend-mode: soft-light;" />
+  
+  
+  <path d="M0,0 L512,0 L512,512 L0,512 Z M50,50 L50,462 L462,462 L462,50 Z" fill="#001122" opacity="0.1" fill-rule="evenodd" filter="url(#deepBlur)" />
+
+</svg>

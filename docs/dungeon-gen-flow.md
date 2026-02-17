@@ -99,10 +99,10 @@ flowchart TB
 | 3b | DungeongenService | **Procedural**: `DungeonGenerator.generate()` (local algo) | ❌ |
 | 4 | DungeonGenerator | Paints grid from outline or random placement (local) | ❌ |
 | 5 | DungeongenService | `_planAndPopulate()` → `AiAssetService.planDungeon()` or `planDungeonFromOutline()` | ✅ Gemini text |
-| 6 | AiAssetService | Returns **plan** (per-room themes, textures, items) + **wishlist** (missing assets) + **default_floor** | — |
+| 6 | AiAssetService | Returns **plan** (per-room themes, textures, blocking+ambient items with width/height) + **wishlist** (missing assets with dimensions+placement) + **default_floor** | — |
 | 7 | DungeongenService | For each wishlist item: `AiAssetService.generateSVG()` → Gemini (SVG) → `_critiqueSVG()` → Gemini (text); repeat until pass or best-effort | ✅ Gemini SVG + text |
 | 8 | AiAssetService | `saveAsset()` → upload file, register in library; library reload | — |
-| 9 | DungeongenService | Map plan to items/textures, then `DungeonRenderer.renderToBlob()`, `WallBuilder.build()` | ❌ |
+| 9 | DungeongenService | Map plan to items/textures (multi-cell dims, blocking/ambient placement), then `DungeonRenderer.renderToBlob()`, `WallBuilder.build()` | ❌ |
 | 10 | DungeongenService | Returns `{ blob, walls, items, rooms }` to dialog | — |
 | 11 | VibeSceneDialog | `SceneImporter.createScene()` → upload image, create Foundry Scene, place walls/items | — |
 | 12 | User | Optional: activate new scene | — |

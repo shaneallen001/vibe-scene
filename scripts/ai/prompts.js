@@ -57,19 +57,20 @@ export const PROMPTS = {
     Input Prompt: 
     `,
 
-  // Prompt for Objects (Furniture, Decor, Items)
+  // Prompt for Objects (Furniture/Decor, supports multi-cell aspect ratios)
   SVG_OBJECT: `
     TYPE: OBJECT (Furniture/Decor)
 
     SPECIFIC GUIDELINES:
-    1. The object must fit within the 512x512 viewbox, but DOES NOT need to fill it.
+    1. The object must fit within the viewbox, but DOES NOT need to fill it.
     2. Leave a small amount of padding around the edge.
     3. Background MUST be transparent.
     4. Perspective: Top-down 2D.
     5. Prioritize a strong silhouette first, then detailed interior rendering.
     6. Include believable material detail: grain, dents, seams, bindings, scratches, edge wear.
     7. If the object casts a shadow, use only a small contact shadow (semi-transparent black) directly underneath.
-    8. Maintain clarity at 100px downscale while still looking rich at 512px.
+    8. Maintain clarity at 100px downscale while still looking rich at full resolution.
+    9. IMPORTANT: The viewBox dimensions encode the object's aspect ratio. A "0 0 1024 512" viewBox means the object is 2x1 grid cells (wider than tall). A "0 0 512 1024" viewBox means 1x2 (taller than wide). Fill the viewBox proportionally.
     
     Input Prompt: 
     `,
@@ -108,7 +109,7 @@ export const PROMPTS = {
 
   // Prompt for Room Contents (JSON)
   ROOM_CONTENT: `
-    You are an expert dungeon master. Your task is to populate a specific room with furniture and items.
+    You are an expert dungeon master. Your task is to richly populate a specific room with furniture, items, and atmospheric decor.
     
     INPUT:
     - Room Type/Theme (e.g., "Dungeon Cell", "Throne Room")
@@ -123,43 +124,50 @@ export const PROMPTS = {
       - "original_id": (Optional) The ID from AVAILABLE_ASSETS if used.
       - "x": Integer grid coordinate (0 to Width-1).
       - "y": Integer grid coordinate (0 to Height-1).
+      - "width": Integer grid cells wide (>= 1). Tables are 2x1, beds 2x1, thrones 2x2, small items 1x1.
+      - "height": Integer grid cells tall (>= 1).
       - "rotation": Integer (0, 90, 180, 270).
+      - "placement": "blocking" (furniture/obstacles) or "ambient" (decor/non-blocking like torches, cobwebs, rugs, bloodstains).
     
     CONSTRAINTS:
     - PRIORITIZE using items from AVAILABLE_ASSETS.
     - If a specific item is needed for the theme but not available, you may suggest it (and set "original_id" to null).
-    - Place items logically (e.g., beds against walls, throne in center-back).
-    - Do not overlap items heavily.
-    - Objects should not block all paths (leave walking space).
+    - Place blocking items logically (e.g., beds against walls, throne in center-back). Leave walking space.
+    - Place ambient items along walls, in corners, or as floor overlays. These add atmosphere without blocking movement.
+    - Include BOTH blocking and ambient items. Rooms should feel populated, not sparse.
     - Return ONLY valid JSON.
     `,
 
   // Prompt for Whole Dungeon Planning
   DUNGEON_PLANNER: `
-    You are an expert level designer. Your task is to assign themes, floor textures, wall textures, and populate a dungeon based on a floorplan graph and a user description.
+    You are an expert level designer. Your task is to assign themes, floor textures, wall textures, and richly populate a dungeon based on a floorplan graph and a user description.
     
     INPUT:
     - DESCRIPTION: User's concept (e.g. "A fire temple with a frozen treasure room").
     - ROOMS: List of { id, width, height, area, connections: [id, id] }.
-    - AVAILABLE_ASSETS: List of { id, name, type, tags } currently in the library. Types include OBJECT, TEXTURE, and WALL.
+    - AVAILABLE_ASSETS: List of { id, name, type, tags, width, height, placement } currently in the library. Types include OBJECT, TEXTURE, and WALL. "placement" is "blocking" (furniture/obstacles) or "ambient" (decor/non-blocking).
     
     TASK:
     1. Analyze the connectivity and DESCRIPTION.
     2. Assign a "theme" and "floor_texture" to EVERY room.
       - "floor_texture": Can be an existing asset ID or name (from AVAILABLE_ASSETS) OR a visual description of a new texture (e.g. "lava flow", "ice sheet").
     3. **DESCRIPTION**: Generate a brief, atmospheric description (flavor text) for each room.
-    4. Populate the rooms with items (prioritizing AVAILABLE_ASSETS).
+    4. **Populate the rooms RICHLY** with two categories of items:
+      a. **Blocking items** ("placement": "blocking"): Furniture, obstacles, and interactable objects that occupy floor space. These should be placed logically with clear walking lanes.
+      b. **Ambient items** ("placement": "ambient"): Decorative, atmospheric elements that do NOT block movement — wall torches, sconces, rugs, banners, cobwebs, bloodstains, candelabras, cracks, moss patches, scattered bones, etc. Place these along walls, in corners, or as floor overlays. Ambient items make rooms feel LIVED-IN and atmospheric.
     5. **WALL TEXTURES**: Assign a "default_wall" for the dungeon and optionally a "wall_texture" per room.
       - Wall textures describe the architectural material of the walls (e.g. "rough hewn stone blocks", "ancient sandstone with glyphs", "dark wood paneling").
-      - "wall_texture" per room is OPTIONAL — only set it if the room differs from the default (e.g. a throne room with ornate marble walls in an otherwise rough stone dungeon).
+      - "wall_texture" per room is OPTIONAL — only set it if the room differs from the default.
     6. **WISHLIST**:
        - If a room needs a specific OBJECT, FLOOR TEXTURE, or WALL TEXTURE that is NOT in AVAILABLE_ASSETS, add it to the "wishlist".
        - For floor textures, the type is "TEXTURE". For wall textures, the type is "WALL".
+       - Wishlist OBJECT items MUST include "width" and "height" (in grid cells) and "placement" ("blocking" or "ambient").
     
     OUTPUT:
     - Return a JSON Object with: "plan", "wishlist", "default_floor", and "default_wall".
     - "default_floor": Description or ID of the floor texture for corridors and default rooms.
-    - "default_wall": Description or ID of the wall texture for the dungeon's walls (e.g. "rough stone blocks", "mortared brick").
+    - "default_wall": Description or ID of the wall texture for the dungeon's walls.
+    - Each item in "contents" MUST include "width" and "height" (in grid cells, integers >= 1) and "placement" ("blocking" or "ambient").
     - Structure:
     {
       "default_floor": "stone_paving_dark",
@@ -172,32 +180,48 @@ export const PROMPTS = {
           "wall_texture": null,
           "description": "Flavor text...",
           "contents": [
-            { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "rotation": 0 }
+            { "name": "wooden table", "original_id": "table_01", "x": 2, "y": 3, "width": 2, "height": 1, "rotation": 0, "placement": "blocking" },
+            { "name": "wall torch", "original_id": null, "x": 0, "y": 2, "width": 1, "height": 1, "rotation": 0, "placement": "ambient" },
+            { "name": "cobwebs", "original_id": null, "x": 0, "y": 0, "width": 1, "height": 1, "rotation": 0, "placement": "ambient" }
           ]
         }
       ],
       "wishlist": [
-        { "name": "stone throne", "type": "OBJECT", "visual_style": "ancient, cracked" },
+        { "name": "stone throne", "type": "OBJECT", "visual_style": "ancient, cracked", "width": 2, "height": 2, "placement": "blocking" },
+        { "name": "wall torch", "type": "OBJECT", "visual_style": "iron bracket with flickering flame, top-down", "width": 1, "height": 1, "placement": "ambient" },
         { "name": "lava flow", "type": "TEXTURE", "visual_style": "molten rock, glowing cracks" },
         { "name": "rough hewn stone blocks", "type": "WALL", "visual_style": "dark gray irregular stone blocks with mortar lines" }
       ]
     }
     
+    ITEM SIZE GUIDE (width x height in grid cells):
+    - Small items (torch, candle, skull, gem): 1x1
+    - Medium items (chair, barrel, chest, rug): 1x1 or 2x1
+    - Large items (table, bed, bookshelf, weapon rack, sarcophagus): 2x1 or 2x2
+    - Very large items (throne, altar, large rug, banquet table): 2x2 or 3x2
+    - Ambient decor (torch, sconce, cobweb, bloodstain, moss, crack): always 1x1
+
     CONSTRAINTS:
-    - Respect the user's DESCRIPTION. If they say "Sand Dungeon", default_floor should be "sand" and default_wall should match (e.g. "ancient sandstone blocks").
+    - Respect the user's DESCRIPTION. If they say "Sand Dungeon", default_floor should be "sand" and default_wall should match.
     - PRIORITIZE AVAILABLE_ASSETS. If you use an existing asset, set "original_id" to the matching AVAILABLE_ASSETS "id" (stable identifier).
-    - The "default_wall" MUST always be set. Choose a wall material that fits the dungeon concept.
-    - Per-room "wall_texture" should only be set when a room has distinctly different walls from the rest of the dungeon.
-    - Populate by room area:
-      - area < 12: usually 0 items (very small utility spaces).
-      - area 12-35: 1-2 items.
-      - area 36-64: 2-4 items.
-      - area > 64: 4-8 items.
-    - Room role density rules:
-      - Storage / warehouse / armory rooms should be denser than average.
-      - Corridors / hallways / passages can be sparse.
-    - Non-corridor rooms with area >= 12 must have at least 1 item.
-    - Place items logically and leave clear walking lanes from doors to central space.
+    - The "default_wall" MUST always be set.
+    - Per-room "wall_texture" should only be set when a room has distinctly different walls.
+    - **BLOCKING item density** (by room area):
+      - area < 12: 0 blocking items (very small utility spaces).
+      - area 12-35: 1-3 blocking items.
+      - area 36-64: 3-5 blocking items.
+      - area > 64: 5-10 blocking items.
+    - **AMBIENT item density** (ALWAYS add these — they make rooms feel alive):
+      - area < 12: 1-2 ambient items.
+      - area 12-35: 2-4 ambient items.
+      - area 36-64: 4-6 ambient items.
+      - area > 64: 6-10 ambient items.
+    - Storage / warehouse / armory rooms should be denser than average for BOTH categories.
+    - Corridors / hallways / passages: 0 blocking, but 1-3 ambient items (torches, cobwebs, cracks).
+    - Non-corridor rooms with area >= 12 must have at least 1 blocking item AND 2 ambient items.
+    - Place blocking items logically with clear walking lanes from doors to central space.
+    - Place ambient items along walls (x=0 or x=width-1 or y=0 or y=height-1), in corners, or scattered on the floor.
+    - Every item MUST have "width", "height", and "placement" fields.
     - Return ONLY valid JSON.
     `
   ,
@@ -249,7 +273,7 @@ export const PROMPTS = {
 
   // Prompt for Intentional Content Pass
   DUNGEON_CONTENT_PLANNER: `
-    You are an expert level dresser. Given an intentional room outline, generate room contents, wall textures, and wishlist gaps.
+    You are an expert level dresser. Given an intentional room outline, generate rich room contents, wall textures, and wishlist gaps. Rooms should feel POPULATED and atmospheric, not empty.
 
     INPUT:
     - DESCRIPTION: User fantasy concept.
@@ -259,14 +283,16 @@ export const PROMPTS = {
         rooms: [{ id, width, height, area, theme, description, connections }],
         connections
       }
-    - AVAILABLE_ASSETS: [{ id, name, type, tags }] — types include OBJECT, TEXTURE, and WALL.
+    - AVAILABLE_ASSETS: [{ id, name, type, tags, width, height, placement }] — types include OBJECT, TEXTURE, and WALL. "placement" is "blocking" or "ambient".
 
     TASK:
     1. Keep each room's theme/description aligned with the outline intent.
     2. Assign floor textures per room where needed.
     3. Assign a "default_wall" texture for the dungeon and optionally a "wall_texture" per room where the walls differ from the default.
-    4. Generate item placements per room.
-    5. Produce wishlist entries for missing OBJECT, TEXTURE, or WALL assets.
+    4. **Populate rooms RICHLY** with two categories:
+      a. **Blocking items** ("placement": "blocking"): Furniture, obstacles, interactable objects.
+      b. **Ambient items** ("placement": "ambient"): Decorative, non-blocking atmosphere — wall torches, sconces, rugs, banners, cobwebs, bloodstains, candelabras, moss, scattered bones, etc.
+    5. Produce wishlist entries for missing OBJECT, TEXTURE, or WALL assets. Wishlist OBJECT items MUST include "width", "height", and "placement".
 
     OUTPUT:
     {
@@ -280,28 +306,45 @@ export const PROMPTS = {
           "wall_texture": null,
           "description": "Cold torchlight and old banners mark the threshold.",
           "contents": [
-            { "name": "weapon rack", "original_id": "123", "x": 2, "y": 1, "rotation": 90 }
+            { "name": "weapon rack", "original_id": "123", "x": 2, "y": 1, "width": 2, "height": 1, "rotation": 90, "placement": "blocking" },
+            { "name": "wall torch", "original_id": null, "x": 0, "y": 3, "width": 1, "height": 1, "rotation": 0, "placement": "ambient" },
+            { "name": "cobwebs", "original_id": null, "x": 0, "y": 0, "width": 1, "height": 1, "rotation": 0, "placement": "ambient" }
           ]
         }
       ],
       "wishlist": [
-        { "name": "broken portcullis", "type": "OBJECT", "visual_style": "rusted iron, bent bars" },
+        { "name": "broken portcullis", "type": "OBJECT", "visual_style": "rusted iron, bent bars", "width": 2, "height": 1, "placement": "blocking" },
+        { "name": "wall torch", "type": "OBJECT", "visual_style": "iron bracket with flickering flame, top-down", "width": 1, "height": 1, "placement": "ambient" },
         { "name": "rough hewn stone blocks", "type": "WALL", "visual_style": "dark gray irregular stone blocks with mortar lines" }
       ]
     }
 
+    ITEM SIZE GUIDE (width x height in grid cells):
+    - Small items (torch, candle, skull, gem): 1x1
+    - Medium items (chair, barrel, chest, rug): 1x1 or 2x1
+    - Large items (table, bed, bookshelf, weapon rack, sarcophagus): 2x1 or 2x2
+    - Very large items (throne, altar, large rug, banquet table): 2x2 or 3x2
+    - Ambient decor (torch, sconce, cobweb, bloodstain, moss, crack): always 1x1
+
     CONSTRAINTS:
     - PRIORITIZE AVAILABLE_ASSETS.
     - If using an existing asset, set "original_id" to AVAILABLE_ASSETS.id.
-    - The "default_wall" MUST always be set. Choose a wall material that fits the dungeon concept.
-    - Per-room "wall_texture" should only be set when a room has distinctly different walls from the rest of the dungeon.
-    - Populate by room area:
-      - area < 12: usually 0 items.
-      - area 12-35: 1-2 items.
-      - area 36-64: 2-4 items.
-      - area > 64: 4-8 items.
-    - Corridors/passages should be sparse.
-    - Non-corridor rooms with area >= 12 should have at least 1 item.
+    - The "default_wall" MUST always be set.
+    - Per-room "wall_texture" should only be set when a room has distinctly different walls.
+    - **BLOCKING item density** (by room area):
+      - area < 12: 0 blocking items.
+      - area 12-35: 1-3 blocking items.
+      - area 36-64: 3-5 blocking items.
+      - area > 64: 5-10 blocking items.
+    - **AMBIENT item density** (ALWAYS add these — they make rooms feel alive):
+      - area < 12: 1-2 ambient items.
+      - area 12-35: 2-4 ambient items.
+      - area 36-64: 4-6 ambient items.
+      - area > 64: 6-10 ambient items.
+    - Corridors/passages: 0 blocking, but 1-3 ambient items (torches, cobwebs).
+    - Non-corridor rooms with area >= 12 must have at least 1 blocking AND 2 ambient items.
+    - Place ambient items along walls (x=0 or x=width-1 or y=0 or y=height-1), in corners, or scattered on the floor.
+    - Every item MUST have "width", "height", and "placement" fields.
     - Keep coordinates in room-local space: 0..width-1 and 0..height-1.
     - Return ONLY valid JSON.
     `

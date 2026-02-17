@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <radialGradient id="rockGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#78909c" />
+      <stop offset="100%" stop-color="#37474f" />
+    </radialGradient>
+    <radialGradient id="bearGrad" cx="40%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#5d4037" />
+      <stop offset="60%" stop-color="#3e2723" />
+      <stop offset="100%" stop-color="#1b0000" />
+    </radialGradient>
+    <linearGradient id="wolfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0e0e0" />
+      <stop offset="50%" stop-color="#9e9e9e" />
+      <stop offset="100%" stop-color="#424242" />
+    </linearGradient>
+    <radialGradient id="dirtGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3e2723" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3e2723" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  
+  <path d="M100,380 Q256,480 420,390 Q480,350 400,280 Q256,220 120,290 Q60,340 100,380 Z" fill="#000000" fill-opacity="0.4" filter="blur(4px)"/>
+
+  
+  <g transform="translate(0, 20)">
+    
+    <path d="M150,350 L120,300 L160,250 L250,260 L280,320 L220,380 Z" fill="url(#rockGrad)" stroke="#263238" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M160,250 L250,260 L220,290 L140,290" fill="#ffffff" fill-opacity="0.1"/> 
+    <path d="M150,350 L220,380 L280,320" fill="#000000" fill-opacity="0.3"/> 
+    
+    
+    <path d="M260,340 L280,240 L380,230 L420,280 L390,360 L300,370 Z" fill="url(#rockGrad)" stroke="#263238" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M280,240 L380,230 L350,280 L290,290" fill="#ffffff" fill-opacity="0.1"/>
+    
+    
+    <path d="M150,320 Q160,310 170,325 Q160,340 150,320 M380,340 Q390,330 400,345" fill="#558b2f" fill-opacity="0.6"/>
+  </g>
+
+  
+  <g transform="translate(20, -10)">
+    
+    <path d="M140,160 
+             L120,170 L130,190 L110,210 L125,230 L100,260 L130,280 L120,310 L150,330 
+             L160,370 L190,360 L210,390 L240,370 L270,400 L300,370 L340,390 
+             L360,350 L400,360 L390,320 L430,300 L410,270 L440,240 L410,220 
+             L420,180 L380,190 L360,160 L330,180 L300,140 L270,170 L240,130 
+             L210,160 L180,140 L160,170 Z" 
+             fill="url(#bearGrad)" stroke="#271c19" stroke-width="1.5" stroke-linejoin="round"/>
+
+    
+    <path d="M180,250 Q256,300 340,240 L360,280 Q260,350 160,300 Z" fill="#000000" fill-opacity="0.4"/>
+
+    
+    <path d="M150,200 L160,220 L155,240 L140,230 Z M300,320 L310,350 L290,360 Z M400,250 L420,270 L390,280 Z" fill="#2d1e1b"/>
+    <path d="M220,180 L230,210 L210,220 Z M350,200 L370,220 L340,230 Z" fill="#2d1e1b"/>
+    
+    
+    <path d="M200,180 L205,200 M250,160 L255,190 M320,280 L330,310" stroke="#795548" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5"/>
+    
+    
+    <path d="M240,130 Q280,100 320,140" fill="none" stroke="#271c19" stroke-width="2" stroke-opacity="0.5"/>
+  </g>
+
+  
+  <path d="M180,180 Q256,220 330,200 Q300,280 200,250 Z" fill="#000000" fill-opacity="0.6" filter="blur(8px)"/>
+
+  
+  <g transform="rotate(-15, 256, 256)">
+    
+    <path d="M200,150 
+             L190,170 L170,180 L185,200 L160,220 L180,240 L170,270 
+             L200,290 L190,320 L230,310 L250,340 L280,310 L310,330 
+             L320,300 L350,290 L330,260 L360,240 L330,220 L350,190 
+             L310,200 L300,170 L270,190 L256,120 L240,190 L220,170 Z" 
+             fill="url(#wolfGrad)" stroke="#424242" stroke-width="1" stroke-linejoin="round"/>
+
+    
+    <path d="M256,120 Q230,200 220,250 Q256,340 310,250 Q300,200 256,120" fill="#616161" filter="blur(2px)"/>
+    
+    
+    <g stroke="#424242" stroke-width="1.5" stroke-linecap="round" fill="none">
+        <path d="M200,200 L210,220 L205,240"/>
+        <path d="M300,220 L290,240 L310,250"/>
+        <path d="M256,150 L250,180"/>
+        <path d="M256,280 L260,310"/>
+        <path d="M180,250 L190,260"/>
+        <path d="M340,250 L330,270"/>
+    </g>
+    
+    
+    <g stroke="#f5f5f5" stroke-width="1" stroke-linecap="round" fill="none" stroke-opacity="0.6">
+        <path d="M190,210 L200,215"/>
+        <path d="M320,230 L310,235"/>
+        <path d="M250,140 L240,160"/>
+        <path d="M260,300 L270,320"/>
+    </g>
+
+    
+    <path d="M240,140 Q256,120 272,140" fill="#424242" fill-opacity="0.5"/> 
+    <circle cx="256" cy="130" r="15" fill="#212121" fill-opacity="0.3"/> 
+  </g>
+
+  
+  <g>
+    
+    <circle cx="200" cy="300" r="15" fill="#4e342e" fill-opacity="0.6" filter="blur(2px)"/>
+    <circle cx="220" cy="290" r="8" fill="#4e342e" fill-opacity="0.7"/>
+    <circle cx="350" cy="220" r="12" fill="#3e2723" fill-opacity="0.5" filter="blur(1px)"/>
+    
+    
+    <path d="M380,300 Q400,320 390,340 Q370,330 360,310 Z" fill="#360f0f" fill-opacity="0.7" mix-blend-mode="multiply"/>
+    
+    
+    <circle cx="250" cy="200" r="2" fill="#5d4037"/>
+    <circle cx="280" cy="250" r="3" fill="#5d4037"/>
+    <circle cx="180" cy="220" r="2" fill="#5d4037"/>
+    <circle cx="320" cy="180" r="2" fill="#5d4037"/>
+    <circle cx="300" cy="350" r="3" fill="#8d6e63"/>
+    
+    
+    <path d="M220,250 L240,260" stroke="#000000" stroke-width="3" stroke-opacity="0.4" stroke-linecap="round" filter="blur(1px)"/>
+    <path d="M300,240 L280,250" stroke="#000000" stroke-width="3" stroke-opacity="0.4" stroke-linecap="round" filter="blur(1px)"/>
+  </g>
+
+  
+  <path d="M256,120 L240,150 L270,150 Z" fill="#ffffff" fill-opacity="0.15" transform="rotate(-15, 256, 256)"/> 
+  <path d="M140,200 Q160,180 180,210" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.1" stroke-linecap="round"/> 
+
+</svg>

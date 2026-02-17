@@ -199,14 +199,27 @@ export class SceneImporter {
                             }
                             return textureOk;
                         })
-                        .map(item => ({
-                            texture: { src: item.texture },
-                            x: item.x,
-                            y: item.y,
-                            width: item.width,
-                            height: item.height,
-                            rotation: item.rotation
-                        }));
+                        .map(item => {
+                            const tileData = {
+                                texture: { src: item.texture },
+                                x: item.x,
+                                y: item.y,
+                                width: item.width,
+                                height: item.height,
+                                rotation: item.rotation
+                            };
+                            // Ambient items are non-blocking decor (no occlusion, not overhead)
+                            if (item.placement === "ambient") {
+                                tileData.overhead = false;
+                                tileData.roof = false;
+                                tileData.occlusion = { mode: 0 };
+                                tileData.sort = 0;
+                                tileData.flags = { "vibe-scenes": { placement: "ambient" } };
+                            } else {
+                                tileData.flags = { "vibe-scenes": { placement: "blocking" } };
+                            }
+                            return tileData;
+                        });
 
                     if (tiles.length > 0) {
                         try {

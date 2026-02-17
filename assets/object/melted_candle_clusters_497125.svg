@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <filter id="flameGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <filter id="waxTexture" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.15 0" in="noise" result="coloredNoise" />
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite" />
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic" />
+    </filter>
+
+    
+    <radialGradient id="gradWhiteBase" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#fdfbf7" />
+      <stop offset="70%" stop-color="#e6e0d4" />
+      <stop offset="100%" stop-color="#cbbfa3" />
+    </radialGradient>
+    
+    <radialGradient id="gradRedBase" cx="40%" cy="40%" r="60%" fx="40%" fy="40%">
+      <stop offset="0%" stop-color="#d94e4e" />
+      <stop offset="60%" stop-color="#8f1e1e" />
+      <stop offset="100%" stop-color="#4a0a0a" />
+    </radialGradient>
+
+    <radialGradient id="gradFlame" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="20%" stop-color="#fff700" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#ff8800" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#ff0000" stop-opacity="0" />
+    </radialGradient>
+    
+    <radialGradient id="gradPoolLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  
+  <g opacity="0.4">
+    <path d="M120,280 Q100,350 160,380 T280,420 T400,350 T420,250 T350,180 T200,160 Z" fill="#000000" filter="url(#flameGlow)" />
+  </g>
+
+  
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    
+    
+    <path d="M150,250 C120,280 100,320 130,360 C160,400 220,410 260,390 C300,370 280,320 260,300 C240,280 180,220 150,250 Z" 
+          fill="url(#gradWhiteBase)" stroke="#b0a48f" stroke-width="1" filter="url(#waxTexture)"/>
+    
+    
+    <path d="M260,390 C300,420 380,400 400,340 C420,280 380,220 320,240 C280,253 240,300 260,390 Z" 
+          fill="url(#gradRedBase)" stroke="#5e1212" stroke-width="1" filter="url(#waxTexture)"/>
+
+    
+    <path d="M100,300 C90,310 95,320 105,315 C115,310 110,295 100,300 Z" fill="#e6e0d4" stroke="#b0a48f" stroke-width="0.5"/>
+    <path d="M420,300 C430,310 425,325 410,320 C400,315 410,290 420,300 Z" fill="#8f1e1e" stroke="#4a0a0a" stroke-width="0.5"/>
+
+    
+    
+    
+    <g transform="translate(180, 280)">
+      
+      <path d="M-60,20 C-65,40 -40,55 -20,60 C10,65 40,50 45,20 C50,-10 30,-40 0,-45 C-30,-50 -55,-10 -60,20 Z" 
+            fill="#e6e0d4" stroke="#beb29a" stroke-width="1"/>
+      
+      <path d="M-50,10 C-55,25 -50,40 -40,35 C-30,30 -35,15 -40,10 Z" fill="#fdfbf7" opacity="0.8"/>
+      <path d="M20,40 C15,55 25,60 35,50 C45,40 30,30 20,40 Z" fill="#fdfbf7" opacity="0.8"/>
+      
+      <path d="M-45,10 C-45,35 -25,50 0,50 C25,50 40,30 35,5 C30,-20 10,-35 -15,-35 C-40,-35 -45,-15 -45,10 Z" 
+            fill="#f7f4ec" stroke="#dcd3c0" stroke-width="1"/>
+      
+      <ellipse cx="-5" cy="10" rx="30" ry="25" fill="#e8e1d0" />
+    </g>
+
+    
+    <g transform="translate(320, 290)">
+      
+      <path d="M-40,10 C-45,30 -20,45 0,45 C25,45 40,30 35,0 C30,-30 0,-40 -20,-35 C-40,-30 -35,-10 -40,10 Z" 
+            fill="#a62626" stroke="#5e1212" stroke-width="1"/>
+      
+      <path d="M30,10 Q35,25 30,35 Q25,25 25,10" fill="#cc4444" />
+      <path d="M-30,20 Q-35,35 -25,40 Q-20,30 -20,20" fill="#cc4444" />
+      
+      <path d="M-30,5 C-30,25 -10,35 5,35 C20,35 30,20 25,0 C20,-20 0,-30 -15,-25 C-30,-20 -30,-15 -30,5 Z" 
+            fill="#be3838" stroke="#8a0303" stroke-width="1"/>
+      
+      <ellipse cx="-2" cy="5" rx="20" ry="18" fill="#8f1e1e" />
+    </g>
+
+    
+    <g transform="translate(250, 220)">
+      <path d="M-30,10 C-35,25 -10,35 10,30 C30,25 35,5 25,-10 C15,-25 -10,-25 -20,-15 C-30,-5 -25,0 -30,10 Z" 
+            fill="#dcd3c0" stroke="#b0a48f" stroke-width="1"/>
+      <ellipse cx="0" cy="5" rx="22" ry="16" fill="#f0ebd8" stroke="#dcd3c0" stroke-width="0.5"/>
+      <ellipse cx="0" cy="5" rx="15" ry="10" fill="#dad2be" />
+    </g>
+
+    
+    
+    
+    <g transform="translate(175, 290)">
+      
+      <ellipse cx="0" cy="0" rx="15" ry="12" fill="url(#gradPoolLight)" opacity="0.7"/>
+      
+      <path d="M-2,2 Q0,-5 3,0" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="2" cy="-1" r="1.5" fill="#ff4d00" opacity="0.8"/>
+      
+      <path d="M0,5 Q-8,0 0,-35 Q8,0 0,5 Z" fill="url(#gradFlame)" filter="url(#flameGlow)" opacity="0.95">
+         <animate attributeName="d" values="M0,5 Q-8,0 0,-35 Q8,0 0,5 Z; M0,5 Q-7,0 -2,-33 Q9,0 0,5 Z; M0,5 Q-8,0 2,-36 Q7,0 0,5 Z; M0,5 Q-8,0 0,-35 Q8,0 0,5 Z" dur="0.8s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    
+    <g transform="translate(318, 295)">
+      <ellipse cx="0" cy="0" rx="10" ry="8" fill="url(#gradPoolLight)" opacity="0.5"/>
+      <path d="M-1,1 Q2,-4 1,-6" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0,3 Q-6,-2 1,-28 Q7,-2 0,3 Z" fill="url(#gradFlame)" filter="url(#flameGlow)" opacity="0.95">
+        <animate attributeName="d" values="M0,3 Q-6,-2 1,-28 Q7,-2 0,3 Z; M0,3 Q-5,-2 -1,-30 Q8,-2 0,3 Z; M0,3 Q-7,-2 2,-27 Q6,-2 0,3 Z; M0,3 Q-6,-2 1,-28 Q7,-2 0,3 Z" dur="0.9s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+    
+    <g transform="translate(250, 225)">
+      <ellipse cx="0" cy="0" rx="8" ry="6" fill="url(#gradPoolLight)" opacity="0.6"/>
+      <path d="M0,2 L1,-3" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M0,3 Q-4,0 0,-20 Q4,0 0,3 Z" fill="url(#gradFlame)" filter="url(#flameGlow)" opacity="0.9">
+         <animate attributeName="d" values="M0,3 Q-4,0 0,-20 Q4,0 0,3 Z; M0,3 Q-3,0 1,-18 Q5,0 0,3 Z; M0,3 Q-5,0 -1,-21 Q3,0 0,3 Z; M0,3 Q-4,0 0,-20 Q4,0 0,3 Z" dur="0.6s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+  </g>
+  
+  
+  <g opacity="0.5" fill="#ffffff">
+    
+    <path d="M330,280 Q340,285 345,300 Q342,290 338,285 Z" />
+    
+    <path d="M160,260 Q150,270 145,290 Q150,275 160,265 Z" />
+    
+    <path d="M260,400 Q280,405 300,402 Q280,398 260,400 Z" opacity="0.3"/>
+  </g>
+</svg>

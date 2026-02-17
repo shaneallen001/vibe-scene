@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="stoneTexture" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.4 0" in="noise" result="coloredNoise"/>
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic"/>
+    </filter>
+    
+    <filter id="sootBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12"/>
+    </filter>
+    
+    <filter id="waxGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"/>
+      <feOffset dx="0" dy="1" result="offsetBlur"/>
+      <feFlood flood-color="#000" flood-opacity="0.5"/>
+      <feComposite in2="offsetBlur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    
+    <linearGradient id="stoneGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a4a4a"/>
+      <stop offset="100%" stop-color="#2b2b2b"/>
+    </linearGradient>
+    <linearGradient id="stoneGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3d3d3d"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+    <linearGradient id="stoneGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#555555"/>
+      <stop offset="100%" stop-color="#333333"/>
+    </linearGradient>
+    
+    <linearGradient id="waxGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8dcb5"/>
+      <stop offset="50%" stop-color="#fdf6d8"/>
+      <stop offset="100%" stop-color="#e8dcb5"/>
+    </linearGradient>
+  </defs>
+
+  
+  <rect width="512" height="512" fill="#0f0f0f" />
+
+  
+  <g filter="url(#stoneTexture)">
+    <path d="M-10 8 L160 8 L160 120 L-10 120 Z" fill="url(#stoneGrad1)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M168 8 L336 8 L336 120 L168 120 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M344 8 L522 8 L522 120 L344 120 Z" fill="url(#stoneGrad1)" stroke="#1a1a1a" stroke-width="2"/>
+    
+    
+    <path d="M-10 8 L160 8" stroke="#666" stroke-width="1" opacity="0.5"/>
+    <path d="M168 8 L336 8" stroke="#666" stroke-width="1" opacity="0.5"/>
+    <path d="M344 8 L522 8" stroke="#666" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  
+  <g filter="url(#stoneTexture)">
+    <path d="M-30 128 L80 128 L80 250 L-30 250 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M88 128 L280 128 L280 250 L88 250 Z" fill="url(#stoneGrad3)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M288 128 L460 128 L460 250 L288 250 Z" fill="url(#stoneGrad1)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M468 128 L542 128 L542 250 L468 250 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+
+    
+    <path d="M88 128 L280 128" stroke="#777" stroke-width="1" opacity="0.5"/>
+    <path d="M288 128 L460 128" stroke="#777" stroke-width="1" opacity="0.5"/>
+    <path d="M468 128 L542 128" stroke="#777" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  
+  <g filter="url(#stoneTexture)">
+    <path d="M-10 258 L140 258 L140 380 L-10 380 Z" fill="url(#stoneGrad1)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M148 258 L360 258 L360 380 L148 380 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M368 258 L522 258 L522 380 L368 380 Z" fill="url(#stoneGrad3)" stroke="#1a1a1a" stroke-width="2"/>
+    
+    
+    <path d="M148 258 L360 258" stroke="#666" stroke-width="1" opacity="0.5"/>
+    <path d="M368 258 L522 258" stroke="#666" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  
+  <g filter="url(#stoneTexture)">
+    <path d="M-20 388 L100 388 L100 504 L-20 504 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M108 388 L250 388 L250 504 L108 504 Z" fill="url(#stoneGrad1)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M258 388 L420 388 L420 504 L258 504 Z" fill="url(#stoneGrad3)" stroke="#1a1a1a" stroke-width="2"/>
+    <path d="M428 388 L532 388 L532 504 L428 504 Z" fill="url(#stoneGrad2)" stroke="#1a1a1a" stroke-width="2"/>
+
+    
+    <path d="M108 388 L250 388" stroke="#777" stroke-width="1" opacity="0.5"/>
+    <path d="M258 388 L420 388" stroke="#777" stroke-width="1" opacity="0.5"/>
+    <path d="M428 388 L532 388" stroke="#777" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  
+  <g fill="none" stroke="#000" stroke-width="1.5" opacity="0.6" stroke-linecap="round">
+    <path d="M180 30 L190 45 L185 55"/>
+    <path d="M400 300 L390 310 L395 325"/>
+    <path d="M120 400 L130 410 L125 430"/>
+    <path d="M320 150 L315 160"/>
+  </g>
+
+  
+  <g filter="url(#sootBlur)" opacity="0.7">
+    
+    <path d="M-10 -10 L150 -10 L50 80 Q0 100 -10 50 Z" fill="#000"/>
+    <path d="M522 -10 L350 -10 L450 80 Q500 100 522 50 Z" fill="#000"/>
+    
+    <path d="M140 250 Q160 200 180 250 L180 280 L140 280 Z" fill="#000" opacity="0.8"/>
+    
+    <path d="M300 520 Q350 400 400 520 Z" fill="#000" opacity="0.6"/>
+    
+    <circle cx="280" cy="180" r="30" fill="#000" opacity="0.5"/>
+    <circle cx="100" cy="400" r="40" fill="#000" opacity="0.4"/>
+  </g>
+
+  
+  <g filter="url(#waxGlow)">
+    
+    <path d="M120 110 Q125 130 125 150 Q125 160 120 160 Q115 160 115 150 Q115 130 120 110" fill="url(#waxGrad)"/>
+    <circle cx="120" cy="162" r="3" fill="url(#waxGrad)"/>
+    <path d="M128 115 Q132 125 132 135 Q132 140 128 140 Q124 140 124 135 Q124 125 128 115" fill="url(#waxGrad)"/>
+
+    
+    
+    <path d="M400 250 Q430 245 460 250 Q460 258 430 260 Q400 258 400 250" fill="url(#waxGrad)"/>
+    
+    <path d="M410 255 L410 300 Q410 310 415 310 Q420 310 420 300 L420 255" fill="url(#waxGrad)"/>
+    <path d="M430 255 L430 340 Q430 350 435 350 Q440 350 440 340 L440 255" fill="url(#waxGrad)"/>
+    <path d="M450 255 L450 290 Q450 298 455 298 Q460 298 460 290 L460 255" fill="url(#waxGrad)"/>
+
+    
+    <path d="M50 380 Q70 375 90 380 L90 385 Q70 390 50 385 Z" fill="url(#waxGrad)"/>
+    <path d="M60 385 L60 420 Q60 428 65 428 Q70 428 70 420 L70 385" fill="url(#waxGrad)"/>
+  </g>
+
+  
+  <rect width="512" height="512" fill="url(#vignette)" style="mix-blend-mode: multiply; pointer-events: none;" />
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+</svg>

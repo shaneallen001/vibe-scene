@@ -3,9 +3,18 @@
  * 
  * Extracts wall segments from the grid for Foundry VTT.
  * Optimizes by merging collinear segments.
+ *
+ * Wall Offset ("kicked-out walls"):
+ *   Vision-blocking walls are pushed outward from the FLOOR/non-FLOOR boundary
+ *   by WALL_OUTSET (1/3 cell) so that players can see the textured wall band
+ *   from inside rooms. Doors are widened accordingly to span the larger opening.
  */
 
 import { CellType } from '../layout/models.js';
+
+// How far (in grid-cell fractions) to push walls outward into the wall band.
+// 1/3 of a cell lets players see wall textures without exposing too much.
+const WALL_OUTSET = 1 / 3;
 
 // Foundry VTT Constants (replicated here to avoid dependency on global user constants in node env)
 const WALL_DOOR_TYPES = {
@@ -68,110 +77,116 @@ export class WallBuilder {
     }
 
     _extractSegments() {
-        // Identify all cell edges that should be walls.
-        // Vision-blocking walls are placed at the FLOOR/non-FLOOR boundary,
-        // i.e. where walkable floor meets the wall band (or empty space).
+        // Vision-blocking walls are pushed outward from the FLOOR/non-FLOOR
+        // boundary by WALL_OUTSET so players can see the textured wall band.
+        //
+        // Each 1-cell edge segment is shifted perpendicular to itself (away from
+        // the floor side). Its two endpoints are then conditionally extended by
+        // WALL_OUTSET so that it meets the perpendicular pushed-out wall at that
+        // corner — but ONLY when such a perpendicular wall actually exists there.
+        // This prevents "horns" at convex corners and gaps at concave ones.
 
-        // Helper: true only for walkable FLOOR cells (not WALL texture cells)
         const isFloor = (x, y) => this.grid.get(x, y) === CellType.FLOOR;
+        const outset = WALL_OUTSET;
 
-        // Helper to check if a specific edge is occupied by a door
-        const getDoorAt = (x, y, dir) => {
-            return this.grid.doors.find(d => d.x === x && d.y === y && d.direction === dir);
-        };
+        // Pre-compute which edges are boundaries so we can look up neighbours.
+        // vEdge[x][y] = true  means the vertical grid-line at x between
+        //   cells (x-1,y) and (x,y) is a floor/non-floor boundary.
+        // hEdge[x][y] = true  means the horizontal grid-line at y between
+        //   cells (x,y-1) and (x,y) is a floor/non-floor boundary.
+        const W = this.grid.width;
+        const H = this.grid.height;
 
-        // Scan for Vertical Walls (Left/Right edges of cells)
-        // We only need to check the "Right" side of each cell to avoid partial doubles,
-        // plus the "Left" side of column 0?
-        // Actually, let's just scan all vertical grid lines.
-        // Grid width W has W+1 vertical grid lines (0 to W).
-        for (let x = 0; x <= this.grid.width; x++) {
-            for (let y = 0; y < this.grid.height; y++) {
-                const cellLeft = isFloor(x - 1, y);
-                const cellRight = isFloor(x, y);
+        const vEdge = Array.from({ length: W + 1 }, () => new Uint8Array(H));
+        const hEdge = Array.from({ length: W }, () => new Uint8Array(H + 1));
 
-                // Wall exists if boundary between floor and empty
-                if (cellLeft !== cellRight) {
-                    // Check if this is a door
-                    // A vertical door sits at (x,y) and blocks Left-Right.
-                    // In our model, a Door object is at a specific cell coordinate.
-                    // The door object at (x,y) represents the cell itself being a doorway.
-                    // Wait, our previous logic said "Door replaces Floor". 
-                    // Let's re-read models.js and doors.js.
-                    // DoorPlacer: "grid.doors.push(new Door(x, y, direction))"
-                    // And the cell at (x,y) IS Type.FLOOR (it was checked as such).
-                    // So a specific cell (x,y) IS the door.
+        for (let x = 0; x <= W; x++)
+            for (let y = 0; y < H; y++)
+                if (isFloor(x - 1, y) !== isFloor(x, y)) vEdge[x][y] = 1;
 
-                    // IF cell (x,y) is a door:
-                    //   Vertical Door: Blocks L-R movement. It needs walls on its Left and Right?
-                    //   No, the door ITSELF is the barrier.
+        for (let y = 0; y <= H; y++)
+            for (let x = 0; x < W; x++)
+                if (isFloor(x, y - 1) !== isFloor(x, y)) hEdge[x][y] = 1;
 
-                    // Let's look at the Renderer.
-                    // Vertical door (w=thickness, h=cellSize) is drawn in center of cell.
-                    // This implies the door is INSIDE the cell, not on the edge.
+        // --- Vertical boundary walls ---
+        // A vertical edge at grid-line x, cell-row y separates (x-1,y) and (x,y).
+        // It is pushed toward the non-floor side by outset.
+        //
+        // At each endpoint we extend by outset if a perpendicular (horizontal)
+        // boundary edge meets at that corner AND its pushed-out position would
+        // intersect this wall's pushed-out position. This happens in two cases:
+        //
+        //   Convex corner (outside turn): the perpendicular edge is on the
+        //     floor-side column → both walls push outward in the same "away
+        //     from floor" direction and meet at the outset corner.
+        //
+        //   Concave corner (inside turn): the perpendicular edge is on the
+        //     non-floor-side column → the perpendicular wall is pushed toward
+        //     this wall (they converge) and also meet at the outset corner.
+        //
+        // We check BOTH columns; if either has a horizontal boundary we extend.
+        for (let x = 0; x <= W; x++) {
+            for (let y = 0; y < H; y++) {
+                if (!vEdge[x][y]) continue;
+                const floorL = isFloor(x - 1, y);
 
-                    // Foundry Walls/Doors are vectors.
-                    // If the cell (x,y) is a Vertical Door, it acts as a wall running down the middle of the cell?
-                    // Or on one of the edges?
+                const wx = floorL ? x + outset : x - outset;
 
-                    // Usually in grid dungeongen:
-                    // If (x,y) is a DOOR cell, we typically put the wall/door segment in the CENTER of the cell, 
-                    // or we treat the cell as a connector.
+                // Top end (grid-line y)
+                let y1 = y;
+                const hTopFloor = (floorL ? hEdge[x - 1]?.[y] : hEdge[x]?.[y]) || 0;
+                const hTopNon   = (floorL ? hEdge[x]?.[y]     : hEdge[x - 1]?.[y]) || 0;
+                if (hTopFloor || hTopNon) y1 -= outset;
 
-                    // Re-evaluating extraction strategy for Doors:
-                    // The "Edge Detection" loop finds walls between Floor and Empty.
-                    // Doors are ON Floor cells.
-                    // So, we need two passes:
+                // Bottom end (grid-line y+1)
+                let y2 = y + 1;
+                const hBotFloor = (floorL ? hEdge[x - 1]?.[y + 1] : hEdge[x]?.[y + 1]) || 0;
+                const hBotNon   = (floorL ? hEdge[x]?.[y + 1]     : hEdge[x - 1]?.[y + 1]) || 0;
+                if (hBotFloor || hBotNon) y2 += outset;
 
-                    // Pass A: Boundary Walls (Edge Logic)
-                    // If (x-1,y) is Floor and (x,y) is Empty -> Wall on grid line X, from Y to Y+1.
-                    // This is a normal solid wall.
-
-                    // Pass B: Internal Doors (Cell Logic)
-                    // Iterate all Door objects.
-                    // If Door at (x,y) is Vertical:
-                    //   It connects (x-1,y) and (x+1,y).
-                    //   We want a Foundry "Door" wall segment.
-                    //   Where? Standard practice is either:
-                    //   1. Center of cell: (x+0.5, y) to (x+0.5, y+1)
-                    //   2. Aligned with grid lines? No, if it's a 1x1 cell, center is best.
-
-                    // Let's stick to the Edge Detection loop for ENCLOSURE walls.
-                    // And strictly handle Doors based on the Door list, probably placing them in the center of the cell.
-
-                    // So, inside this loop (x,y), we are just looking for solid walls.
-                    // A Door cell is considered "Floor" so it handles boundary correctly (e.g. Door next to Void has a Wall).
-
-                    this.addWallSegment(x, y, x, y + 1, WALL_DOOR_TYPES.NONE);
-                }
+                this.addWallSegment(wx, y1, wx, y2, WALL_DOOR_TYPES.NONE);
             }
         }
 
-        // Scan for Horizontal Walls (Top/Bottom edges)
-        for (let y = 0; y <= this.grid.height; y++) {
-            for (let x = 0; x < this.grid.width; x++) {
-                const cellUp = isFloor(x, y - 1);
-                const cellDown = isFloor(x, y);
+        // --- Horizontal boundary walls ---
+        for (let y = 0; y <= H; y++) {
+            for (let x = 0; x < W; x++) {
+                if (!hEdge[x][y]) continue;
+                const floorU = isFloor(x, y - 1);
 
-                if (cellUp !== cellDown) {
-                    this.addWallSegment(x, y, x + 1, y, WALL_DOOR_TYPES.NONE);
-                }
+                const wy = floorU ? y + outset : y - outset;
+
+                // Left end (grid-line x)
+                let x1 = x;
+                const vLeftFloor = (floorU ? vEdge[x]?.[y - 1] : vEdge[x]?.[y]) || 0;
+                const vLeftNon   = (floorU ? vEdge[x]?.[y]     : vEdge[x]?.[y - 1]) || 0;
+                if (vLeftFloor || vLeftNon) x1 -= outset;
+
+                // Right end (grid-line x+1)
+                let x2 = x + 1;
+                const vRightFloor = (floorU ? vEdge[x + 1]?.[y - 1] : vEdge[x + 1]?.[y]) || 0;
+                const vRightNon   = (floorU ? vEdge[x + 1]?.[y]     : vEdge[x + 1]?.[y - 1]) || 0;
+                if (vRightFloor || vRightNon) x2 += outset;
+
+                this.addWallSegment(x1, wy, x2, wy, WALL_DOOR_TYPES.NONE);
             }
         }
 
-        // Now add Doors as "Door" walls
-        // We place them in the center of the cell to match the visual rendering
-        // Vertical Door: (x+0.5, y) to (x+0.5, y+1)
-        // Horizontal Door: (x, y+0.5) to (x+1, y+0.5)
+        // --- Doors ---
+        // Doors span the full pushed-out wall gap (1 cell + outset on each end).
         for (const door of this.grid.doors) {
             if (door.direction === 'vertical') {
-                // Vertical door in cell (x,y)
-                // In rendering, it's a thin rect in center.
-                // Foundry wall should be a line down the center.
-                this.addWallSegment(door.x + 0.5, door.y, door.x + 0.5, door.y + 1, WALL_DOOR_TYPES.DOOR);
+                this.addWallSegment(
+                    door.x + 0.5, door.y - outset,
+                    door.x + 0.5, door.y + 1 + outset,
+                    WALL_DOOR_TYPES.DOOR
+                );
             } else {
-                // Horizontal door
-                this.addWallSegment(door.x, door.y + 0.5, door.x + 1, door.y + 0.5, WALL_DOOR_TYPES.DOOR);
+                this.addWallSegment(
+                    door.x - outset, door.y + 0.5,
+                    door.x + 1 + outset, door.y + 0.5,
+                    WALL_DOOR_TYPES.DOOR
+                );
             }
         }
     }
@@ -234,13 +249,11 @@ export class WallBuilder {
             for (let i = 1; i < group.length; i++) {
                 const next = group[i];
 
-                // Check for overlap or adjacency
-                // Tolerance for float math? 
-                // Grid coords are usually integers or .5.
-                // An epsilon of 0.01 is fine.
-                if (Math.abs(current[endCoord] - next[startCoord]) < 0.01) {
-                    // Contiguous! Extend current.
-                    current[endCoord] = next[endCoord];
+                // Merge if segments are contiguous or overlapping (within tolerance).
+                // With wall outset, adjacent segments overlap by 2*WALL_OUTSET.
+                if (next[startCoord] <= current[endCoord] + 0.01) {
+                    // Extend current to the farther end
+                    current[endCoord] = Math.max(current[endCoord], next[endCoord]);
                 } else {
                     // Gap found. Push current and start new.
                     result.push(current);
