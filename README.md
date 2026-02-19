@@ -2,6 +2,8 @@
 
 A Foundry VTT v13 module for generating procedural dungeon maps and importing them as new scenes.
 
+> **Part of the Vibe Project**: This module works alongside `vibe-common`, `vibe-combat`, and `vibe-actor` to provide a comprehensive AI-enhanced Foundry experience.
+
 ## Features
 
 - **"Vibe Scene" Button**: Adds a button to the Scenes directory sidebar for quick dungeon generation
@@ -23,7 +25,8 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
    ```
    [FoundryVTT Data]/Data/modules/vibe-scenes/
    ```
-2. Enable "Vibe Scenes" in Foundry VTT's Module Management
+2. **Install Dependency**: Ensure `vibe-common` is installed and enabled (recommended for shared API services).
+3. Enable "Vibe Scenes" in Foundry VTT's Module Management
 
 ## Usage
 
@@ -100,12 +103,12 @@ The texture rendering system uses a multi-stage pipeline for both floor and wall
 
 This module targets the Foundry v13 namespaced API. The following migrations have been applied:
 
-| Deprecated Global | v13 Namespaced Replacement | Removed In |
-|---|---|---|
-| `renderTemplate()` | `foundry.applications.handlebars.renderTemplate()` | v15 |
-| `FilePicker` | `foundry.applications.apps.FilePicker.implementation` | v15 |
-| `mergeObject()` | `foundry.utils.mergeObject()` | v15 |
-| `Dialog.confirm()` | `foundry.applications.api.DialogV2.confirm()` | v16 |
+| Deprecated Global  | v13 Namespaced Replacement                            | Removed In |
+| ------------------ | ----------------------------------------------------- | ---------- |
+| `renderTemplate()` | `foundry.applications.handlebars.renderTemplate()`    | v15        |
+| `FilePicker`       | `foundry.applications.apps.FilePicker.implementation` | v15        |
+| `mergeObject()`    | `foundry.utils.mergeObject()`                         | v15        |
+| `Dialog.confirm()` | `foundry.applications.api.DialogV2.confirm()`         | v16        |
 
 ### Remaining V1 Framework Usage (Migration Planned for v16)
 

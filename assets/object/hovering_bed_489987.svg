@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    
+    <filter id="glowBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" />
+      <feOffset dx="0" dy="0" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.6" />
+      </feComponentTransfer>
+    </filter>
+
+    <filter id="fabricTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.05 0" in="noise" result="coloredNoise"/>
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic"/>
+    </filter>
+
+    
+    <linearGradient id="velvetSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a0a3b" />
+      <stop offset="40%" stop-color="#4a146b" />
+      <stop offset="50%" stop-color="#7c43bd" />
+      <stop offset="60%" stop-color="#4a146b" />
+      <stop offset="100%" stop-color="#1a0526" />
+    </linearGradient>
+
+    <radialGradient id="pillowsGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#9c27b0" />
+      <stop offset="100%" stop-color="#4a148c" />
+    </radialGradient>
+
+    <linearGradient id="woodFrame" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3e2723" />
+      <stop offset="10%" stop-color="#5d4037" />
+      <stop offset="20%" stop-color="#3e2723" />
+      <stop offset="80%" stop-color="#3e2723" />
+      <stop offset="90%" stop-color="#5d4037" />
+      <stop offset="100%" stop-color="#281a16" />
+    </linearGradient>
+
+    <radialGradient id="runeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#00b0ff" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    
+    <linearGradient id="goldTrim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd54f" />
+      <stop offset="50%" stop-color="#ff6f00" />
+      <stop offset="100%" stop-color="#ffd54f" />
+    </linearGradient>
+  </defs>
+
+  
+  <g transform="translate(512, 512)">
+    
+    <ellipse cx="0" cy="0" rx="350" ry="450" fill="#000000" opacity="0.5" filter="url(#softShadow)" />
+    
+    
+    <g filter="url(#glowBlur)" opacity="0.9">
+      <circle cx="0" cy="0" r="300" fill="none" stroke="#00e5ff" stroke-width="3" opacity="0.6"/>
+      <circle cx="0" cy="0" r="280" fill="none" stroke="#00e5ff" stroke-width="1" stroke-dasharray="10 5" opacity="0.4"/>
+      <path d="M-200,0 L200,0 M0,-250 L0,250 M-140,-140 L140,140 M-140,140 L140,-140" stroke="#00b0ff" stroke-width="2" opacity="0.5" />
+      
+      <path d="M-100,-173 L100,-173 L200,0 L100,173 L-100,173 L-200,0 Z" fill="none" stroke="#00e5ff" stroke-width="4" />
+      
+      <path d="M-50,-50 Q0,-100 50,-50 T50,50 T-50,50 Z" fill="none" stroke="#e1f5fe" stroke-width="3" />
+      <circle cx="0" cy="0" r="20" fill="#00e5ff" />
+    </g>
+  </g>
+
+  
+  <g transform="translate(162, 112)"> 
+    
+    
+    <rect x="20" y="20" width="660" height="760" rx="20" fill="#00b8d4" opacity="0.3" filter="url(#softShadow)" />
+
+    
+    <rect x="0" y="0" width="700" height="800" rx="30" fill="url(#woodFrame)" stroke="#1a0e0b" stroke-width="2" />
+    
+    
+    <path d="M50,0 V800 M650,0 V800 M20,400 H680" stroke="#281a16" stroke-width="2" opacity="0.5" />
+    <path d="M10,100 Q350,150 690,100 M10,700 Q350,650 690,700" stroke="#281a16" stroke-width="3" opacity="0.3" fill="none"/>
+
+    
+    <rect x="-10" y="-10" width="60" height="60" rx="10" fill="url(#goldTrim)" stroke="#bf360c" stroke-width="1" />
+    <rect x="650" y="-10" width="60" height="60" rx="10" fill="url(#goldTrim)" stroke="#bf360c" stroke-width="1" />
+    <rect x="-10" y="750" width="60" height="60" rx="10" fill="url(#goldTrim)" stroke="#bf360c" stroke-width="1" />
+    <rect x="650" y="750" width="60" height="60" rx="10" fill="url(#goldTrim)" stroke="#bf360c" stroke-width="1" />
+
+    
+    <path d="M20,20 Q350,-40 680,20 L680,80 Q350,120 20,80 Z" fill="#2d1a10" stroke="#1a0e0b" stroke-width="2" />
+    <path d="M30,30 Q350,-20 670,30" fill="none" stroke="url(#goldTrim)" stroke-width="4" />
+
+    
+    <rect x="40" y="80" width="620" height="680" rx="10" fill="#e0e0e0" />
+    
+    <path d="M50,150 Q150,160 200,150 T400,155 T600,150" fill="none" stroke="#bdbdbd" stroke-width="2" opacity="0.5"/>
+    <path d="M50,650 Q200,640 650,660" fill="none" stroke="#bdbdbd" stroke-width="2" opacity="0.5"/>
+
+    
+    <g filter="url(#fabricTexture)">
+      
+      <path d="M35,250 
+               C35,250 150,230 350,230 
+               C550,230 665,250 665,250 
+               L675,770 
+               C675,770 600,810 500,790 
+               C400,770 300,770 200,790 
+               C100,810 25,770 25,770 
+               Z" 
+            fill="url(#velvetSheen)" stroke="#2a0a3b" stroke-width="1"/>
+            
+      
+      <path d="M150,240 Q160,500 140,780" fill="none" stroke="#1a0526" stroke-width="15" opacity="0.4" filter="url(#softShadow)"/>
+      <path d="M550,240 Q540,500 560,780" fill="none" stroke="#1a0526" stroke-width="15" opacity="0.4" filter="url(#softShadow)"/>
+      <path d="M350,230 Q360,500 340,770" fill="none" stroke="#1a0526" stroke-width="10" opacity="0.3" filter="url(#softShadow)"/>
+      
+      
+      <path d="M120,250 Q130,500 110,780" fill="none" stroke="#9c27b0" stroke-width="8" opacity="0.3"/>
+      <path d="M580,250 Q570,500 590,780" fill="none" stroke="#9c27b0" stroke-width="8" opacity="0.3"/>
+      
+      
+      <path d="M100,700 Q350,650 600,700" fill="none" stroke="#ffb300" stroke-width="2" stroke-dasharray="5 5" opacity="0.7"/>
+      <path d="M100,720 Q350,670 600,720" fill="none" stroke="#ffb300" stroke-width="2" stroke-dasharray="5 5" opacity="0.7"/>
+    </g>
+
+    
+    <g transform="translate(0, 20)">
+      
+      <rect x="70" y="70" width="250" height="150" rx="30" fill="url(#pillowsGrad)" stroke="#2a0a3b" stroke-width="1" />
+      
+      <ellipse cx="195" cy="145" rx="80" ry="40" fill="#2a0a3b" opacity="0.2" filter="url(#softShadow)" />
+      
+      <circle cx="70" cy="70" r="8" fill="#ffb300" />
+      <circle cx="320" cy="70" r="8" fill="#ffb300" />
+      <circle cx="70" cy="220" r="8" fill="#ffb300" />
+      <circle cx="320" cy="220" r="8" fill="#ffb300" />
+
+      
+      <rect x="380" y="70" width="250" height="150" rx="30" fill="url(#pillowsGrad)" stroke="#2a0a3b" stroke-width="1" />
+      
+      <ellipse cx="505" cy="145" rx="80" ry="40" fill="#2a0a3b" opacity="0.2" filter="url(#softShadow)" />
+      
+      <circle cx="380" cy="70" r="8" fill="#ffb300" />
+      <circle cx="630" cy="70" r="8" fill="#ffb300" />
+      <circle cx="380" cy="220" r="8" fill="#ffb300" />
+      <circle cx="630" cy="220" r="8" fill="#ffb300" />
+      
+      
+      <circle cx="350" cy="180" r="50" fill="#4a148c" stroke="#ffb300" stroke-width="2" />
+      <path d="M350,130 L350,230 M300,180 L400,180" stroke="#ffb300" stroke-width="1" opacity="0.5"/>
+    </g>
+
+    
+    
+    <ellipse cx="350" cy="400" rx="200" ry="300" fill="url(#runeGlow)" opacity="0.1" pointer-events="none"/>
+    
+    
+    <path d="M0,770 Q350,820 700,770" fill="none" stroke="#00e5ff" stroke-width="4" opacity="0.4" filter="url(#glowBlur)" />
+
+  </g>
+</svg>

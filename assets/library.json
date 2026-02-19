@@ -1486,5 +1486,77 @@
     "height": 1,
     "placement": "blocking",
     "generatedAt": 1771307075394
+  },
+  "125": {
+    "id": 125,
+    "name": "floating_inkwell_and_quill_481934",
+    "prompt": "floating inkwell and quill",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/floating_inkwell_and_quill_481934.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771471481945
+  },
+  "126": {
+    "id": 126,
+    "name": "hovering_bed_489987",
+    "prompt": "hovering bed",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/hovering_bed_489987.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771471489994
+  },
+  "127": {
+    "id": 127,
+    "name": "polished_obsidian_tiles_543041",
+    "prompt": "polished obsidian tiles",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/texture/polished_obsidian_tiles_543041.svg",
+    "fileType": "svg",
+    "type": "TEXTURE",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771471543059
+  },
+  "128": {
+    "id": 128,
+    "name": "shelves_of_pickled_monster_parts_550752",
+    "prompt": "shelves of pickled monster parts",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/shelves_of_pickled_monster_parts_550752.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771471550758
   }
 }

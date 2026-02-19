@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <radialGradient id="glassBodyGrad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#e0f7fa" stop-opacity="0.2"/>
+      <stop offset="60%" stop-color="#4fc3f7" stop-opacity="0.1"/>
+      <stop offset="90%" stop-color="#01579b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#002f6c" stop-opacity="0.8"/>
+    </radialGradient>
+    
+    
+    <radialGradient id="inkGrad" cx="50%" cy="50%" r="45%" fx="40%" fy="40%">
+      <stop offset="0%" stop-color="#4a148c"/>
+      <stop offset="40%" stop-color="#311b92"/>
+      <stop offset="80%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+
+    
+    <linearGradient id="featherGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f5f5dc"/>
+      <stop offset="100%" stop-color="#d7ccc8"/>
+    </linearGradient>
+
+    
+    <radialGradient id="magicGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d500f9" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#aa00ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4a148c" stop-opacity="0"/>
+    </radialGradient>
+
+    
+    <linearGradient id="brassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff59d"/>
+      <stop offset="20%" stop-color="#fbc02d"/>
+      <stop offset="50%" stop-color="#f57f17"/>
+      <stop offset="80%" stop-color="#fbc02d"/>
+      <stop offset="100%" stop-color="#fff59d"/>
+    </linearGradient>
+    
+    <filter id="blurFilter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+    <filter id="strongBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
+    </filter>
+  </defs>
+
+  
+  <ellipse cx="256" cy="300" rx="140" ry="120" fill="#000000" fill-opacity="0.4" filter="url(#strongBlur)"/>
+
+  
+  <g transform="translate(256, 256)">
+    <circle cx="0" cy="0" r="160" fill="url(#magicGlow)" opacity="0.4" filter="url(#blurFilter)"/>
+    <path d="M-100,-50 Q-50,-150 50,-100 T120,0 T50,120 T-80,80 T-100,-50" fill="none" stroke="#d500f9" stroke-width="2" stroke-opacity="0.6" stroke-linecap="round" stroke-dasharray="10, 15" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite"/>
+    </path>
+    <path d="M80,40 Q120,-40 0,-100 T-100,20 T80,40" fill="none" stroke="#ea80fc" stroke-width="1.5" stroke-opacity="0.5" stroke-linecap="round" opacity="0.6">
+      <animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0" dur="25s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  
+  <g transform="translate(200, 280)">
+    
+    <path d="M-60,-40 L-80,20 Q-90,60 -50,80 L50,80 Q90,60 80,20 L60,-40 Q50,-70 0,-70 Q-50,-70 -60,-40 Z" fill="#263238" fill-opacity="0.3"/>
+    
+    
+    <circle cx="0" cy="10" r="75" fill="url(#glassBodyGrad)" stroke="#37474f" stroke-width="2" stroke-opacity="0.5"/>
+    
+    
+    <circle cx="0" cy="10" r="60" fill="url(#inkGrad)"/>
+    
+    
+    <path d="M-40,0 Q-20,20 20,5 T50,-10" fill="none" stroke="#7e57c2" stroke-width="2" opacity="0.4"/>
+    <path d="M-30,20 Q0,40 30,25" fill="none" stroke="#4a148c" stroke-width="3" opacity="0.6"/>
+    
+    
+    <path d="M-55,-30 Q-65,10 -55,50" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    <path d="M55,-30 Q65,10 55,50" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+
+    
+    <circle cx="0" cy="10" r="45" fill="none" stroke="url(#brassGrad)" stroke-width="8"/>
+    <circle cx="0" cy="10" r="45" fill="none" stroke="#000000" stroke-width="1" stroke-opacity="0.3"/> 
+    
+    
+    <path d="M-30,-25 A45,45 0 0,1 30,-25" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  </g>
+
+  
+  
+  <g transform="translate(300, 220) rotate(-45)">
+    
+    <path d="M-10,0 Q-30,-100 0,-220 Q30,-100 10,0 L0,40 Z" fill="#000000" fill-opacity="0.3" transform="translate(-15, 15) scale(1.05)" filter="url(#blurFilter)"/>
+
+    
+    <path d="M0,40 C-5,0 -2,-180 -10,-230 L0,-235 L10,-230 C2,-180 5,0 0,40 Z" fill="#d7ccc8" stroke="#5d4037" stroke-width="1"/>
+
+    
+    <path d="M-2,-180 
+             Q-35,-160 -45,-120 
+             L-42,-115 L-50,-100 
+             L-48,-95 L-55,-60 
+             Q-50,-20 -5,0 
+             Z" fill="url(#featherGrad)" stroke="#bcaaa4" stroke-width="1" stroke-linejoin="round"/>
+             
+    
+    <path d="M2,-180 
+             Q35,-160 45,-120 
+             L42,-115 L50,-100 
+             L48,-95 L55,-60 
+             Q50,-20 5,0 
+             Z" fill="url(#featherGrad)" stroke="#bcaaa4" stroke-width="1" stroke-linejoin="round"/>
+
+    
+    <g stroke="#a1887f" stroke-width="1" fill="none" opacity="0.5">
+      <path d="M-2,-150 L-30,-140"/>
+      <path d="M-3,-120 L-35,-110"/>
+      <path d="M-4,-90 L-40,-80"/>
+      <path d="M2,-160 L30,-150"/>
+      <path d="M3,-130 L35,-120"/>
+      <path d="M4,-100 L40,-90"/>
+    </g>
+
+    
+    <path d="M-5,0 L0,45 L5,0 Z" fill="#8d6e63"/>
+    <path d="M-5,0 L0,45 L5,0 Z" fill="url(#inkGrad)" fill-opacity="0.9" clip-path="inset(20% 0 0 0)"/>
+    
+    
+    <path d="M0,20 L0,45" stroke="#311b92" stroke-width="2"/>
+  </g>
+
+  
+  <g>
+    
+    <circle cx="200" cy="200" r="3" fill="#ffffff" filter="url(#blurFilter)"/>
+    <circle cx="200" cy="200" r="1.5" fill="#ffffff"/>
+    
+    <circle cx="350" cy="350" r="4" fill="#ea80fc" opacity="0.8" filter="url(#blurFilter)"/>
+    <circle cx="350" cy="350" r="2" fill="#ffffff"/>
+
+    <circle cx="150" cy="300" r="2" fill="#d500f9" opacity="0.6"/>
+    
+    <path d="M280,180 L285,190 L280,200 L275,190 Z" fill="#e040fb" opacity="0.8">
+       <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/>
+       <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur="4s" repeatCount="indefinite"/>
+    </path>
+    
+    
+    <path d="M328,295 Q330,305 328,315 A2,2 0 1,1 328,295" fill="#4a148c" stroke="#aa00ff" stroke-width="1">
+        <animate attributeName="d" values="M328,295 Q330,305 328,315 A2,2 0 1,1 328,295; M328,320 Q330,330 328,340 A2,2 0 1,1 328,320" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+</svg>
