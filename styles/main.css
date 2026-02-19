@@ -1,45 +1,31 @@
-/* Vibe Scene Button in Scene Directory */
-.vibe-scene-button {
-  margin-left: 8px;
-  padding: 4px 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
+/*
+ * main.css — vibe-scenes
+ * =========================================================
+ * Styles for the Vibe Scene generation dialog.
+ * Design tokens come from vibe-common/styles/vibe-theme.css.
+ * =========================================================
+ */
 
-.vibe-scene-button:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.vibe-scene-button:active {
-  transform: translateY(0);
-}
-
+/* ─── Sidebar Button ─────────────────────────────────────── */
+/* .vibe-scene-button is defined in vibe-theme.css */
 .vibe-scene-button i {
   font-size: 12px;
 }
 
-/* Button container styling */
 .vibe-scene-button-container {
   padding: 8px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--vibe-border);
 }
 
-/* Dialog styling */
+/* ─── Scene Dialog Form ──────────────────────────────────── */
+/* Uses .vibe-dialog-form from vibe-theme.css as base.
+   The inner grid helpers .vibe-grid-2 / .vibe-grid-3 are also from theme. */
+
 .vibe-scene-dialog .dialog-content {
   padding: 0;
 }
 
+/* Keep local class for backward compatibility with existing template */
 .vibe-scene-form {
   display: flex;
   flex-direction: column;
@@ -56,45 +42,64 @@
 .vibe-scene-form label {
   font-weight: 600;
   font-size: 13px;
-  color: #333;
+  color: var(--vibe-text-primary);
 }
 
 .vibe-scene-form input,
 .vibe-scene-form select {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 7px 10px;
+  border: 1px solid var(--vibe-border-input);
+  border-radius: var(--vibe-radius-sm);
   font-size: 13px;
-  background: #fff;
-  transition: border-color 0.2s ease;
+  background: var(--vibe-surface);
+  color: var(--vibe-text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .vibe-scene-form input:focus,
 .vibe-scene-form select:focus {
-  border-color: #667eea;
+  border-color: var(--vibe-primary);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 0 2px var(--vibe-border-focus);
+}
+
+.vibe-scene-form textarea {
+  padding: 7px 10px;
+  border: 1px solid var(--vibe-border-input);
+  border-radius: var(--vibe-radius-sm);
+  font-size: 13px;
+  background: var(--vibe-surface);
+  color: var(--vibe-text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.vibe-scene-form textarea:focus {
+  border-color: var(--vibe-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--vibe-border-focus);
 }
 
 .vibe-scene-form .notes {
   font-size: 11px;
-  color: #666;
+  color: var(--vibe-text-secondary);
   margin: 4px 0 0 0;
   font-style: italic;
 }
 
-/* Generate button styling in dialog */
+/* Generate button in dialog footer */
 .vibe-scene-dialog .dialog-buttons button[data-button="generate"] {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--vibe-gradient);
   color: white;
   border: none;
 }
 
 .vibe-scene-dialog .dialog-buttons button[data-button="generate"]:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: var(--vibe-gradient-flip);
 }
 
-/* Grid Layouts */
+/* ─── Grid Layouts ───────────────────────────────────────── */
 .vibe-scene-grid-3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -111,7 +116,6 @@
   grid-column: 1 / -1;
 }
 
-/* Compact form elements for grid */
 .vibe-scene-grid-3 .form-group input,
 .vibe-scene-grid-3 .form-group select,
 .vibe-scene-grid-2 .form-group input,
@@ -120,12 +124,12 @@
   box-sizing: border-box;
 }
 
-/* Advanced Options */
+/* ─── Advanced Options ───────────────────────────────────── */
 details.advanced-options {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 8px;
-  background: #fdfdfd;
+  border: 1px solid var(--vibe-border-light);
+  border-radius: var(--vibe-radius-sm);
+  padding: 8px 10px;
+  background: var(--vibe-surface-alt);
 }
 
 details.advanced-options summary {
@@ -133,21 +137,22 @@ details.advanced-options summary {
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--vibe-text-secondary);
   user-select: none;
+  list-style: none;
 }
 
 details.advanced-options summary:hover {
-  color: #333;
+  color: var(--vibe-text-primary);
 }
 
 details.advanced-options[open] summary {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--vibe-border-light);
   padding-bottom: 4px;
   margin-bottom: 8px;
 }
 
-/* Checkbox alignment */
+/* ─── Checkbox alignment ─────────────────────────────────── */
 .vibe-scene-form .form-group.check {
   justify-content: flex-end;
 }
@@ -157,7 +162,6 @@ details.advanced-options[open] summary {
   align-items: center;
   gap: 8px;
   height: 35px;
-  /* Match input height */
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -171,16 +175,15 @@ details.advanced-options[open] summary {
   white-space: nowrap;
 }
 
-/* Status Bar */
+/* ─── Status / Progress Bar ──────────────────────────────── */
 .status-bar {
   margin-top: 10px;
-  padding: 8px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 8px 10px;
+  background: var(--vibe-surface-alt);
+  border: 1px solid var(--vibe-border);
+  border-radius: var(--vibe-radius-sm);
   font-size: 12px;
   display: none;
-  /* Hidden by default */
 }
 
 .status-bar.active {
@@ -190,7 +193,7 @@ details.advanced-options[open] summary {
 .status-message {
   margin-bottom: 4px;
   font-weight: 500;
-  color: #333;
+  color: var(--vibe-text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -199,14 +202,22 @@ details.advanced-options[open] summary {
 .progress-track {
   width: 100%;
   height: 6px;
-  background: #e0e0e0;
+  background: var(--vibe-border);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: var(--vibe-gradient);
   width: 0%;
   transition: width 0.3s ease;
+}
+
+/* ─── Studio Status ──────────────────────────────────────── */
+.studio-status {
+  min-height: 20px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--vibe-text-secondary);
 }

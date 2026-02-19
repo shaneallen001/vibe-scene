@@ -1,5 +1,5 @@
-<form class="vibe-studio-form">
-    <div class="studio-header">
+<form class="vibe-scene-form vibe-studio-form">
+    <div class="form-group">
         <p class="notes">Generate new assets for your library using AI.</p>
     </div>
 
@@ -26,14 +26,14 @@
     </div>
 
     <div class="form-group">
-        <label for="style">Visual Style (Optional)</label>
+        <label for="style">Visual Style <span class="notes" style="font-style:italic;">(optional)</span></label>
         <input type="text" name="style" id="style" value="{{style}}"
             placeholder="e.g. Dark fantasy, cel shaded, realistic">
     </div>
 
     <hr>
 
-    <div class="studio-status" style="min-height: 20px; font-style: italic; font-size: 0.9em; color: #666;">
+    <div class="studio-status">
         <!-- Status messages go here -->
     </div>
 </form>

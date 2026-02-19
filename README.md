@@ -64,19 +64,223 @@ The underlying generator options are now fully exposed in the dialog:
 
 - **Door Density**: Probability (0.0 - 1.0) of placing a door at a valid location.
 
-## Technical Details
+---
 
-This module includes a complete JavaScript port of the [dungeongen](https://github.com/benjcooley/dungeongen) library, enhanced with Foundry-specific optimizations:
+## Developer Guide
 
-- **Layout Generation**: Phase-based procedural generation framework (inspired by Donjon).
-- **Advanced Room Placement**: Supports iterative **Relaxation** (physics-based separation) to resolve overlaps and **Symmetric** placement strategies.
-- **Passage Routing**: Uses **Minimum Spanning Trees (MST)** for room connectivity and **A* Pathfinding** for carving. "Errant" styles employ weighted noise to create organic, winding paths.
-- **Performance Optimization**: The `WallBuilder` performs **Collinear Merging**, collapsing hundreds of tile-sized sections into single long vector lines to maintain high performance in Foundry VTT.
-- **Canvas Rendering**: Pure JavaScript rendering using the HTML5 Canvas API, employing a multi-layered approach (Floor → Wall Textures → Wall Edges → Doors).
-- **Foundry Vision**: Context-aware door placement and automated wall generation ensure the dungeon is ready for immediate play.
-- **Smart Room Population**: The generator identifies key rooms and uses the Gemini API to suggest a thematic layout. It is **context-aware**, prioritizing assets available in your library to ensure a coherent look.
-- **Multi-Cell Assets**: Objects are placed at their natural dimensions (e.g. beds at 2x1, thrones at 2x2). SVGs are generated with aspect-ratio-correct viewBoxes and the AI planner reasons about footprint sizes.
-- **Ambient Decor Layer**: Every room is populated with two categories of items: **blocking** (furniture, obstacles) and **ambient** (wall torches, cobwebs, rugs, bloodstains, scattered bones). Ambient items are placed along walls and in corners, making rooms feel lived-in without impeding movement. Even corridors get atmospheric touches.
+### Module Entry Point & Hooks (`scripts/main.js`)
+
+```
+Hooks.once("init")            → registerModuleSettings() — settings registered early so they're
+                                available to all modules during init phase
+Hooks.once("ready")           → migrateGeminiSvgModelDefault() — one-time data migration
+Hooks.on("renderSceneDirectory") → addVibeSceneButton() via requestAnimationFrame
+Hooks.on("renderSidebarTab")  → Same, guards on app.tabName === "scenes"
+```
+
+> **Why `init` for settings?** Unlike vibe-actor and vibe-combat, vibe-scenes registers settings in the `init` hook (not `ready`). This ensures settings are available during the module initialization phase, which is important for services that read settings during their own initialization.
+
+### Directory Structure
+
+```
+scripts/
+├── main.js                         # Entry point, hook registration
+├── settings.js                     # game.settings.register() + migrateGeminiSvgModelDefault()
+├── ai/
+│   └── prompts.js                  # Centralized AI system prompts and instructions
+├── data/
+│   └── library.json                # (Runtime write target) Asset library index
+├── debug/
+│   └── ...                         # Debug utilities
+├── dungeongen/                     # Pure JS dungeon generation library (no Foundry dependency)
+│   ├── dungeongen.js               # Main entry: DungeonGenerator + DungeonRenderer classes
+│   ├── algorithms/                 # Pathfinding, graph algorithms (A*, MST)
+│   │   ├── a-star.js
+│   │   ├── mst.js
+│   │   └── ...
+│   ├── layout/                     # Phase-based layout data structures
+│   │   ├── dungeon-grid.js         # DungeonGrid: CellType enum, grid state, carveWallPerimeter()
+│   │   ├── room.js                 # Room data class
+│   │   └── ...
+│   └── map/
+│       ├── wall-builder.js         # WallBuilder: converts grid cells → Foundry wall segments
+│       └── dungeon-renderer.js     # DungeonRenderer: Canvas API rendering of grid to PNG/blob
+├── services/
+│   ├── dungeongen-service.js       # Main orchestrator: Generate → Plan → Render → Return
+│   ├── ai-asset-service.js         # AiAssetService: Gemini SVG generation, dungeon planner
+│   ├── asset-library-service.js    # AssetLibraryService: Read/write library.json
+│   ├── gemini-service.js           # Extended Gemini client (text + vision/multimodal)
+│   └── scene-importer.js           # SceneImporter: Creates Foundry Scene from dungeon output
+├── tools/
+│   └── ...                         # Internal dev tools
+├── ui/
+│   ├── button-injector.js          # Injects "Vibe Scene" button into Scene Directory header
+│   ├── vibe-scene-dialog.js        # Main dungeon configuration dialog (V1 Dialog — TODO: migrate)
+│   ├── vibe-studio-dialog.js       # Asset generator dialog (V1 Dialog — TODO: migrate)
+│   └── asset-library.js            # Asset browser Application (V1 Application — TODO: migrate)
+└── utils/
+    └── ...
+tests/
+├── test_generator.js               # Standalone dungeon generator tester (Node.js, no Foundry)
+├── test_ai_generator.js            # Standalone AI SVG generator tester
+└── config.json                     # (gitignored) API key for standalone testing
+styles/
+├── main.css                        # Scene dialog, progress bar, studio dialog
+└── asset-library.css               # Asset library table, preview panel, filter bar
+```
+
+### Full Generation Flow (`services/dungeongen-service.js`)
+
+`DungeongenService.generate(options)` is the top-level orchestrator. It runs four major phases:
+
+```
+DungeongenService.generate(options)
+│
+├─ Phase 1: Layout Generation
+│   ├─ Procedural mode → DungeonGenerator.generate()
+│   │     Uses phase-based room placement (random/relaxation/symmetric) + MST + A* corridor carving
+│   └─ Intentional mode (AI) → AiAssetService.planDungeonOutline() → DungeonGenerator.generateFromOutline()
+│         AI designs the room/connection structure; generator implements it deterministically
+│
+├─ Phase 2: AI Planning & Population → _planAndPopulate(grid, options)
+│   ├─ Load asset library (AssetLibraryService.load())
+│   ├─ AiAssetService.planDungeon(rooms, assets, description) → { plan[], wishlist[], default_floor, default_wall }
+│   │     plan[]:    Per-room { id, theme, description, contents[], floor_texture, wall_texture }
+│   │     wishlist[]: New assets to generate { name, type, visual_style, width, height, placement }
+│   ├─ Wishlist Processing (bounded concurrency pool, DungeongenService.WISHLIST_CONCURRENCY)
+│   │     For each wishlist item: AiAssetService.generateSVG() → saveAsset()
+│   │     Failures are swallowed — one bad asset doesn't block the batch
+│   ├─ AssetLibraryService.reload() — Force-reloads library.json after wishlist generation
+│   │     (1-second delay for filesystem consistency before reload)
+│   ├─ Texture Resolution: _findTexture(textures, name) — 3-strategy fuzzy match
+│   │     1. Exact name match (case-insensitive)
+│   │     2. Substring match
+│   │     3. Keyword overlap scoring
+│   └─ Item Placement: Converts plan contents to pixel coordinates
+│         Items are bounds-checked against room dimensions
+│         Fallback population fills rooms the AI didn't cover (deterministic, seed-stable)
+│         Post-pass guarantees no room is completely empty
+│
+├─ Phase 3: Canvas Rendering → DungeonRenderer.renderToBlob()
+│   ├─ Multi-layer approach: Floor → Wall textures → Wall edges → Items → Doors
+│   ├─ ctx.createPattern() fillls FLOOR cells with default/per-room textures
+│   └─ Optional Visual Review Pass: AI inspects the rendered PNG and proposes adjustments
+│         Then re-renders if changes are suggested
+│
+└─ Phase 4: Wall Building → WallBuilder.build(grid, gridSize, padding)
+      Collinear merging: Collapses tile-sized segments into long single wall lines
+      Walls placed 1/3 cell inward from FLOOR/WALL boundary (lets players see wall texture)
+      Returns { blob, walls[], items[], rooms[] }
+```
+
+### Scene Import (`services/scene-importer.js`)
+
+`SceneImporter` consumes the output of `DungeongenService.generate()` and creates a Foundry `Scene` document:
+
+```
+SceneImporter.importScene({ blob, walls, items, rooms, name, gridSize, ... })
+  1. Upload blob → FilePicker upload → scene background image path
+  2. Scene.create({ name, background, grid, ... })
+  3. scene.createEmbeddedDocuments("Wall", walls)         — Vision walls + doors
+  4. scene.createEmbeddedDocuments("Tile", items)         — Decor tiles (blocking + ambient)
+  5. For each room with a description → JournalEntry.create() + Note placed on map
+```
+
+> **Tile vs Token**: Room objects are created as **Tiles** (`scene.createEmbeddedDocuments("Tile")`), not Tokens. Tiles are static map decorations. This is intentional — they don't need actor backing.
+
+### Dungeongen Library (`scripts/dungeongen/`)
+
+This is a self-contained JavaScript port of the [dungeongen](https://github.com/benjcooley/dungeongen) library. It has **no dependency on Foundry APIs** and can be run standalone via `tests/test_generator.js`.
+
+Key classes:
+
+| Class              | File                          | Role                                                           |
+| ------------------ | ----------------------------- | -------------------------------------------------------------- |
+| `DungeonGenerator` | `dungeongen.js`               | Generates the grid (rooms, corridors, doors)                   |
+| `DungeonRenderer`  | `dungeongen.js` (via imports) | Renders grid to Canvas; produces a `Blob`                      |
+| `DungeonGrid`      | `layout/dungeon-grid.js`      | Grid state; `CellType` enum (`FLOOR`, `WALL`, `EMPTY`, `DOOR`) |
+| `WallBuilder`      | `map/wall-builder.js`         | Converts grid → Foundry wall segment array                     |
+| `AStar`            | `algorithms/a-star.js`        | Pathfinding for corridor carving                               |
+| `MST`              | `algorithms/mst.js`           | Minimum spanning tree for room connectivity                    |
+
+**`CellType` enum** (critical for understanding the texture pipeline):
+- `EMPTY` — Outside the dungeon (no rendering)
+- `FLOOR` — Walkable room/corridor interior
+- `WALL` — 1-cell-thick textured border around FLOOR cells (carved by `DungeonGrid.carveWallPerimeter()`)
+- `DOOR` — Wall cell designated as a door
+
+**Wall Perimeter**: After layout generation, `DungeonGrid.carveWallPerimeter()` marks all `EMPTY` cells adjacent to `FLOOR` cells as `CellType.WALL`. This creates the textured wall band.
+
+### AiAssetService (`services/ai-asset-service.js`)
+
+The main AI planner and SVG generator. Uses a **two-model split** for quality vs. speed:
+
+- `textModel` (configurable, default `gemini-2.5-flash`) — Used for dungeon planning JSON. Fast, structured output.
+- `svgModel` (configurable, default `gemini-pro`) — Used for SVG generation. Higher quality for richer art.
+
+Key methods:
+
+| Method                                         | Description                                                               |
+| ---------------------------------------------- | ------------------------------------------------------------------------- |
+| `planDungeon(rooms, assets, description)`      | Returns `{ plan[], wishlist[], default_floor, default_wall }`             |
+| `planDungeonOutline({ ... })`                  | AI designs the room/connection structure for intentional mode             |
+| `planDungeonFromOutline({ ... }, assets)`      | Plans content from an AI-designed outline                                 |
+| `generateSVG(prompt, type, dims)`              | Generates a single SVG asset via Gemini                                   |
+| `saveAsset(svg, name, type, tags, meta)`       | Saves SVG file + registers in `library.json`                              |
+| `reviewRenderedMap({ imageBase64, metadata })` | Visual QA: sends rendered map image + metadata, returns suggested changes |
+
+**Asset types** understood by the service: `OBJECT` (decor), `TEXTURE` (floor fill), `WALL` (wall band fill).
+
+**SVG quality loop**: `generateSVG` uses an iterative critique-refine loop (generate → critique → refine) to push assets toward a higher detail target before returning the final SVG.
+
+**`_sanitizeSVG(svg)`**: All AI-generated SVGs are sanitized before saving:
+- Removes `<style>` blocks (inline styles only — browser VTT compatibility)
+- Ensures `viewBox` attribute is present with correct dimensions
+- Strips potentially dangerous attributes
+
+### AssetLibraryService (`services/asset-library-service.js`)
+
+Reads/writes `library.json` — the persistent index of all generated assets.
+
+```json
+// library.json structure
+{
+  "assets": [
+    {
+      "id": "cracked_stone_floor",
+      "name": "Cracked Stone Floor",
+      "type": "TEXTURE",
+      "path": "vibe-scenes/textures/cracked_stone_floor_123456.svg",
+      "tags": ["stone", "floor", "ai-gen"],
+      "width": 1,
+      "height": 1,
+      "placement": "blocking",
+      "meta": { "prompt": "...", "model": "...", "createdAt": "..." }
+    }
+  ]
+}
+```
+
+Key methods:
+
+| Method            | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| `load()`          | Reads `library.json` — caches in memory                               |
+| `reload()`        | Force re-reads from disk (used after wishlist generation)             |
+| `getAssets(type)` | Returns assets filtered by `type` (`"OBJECT"`, `"TEXTURE"`, `"WALL"`) |
+| `addAsset(asset)` | Appends to `assets[]`, writes `library.json`                          |
+| `removeAsset(id)` | Removes by id, writes `library.json`, deletes SVG file                |
+
+### Settings (`scripts/settings.js`)
+
+| Key                   | Type   | Notes                                                 |
+| --------------------- | ------ | ----------------------------------------------------- |
+| `geminiApiKey`        | String | GM-only; used by AiAssetService and DungeongenService |
+| `defaultGridSize`     | Number | Default scene grid size                               |
+| `mapRenderResolution` | Number | Pixels per cell for renderer                          |
+| `imagePath`           | String | Foundry data path for saving dungeon PNGs             |
+| `geminiTextModel`     | String | Gemini model for planning/JSON tasks                  |
+| `geminiSvgModel`      | String | Gemini model for SVG generation                       |
 
 ### Dynamic Texture Pipeline (Floors & Walls)
 
@@ -94,6 +298,11 @@ The texture rendering system uses a multi-stage pipeline for both floor and wall
 7.  **Foundry Walls**: `WallBuilder` places vision-blocking wall segments **1/3 cell outward** from the `FLOOR`/`WALL` boundary into the wall band. This lets players see the wall textures from inside rooms. Doors are widened to span the larger opening.
 
 **Debugging**: If floors or walls appear blank (white/gray or solid dark), check the browser console for `Vibe Scenes |` prefixed warnings about texture resolution or loading failures.
+
+### CSS Architecture
+- **`styles/main.css`**: Scene dialog, progress bar, advanced options, studio dialog forms. Uses CSS variables from `vibe-common/styles/vibe-theme.css`.
+- **`styles/asset-library.css`**: Asset Library table, preview panel, filter bar, tags, icon buttons. All colours reference `--vibe-*` tokens.
+- **Base tokens**: Provided by `vibe-common/styles/vibe-theme.css`. Do not hardcode hex colours; use `var(--vibe-*)` variables.
 
 ## Requirements
 
@@ -167,14 +376,10 @@ The module includes a standalone AI service for generating SVG assets (tiles, fu
     ```
     The resulting SVG will be saved to `vibe-scenes/svgs/`.
 
-#### In-game Usage
-
-Once configured in Foundry (Module Settings -> Vibe Scenes -> Gemini API Key), the `AiAssetService` can be used to generate assets dynamically. Currently exposed via the API, with a UI coming soon.
-
 ## AI Asset Standards
 
 To ensure generated assets work well in a VTT environment, we enforce specific "Archetypes" via system prompts. All SVG styling must be **inline** (no `<style>` blocks) since the `_sanitizeSVG` pipeline strips `<style>` tags for browser compatibility.
-The generator now uses an iterative quality loop (generate -> critique -> refine) to push assets toward a higher detail target before returning the final SVG.
+The generator now uses an iterative quality loop (generate → critique → refine) to push assets toward a higher detail target before returning the final SVG.
 
 ### 1. Textures (The Base Layer)
 *   **Role**: The "carpet" or "ground" that fills the entire room or corridor.
@@ -198,3 +403,9 @@ The generator now uses an iterative quality loop (generate -> critique -> refine
 *   **Role**: Large features that might act as both walls and floor (e.g., a tent or hut).
 *   **Enforcement**: Similar to objects but larger scale.
 
+### Common Gotchas
+- **Library reload after wishlist**: Always call `AssetLibraryService.reload()` after generating wishlist assets. There is a deliberate 1-second delay before reload to allow the filesystem to flush new SVG files before the index re-reads them. Without this, newly generated assets are invisible to texture resolution and room population.
+- **Two `GeminiService` files**: `vibe-scenes/scripts/services/gemini-service.js` is NOT the same as `vibe-common/scripts/services/gemini-service.js`. The scenes version supports multimodal requests (sending image data for the visual review pass). Do not conflate them.
+- **Intentional mode fallback**: If Gemini API key is not configured but intentional mode is selected, the service automatically falls back to procedural generation with a console warning.
+- **`DungeongenService.WISHLIST_CONCURRENCY`**: A static class property controlling how many SVG generation requests run in parallel. Adjust carefully — too high and you hit Gemini rate limits; too low and generation is slow.
+- **Tiles not Tokens**: Room objects are placed as Foundry Tiles, not Actors/Tokens. They are static map decorations. Do not try to add actor data to them.
