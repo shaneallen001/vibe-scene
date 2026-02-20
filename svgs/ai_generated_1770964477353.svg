@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  
+  
+
+  
+  <circle cx="256" cy="262" r="210" fill="black" fill-opacity="0.15" />
+
+  
+  <circle cx="256" cy="256" r="200" fill="url(#silverGradient)" stroke="#495057" stroke-width="4" />
+
+  
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#rimGradient)" stroke-width="12" stroke-opacity="0.6" />
+
+  
+  <path d="M256 120 
+           L290 210 
+           L386 210 
+           L310 270 
+           L340 366 
+           L256 310 
+           L172 366 
+           L202 270 
+           L126 210 
+           L222 210 Z" 
+        fill="#ced4da" 
+        stroke="#6c757d" 
+        stroke-width="6" />
+
+  
+  <path d="M256 140 
+           L280 215 
+           L360 215 
+           L295 265 
+           L320 340 
+           L256 295 
+           L192 340 
+           L217 265 
+           L152 215 
+           L232 215 Z" 
+        fill="#f8f9fa" 
+        fill-opacity="0.5" />
+
+  
+  <path d="M120 160 A 160 160 0 0 1 200 100" fill="none" stroke="white" stroke-width="15" stroke-linecap="round" stroke-opacity="0.4" />
+  <path d="M320 400 A 160 160 0 0 0 380 340" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" stroke-opacity="0.2" />
+  
+  
+  <circle cx="150" cy="150" r="12" fill="white" fill-opacity="0.6" />
+</svg>

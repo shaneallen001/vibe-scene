@@ -1,0 +1,78 @@
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template modules/vibe-scenes/templates/vibe-scene-dialog.html
+foundry.mjs:6727 Error: The V1 Application framework is deprecated, and will be removed in a later core software version. Please use the V2 version of the Application framework available under foundry.applications.api.ApplicationV2.
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 16
+    at Object.logCompatibilityWarning (foundry.mjs:6715:17)
+    at new Application (foundry.mjs:37008:21)
+    at new Dialog (foundry.mjs:117100:5)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:86:24)
+logCompatibilityWarning @ foundry.mjs:6727
+Application @ foundry.mjs:37008
+Dialog @ foundry.mjs:117100
+show @ vibe-scene-dialog.js:86
+await in show
+(anonymous) @ main.js:26
+(anonymous) @ button-injector.js:53
+foundry.mjs:37351 Foundry VTT | Rendering Dialog
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/hud/dialog.html
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/app-window.html
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:107:15)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:107
+(anonymous) @ quick-insert.ts:105
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:123:19)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:123
+(anonymous) @ quick-insert.ts:105
+vibe-scene-dialog.js:174 Vibe Scenes | generateDungeon called with: {sceneName: 'Generated Dungeon', size: 'tiny', maskType: 'rectangle', seed: 244572, dungeonDescription: 'Stone dungeon with an underground river and docks.'}
+vibe-scene-dialog.js:195 Vibe Scenes | DungeongenService created, starting generation...
+dungeongen-service.js:37 Vibe Scenes | Generating dungeon locally with options: {size: 'tiny', maskType: 'rectangle', symmetry: 'none', corridorStyle: 'l_path', connectivity: 'mst_loops', …}
+dungeongen-service.js:124 Vibe Scenes | Planning dungeon layout...
+ai-asset-service.js:77 Vibe Scenes | Sending dungeon plan request to AI with dynamic wishlist...
+dungeongen-service.js:139 Vibe Scenes | Dungeon Plan: (5) [{…}, {…}, {…}, {…}, {…}]
+dungeongen-service.js:140 Vibe Scenes | Asset Wishlist: []
+dungeongen-service.js:187 Vibe Scenes | Resolved default floor texture: "cracked_stone_tiles_128977" → modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+dungeongen-service.js:211 Vibe Scenes | Room 779fae03-6ce0-4a99-9984-7ca3ffb9fc07 floor: "cracked_stone_tiles_128977" → modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+dungeongen-service.js:211 Vibe Scenes | Room bd16cdb4-15b8-4149-b11f-4277ef541c4c floor: "cracked_stone_tiles_128977" → modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+dungeongen-service.js:211 Vibe Scenes | Room ae04f4c9-ffef-474f-aff6-a825ea257fee floor: "cracked_stone_tiles_128977" → modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+dungeongen-service.js:211 Vibe Scenes | Room 7790b2b0-5a78-425c-a442-50080e0db217 floor: "murky_water_surface_164666" → modules/vibe-scenes/assets/texture/murky_water_surface_164666.svg
+dungeongen-service.js:211 Vibe Scenes | Room e6557204-50c8-4aec-a342-aca3b6ccb634 floor: "cracked_stone_tiles_128977" → modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+dungeongen-service.js:317 Vibe Scenes | Placed 28 items in dungeon.
+dungeongen-service.js:80 Vibe Scenes | Rendering to blob...
+renderer.js:31 Vibe Scenes | Loading default floor texture: modules/vibe-scenes/assets/texture/cracked_stone_tiles_128977.svg
+renderer.js:34 Vibe Scenes | Default floor texture loaded successfully (512x512)
+renderer.js:46 Vibe Scenes | Loading 5 room-specific textures...
+dungeongen-service.js:87 Vibe Scenes | Generation complete in 19487ms
+vibe-scene-dialog.js:214 Vibe Scenes | Image data received, size: 901358 bytes
+scene-importer.js:22 Vibe Scenes | Creating scene: Generated Dungeon
+foundry.mjs:115132 dungeon_244572_1771132977009.png saved to vibe-scenes/dungeons 
+scene-importer.js:39 Vibe Scenes | Upload result: {status: 'success', message: 'dungeon_244572_1771132977009.png saved to vibe-scenes/dungeons', path: 'vibe-scenes/dungeons/dungeon_244572_1771132977009.png'}
+scene-importer.js:47 Vibe Scenes | Image dimensions: {width: 4400, height: 4400}
+scene-importer.js:86 Vibe Scenes | Scene data: {name: 'Generated Dungeon', img: 'vibe-scenes/dungeons/dungeon_244572_1771132977009.png', width: 4400, height: 4400, grid: {…}, …}
+foundry.mjs:84197 Foundry VTT | Loading 1 Assets
+scene-importer.js:96 Vibe Scenes | Creating 47 walls...
+button-injector.js:118 Vibe Scenes: Vibe Scene button added successfully
+scene-importer.js:103 Vibe Scenes | Creating 28 tiles...
+scene-importer.js:107 Vibe Scenes | Unique textures used: (17) ['modules/vibe-scenes/assets/object/wooden_crates_197739.svg', 'modules/vibe-scenes/assets/object/barrel_of_provisions_377068.svg', 'modules/vibe-scenes/assets/object/decor_chest_wooden.svg', 'modules/vibe-scenes/assets/object/decor_pot_ceramic.svg', 'modules/vibe-scenes/assets/object/decor_pot_broken.svg', 'modules/vibe-scenes/assets/object/military_cot_062328.svg', 'modules/vibe-scenes/assets/object/furniture_table_decayed.svg', 'modules/vibe-scenes/assets/object/furniture_chair_decayed.svg', 'modules/vibe-scenes/assets/object/sword_rack__full__693140.svg', 'modules/vibe-scenes/assets/object/tattered_cloak_286535.svg', 'modules/vibe-scenes/assets/object/iron_cell_bars_809027.svg', 'modules/vibe-scenes/assets/object/shackles_319913.svg', 'modules/vibe-scenes/assets/object/wooden_dock_section_039596.svg', 'modules/vibe-scenes/assets/object/mooring_post_071013.svg', 'modules/vibe-scenes/assets/object/small_rowboat_094581.svg', 'modules/vibe-scenes/assets/object/gangplank_116529.svg', 'modules/vibe-scenes/assets/object/wall_torch_106826.svg']
+scene-importer.js:126 Vibe Scenes | Creating tile batch 1/1
+scene-importer.js:165 Vibe Scenes | Creating journal entries for rooms...
+scene-importer.js:220 Vibe Scenes | Creating 5 map notes...
+scene-importer.js:226 Vibe Scenes | Scene created successfully: d3aet0cST0Inbyao
+foundry.mjs:115132 Successfully created scene: Generated Dungeon 
+foundry.mjs:46163 Foundry VTT | Viewing Scene Generated Dungeon
+foundry.mjs:94310 Foundry VTT | Drawing game canvas for scene Generated Dungeon
+foundry.mjs:84197 Foundry VTT | Loading 79 Assets

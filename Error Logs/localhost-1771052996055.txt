@@ -1,0 +1,385 @@
+ _______________________________________________________________
+ _____ ___  _   _ _   _ ____  ______   __ __     _______ _____
+|  ___/ _ \| | | | \ | |  _ \|  _ \ \ / / \ \   / |_   _|_   _|
+| |_ | | | | | | |  \| | | | | |_) \ V /   \ \ / /  | |   | |
+|  _|| |_| | |_| | |\  | |_| |  _ < | |     \ V /   | |   | |
+|_|   \___/ \___/|_| \_|____/|_| \_\|_|      \_/    |_|   |_|
+===============================================================
+ Foundry VTT | Foundry Virtual Tabletop ESModule loaded
+ 
+logCompatibilityWarning @ foundry.mjs:6727
+ Foundry VTT | Reestablishing existing session 70bb02c7dbdb7b23bbb8c9aa
+ Foundry VTT | Connected to server socket using session 70bb02c7dbdb7b23bbb8c9aa
+ Foundry VTT | Initializing Foundry Virtual Tabletop Game
+ D&D 5e | Initializing the D&D Fifth Game System - Version 5.1.8_____________________________________      ______ _____ _____|  _  \___  |  _  \  ___|  ___|| | | ( _ ) | | | |___ \| |__| | | / _ \/\ | | |   \ \  __|| |/ / (_>  < |/ //\__/ / |___|___/ \___/\/___/ \____/\____/_______________________________
+ D&D 5e | Registering Module Data
+ 
+logCompatibilityWarning @ foundry.mjs:6727
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/active-effects.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/active-effects.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/active-effects2.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/active-effects2.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/inventory.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/inventory.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/apps/parts/trait-list.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/apps/parts/trait-list.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/apps/parts/traits-list.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/apps/parts/traits-list.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-classes.hbs
+ Foundry VTT | Loaded localization file lang/en.json
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-classes.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-traits.hbs
+ Foundry VTT | Loaded localization file systems/dnd5e/lang/en.json
+ Foundry VTT | Loaded localization file modules/dnd-dungeon-masters-guide/lang/en.json
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-traits.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-features.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-features.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-inventory.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-inventory.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-spellbook.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-spellbook.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-warnings.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-warnings.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/biography-textbox.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/parts/biography-textbox.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-bastion.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-bastion.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-biography.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-biography.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-details.hbs
+ Foundry VTT | Loaded localization file modules/dnd-monster-manual/lang/en.json
+ Foundry VTT | Loaded localization file modules/dnd-players-handbook/lang/en.json
+ Foundry VTT | Loaded localization file modules/quick-insert/lang/en.json
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/character-details.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/group-members.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/group-members.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/npc-biography.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/actors/tabs/npc-biography.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/chat/parts/card-activities.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/chat/parts/card-activities.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/chat/parts/card-deltas.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/chat/parts/card-deltas.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-background.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-background.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-class.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-class.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-consumable.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-consumable.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-container.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-container.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-equipment.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-equipment.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-facility.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-facility.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-feat.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-feat.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-loot.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-loot.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-mountable.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-mountable.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-species.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-species.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-spell.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-spell.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-spellcasting.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-spellcasting.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-starting-equipment.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-starting-equipment.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-subclass.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-subclass.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-tool.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-tool.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-weapon.hbs
+ Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/details/details-weapon.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/item-summary.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/item-summary.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/item-tooltip.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/item-tooltip.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/spell-block.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/items/parts/spell-block.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-activation.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-activation.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-damage.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-damage.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-duration.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-duration.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-range.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-range.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-targets.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-targets.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-uses.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/field-uses.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/fieldlist.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/fieldlist.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/formlist.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/shared/fields/formlist.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-modern-traits.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-modern-traits.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-table.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/journal/parts/journal-table.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-controls.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-controls.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs
+foundry.mjs:167466 Foundry VTT | Synchronized official game time in 0ms
+utils.mjs:435 D&D 5e | Setting Up Compendium Packs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/scene-navigation.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tab.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/players.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/hotbar.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/scene-controls-layers.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/scene-controls-tools.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/chat/log.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/chat/notifications.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/chat/input.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/combat/header.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/combat/tracker.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/combat/footer.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/directory/header.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/directory/directory.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/partials/scene-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/partials/folder-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/directory/footer.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/partials/document-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/playlist/controls.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/playlist/playlist-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/playlist/playing.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/playlist/sound-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/compendiums.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/partials/pack-partial.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/tabs/settings.hbs
+button-injector.js:124 Vibe Combat: Button added successfully
+button-injector.js:118 Vibe Scenes: Vibe Scene button added successfully
+button-injector.js:245 Vibe Combat: Vibe Actor button added successfully
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template systems/dnd5e/templates/chat/roll-breakdown.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/dice/roll.hbs
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/sidebar/chat-message.hbs
+foundry.mjs:75114 Foundry VTT | Fonts loaded and ready.
+foundry.mjs:46163 Foundry VTT | Viewing Scene Generated Dungeon
+foundry.mjs:94310 Foundry VTT | Drawing game canvas for scene Generated Dungeon
+foundry.mjs:84197 Foundry VTT | Loading 82 Assets
+foundry.mjs:85137 Foundry VTT | Drawing the HiddenCanvasGroup canvas group
+foundry.mjs:85137 Foundry VTT | Drawing the RenderedCanvasGroup canvas group
+foundry.mjs:85137 Foundry VTT | Drawing the EnvironmentCanvasGroup canvas group
+foundry.mjs:85137 Foundry VTT | Drawing the PrimaryCanvasGroup canvas group
+foundry.mjs:90022 Foundry VTT | Drawing the WeatherEffects canvas layer
+foundry.mjs:85137 Foundry VTT | Drawing the EffectsCanvasGroup canvas group
+foundry.mjs:90022 Foundry VTT | Drawing the CanvasBackgroundAlterationEffects canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the CanvasIlluminationEffects canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the CanvasColorationEffects canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the CanvasDarknessEffects canvas layer
+foundry.mjs:85137 Foundry VTT | Drawing the CanvasVisibility canvas group
+worker.js:72 Worker TextureCompressor of FogExtractor | Initialized Worker
+foundry.mjs:85137 Foundry VTT | Drawing the InterfaceCanvasGroup canvas group
+foundry.mjs:90022 Foundry VTT | Drawing the GridLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the RegionLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the DrawingsLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the TemplateLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the TilesLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the WallsLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the TokenLayer5e canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the SoundsLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the LightingLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the NotesLayer canvas layer
+foundry.mjs:90022 Foundry VTT | Drawing the ControlsLayer canvas layer
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/hud/waypoint-label.hbs
+foundry.mjs:85137 Foundry VTT | Drawing the OverlayCanvasGroup canvas group
+foundry.mjs:168911 Applying buffered socket event: userActivity
+quick-insert.ts:86 Quick Insert | Initializing...
+quick-insert.ts:128 Quick Insert | Search Application ready
+main.js:11 Vibe Scenes | Module initialized
+button-injector.js:118 Vibe Scenes: Vibe Scene button added successfully
+button-injector.js:124 Vibe Combat: Button added successfully
+dnd5e.ts:245 Quick Insert | dnd5e system extensions initiated
+foundry.mjs:24937 Foundry VTT | Constructed index of dnd-players-handbook.classes Compendium containing 522 entries
+foundry.mjs:24937 Foundry VTT | Constructed index of dnd-players-handbook.classes Compendium containing 522 entries
+foundry.mjs:24937 Foundry VTT | Constructed index of dnd5e.spells24 Compendium containing 340 entries
+foundry.mjs:24937 Foundry VTT | Constructed index of dnd-players-handbook.spells Compendium containing 392 entries
+foundry.mjs:6727 Error: You are accessing the global "renderTemplate" which is now namespaced under foundry.applications.handlebars.renderTemplate
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:84:25)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template modules/vibe-scenes/templates/vibe-scene-dialog.html
+foundry.mjs:6727 Error: The V1 Application framework is deprecated, and will be removed in a later core software version. Please use the V2 version of the Application framework available under foundry.applications.api.ApplicationV2.
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 16
+    at Object.logCompatibilityWarning (foundry.mjs:6715:17)
+    at new Application (foundry.mjs:37008:21)
+    at new Dialog (foundry.mjs:117100:5)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:86:24)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:37351 Foundry VTT | Rendering Dialog
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/hud/dialog.html
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/app-window.html
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:107:15)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:123:19)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+vibe-scene-dialog.js:175 Vibe Scenes | generateDungeon called with: Object
+vibe-scene-dialog.js:196 Vibe Scenes | DungeongenService created, starting generation...
+dungeongen-service.js:37 Vibe Scenes | Generating dungeon locally with options: Object
+dungeongen-service.js:123 Vibe Scenes | Planning dungeon layout...
+ai-asset-service.js:76 Vibe Scenes | Sending dungeon plan request to AI with dynamic wishlist...
+dungeongen-service.js:133 Vibe Scenes | Dungeon Plan: Array(5)
+dungeongen-service.js:134 Vibe Scenes | Asset Wishlist: Array(5)
+foundry.mjs:115132 AI requested 5 new assets. This may take a moment... 
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AiAssetService.saveAsset (ai-asset-service.js:108:9)
+    at DungeongenService._planAndPopulate (dungeongen-service.js:162:41)
+    at async DungeongenService.generate (dungeongen-service.js:65:61)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:200:62)
+    at async Dialog.callback (vibe-scene-dialog.js:119:25)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AiAssetService.saveAsset (ai-asset-service.js:130:13)
+    at DungeongenService._planAndPopulate (dungeongen-service.js:162:41)
+    at async DungeongenService.generate (dungeongen-service.js:65:61)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:200:62)
+    at async Dialog.callback (vibe-scene-dialog.js:119:25)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+foundry.mjs:29504 cracked_volcanic_rock_805284.svg saved to modules/vibe-scenes/assets/texture
+ai-asset-service.js:137 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/texture/cracked_volcanic_rock_805284.svg
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AssetLibraryService._save (asset-library-service.js:217:13)
+    at AssetLibraryService.registerAsset (asset-library-service.js:191:20)
+    at async AiAssetService.saveAsset (ai-asset-service.js:141:13)
+    at async DungeongenService._planAndPopulate (dungeongen-service.js:162:25)
+    at async DungeongenService.generate (dungeongen-service.js:65:61)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:200:62)
+    at async Dialog.callback (vibe-scene-dialog.js:119:25)
+logCompatibilityWarning @ foundry.mjs:6727
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/ui/toolclip.hbs
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:130
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 lava_flow_859227.svg saved to modules/vibe-scenes/assets/texture
+ai-asset-service.js:137 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/texture/lava_flow_859227.svg
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AssetLibraryService._save (asset-library-service.js:217:13)
+    at AssetLibraryService.registerAsset (asset-library-service.js:191:20)
+    at AiAssetService.saveAsset (ai-asset-service.js:141:32)
+    at async DungeongenService._planAndPopulate (dungeongen-service.js:162:25)
+    at async DungeongenService.generate (dungeongen-service.js:65:61)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:200:62)
+    at async Dialog.callback (vibe-scene-dialog.js:119:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:141
+await in saveAsset
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:141
+await in saveAsset
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:130
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 ice_sheet_904794.svg saved to modules/vibe-scenes/assets/texture
+ai-asset-service.js:137 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/texture/ice_sheet_904794.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:141
+await in saveAsset
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:130
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 frozen_treasure_chest_948845.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:137 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/frozen_treasure_chest_948845.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:141
+await in saveAsset
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+ai-asset-service.js:234 Vibe Scenes | Injecting height=512 into SVG
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:130
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 ice_sculpture_997621.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:137 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/ice_sculpture_997621.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:141
+await in saveAsset
+_planAndPopulate @ dungeongen-service.js:162
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.

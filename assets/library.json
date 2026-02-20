@@ -1558,5 +1558,113 @@
     "height": 1,
     "placement": "blocking",
     "generatedAt": 1771471550758
+  },
+  "129": {
+    "id": 129,
+    "name": "ambient_wall_torch_316177",
+    "prompt": "ambient wall torch",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/ambient_wall_torch_316177.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771561316194
+  },
+  "130": {
+    "id": 130,
+    "name": "soot_piles_361205",
+    "prompt": "soot piles",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/soot_piles_361205.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771561361210
+  },
+  "131": {
+    "id": 131,
+    "name": "warped_iron_gate_388643",
+    "prompt": "warped iron gate",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/warped_iron_gate_388643.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771561388651
+  },
+  "132": {
+    "id": 132,
+    "name": "blistered_mural_420716",
+    "prompt": "blistered mural",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/blistered_mural_420716.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771561420723
+  },
+  "133": {
+    "id": 133,
+    "name": "heat_haze_435741",
+    "prompt": "heat haze",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/heat_haze_435741.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771561435749
+  },
+  "134": {
+    "id": 134,
+    "name": "molten_ore_puddle_470480",
+    "prompt": "molten ore puddle",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/molten_ore_puddle_470480.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771561470486
   }
 }

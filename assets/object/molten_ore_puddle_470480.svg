@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    
+    <filter id="heatBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.6 0" />
+    </filter>
+    
+    
+    <filter id="displacement" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+    </filter>
+
+    
+    <radialGradient id="magmaBase" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#fff5cc" />
+      <stop offset="25%" stop-color="#ffcc00" />
+      <stop offset="60%" stop-color="#ff4500" />
+      <stop offset="90%" stop-color="#8b0000" />
+      <stop offset="100%" stop-color="#3e0505" />
+    </radialGradient>
+
+    <linearGradient id="scorchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a" />
+      <stop offset="100%" stop-color="#0d0d0d" />
+    </linearGradient>
+  </defs>
+
+  
+  <g transform="translate(256, 256)">
+    
+    <path d="M-180,-40 Q-150,-90 -80,-80 T20,-110 T140,-60 T200,10 T160,90 T40,120 T-60,110 T-160,60 Z" 
+          fill="#110b0b" opacity="0.8" filter="url(#heatBlur)" />
+  </g>
+
+  
+  <g transform="translate(0,0)">
+    
+    
+    <path d="M120,240 L150,210 L140,180 L180,190 L220,150 L260,170 L300,140 L340,160 L380,130 L400,180 L440,200 L410,240 L450,280 L400,310 L370,350 L330,320 L290,360 L250,330 L210,360 L180,320 L140,340 L110,300 L70,280 L100,260 Z" 
+          fill="#1a1515" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
+    
+    
+    <path d="M120,240 L150,210 L140,180 L180,190 L220,150 L260,170 L300,140 L340,160 L380,130 L400,180 L440,200 L410,240 L450,280 L400,310 L370,350 L330,320 L290,360 L250,330 L210,360 L180,320 L140,340 L110,300 L70,280 L100,260 Z" 
+          fill="none" stroke="#ff5500" stroke-width="2" stroke-opacity="0.6" stroke-linejoin="round" transform="scale(0.96) translate(10,10)" />
+  </g>
+
+  
+  <g filter="url(#displacement)">
+    
+    <path d="M125,245 L152,218 L145,190 L182,198 L220,160 L260,178 L298,150 L338,168 L375,140 L395,185 L430,205 L405,240 L440,275 L395,302 L368,340 L332,312 L295,350 L255,322 L215,350 L188,315 L148,332 L120,298 L85,280 L110,262 Z" 
+          fill="url(#magmaBase)" stroke="none" />
+          
+    
+    <path d="M160,250 Q200,220 250,250 T340,230" fill="none" stroke="#8b0000" stroke-width="8" stroke-opacity="0.4" stroke-linecap="round" />
+    <path d="M380,280 Q320,310 260,290 T180,300" fill="none" stroke="#8b0000" stroke-width="6" stroke-opacity="0.4" stroke-linecap="round" />
+    <path d="M220,200 Q240,230 220,260" fill="none" stroke="#8b0000" stroke-width="5" stroke-opacity="0.3" stroke-linecap="round" />
+    
+    
+    <ellipse cx="260" cy="250" rx="40" ry="25" fill="#fff7e6" opacity="0.6" filter="url(#heatBlur)" />
+    <ellipse cx="360" cy="200" rx="20" ry="15" fill="#ffcc00" opacity="0.8" />
+    <ellipse cx="180" cy="280" rx="15" ry="10" fill="#ffcc00" opacity="0.8" />
+  </g>
+
+  
+  <g>
+    
+    <path d="M240,240 L260,235 L270,250 L255,260 L235,255 Z" fill="#221111" stroke="#331a1a" stroke-width="1" />
+    
+    <path d="M240,240 L260,235 L270,250 L255,260 L235,255 Z" fill="none" stroke="#ffaa00" stroke-width="2" stroke-opacity="0.5" clip-path="inset(0 0 0 0)" />
+
+    
+    <path d="M320,280 L340,275 L345,290 L325,295 Z" fill="#221111" stroke="#331a1a" stroke-width="1" />
+    
+    
+    <path d="M190,220 L205,215 L210,225 L200,235 L185,230 Z" fill="#221111" stroke="#331a1a" stroke-width="1" />
+    
+    
+    <circle cx="290" cy="210" r="4" fill="#110a0a" />
+    <circle cx="380" cy="250" r="3" fill="#110a0a" />
+  </g>
+
+  
+  <g>
+    
+    <circle cx="280" cy="240" r="6" fill="#ffffff" fill-opacity="0.8" />
+    <circle cx="280" cy="240" r="6" fill="none" stroke="#ffaa00" stroke-width="2" opacity="0.5" />
+    
+    <circle cx="220" cy="280" r="3" fill="#ffcc00" />
+    <circle cx="350" cy="220" r="4" fill="#ffffff" fill-opacity="0.9" />
+    
+    
+    <circle cx="260" cy="200" r="1" fill="#ffff00" />
+    <circle cx="270" cy="290" r="1.5" fill="#ffff00" />
+    <circle cx="310" cy="250" r="1" fill="#ffff00" />
+  </g>
+
+  
+  <radialGradient id="heatHaze" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#ff5500" stop-opacity="0.2" />
+    <stop offset="70%" stop-color="#ff0000" stop-opacity="0.05" />
+    <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+  </radialGradient>
+  <ellipse cx="256" cy="256" rx="220" ry="180" fill="url(#heatHaze)" style="mix-blend-mode: screen;" pointer-events="none" />
+
+</svg>

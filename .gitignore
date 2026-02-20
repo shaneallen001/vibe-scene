@@ -1,5 +1,4 @@
-Generated Dungeons/
 node_modules/
-Error Logs/
 tests/config.json
-svgs/
+.vscode/
+.env

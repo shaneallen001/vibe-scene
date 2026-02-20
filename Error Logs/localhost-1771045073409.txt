@@ -1,0 +1,510 @@
+button-injector.js:118 Vibe Scenes: Vibe Scene button added successfully
+foundry.mjs:6727 Error: You are accessing the global "renderTemplate" which is now namespaced under foundry.applications.handlebars.renderTemplate
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:85:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+show @ vibe-scene-dialog.js:85
+await in show
+(anonymous) @ main.js:24
+(anonymous) @ button-injector.js:53
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template modules/vibe-scenes/templates/vibe-scene-dialog.html
+foundry.mjs:6727 Error: The V1 Application framework is deprecated, and will be removed in a later core software version. Please use the V2 version of the Application framework available under foundry.applications.api.ApplicationV2.
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 16
+    at Object.logCompatibilityWarning (foundry.mjs:6715:17)
+    at new Application (foundry.mjs:37008:21)
+    at new Dialog (foundry.mjs:117100:5)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:87:24)
+logCompatibilityWarning @ foundry.mjs:6727
+Application @ foundry.mjs:37008
+Dialog @ foundry.mjs:117100
+show @ vibe-scene-dialog.js:87
+await in show
+(anonymous) @ main.js:24
+(anonymous) @ button-injector.js:53
+foundry.mjs:37351 Foundry VTT | Rendering Dialog
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/hud/dialog.html
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/app-window.html
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:107:15)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:107
+(anonymous) @ quick-insert.ts:105
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:123:19)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:123
+(anonymous) @ quick-insert.ts:105
+vibe-scene-dialog.js:182 Vibe Scenes | generateDungeon called with: {sceneName: 'Generated Dungeon 8', size: 'tiny', maskType: 'rectangle', seed: 100139}
+foundry.mjs:115132 Generating dungeon... 
+vibe-scene-dialog.js:190 Vibe Scenes | DungeongenService created, starting generation...
+dungeongen-service.js:37 Vibe Scenes | Generating dungeon locally with options: {size: 'tiny', maskType: 'rectangle', symmetry: 'none', corridorStyle: 'l_path', connectivity: 'mst_loops', …}
+floor_stone_block_large.svg:1 
+        
+        
+       GET http://localhost:30000/modules/vibe-scenes/assets/generated/texture/floor_stone_block_large.svg 404 (Not Found)
+Image
+(anonymous) @ renderer.js:57
+_loadFloorImage @ renderer.js:51
+renderToBlob @ renderer.js:31
+generateDungeonWithData @ dungeongen.js:129
+generate @ dungeongen-service.js:42
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+renderer.js:33 Vibe Scenes | Failed to load floor texture: Event {isTrusted: true, type: 'error', target: img, currentTarget: img, eventPhase: 2, …}
+renderToBlob @ renderer.js:33
+await in renderToBlob
+generateDungeonWithData @ dungeongen.js:129
+generate @ dungeongen-service.js:42
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+dungeongen-service.js:114 Vibe Scenes | Planning dungeon layout...
+foundry.mjs:115132 Consulting the Oracle for dungeon layout... 
+ai-asset-service.js:76 Vibe Scenes | Sending dungeon plan request to AI with dynamic wishlist...
+dungeongen-service.js:125 Vibe Scenes | Dungeon Plan: (5) [{…}, {…}, {…}, {…}, {…}]
+dungeongen-service.js:126 Vibe Scenes | Asset Wishlist: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+foundry.mjs:115132 AI requested 6 new assets. This may take a moment... 
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [1/6]: Stone Throne
+foundry.mjs:115132 Crafting new asset (1/6): Stone Throne... 
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AiAssetService.saveAsset (ai-asset-service.js:107:9)
+    at DungeongenService._populateRooms (dungeongen-service.js:155:41)
+    at async DungeongenService.generate (dungeongen-service.js:59:27)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:194:62)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+saveAsset @ ai-asset-service.js:107
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AiAssetService.saveAsset (ai-asset-service.js:129:13)
+    at DungeongenService._populateRooms (dungeongen-service.js:155:41)
+    at async DungeongenService.generate (dungeongen-service.js:59:27)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:194:62)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 stone_throne_314008.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/stone_throne_314008.svg
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AssetLibraryService._save (asset-library-service.js:217:13)
+    at AssetLibraryService.registerAsset (asset-library-service.js:191:20)
+    at async AiAssetService.saveAsset (ai-asset-service.js:140:13)
+    at async DungeongenService._populateRooms (dungeongen-service.js:155:25)
+    at async DungeongenService.generate (dungeongen-service.js:59:27)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:194:62)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+await in registerAsset
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+await in registerAsset
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [2/6]: Guard Armor
+foundry.mjs:115132 Crafting new asset (2/6): Guard Armor... 
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 guard_armor_347735.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/guard_armor_347735.svg
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at AssetLibraryService._save (asset-library-service.js:217:13)
+    at AssetLibraryService.registerAsset (asset-library-service.js:191:20)
+    at AiAssetService.saveAsset (ai-asset-service.js:140:32)
+    at async DungeongenService._populateRooms (dungeongen-service.js:155:25)
+    at async DungeongenService.generate (dungeongen-service.js:59:27)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:194:62)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [3/6]: Iron Cell Door
+foundry.mjs:115132 Crafting new asset (3/6): Iron Cell Door... 
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 iron_cell_door_366052.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/iron_cell_door_366052.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [4/6]: Large Stone Hearth
+foundry.mjs:115132 Crafting new asset (4/6): Large Stone Hearth... 
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 large_stone_hearth_398902.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/large_stone_hearth_398902.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [5/6]: Butcher's Knife (large)
+foundry.mjs:115132 Crafting new asset (5/6): Butcher's Knife (large)... 
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 butcher_s_knife__large__428137.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/butcher_s_knife__large__428137.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+dungeongen-service.js:143 Vibe Scenes | Generating missing asset [6/6]: Food Rations (dried meat, bread)
+foundry.mjs:115132 Crafting new asset (6/6): Food Rations (dried meat, bread)... 
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+saveAsset @ ai-asset-service.js:129
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 food_rations__dried_meat__bread__436327.svg saved to modules/vibe-scenes/assets/object
+ai-asset-service.js:136 Vibe Scenes | Saved and verified asset at modules/vibe-scenes/assets/object/food_rations__dried_meat__bread__436327.svg
+foundry.mjs:29497 You have uploaded files into a module or system folder. This is generally <strong>unsafe</strong> because updates to the system or module will delete your files.
+upload @ foundry.mjs:29497
+await in upload
+_save @ asset-library-service.js:217
+registerAsset @ asset-library-service.js:191
+saveAsset @ ai-asset-service.js:140
+await in saveAsset
+_populateRooms @ dungeongen-service.js:155
+await in _populateRooms
+generate @ dungeongen-service.js:59
+await in generate
+generateDungeon @ vibe-scene-dialog.js:194
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:29504 library.json saved to modules/vibe-scenes/assets
+asset-library-service.js:218 Vibe Scenes | Library index saved.
+foundry.mjs:115132 New assets crafted! Arranging rooms... 
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_table_round.svg at 2900, 2400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/iron_maiden_283147.svg at 2800, 2400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_chair_decayed.svg at 3000, 2400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/stone_pedestal_055076.svg at 2600, 2200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_table_round.svg at 3400, 2200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/decor_pot_broken.svg at 3100, 2100
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_bed_wood.svg at 1300, 2200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_bed_wood.svg at 1300, 2400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/iron_maiden_283147.svg at 1600, 2200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_table_round.svg at 1900, 2300
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/iron_maiden_283147.svg at 1900, 2200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/weapon_rack_237821.svg at 1900, 2400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/parchment_scrolls_185884.svg at 2100, 2100
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/barrel_of_provisions_377068.svg at 1700, 2100
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/wooden_crates_197739.svg at 1800, 3300
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/object_puddle_water.svg at 2100, 3400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/wall_torch_106826.svg at 1600, 3200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/wooden_crates_197739.svg at 1700, 3000
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_table_round.svg at 2200, 1400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/shackles_319913.svg at 2400, 1300
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/decor_pot_ceramic.svg at 2400, 1400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/wall_torch_106826.svg at 2000, 1600
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/stone_throne_895065.svg at 2500, 1600
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/decor_pot_ceramic.svg at 2000, 1500
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/ritual_altar_641113.svg at 2900, 1200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/wall_torch_106826.svg at 2900, 1400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/furniture_table_round.svg at 3200, 1200
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/throne_215935.svg at 3300, 1400
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/ancient_brazier_083204.svg at 3100, 1500
+dungeongen-service.js:214 Vibe Scenes | Placed asset: modules/vibe-scenes/assets/object/decor_pot_ceramic.svg at 3400, 1100
+dungeongen-service.js:253 Vibe Scenes | Placed 30 items in dungeon.
+dungeongen-service.js:61 Vibe Scenes | Dungeon generated successfully
+vibe-scene-dialog.js:209 Vibe Scenes | Image data received, size: 399377 bytes
+foundry.mjs:115132 Dungeon generated! Creating scene... 
+scene-importer.js:22 Vibe Scenes | Creating scene: Generated Dungeon 8
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at SceneImporter._ensureDirectory (scene-importer.js:188:13)
+    at SceneImporter.createScene (scene-importer.js:28:20)
+    at VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:216:47)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+_ensureDirectory @ scene-importer.js:188
+createScene @ scene-importer.js:28
+generateDungeon @ vibe-scene-dialog.js:216
+await in generateDungeon
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:6727 Error: You are accessing the global "FilePicker" which is now namespaced under foundry.applications.apps.FilePicker.implementation
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at SceneImporter._uploadFile (scene-importer.js:210:30)
+    at SceneImporter.createScene (scene-importer.js:37:41)
+    at async VibeSceneDialog.generateDungeon (vibe-scene-dialog.js:216:27)
+    at async Dialog.callback (vibe-scene-dialog.js:126:25)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+_uploadFile @ scene-importer.js:210
+createScene @ scene-importer.js:37
+await in createScene
+generateDungeon @ vibe-scene-dialog.js:216
+await in generateDungeon
+callback @ vibe-scene-dialog.js:126
+submit @ foundry.mjs:117251
+#onClickButton @ foundry.mjs:117180
+dispatch @ jquery.min.js:2
+v.handle @ jquery.min.js:2
+foundry.mjs:115132 dungeon_100139_1771042437526.png saved to vibe-scenes/dungeons 
+scene-importer.js:38 Vibe Scenes | Upload result: {status: 'success', message: 'dungeon_100139_1771042437526.png saved to vibe-scenes/dungeons', path: 'vibe-scenes/dungeons/dungeon_100139_1771042437526.png'}
+scene-importer.js:46 Vibe Scenes | Image dimensions: {width: 4400, height: 4400}
+scene-importer.js:85 Vibe Scenes | Scene data: {name: 'Generated Dungeon 8', img: 'vibe-scenes/dungeons/dungeon_100139_1771042437526.png', width: 4400, height: 4400, grid: {…}, …}
+foundry.mjs:84197 Foundry VTT | Loading 1 Assets
+scene-importer.js:95 Vibe Scenes | Creating 51 walls...
+scene-importer.js:101 Vibe Scenes | Creating 30 tiles...
+scene-importer.js:105 Vibe Scenes | Unique textures used: (18) ['modules/vibe-scenes/assets/object/furniture_table_round.svg', 'modules/vibe-scenes/assets/object/iron_maiden_283147.svg', 'modules/vibe-scenes/assets/object/furniture_chair_decayed.svg', 'modules/vibe-scenes/assets/object/stone_pedestal_055076.svg', 'modules/vibe-scenes/assets/object/decor_pot_broken.svg', 'modules/vibe-scenes/assets/object/furniture_bed_wood.svg', 'modules/vibe-scenes/assets/object/weapon_rack_237821.svg', 'modules/vibe-scenes/assets/object/parchment_scrolls_185884.svg', 'modules/vibe-scenes/assets/object/barrel_of_provisions_377068.svg', 'modules/vibe-scenes/assets/object/wooden_crates_197739.svg', 'modules/vibe-scenes/assets/object/object_puddle_water.svg', 'modules/vibe-scenes/assets/object/wall_torch_106826.svg', 'modules/vibe-scenes/assets/object/shackles_319913.svg', 'modules/vibe-scenes/assets/object/decor_pot_ceramic.svg', 'modules/vibe-scenes/assets/object/stone_throne_895065.svg', 'modules/vibe-scenes/assets/object/ritual_altar_641113.svg', 'modules/vibe-scenes/assets/object/throne_215935.svg', 'modules/vibe-scenes/assets/object/ancient_brazier_083204.svg']
+scene-importer.js:120 Vibe Scenes | Creating journal entries for rooms...
+scene-importer.js:173 Vibe Scenes | Creating 5 map notes...
+scene-importer.js:178 Vibe Scenes | Scene created successfully: mP87vSUOckcpoSvG
+foundry.mjs:115132 Successfully created scene: Generated Dungeon 8 
+foundry.mjs:37351 Foundry VTT | Rendering Dialog
+button-injector.js:118 Vibe Scenes: Vibe Scene button added successfully
+foundry.mjs:46163 Foundry VTT | Viewing Scene Generated Dungeon 8
+foundry.mjs:94310 Foundry VTT | Drawing game canvas for scene Generated Dungeon 8
+foundry.mjs:84197 Foundry VTT | Loading 80 Assets

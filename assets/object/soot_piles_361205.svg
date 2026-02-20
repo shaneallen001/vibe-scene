@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" shape-rendering="geometricPrecision">
+  <defs>
+    
+    <filter id="ashNoise" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0" in="noise" result="coloredNoise"/>
+      <feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/>
+      <feBlend mode="multiply" in="composite" in2="SourceGraphic"/>
+    </filter>
+    
+    
+    <filter id="softEdge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+    </filter>
+
+    
+    <filter id="shadowBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+
+    
+    <radialGradient id="pileGradient1" cx="40%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#4a4a4a"/>
+      <stop offset="60%" stop-color="#2b2b2b"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </radialGradient>
+    
+    <radialGradient id="pileGradient2" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#555555"/>
+      <stop offset="70%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#161616"/>
+    </radialGradient>
+
+    <radialGradient id="charcoalGradient" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#333333"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+
+  
+  <g opacity="0.6" filter="url(#shadowBlur)">
+    <path d="M120,280 Q100,350 180,380 T300,360 T400,280 T320,180 T180,180 T120,280 Z" fill="#000000"/>
+    <circle cx="360" cy="320" r="50" fill="#000000"/>
+    <circle cx="180" cy="220" r="40" fill="#000000"/>
+  </g>
+
+  
+  <g>
+    
+    <path d="M140,260 C100,280 90,340 130,370 C170,400 240,410 280,380 C320,350 310,290 270,260 C230,230 180,240 140,260 Z" 
+          fill="url(#pileGradient1)" stroke="none" filter="url(#ashNoise)"/>
+    
+    
+    <path d="M290,190 C260,210 270,270 310,290 C350,310 410,290 430,250 C450,210 400,160 360,170 C320,180 290,190 290,190 Z" 
+          fill="url(#pileGradient2)" stroke="none" filter="url(#ashNoise)"/>
+
+    
+    <path d="M240,240 C220,250 210,290 230,310 C250,330 290,320 300,300 C310,280 270,230 240,240 Z" 
+          fill="#2a2a2a" opacity="0.9" filter="url(#softEdge)"/>
+  </g>
+
+  
+  <g filter="url(#ashNoise)" opacity="0.8">
+    
+    <path d="M160,290 C150,310 160,340 190,350 C220,360 250,340 240,310 C230,280 190,270 160,290 Z" 
+          fill="#5a5a5a" opacity="0.5"/>
+    
+    
+    <path d="M330,200 C310,210 320,240 350,250 C380,260 400,230 380,210 C360,190 330,200 330,200 Z" 
+          fill="#666666" opacity="0.5"/>
+  </g>
+
+  
+  <g>
+    
+    <path d="M190,320 L210,315 L215,330 L200,340 L185,330 Z" fill="url(#charcoalGradient)" stroke="#111111" stroke-width="1"/>
+    <path d="M195,325 L205,322" stroke="#444" stroke-width="0.5" opacity="0.5"/> 
+
+    
+    <path d="M350,230 L370,225 L375,240 L360,245 L345,235 Z" fill="url(#charcoalGradient)" stroke="#111111" stroke-width="1"/>
+    
+    
+    <path d="M260,280 L270,278 L272,285 L262,288 Z" fill="#1a1a1a" stroke="none"/>
+
+    
+    <path d="M140,350 L160,360 L165,355 L145,345 Z" fill="#0a0a0a" stroke="none"/>
+  </g>
+
+  
+  <g fill="#222222" opacity="0.7">
+    
+    <circle cx="110" cy="300" r="3" />
+    <circle cx="120" cy="380" r="2" />
+    <circle cx="150" cy="400" r="4" />
+    <circle cx="300" cy="400" r="2.5" />
+    <circle cx="440" cy="270" r="3" />
+    <circle cx="410" cy="190" r="2" />
+    <circle cx="380" cy="150" r="3" />
+    <circle cx="280" cy="220" r="2" />
+    
+    
+    <path d="M100,330 Q105,335 110,330 T120,330" stroke="#333" stroke-width="2" fill="none" opacity="0.5"/>
+    <path d="M420,220 Q425,225 430,220" stroke="#333" stroke-width="2" fill="none" opacity="0.5"/>
+  </g>
+
+  
+  <circle cx="256" cy="256" r="200" fill="url(#pileGradient1)" opacity="0.1" pointer-events="none"/>
+
+</svg>

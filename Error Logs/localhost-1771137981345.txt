@@ -1,0 +1,41 @@
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template modules/vibe-scenes/templates/vibe-scene-dialog.html
+foundry.mjs:6727 Error: The V1 Application framework is deprecated, and will be removed in a later core software version. Please use the V2 version of the Application framework available under foundry.applications.api.ApplicationV2.
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 16
+    at Object.logCompatibilityWarning (foundry.mjs:6715:17)
+    at new Application (foundry.mjs:37008:21)
+    at new Dialog (foundry.mjs:117100:5)
+    at VibeSceneDialog.show (vibe-scene-dialog.js:86:24)
+logCompatibilityWarning @ foundry.mjs:6727
+Application @ foundry.mjs:37008
+Dialog @ foundry.mjs:117100
+show @ vibe-scene-dialog.js:86
+await in show
+(anonymous) @ main.js:26
+(anonymous) @ button-injector.js:53
+foundry.mjs:37351 Foundry VTT | Rendering Dialog
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/hud/dialog.html
+foundry.mjs:65845 Foundry VTT | Retrieved and compiled template templates/app-window.html
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:107:15)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:107
+(anonymous) @ quick-insert.ts:105
+foundry.mjs:6727 Error: You are accessing the global "KeyboardManager" which is now namespaced under foundry.helpers.interaction.KeyboardManager
+Deprecated since Version 13
+Backwards-compatible support will be removed in Version 15
+    at logCompatibilityWarning (foundry.mjs:6715:17)
+    at get (foundry.mjs:181053:9)
+    at customKeybindHandler (utils.ts:123:19)
+    at HTMLDocument.<anonymous> (quick-insert.ts:105:5)
+logCompatibilityWarning @ foundry.mjs:6727
+get @ foundry.mjs:181053
+customKeybindHandler @ utils.ts:123
+(anonymous) @ quick-insert.ts:105
+vibe-scene-dialog.js:176 Vibe Scenes | [vs-3521-mlndqhb7] generateDungeon
