@@ -1,4 +1,5 @@
 import { AiAssetService } from "../services/ai-asset-service.js";
+import { getGeminiApiKey } from "../../../vibe-common/scripts/settings.js";
 
 const ASSET_TYPES = [
     { value: "OBJECT", label: "Object (Furniture, Items)" },
@@ -10,9 +11,10 @@ const ASSET_TYPES = [
 export class VibeStudio {
     static async show(options = {}) {
         // Check for API Key
-        const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
-        if (!apiKey) {
-            ui.notifications.warn("Vibe Studio requires a Gemini API Key. Please configure it in Module Settings.");
+        let apiKey;
+        try {
+            apiKey = getGeminiApiKey();
+        } catch (e) {
             return;
         }
 
@@ -76,7 +78,12 @@ export class VibeStudio {
             return;
         }
 
-        const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
+        let apiKey;
+        try {
+            apiKey = getGeminiApiKey();
+        } catch (e) {
+            return;
+        }
         const legacyModel = game.settings.get("vibe-scenes", "geminiModel");
         const textModel = game.settings.get("vibe-scenes", "geminiTextModel") || legacyModel;
         const svgModel = game.settings.get("vibe-scenes", "geminiSvgModel") || textModel;

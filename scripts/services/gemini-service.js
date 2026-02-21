@@ -88,7 +88,7 @@ export class GeminiService {
                 hasSystemInstruction: Boolean(systemInstruction),
                 inlineParts: parts.length - 1
             });
-            const response = await this._callApi(requestBody, 90000, model);
+            const response = await this._callApi(requestBody, 90000, model, options.abortSignal);
             const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "";
             console.log(`Vibe Scenes | [${requestId}] Gemini generateContent:success`, {
                 elapsedMs: Math.round(performance.now() - started),
@@ -106,14 +106,22 @@ export class GeminiService {
      * Internal API call wrapper with automatic retry and exponential backoff.
      * Retries on 429 (rate limit), 500, and 503 errors.
      */
-    async _callApi(body, timeoutMs = 90000, modelOverride = "") {
+    async _callApi(body, timeoutMs = 90000, modelOverride = "", abortSignal = null) {
         const activeModel = modelOverride || this.model;
         const url = `${BASE_URL}/${GEMINI_API_VERSION}/models/${activeModel}:generateContent?key=${this.apiKey}`;
         const { maxRetries, baseDelayMs, maxDelayMs, retryableStatuses } = RETRY_DEFAULTS;
 
         for (let attempt = 0; attempt <= maxRetries; attempt++) {
+            if (abortSignal?.aborted) {
+                throw new DOMException("Aborted", "AbortError");
+            }
+
             const controller = new AbortController();
             const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+            const onUserAbort = () => controller.abort();
+            if (abortSignal) abortSignal.addEventListener("abort", onUserAbort);
+
             const requestStart = performance.now();
             let response;
             try {
@@ -125,12 +133,18 @@ export class GeminiService {
                 });
             } catch (error) {
                 clearTimeout(timeout);
+                if (abortSignal) abortSignal.removeEventListener("abort", onUserAbort);
+
+                if (abortSignal?.aborted) {
+                    throw new DOMException("Aborted", "AbortError");
+                }
                 if (error?.name === "AbortError") {
                     throw new Error(`Gemini API request timed out after ${timeoutMs}ms`);
                 }
                 throw error;
             } finally {
                 clearTimeout(timeout);
+                if (abortSignal) abortSignal.removeEventListener("abort", onUserAbort);
             }
 
             const elapsedMs = Math.round(performance.now() - requestStart);
@@ -160,7 +174,15 @@ export class GeminiService {
                 delayMs = Math.min(baseDelayMs * Math.pow(2, attempt) + Math.random() * 1000, maxDelayMs);
             }
             console.warn(`Vibe Scenes | Gemini API ${response.status} — retrying in ${Math.round(delayMs)}ms (attempt ${attempt + 1}/${maxRetries})`, { model: activeModel });
-            await new Promise(resolve => setTimeout(resolve, delayMs));
+            await new Promise(resolve => {
+                const tid = setTimeout(resolve, delayMs);
+                if (abortSignal) {
+                    abortSignal.addEventListener("abort", () => {
+                        clearTimeout(tid);
+                        resolve();
+                    }, { once: true });
+                }
+            });
         }
     }
 }

@@ -226,6 +226,21 @@ export class VibeSceneDialog {
             }
         };
 
+        const controller = new AbortController();
+
+        let cancelBtn = dialogElement.find('.vibe-scene-cancel-btn');
+        if (!cancelBtn.length) {
+            cancelBtn = $('<button class="vibe-scene-cancel-btn" style="margin-top: 5px;"><i class="fas fa-times"></i> Cancel Generation</button>');
+            statusBar.after(cancelBtn);
+        }
+        cancelBtn.show();
+        cancelBtn.prop('disabled', false).html('<i class="fas fa-times"></i> Cancel Generation');
+        cancelBtn.off('click').on('click', (ev) => {
+            ev.preventDefault();
+            controller.abort();
+            cancelBtn.prop('disabled', true).text("Cancelling...");
+        });
+
         updateStatus("Initializing...", 0);
 
         try {
@@ -250,6 +265,7 @@ export class VibeSceneDialog {
                 doorDensity,
                 dungeonDescription: options.dungeonDescription,
                 runId,
+                abortSignal: controller.signal,
                 onProgress: (msg, pct) => {
                     const mapped = Math.floor(pct * 0.8); // 0-80%
                     updateStatus(msg, mapped);
@@ -267,6 +283,8 @@ export class VibeSceneDialog {
                 items: items?.length || 0,
                 rooms: rooms?.length || 0
             });
+
+            cancelBtn.hide();
 
             updateStatus("Dungeon generated! Creating Foundry scene...", 82);
             notifyMilestone(`Dungeon generated in ${genSec}s — importing scene...`);
@@ -318,11 +336,20 @@ export class VibeSceneDialog {
             // Object.values(ui.windows).find(w => w.title === "Vibe Scene - Generate Dungeon")?.close();
 
         } catch (error) {
-            console.error(`Vibe Scenes | [${runId}] Error generating dungeon:`, error);
-            updateStatus(`Error: ${error.message}`, 100);
-            progressBar.css('background', '#ff4444');
-            ui.notifications.error(`Failed to generate dungeon: ${error.message}`);
+            cancelBtn.hide();
+            if (error?.name === "AbortError" || error?.message === "Aborted") {
+                console.log(`Vibe Scenes | [${runId}] Generation cancelled by user.`);
+                updateStatus("Generation cancelled.", 0);
+                ui.notifications.info("Dungeon generation cancelled.");
+                progressBar.css('background', '#ff9900');
+            } else {
+                console.error(`Vibe Scenes | [${runId}] Error generating dungeon:`, error);
+                updateStatus(`Error: ${error.message}`, 100);
+                progressBar.css('background', '#ff4444');
+                ui.notifications.error(`Failed to generate dungeon: ${error.message}`);
+            }
         } finally {
+            if (cancelBtn) cancelBtn.hide();
             console.log(`Vibe Scenes | [${runId}] Pipeline total ${(performance.now() - pipelineStart).toFixed(0)}ms`);
             console.groupEnd();
         }

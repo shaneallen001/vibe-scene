@@ -55,7 +55,8 @@ export class AiAssetService {
                 const rawText = await this.gemini.generateContent(generationPrompt, fullSystemPrompt, {
                     model: this.svgModel,
                     temperature: pass === 1 ? svgOptions.initialTemperature : svgOptions.refineTemperature,
-                    maxOutputTokens: svgOptions.maxOutputTokens
+                    maxOutputTokens: svgOptions.maxOutputTokens,
+                    abortSignal: options.abortSignal
                 });
                 console.log(`Vibe Scenes | [${traceId}] generateSVG:response-received`, {
                     pass,
@@ -133,7 +134,7 @@ export class AiAssetService {
      * @param {Array} availableAssets - List of asset names/IDs
      * @returns {Promise<Array>} - List of items { name, x, y, rotation }
      */
-    async suggestRoomContents(roomData, availableAssets = []) {
+    async suggestRoomContents(roomData, availableAssets = [], options = {}) {
         const type = roomData.type || "Generic Dungeon Room";
 
         let prompt = `Room Type: ${type}\nWidth: ${roomData.width}\nHeight: ${roomData.height}`;
@@ -147,7 +148,8 @@ export class AiAssetService {
             const rawText = await this.gemini.generateContent(prompt, system, {
                 model: this.textModel,
                 temperature: 0.25,
-                responseMimeType: "application/json"
+                responseMimeType: "application/json",
+                abortSignal: options.abortSignal
             });
             const parsed = this._parseJSON(rawText);
             return Array.isArray(parsed) ? parsed : [];
@@ -163,7 +165,7 @@ export class AiAssetService {
      * @param {Array} availableAssets - List of available asset IDs
      * @returns {Promise<Object>} - { plan: Array, wishlist: Array }
      */
-    async planDungeon(rooms, availableAssets = [], description = "") {
+    async planDungeon(rooms, availableAssets = [], description = "", options = {}) {
         const traceId = this._newTraceId("plan");
         const start = performance.now();
         // Strip unnecessary data from rooms to save tokens
@@ -188,7 +190,8 @@ export class AiAssetService {
             const rawText = await this.gemini.generateContent(prompt, system, {
                 model: this.textModel,
                 temperature: 0.25,
-                responseMimeType: "application/json"
+                responseMimeType: "application/json",
+                abortSignal: options.abortSignal
             });
             console.log(`Vibe Scenes | [${traceId}] planDungeon:response-received`, {
                 chars: rawText?.length || 0
@@ -239,7 +242,7 @@ export class AiAssetService {
      * @param {string} input.description
      * @returns {Promise<Object>} - { mask_type, default_floor, rooms, connections }
      */
-    async planDungeonOutline(input = {}) {
+    async planDungeonOutline(input = {}, options = {}) {
         const traceId = this._newTraceId("outline");
         const start = performance.now();
         const payload = {
@@ -266,7 +269,8 @@ export class AiAssetService {
                 {
                     model: this.textModel,
                     temperature: 0.35,
-                    responseMimeType: "application/json"
+                    responseMimeType: "application/json",
+                    abortSignal: options.abortSignal
                 }
             );
             const parsed = this._parseJSON(rawText);
@@ -308,7 +312,7 @@ export class AiAssetService {
      * @param {Array} availableAssets
      * @returns {Promise<Object>} - { plan, wishlist, default_floor }
      */
-    async planDungeonFromOutline(input = {}, availableAssets = []) {
+    async planDungeonFromOutline(input = {}, availableAssets = [], options = {}) {
         const traceId = this._newTraceId("outline-content");
         const start = performance.now();
         const rooms = Array.isArray(input.rooms) ? input.rooms : [];
@@ -338,7 +342,8 @@ export class AiAssetService {
             const rawText = await this.gemini.generateContent(prompt, PROMPTS.DUNGEON_CONTENT_PLANNER, {
                 model: this.textModel,
                 temperature: 0.25,
-                responseMimeType: "application/json"
+                responseMimeType: "application/json",
+                abortSignal: options.abortSignal
             });
             const result = this._parseJSON(rawText);
             if (!result || typeof result !== "object") {
@@ -370,7 +375,7 @@ export class AiAssetService {
      * @param {Object} input.metadata - Summary payload for the reviewer
      * @returns {Promise<Object>} - Normalized review contract
      */
-    async reviewRenderedMap(input = {}) {
+    async reviewRenderedMap(input = {}, options = {}) {
         const traceId = this._newTraceId("map-review");
         const start = performance.now();
         const imageBase64 = String(input.imageBase64 || "").trim();
@@ -393,7 +398,8 @@ export class AiAssetService {
                     temperature: 0.15,
                     maxOutputTokens: 1400,
                     responseMimeType: "application/json",
-                    inlineDataParts: [{ mimeType: "image/png", data: imageBase64 }]
+                    inlineDataParts: [{ mimeType: "image/png", data: imageBase64 }],
+                    abortSignal: options.abortSignal
                 }
             );
             const parsed = this._parseJSON(rawText);
@@ -693,7 +699,7 @@ export class AiAssetService {
                 changes.remove_item_indices
                     .map(v => Number(v))
                     .filter(v => Number.isInteger(v) && v >= 0)
-              )]
+            )]
             : [];
 
         return {
@@ -773,7 +779,11 @@ export class AiAssetService {
         // 3. Remove comments
         content = content.replace(/<!--[\s\S]*?-->/g, '');
 
-        // 4. Trim whitespace
+        // 4. Trim whitespace and perform aggressive minification
+        // Remove all newlines and carriage returns
+        content = content.replace(/\r?\n|\r/g, "");
+        // Remove spaces between tags
+        content = content.replace(/>\s+</g, "><");
         content = content.trim();
 
         // 5. Ensure xmlns

@@ -79,7 +79,7 @@ export class DungeongenService {
             const layoutStart = performance.now();
             let planningContext = {};
             let grid = null;
-            const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
+            const apiKey = game.settings.get("vibe-common", "geminiApiKey");
             const modelConfig = this._getModelConfig();
             if (generationMode === "intentional" && apiKey) {
                 const aiService = this._createAiService(apiKey, modelConfig);
@@ -90,7 +90,8 @@ export class DungeongenService {
                     targetRoomCount: numRooms,
                     shapePreference: options.maskType || "rectangle",
                     description: options.dungeonDescription
-                });
+                }, { abortSignal: options.abortSignal });
+                if (options.abortSignal?.aborted) throw new DOMException("Aborted", "AbortError");
                 if (options.onProgress) options.onProgress("Building rooms from outline...", 18);
                 planningContext = { intentionalOutline: outline };
                 generatorOptions.maskType = outline?.mask_type || generatorOptions.maskType;
@@ -141,6 +142,8 @@ export class DungeongenService {
                 wallTexture: wallTexture,
                 roomWallTextures: roomWallTextures || {},
             });
+
+            if (options.abortSignal?.aborted) throw new DOMException("Aborted", "AbortError");
 
             console.log(`Vibe Scenes | [${runId}] Rendering to blob...`);
             const renderStart = performance.now();
@@ -253,7 +256,7 @@ export class DungeongenService {
         });
 
         // 2. AI Dungeon Planning
-        const apiKey = game.settings.get("vibe-scenes", "geminiApiKey");
+        const apiKey = game.settings.get("vibe-common", "geminiApiKey");
         if (apiKey) {
             if (options.onProgress) options.onProgress("Consulting the Oracle for room themes...", 24);
             console.log(`Vibe Scenes | [${runId}] Planning dungeon layout with AI...`);
@@ -281,11 +284,12 @@ export class DungeongenService {
                     maskType: intentionalOutline.mask_type || options.maskType || "rectangle",
                     defaultFloor: intentionalOutline.default_floor,
                     description: options.dungeonDescription
-                }, availableAssets);
+                }, availableAssets, { abortSignal: options.abortSignal });
             } else {
                 if (options.onProgress) options.onProgress("Planning room themes and contents...", 26);
-                plannerResult = await aiService.planDungeon(grid.rooms, availableAssets, options.dungeonDescription);
+                plannerResult = await aiService.planDungeon(grid.rooms, availableAssets, options.dungeonDescription, { abortSignal: options.abortSignal });
             }
+            if (options.abortSignal?.aborted) throw new DOMException("Aborted", "AbortError");
             const plan = plannerResult?.plan || [];
             const wishlist = plannerResult?.wishlist || [];
             const default_floor = plannerResult?.default_floor || intentionalOutline?.default_floor;
@@ -355,8 +359,10 @@ export class DungeongenService {
 
                             const svg = await aiService.generateSVG(prompt, type, {
                                 width: itemW,
-                                height: itemH
+                                height: itemH,
+                                abortSignal: options.abortSignal
                             });
+                            if (options.abortSignal?.aborted) return;
                             console.log(`Vibe Scenes | [${wishTrace}] Wishlist SVG received`, {
                                 name: item.name, svgChars: svg?.length || 0
                             });
@@ -393,6 +399,8 @@ export class DungeongenService {
                         })());
                     }
                     await Promise.all(workers);
+
+                    if (options.abortSignal?.aborted) throw new DOMException("Aborted", "AbortError");
 
                     console.log(`Vibe Scenes | [${runId}] Wishlist generation complete`, { generated: completed, total: totalNew });
                     if (options.onProgress) options.onProgress("Refreshing asset library...", 72);
@@ -751,7 +759,9 @@ export class DungeongenService {
                 }))
             };
 
-            const review = await aiService.reviewRenderedMap({ imageBase64, metadata });
+            if (options.abortSignal?.aborted) return { applied: false, score: 0 };
+            const review = await aiService.reviewRenderedMap({ imageBase64, metadata }, { abortSignal: options.abortSignal });
+            if (options.abortSignal?.aborted) return { applied: false, score: 0 };
             const suggested = review?.changes || {};
             const hasDefaultFloorField = Object.prototype.hasOwnProperty.call(suggested, "default_floor");
             const hasDefaultWallField = Object.prototype.hasOwnProperty.call(suggested, "default_wall");
@@ -846,7 +856,7 @@ export class DungeongenService {
                 ? [...new Set(suggested.remove_item_indices
                     .map(v => Number(v))
                     .filter(v => Number.isInteger(v) && v >= 0)
-                  )].sort((a, b) => b - a)
+                )].sort((a, b) => b - a)
                 : [];
             for (const idx of removeIndices) {
                 if (idx >= nextItems.length) continue;

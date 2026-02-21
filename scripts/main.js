@@ -10,6 +10,13 @@ import { VibeSceneDialog } from "./ui/vibe-scene-dialog.js";
 Hooks.once("init", () => {
     console.log("Vibe Scenes | Registering module settings");
     registerModuleSettings();
+
+    const module = game.modules.get("vibe-scenes");
+    if (module) {
+        module.api = {
+            VibeSceneDialog
+        };
+    }
 });
 
 Hooks.once("ready", async () => {
@@ -17,22 +24,4 @@ Hooks.once("ready", async () => {
     await migrateGeminiSvgModelDefault();
 });
 
-/**
- * Add Vibe Scene button to Scene Directory
- * For Foundry VTT v13
- */
-Hooks.on("renderSceneDirectory", (app, html, data) => {
-    // Wait for next frame to ensure DOM is ready
-    requestAnimationFrame(() => {
-        addVibeSceneButton(app, html, () => VibeSceneDialog.show());
-    });
-});
-
-// Also hook into sidebar tab rendering for v13
-Hooks.on("renderSidebarTab", (app, html, data) => {
-    if (app.tabName === "scenes") {
-        requestAnimationFrame(() => {
-            addVibeSceneButton(app, html, () => VibeSceneDialog.show());
-        });
-    }
-});
+// The original "Vibe Scene" sidebar button has been removed in favor of the unified Vibe Menu in vibe-common.

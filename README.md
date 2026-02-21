@@ -25,7 +25,7 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
    ```
    [FoundryVTT Data]/Data/modules/vibe-scenes/
    ```
-2. **Install Dependency**: Ensure `vibe-common` is installed and enabled (recommended for shared API services).
+2. **Install Dependency**: Ensure `vibe-common` is installed and enabled (vibe-scenes will cleanly abort initialization and show an error notification if this dependency is missing).
 3. Enable "Vibe Scenes" in Foundry VTT's Module Management
 
 ## Usage
@@ -46,6 +46,8 @@ A Foundry VTT v13 module for generating procedural dungeon maps and importing th
 4. Click **Generate** to create the dungeon
 
 ## Configuration
+
+- **API Keys**: Configure your Gemini API key in the **Vibe Common** module settings.
 
 Configure module settings in **Settings → Module Settings → Vibe Scenes**:
 
@@ -71,8 +73,8 @@ The underlying generator options are now fully exposed in the dialog:
 ### Module Entry Point & Hooks (`scripts/main.js`)
 
 ```
-Hooks.once("init")            → registerModuleSettings() — settings registered early so they're
-                                available to all modules during init phase
+Hooks.once("init")            → Checks for `vibe-common` dependency, then calls registerModuleSettings() — 
+                                settings registered early so they're available to all modules during init phase
 Hooks.once("ready")           → migrateGeminiSvgModelDefault() — one-time data migration
 Hooks.on("renderSceneDirectory") → addVibeSceneButton() via requestAnimationFrame
 Hooks.on("renderSidebarTab")  → Same, guards on app.tabName === "scenes"
@@ -115,9 +117,9 @@ scripts/
 │   └── ...                         # Internal dev tools
 ├── ui/
 │   ├── button-injector.js          # Injects "Vibe Scene" button into Scene Directory header
-│   ├── vibe-scene-dialog.js        # Main dungeon configuration dialog (V1 Dialog — TODO: migrate)
-│   ├── vibe-studio-dialog.js       # Asset generator dialog (V1 Dialog — TODO: migrate)
-│   └── asset-library.js            # Asset browser Application (V1 Application — TODO: migrate)
+│   ├── vibe-scene-dialog.js        # Main dungeon configuration dialog
+│   ├── vibe-studio-dialog.js       # Asset generator dialog
+│   └── asset-library.js            # Asset browser Application (includes pagination)
 └── utils/
     └── ...
 tests/
@@ -237,6 +239,7 @@ Key methods:
 - Removes `<style>` blocks (inline styles only — browser VTT compatibility)
 - Ensures `viewBox` attribute is present with correct dimensions
 - Strips potentially dangerous attributes
+- Performs aggressive minification (strips all newlines, carriage returns, and spaces between tags) to drastically reduce file size.
 
 ### AssetLibraryService (`services/asset-library-service.js`)
 
@@ -319,14 +322,7 @@ This module targets the Foundry v13 namespaced API. The following migrations hav
 | `mergeObject()`    | `foundry.utils.mergeObject()`                         | v15        |
 | `Dialog.confirm()` | `foundry.applications.api.DialogV2.confirm()`         | v16        |
 
-### Remaining V1 Framework Usage (Migration Planned for v16)
 
-The following components still use the V1 Application/Dialog framework, which is deprecated since v13 and scheduled for removal in v16. These are annotated with `TODO` comments in the source:
-
-- **`VibeSceneDialog`** (`vibe-scene-dialog.js`): Uses V1 `new Dialog()` for the main generation form. Requires migration to `DialogV2.wait()` or a custom `ApplicationV2` subclass to preserve the in-dialog progress bar during generation.
-- **`VibeStudio`** (`vibe-studio-dialog.js`): Uses V1 `new Dialog()` for the asset generator form.
-- **`AssetLibrary`** (`asset-library.js`): Extends V1 `Application`. Requires full migration to `ApplicationV2` (different template data flow, event handling, and lifecycle).
-- **Filter/Column dialogs** (`asset-library.js`): Simple V1 `new Dialog()` forms for filtering and column selection.
 
 ## Credits
 

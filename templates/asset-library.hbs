@@ -179,6 +179,39 @@
         .red-text {
             color: #F44336;
         }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            flex: 0 0 auto;
+        }
+
+        .pagination-controls button {
+            background: #2a2a2a;
+            color: #eee;
+            border: 1px solid #444;
+            padding: 4px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .pagination-controls button:hover:not(:disabled) {
+            background: #444;
+        }
+
+        .pagination-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            font-size: 0.9em;
+            color: #aaa;
+        }
     </style>
     <div class="library-layout">
         <!-- Preview Panel -->
@@ -263,5 +296,20 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination Controls -->
+        {{#if pagination}}
+        <div class="pagination-controls">
+            <button type="button" class="page-prev" {{#unless pagination.hasPrev}}disabled{{/unless}}>
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <span class="pagination-info">
+                Showing {{pagination.startIndex}}-{{pagination.endIndex}} of {{pagination.totalItems}} (Page {{pagination.currentPage}} of {{pagination.totalPages}})
+            </span>
+            <button type="button" class="page-next" {{#unless pagination.hasNext}}disabled{{/unless}}>
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        {{/if}}
     </div>
 </form>

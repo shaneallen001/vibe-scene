@@ -11,6 +11,10 @@ export class AssetLibrary extends Application {
         this.sortDesc = false;
         this.previewAsset = null;
         this.visibleColumns = ["id", "name", "type", "width", "tags"]; // Default full
+
+        // Pagination state
+        this.currentPage = 1;
+        this.itemsPerPage = 50;
     }
 
     static get defaultOptions() {
@@ -57,12 +61,33 @@ export class AssetLibrary extends Application {
             return 0;
         });
 
+        // Pagination calculations
+        const totalItems = assets.length;
+        const totalPages = Math.max(1, Math.ceil(totalItems / this.itemsPerPage));
+
+        // Ensure current page is valid after filtering
+        if (this.currentPage > totalPages) {
+            this.currentPage = totalPages;
+        }
+
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const pagedAssets = assets.slice(startIndex, startIndex + this.itemsPerPage);
+
         return {
-            assets,
+            assets: pagedAssets,
             activeFilters: this.filters,
             previewAsset: this.previewAsset,
             sortBy: this.sortBy,
-            sortDesc: this.sortDesc
+            sortDesc: this.sortDesc,
+            pagination: {
+                currentPage: this.currentPage,
+                totalPages: totalPages,
+                totalItems: totalItems,
+                hasPrev: this.currentPage > 1,
+                hasNext: this.currentPage < totalPages,
+                startIndex: startIndex + 1,
+                endIndex: Math.min(startIndex + this.itemsPerPage, totalItems)
+            }
         };
     }
 
@@ -124,6 +149,25 @@ export class AssetLibrary extends Application {
         html.find(".toggle-columns").click((ev) => {
             ev.preventDefault();
             this._showColumnPicker();
+        });
+
+        // Pagination Controls
+        html.find(".page-prev").click((ev) => {
+            ev.preventDefault();
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.render();
+            }
+        });
+
+        html.find(".page-next").click((ev) => {
+            ev.preventDefault();
+            // We need total pages. Fortunately we can just read the data from the rendered DOM, or calculate it.
+            // Using button disable states to govern logic is easiest for next.
+            if (!$(ev.currentTarget).prop("disabled")) {
+                this.currentPage++;
+                this.render();
+            }
         });
     }
 
@@ -200,6 +244,7 @@ export class AssetLibrary extends Application {
                         } else {
                             delete this.filters[col];
                         }
+                        this.currentPage = 1; // reset page on filter
                         this.render();
                     }
                 },
@@ -207,6 +252,7 @@ export class AssetLibrary extends Application {
                     label: "Clear",
                     callback: () => {
                         delete this.filters[col];
+                        this.currentPage = 1; // reset page on filter
                         this.render();
                     }
                 }

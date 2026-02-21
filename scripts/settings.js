@@ -47,15 +47,6 @@ export function registerModuleSettings() {
       step: 10
     }
   });
-  game.settings.register("vibe-scenes", "geminiApiKey", {
-    name: "Gemini API Key",
-    hint: "API Key for Google Gemini (Get one from Google AI Studio)",
-    scope: "world",
-    config: true,
-    type: String,
-    default: ""
-  });
-
   game.settings.register("vibe-scenes", "geminiModel", {
     name: "Gemini Model (Legacy Fallback)",
     hint: "Legacy single-model setting retained for backward compatibility.",
