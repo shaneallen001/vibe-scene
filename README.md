@@ -79,3 +79,6 @@ For information on module extenisbility, APIs, AI pipeline, asset library, CSS t
 ## Credits
 
 - [dungeongen](https://github.com/benjcooley/dungeongen) by benjcooley - Original procedural dungeon generation algorithm
+
+## Recent Changes
+- Fixed issue where dropdown menu text was incorrectly aligned and cropped. This was resolved by declaring explicit `height: 32px` on select/input elements to override Foundry's default 26px limit, while simultaneously adjusting `padding: 0 10px` to prevent vertical padding from pushing text out of the content bounds.

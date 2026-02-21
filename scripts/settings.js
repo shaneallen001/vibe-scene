@@ -7,12 +7,14 @@ export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-3-flash-preview";
 export const DEFAULT_GEMINI_SVG_MODEL = "gemini-3-pro-preview";
 const PREVIOUS_GEMINI_SVG_DEFAULT = "gemini-3-flash-preview";
 const KNOWN_GOOD_GEMINI_MODELS = {
-  "gemini-2.0-flash-lite": "gemini-2.0-flash-lite",
-  "gemini-2.0-flash": "gemini-2.0-flash",
-  "gemini-2.5-flash": "gemini-2.5-flash",
-  "gemini-2.5-pro": "gemini-2.5-pro",
+  "gemini-3.1-pro-preview": "gemini-3.1-pro-preview",
+  "gemini-3.1-flash-preview": "gemini-3.1-flash-preview",
+  "gemini-3-pro-preview": "gemini-3-pro-preview",
   "gemini-3-flash-preview": "gemini-3-flash-preview",
-  "gemini-3-pro-preview": "gemini-3-pro-preview"
+  "gemini-2.5-pro": "gemini-2.5-pro",
+  "gemini-2.5-flash": "gemini-2.5-flash",
+  "gemini-2.0-flash": "gemini-2.0-flash",
+  "gemini-2.0-flash-lite": "gemini-2.0-flash-lite"
 };
 
 export function registerModuleSettings() {

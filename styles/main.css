@@ -47,7 +47,8 @@
 
 .vibe-scene-form input,
 .vibe-scene-form select {
-  padding: 7px 10px;
+  height: 32px;
+  padding: 0 10px;
   border: 1px solid var(--vibe-border-input);
   border-radius: var(--vibe-radius-sm);
   font-size: 13px;
