@@ -1,3 +1,4 @@
+import { VibeToast } from "../../../vibe-common/scripts/ui/toast-manager.js";
 /**
  * Scene Importer
  * Handles creating Foundry scenes from dungeon images
@@ -150,7 +151,7 @@ export class SceneImporter {
                         invalidCount: invalidTextures.length,
                         invalidTextures
                     });
-                    ui.notifications.warn(`Skipped ${invalidTextures.length} invalid tile texture(s). See console for details.`);
+                    VibeToast.warn(`Skipped ${invalidTextures.length} invalid tile texture(s). See console for details.`);
                 }
                 console.log(`Vibe Scenes | [${runId}] Texture validation finished in ${(performance.now() - textureValidationStart).toFixed(0)}ms`, {
                     total: uniqueTextures.size,

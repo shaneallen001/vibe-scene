@@ -1,3 +1,4 @@
+import { VibeToast } from "../../../vibe-common/scripts/ui/toast-manager.js";
 /**
  * Vibe Scene Dialog
  * Dialog for configuring and generating dungeons
@@ -168,6 +169,47 @@ export class VibeSceneDialog {
                     ev.preventDefault();
                     new AssetLibrary().render(true);
                 });
+
+                // Auto-writer magic button
+                html.find('.btn-generate-flavor').click(async (ev) => {
+                    ev.preventDefault();
+                    const btn = $(ev.currentTarget);
+                    const icon = btn.find('i');
+                    const textarea = html.find('#dungeonDescription');
+                    const currentPrompt = textarea.val().trim();
+
+                    if (!currentPrompt) {
+                        ui.notifications?.warn("Please enter a short concept first.");
+                        return;
+                    }
+
+                    btn.prop('disabled', true);
+                    icon.removeClass('fa-magic').addClass('fa-spinner fa-spin');
+                    textarea.val('');
+
+                    try {
+                        const { callGeminiStream } = await import('../../../../vibe-common/scripts/services/gemini-service.js');
+                        const apiKey = game.settings.get("vibe-common", "geminiApiKey");
+                        if (!apiKey) throw new Error("API Key missing.");
+
+                        const prompt = `Flesh out this basic dungeon concept into a detailed, evocative 1-paragraph flavor text description suitable for a fantasy RPG. Keep it atmospheric and evocative. Do not output markdown formatting.\nConcept: ${currentPrompt}`;
+
+                        await callGeminiStream({
+                            apiKey,
+                            prompt,
+                            onChunk: (chunk, fullText) => {
+                                textarea.val(fullText.trimStart());
+                            }
+                        });
+                    } catch (e) {
+                        console.error(e);
+                        if (ui.notifications) ui.notifications.error("Flavor text generation failed.");
+                        textarea.val(currentPrompt);
+                    } finally {
+                        btn.prop('disabled', false);
+                        icon.removeClass('fa-spinner fa-spin').addClass('fa-magic');
+                    }
+                });
             }
         }, {
             width: 420,
@@ -222,7 +264,7 @@ export class VibeSceneDialog {
         const notifyMilestone = (msg) => {
             if (msg !== lastNotification) {
                 lastNotification = msg;
-                ui.notifications.info(`Vibe Scenes | ${msg}`);
+                VibeToast.info(`Vibe Scenes | ${msg}`);
             }
         };
 
@@ -309,7 +351,7 @@ export class VibeSceneDialog {
             });
 
             updateStatus(`Created scene: ${scene.name}`, 100);
-            ui.notifications.info(`Vibe Scenes | Scene "${scene.name}" created successfully!`);
+            VibeToast.info(`Vibe Scenes | Scene "${scene.name}" created successfully!`);
 
             // Optionally activate the scene
             console.log(`Vibe Scenes | [${runId}] Prompting user to activate scene`, { sceneId: scene?.id, sceneName: scene?.name });
@@ -326,7 +368,7 @@ export class VibeSceneDialog {
                     await this._activateSceneWithDiagnostics(scene, runId, updateStatus);
                 } catch (e) {
                     console.error(`Vibe Scenes | [${runId}] Error activating scene:`, e);
-                    ui.notifications.warn("Scene created but failed to activate automatically.");
+                    VibeToast.warn("Scene created but failed to activate automatically.");
                 }
             } else {
                 console.log(`Vibe Scenes | [${runId}] User declined scene activation`);
@@ -340,13 +382,13 @@ export class VibeSceneDialog {
             if (error?.name === "AbortError" || error?.message === "Aborted") {
                 console.log(`Vibe Scenes | [${runId}] Generation cancelled by user.`);
                 updateStatus("Generation cancelled.", 0);
-                ui.notifications.info("Dungeon generation cancelled.");
+                VibeToast.info("Dungeon generation cancelled.");
                 progressBar.css('background', '#ff9900');
             } else {
                 console.error(`Vibe Scenes | [${runId}] Error generating dungeon:`, error);
                 updateStatus(`Error: ${error.message}`, 100);
                 progressBar.css('background', '#ff4444');
-                ui.notifications.error(`Failed to generate dungeon: ${error.message}`);
+                VibeToast.error(`Failed to generate dungeon: ${error.message}`);
             }
         } finally {
             if (cancelBtn) cancelBtn.hide();
@@ -369,7 +411,7 @@ export class VibeSceneDialog {
                 minWidth: 1024,
                 minHeight: 768
             });
-            ui.notifications.warn("Foundry window is below 1024x768. Scene rendering can stall until the window is resized.");
+            VibeToast.warn("Foundry window is below 1024x768. Scene rendering can stall until the window is resized.");
         }
 
         // Track observed scene events so stalled activations can be diagnosed.
@@ -419,7 +461,7 @@ export class VibeSceneDialog {
                     currentCanvasSceneId: canvas?.scene?.id,
                     observedEvents: eventLog
                 });
-                ui.notifications.warn("Scene activation completed, but canvas readiness is delayed. Check window size and console diagnostics.");
+                VibeToast.warn("Scene activation completed, but canvas readiness is delayed. Check window size and console diagnostics.");
             }
         } finally {
             Hooks.off("canvasReady", viewHook);

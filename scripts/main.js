@@ -7,6 +7,9 @@ import { migrateGeminiSvgModelDefault, registerModuleSettings } from "./settings
 import { addVibeSceneButton } from "./ui/button-injector.js";
 import { VibeSceneDialog } from "./ui/vibe-scene-dialog.js";
 
+import { DungeongenService } from "./services/dungeongen-service.js";
+import { AiAssetService } from "./services/ai-asset-service.js";
+
 Hooks.once("init", () => {
     console.log("Vibe Scenes | Registering module settings");
     registerModuleSettings();
@@ -14,7 +17,9 @@ Hooks.once("init", () => {
     const module = game.modules.get("vibe-scenes");
     if (module) {
         module.api = {
-            VibeSceneDialog
+            VibeSceneDialog,
+            DungeongenService,
+            AiAssetService
         };
     }
 });

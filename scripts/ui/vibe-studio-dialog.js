@@ -1,3 +1,4 @@
+import { VibeToast } from "../../../vibe-common/scripts/ui/toast-manager.js";
 import { AiAssetService } from "../services/ai-asset-service.js";
 import { getGeminiApiKey } from "../../../vibe-common/scripts/settings.js";
 
@@ -72,7 +73,7 @@ export class VibeStudio {
 
     static async generateAssets(prompt, type, count, style) {
         if (!prompt) {
-            ui.notifications.warn("Please enter a prompt.");
+            VibeToast.warn("Please enter a prompt.");
             // Re-open dialog to not lose context? 
             // For now just warn.
             return;
@@ -92,7 +93,7 @@ export class VibeStudio {
         // Show progress integration
         // We can't easily keep the dialog open without custom FormApplication, 
         // using UI notifications for now.
-        const notification = ui.notifications.info(`Starting generation for ${count} assets...`, { permanent: true });
+        const notification = VibeToast.info(`Starting generation for ${count} assets...`, { permanent: true });
 
         try {
             let fullPrompt = prompt;
@@ -133,14 +134,14 @@ export class VibeStudio {
             notification.remove();
 
             if (successes > 0) {
-                ui.notifications.info(`Successfully generated ${successes} assets! Check your library.`);
+                VibeToast.info(`Successfully generated ${successes} assets! Check your library.`);
             } else {
-                ui.notifications.warn("Failed to generate assets. Check console for details.");
+                VibeToast.warn("Failed to generate assets. Check console for details.");
             }
 
         } catch (e) {
             notification.remove();
-            ui.notifications.error(e.message);
+            VibeToast.error(e.message);
         }
     }
 }

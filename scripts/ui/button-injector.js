@@ -1,3 +1,4 @@
+import { VibeToast } from "../../../vibe-common/scripts/ui/toast-manager.js";
 /**
  * Button Injector
  * Functions for injecting Vibe Scene button into Scene Directory
@@ -47,7 +48,7 @@ export function addVibeSceneButton(app, html, showVibeSceneDialogFn) {
     // Add click handler
     button.addEventListener("click", () => {
         if (!game.user.isGM) {
-            ui.notifications.warn("Only the GM can use Vibe Scene.");
+            VibeToast.warn("Only the GM can use Vibe Scene.");
             return;
         }
         showVibeSceneDialogFn();

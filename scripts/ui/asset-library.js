@@ -1,8 +1,9 @@
 import { AssetLibraryService } from "../services/asset-library-service.js";
 import { VibeStudio } from "./vibe-studio-dialog.js";
+import { VibeApplication } from "../../../vibe-common/scripts/ui/vibe-application.js";
 
 // TODO: Migrate to foundry.applications.api.ApplicationV2 (V1 Application removed in v16)
-export class AssetLibrary extends Application {
+export class AssetLibrary extends VibeApplication {
     constructor(options = {}) {
         super(options);
         this.library = new AssetLibraryService();

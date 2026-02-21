@@ -1,3 +1,4 @@
+import { VibeToast } from "../../../vibe-common/scripts/ui/toast-manager.js";
 /**
  * Dungeongen Service
  * 
@@ -329,7 +330,7 @@ export class DungeongenService {
                 const totalNew = itemsToGenerate.length;
                 if (totalNew > 0) {
                     if (options.onProgress) options.onProgress(`Generating ${totalNew} new asset${totalNew > 1 ? "s" : ""}...`, 30);
-                    ui.notifications.info(`Generating ${totalNew} new asset${totalNew > 1 ? "s" : ""} — this may take a moment...`);
+                    VibeToast.info(`Generating ${totalNew} new asset${totalNew > 1 ? "s" : ""} — this may take a moment...`);
                     console.log(`Vibe Scenes | [${runId}] Starting parallel wishlist generation`, { totalNew, concurrency: DungeongenService.WISHLIST_CONCURRENCY });
 
                     let completed = 0;
