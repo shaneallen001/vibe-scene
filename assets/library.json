@@ -1666,5 +1666,779 @@
     "height": 1,
     "placement": "ambient",
     "generatedAt": 1771561470486
+  },
+  "135": {
+    "id": 135,
+    "name": "automated_turret_984498",
+    "prompt": "automated turret",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/automated_turret_984498.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771655984509
+  },
+  "136": {
+    "id": 136,
+    "name": "brushed_titanium_panels_987570",
+    "prompt": "brushed titanium panels",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/wall/brushed_titanium_panels_987570.svg",
+    "fileType": "svg",
+    "type": "WALL",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771655987578
+  },
+  "137": {
+    "id": 137,
+    "name": "biometric_scanner_033683",
+    "prompt": "biometric scanner",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/biometric_scanner_033683.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656033698
+  },
+  "138": {
+    "id": 138,
+    "name": "security_desk_044740",
+    "prompt": "security desk",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/security_desk_044740.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656044747
+  },
+  "139": {
+    "id": 139,
+    "name": "red_laser_tripwire_087829",
+    "prompt": "red laser tripwire",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/red_laser_tripwire_087829.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656087837
+  },
+  "140": {
+    "id": 140,
+    "name": "wall_mounted_monitor_105538",
+    "prompt": "wall-mounted monitor",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/wall_mounted_monitor_105538.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656105546
+  },
+  "141": {
+    "id": 141,
+    "name": "ceiling_camera_135292",
+    "prompt": "ceiling camera",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/ceiling_camera_135292.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656135300
+  },
+  "142": {
+    "id": 142,
+    "name": "floor_decal_147035",
+    "prompt": "floor decal",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/floor_decal_147035.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656147043
+  },
+  "143": {
+    "id": 143,
+    "name": "fiber_optic_floor_panel_188778",
+    "prompt": "fiber-optic floor panel",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/fiber_optic_floor_panel_188778.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656188787
+  },
+  "144": {
+    "id": 144,
+    "name": "holographic_sign_197434",
+    "prompt": "holographic sign",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/holographic_sign_197434.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656197441
+  },
+  "145": {
+    "id": 145,
+    "name": "wall_mounted_data_port_235844",
+    "prompt": "wall-mounted data port",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/wall_mounted_data_port_235844.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656235853
+  },
+  "146": {
+    "id": 146,
+    "name": "hydroponic_vat_255422",
+    "prompt": "hydroponic vat",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/hydroponic_vat_255422.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656255429
+  },
+  "147": {
+    "id": 147,
+    "name": "uv_light_array_294069",
+    "prompt": "UV light array",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/uv_light_array_294069.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656294077
+  },
+  "148": {
+    "id": 148,
+    "name": "synthetic_tree_313091",
+    "prompt": "synthetic tree",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/synthetic_tree_313091.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656313098
+  },
+  "149": {
+    "id": 149,
+    "name": "mist_emitter_339810",
+    "prompt": "mist emitter",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/mist_emitter_339810.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656339817
+  },
+  "150": {
+    "id": 150,
+    "name": "nutrient_pipe_361663",
+    "prompt": "nutrient pipe",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/nutrient_pipe_361663.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656361672
+  },
+  "151": {
+    "id": 151,
+    "name": "smart_glass_window_395440",
+    "prompt": "smart-glass window",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/smart_glass_window_395440.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656395447
+  },
+  "152": {
+    "id": 152,
+    "name": "digital_wardrobe_411165",
+    "prompt": "digital wardrobe",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/digital_wardrobe_411165.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656411174
+  },
+  "153": {
+    "id": 153,
+    "name": "digital_art_frame_435947",
+    "prompt": "digital art frame",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/digital_art_frame_435947.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656435956
+  },
+  "154": {
+    "id": 154,
+    "name": "ambient_floor_lighting_448497",
+    "prompt": "ambient floor lighting",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/ambient_floor_lighting_448497.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656448504
+  },
+  "155": {
+    "id": 155,
+    "name": "server_rack_497965",
+    "prompt": "server rack",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/server_rack_497965.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656497973
+  },
+  "156": {
+    "id": 156,
+    "name": "central_processor_508413",
+    "prompt": "central processor",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/central_processor_508413.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656508422
+  },
+  "157": {
+    "id": 157,
+    "name": "maintenance_terminal_552401",
+    "prompt": "maintenance terminal",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/maintenance_terminal_552401.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656552410
+  },
+  "158": {
+    "id": 158,
+    "name": "cooling_unit_557324",
+    "prompt": "cooling unit",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/cooling_unit_557324.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656557330
+  },
+  "159": {
+    "id": 159,
+    "name": "status_leds_600857",
+    "prompt": "status LEDs",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/status_leds_600857.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656600865
+  },
+  "160": {
+    "id": 160,
+    "name": "cable_bundle_614490",
+    "prompt": "cable bundle",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/cable_bundle_614490.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656614497
+  },
+  "161": {
+    "id": 161,
+    "name": "floor_vent_651718",
+    "prompt": "floor vent",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/floor_vent_651718.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656651726
+  },
+  "162": {
+    "id": 162,
+    "name": "holographic_projection_666641",
+    "prompt": "holographic projection",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/holographic_projection_666641.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656666648
+  },
+  "163": {
+    "id": 163,
+    "name": "robotic_arm_705649",
+    "prompt": "robotic arm",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/robotic_arm_705649.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656705658
+  },
+  "164": {
+    "id": 164,
+    "name": "cybernetic_assembly_table_725278",
+    "prompt": "cybernetic assembly table",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/cybernetic_assembly_table_725278.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656725284
+  },
+  "165": {
+    "id": 165,
+    "name": "chemical_synthesizer_761006",
+    "prompt": "chemical synthesizer",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/chemical_synthesizer_761006.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656761015
+  },
+  "166": {
+    "id": 166,
+    "name": "holographic_blueprint_772039",
+    "prompt": "holographic blueprint",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/holographic_blueprint_772039.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656772047
+  },
+  "167": {
+    "id": 167,
+    "name": "fusion_reactor_core_819115",
+    "prompt": "fusion reactor core",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/fusion_reactor_core_819115.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656819125
+  },
+  "168": {
+    "id": 168,
+    "name": "control_console_883923",
+    "prompt": "control console",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/control_console_883923.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656883930
+  },
+  "169": {
+    "id": 169,
+    "name": "safety_railing_939614",
+    "prompt": "safety railing",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/safety_railing_939614.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 4,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771656939622
+  },
+  "170": {
+    "id": 170,
+    "name": "energy_conduit_949582",
+    "prompt": "energy conduit",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/energy_conduit_949582.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771656949589
+  },
+  "171": {
+    "id": 171,
+    "name": "warning_decal_985129",
+    "prompt": "warning decal",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/warning_decal_985129.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656985137
+  },
+  "172": {
+    "id": 172,
+    "name": "high_voltage_spark_997183",
+    "prompt": "high-voltage spark",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/high_voltage_spark_997183.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771656997191
+  },
+  "173": {
+    "id": 173,
+    "name": "floating_command_throne_033506",
+    "prompt": "floating command throne",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/floating_command_throne_033506.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771657033513
+  },
+  "174": {
+    "id": 174,
+    "name": "tactical_display_table_055826",
+    "prompt": "tactical display table",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/tactical_display_table_055826.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 4,
+    "height": 2,
+    "placement": "blocking",
+    "generatedAt": 1771657055833
+  },
+  "175": {
+    "id": 175,
+    "name": "officer_station_095508",
+    "prompt": "officer station",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/officer_station_095508.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 2,
+    "height": 1,
+    "placement": "blocking",
+    "generatedAt": 1771657095515
+  },
+  "176": {
+    "id": 176,
+    "name": "360_degree_tactical_display_116291",
+    "prompt": "360-degree tactical display",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/360_degree_tactical_display_116291.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771657116298
+  },
+  "177": {
+    "id": 177,
+    "name": "digital_banner_145724",
+    "prompt": "digital banner",
+    "model": "gemini-3-pro-preview",
+    "path": "modules/vibe-scenes/assets/object/digital_banner_145724.svg",
+    "fileType": "svg",
+    "type": "OBJECT",
+    "tags": [
+      "ai-gen",
+      "ai-gen",
+      "auto-generated"
+    ],
+    "width": 1,
+    "height": 1,
+    "placement": "ambient",
+    "generatedAt": 1771657145735
   }
 }
