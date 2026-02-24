@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.0] - Stability & Suite Synchronization
+- Finalized Phase 2 stability polish and architectural synchronization.
+- Unified versioning across the Vibe module suite.
+
 ## [1.2.0] - Stability & UI Polish
 - Standardized UI element heights and padding across all dialogs to resolve text clipping.
 - Synchronized generation architecture with the latest `vibe-common` services.
